@@ -17,17 +17,42 @@
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-data</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-service</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.10.1</version>
+                <configuration>
+                    <version>6</version>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <modules>
+                        <ejbModule>
+                            <groupId>hu.schonherz.java.training.project</groupId>
+                            <artifactId>helpdesk-service</artifactId>
+                        </ejbModule>
+                        <webModule>
+                            <groupId>hu.schonherz.java.training.project</groupId>
+                            <artifactId>helpdesk-web</artifactId>
+                            <contextRoot>helpdesk</contextRoot>
+                        </webModule>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
