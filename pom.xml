@@ -8,6 +8,52 @@
     <artifactId>helpdesk</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <name>Help Desk Platform - Help Desk Parent</name>
+    <description>Parent Maven Project of the Help Desk Frontend</description>
+    <inceptionYear>2017</inceptionYear>
+    <organization>
+        <name>Schönherz Iskolaszövetkezet</name>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>attilagyongyosi</id>
+            <name>Gyöngyösi Attila</name>
+            <email>attilagyongyosi0@gmail.com</email>
+            <roles>
+                <role>Team Leader</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>aronszabo</id>
+            <name>Szabó Áron</name>
+            <roles>
+                <role>Java EE developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>davidpinter</id>
+            <name>Pintér Dávid</name>
+            <roles>
+                <role>Java EE developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>marcellnemeth</id>
+            <name>Németh Marcell</name>
+            <roles>
+                <role>Java EE developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>laszlototh</id>
+            <name>Tóth László</name>
+            <roles>
+                <role>Java EE developer</role>
+            </roles>
+        </developer>
+    </developers>
     
     <repositories>
         <repository>
@@ -28,9 +74,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
-        
-        
+        <java.version>1.8</java.version>
+
         <servlet.version>3.1.0</servlet.version>
         <jstl.version>1.2</jstl.version>
         <jsf.version>2.2.14</jsf.version>
@@ -45,9 +90,6 @@
         <dozer.version>5.5.1</dozer.version>
         <spring.security.version>4.2.1.RELEASE</spring.security.version>
         <lombok.version>1.16.12</lombok.version>
-        
-        <java.version>1.8</java.version>
-        
     </properties>
 
     <dependencyManagement>
@@ -187,7 +229,6 @@
     </dependencyManagement>
     
     <build>
-        <defaultGoal>install</defaultGoal>
         <pluginManagement>
             <plugins>
                 <plugin>
