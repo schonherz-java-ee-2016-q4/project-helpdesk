@@ -1,14 +1,13 @@
-target
-/bin
-/logs
+target/
+bin/
+logs/
 
 # IDEA-specific
 *.iml
-/.idea
+.idea/
 
 # Eclipse-specific
 .metadata
-bin/
 tmp/
 *.tmp
 *.bak

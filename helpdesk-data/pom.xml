@@ -38,7 +38,7 @@
             <artifactId>spring-orm</artifactId>
         </dependency>
         <!-- hibernate dependencies -->
-        
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
