@@ -12,6 +12,10 @@
 
     <artifactId>helpdesk-data</artifactId>
 
+    <properties>
+        <dir.codequality>${project.parent.basedir}/code-quality</dir.codequality>
+    </properties>
+
     <dependencies>
         <!-- spring dependencies -->
         <dependency>
@@ -34,6 +38,7 @@
             <artifactId>spring-orm</artifactId>
         </dependency>
         <!-- hibernate dependencies -->
+        
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -54,4 +59,28 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <!-- Code Quality Plugins -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+            <!-- /Code Quality Plugins -->
+        </plugins>
+    </build>
 </project>

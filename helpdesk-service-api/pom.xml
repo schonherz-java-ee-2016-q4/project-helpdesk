@@ -11,6 +11,11 @@
     </parent>
 
     <artifactId>helpdesk-service-api</artifactId>
+
+    <properties>
+        <dir.codequality>${project.parent.basedir}/code-quality</dir.codequality>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
@@ -24,4 +29,27 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <!-- Code Quality Plugins -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+            <!-- /Code Quality Plugins -->
+        </plugins>
+    </build>
 </project>

@@ -75,6 +75,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <dir.codequality>${project.basedir}/code-quality</dir.codequality>
 
         <servlet.version>3.1.0</servlet.version>
         <jstl.version>1.2</jstl.version>
@@ -90,6 +91,10 @@
         <dozer.version>5.5.1</dozer.version>
         <spring.security.version>4.2.1.RELEASE</spring.security.version>
         <lombok.version>1.16.12</lombok.version>
+
+        <version.plugin.checkstyle>2.17</version.plugin.checkstyle>
+        <version.plugin.findbugs>3.0.4</version.plugin.findbugs>
+        <version.plugin.pmd>3.6</version.plugin.pmd>
     </properties>
 
     <dependencyManagement>
@@ -240,7 +245,115 @@
                         <target>${java.version}</target>
                     </configuration>
                 </plugin>
+
+                <!-- Code Quality Plugins -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${version.plugin.checkstyle}</version>
+                    <configuration>
+                        <configLocation>code-quality/checkstyle/checks.xml</configLocation>
+                        <suppressionsLocation>${dir.codequality}/checkstyle/suppressions.xml</suppressionsLocation>
+                        <violationSeverity>warning</violationSeverity>
+                        <failOnViolation>true</failOnViolation>
+                        <failsOnError>false</failsOnError>
+                        <linkXRef>false</linkXRef>
+                        <consoleOutput>false</consoleOutput>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${version.plugin.findbugs}</version>
+                    <configuration>
+                        <xmlOutput>true</xmlOutput>
+                        <effort>Max</effort>
+                        <threshold>Medium</threshold>
+                        <excludeFilterFile>${dir.codequality}/findbugs/findbugs-exclude.xml</excludeFilterFile>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${version.plugin.pmd}</version>
+                    <configuration>
+                        <failOnViolation>true</failOnViolation>
+                        <linkXRef>false</linkXRef>
+                        <rulesets>
+                            <ruleset>${dir.codequality}/pmd/basic.xml</ruleset>
+                            <ruleset>${dir.codequality}/pmd/braces.xml</ruleset>
+                            <ruleset>${dir.codequality}/pmd/codesize.xml</ruleset>
+                            <ruleset>${dir.codequality}/pmd/design.xml</ruleset>
+                            <ruleset>${dir.codequality}/pmd/empty.xml</ruleset>
+                            <ruleset>${dir.codequality}/pmd/javabeans.xml</ruleset>
+                            <ruleset>${dir.codequality}/pmd/strings.xml</ruleset>
+                            <ruleset>${dir.codequality}/pmd/typeresolution.xml</ruleset>
+                            <ruleset>${dir.codequality}/pmd/unnecessary.xml</ruleset>
+                            <ruleset>${dir.codequality}/pmd/unusedcode.xml</ruleset>
+                        </rulesets>
+                    </configuration>
+                </plugin>
+                <!-- /Code Quality Plugins -->
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>code-check</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-checkstyle-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>checkstyle-code-verification</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>check</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-pmd-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>pmd-code-verification</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>check</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>findbugs-maven-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>findbugs-code-verification</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>findbugs</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
+        <profile>
+            <id>skipChecks</id>
+        </profile>
+    </profiles>
 </project>
