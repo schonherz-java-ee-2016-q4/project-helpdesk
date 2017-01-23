@@ -11,6 +11,8 @@
     </parent>
 
     <artifactId>helpdesk-web</artifactId>
+    
+    <packaging>war</packaging>
 
     <properties>
         <dir.codequality>${project.parent.basedir}/code-quality</dir.codequality>
@@ -73,6 +75,23 @@
             <artifactId>javaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <!-- logging dependencies -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        
     </dependencies>
 
     <build>
@@ -96,6 +115,15 @@
                 <artifactId>maven-pmd-plugin</artifactId>
             </plugin>
             <!-- /Code Quality Plugins -->
+        
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+            </plugin>
+        
         </plugins>
     </build>
 
