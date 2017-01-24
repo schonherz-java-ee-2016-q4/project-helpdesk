@@ -23,11 +23,13 @@
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-service</artifactId>
             <version>${project.version}</version>
+            <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-web</artifactId>
             <version>${project.version}</version>
+            <type>war</type>
         </dependency>
     </dependencies>
     
