@@ -1,20 +1,18 @@
-###Message table
- - id
- - content
- - date
- - conversation_id(foreign key)
-
----------
-###Conversation table
+###Conversation
  - id
  - client_id
  - agent_id
  - closed(boolean)
  
-
+----- 
+###Message
+ - id
+ - content
+ - date
+ - conversation_id(foreign key)
  
 -----
-###Agent table
+###Agent
  - id
  - username
  - first_name
@@ -27,13 +25,7 @@
 
 ------------
 
-###Agent_activity
+###Login
  - id
  - agent_id(foreign key)
- - numof_logins
- - numof_client_contacts
- - numof_new_tickets
- - numof_closed_tickets
-
-----------
-
+ - timestamp
