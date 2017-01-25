@@ -19,10 +19,10 @@ public class ClientActivityEntity extends BaseEntity {
     private int clientId;
 
     @Enumerated(EnumType.STRING)
-    private ActivityType activityType;
+    private ActivityType type;
 
     @Lob
-    private String activityTarget;
+    private String target;
 
     private LocalDateTime createdAt;
 
