@@ -1,4 +1,5 @@
 # Help Desk Platform - The Help Desk Frontend Module & Web Plugin
+[![GitHub version](https://badge.fury.io/gh/schonherz-java-ee-2016-q4%2Fproject-helpdesk.svg)](https://badge.fury.io/gh/schonherz-java-ee-2016-q4%2Fproject-helpdesk)
 
 This application module provides the responsive web front-end of help desk agent interaction, activity monitoring and agent reporting for the Help Desk Platform.  
 
