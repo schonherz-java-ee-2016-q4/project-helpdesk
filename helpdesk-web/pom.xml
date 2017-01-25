@@ -7,11 +7,13 @@
     <parent>
         <groupId>hu.schonherz.java.training.project</groupId>
         <artifactId>helpdesk</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.1.1</version>
     </parent>
 
     <artifactId>helpdesk-web</artifactId>
     <packaging>war</packaging>
+    <name>Help Desk Platform - Help Desk Web Module</name>
+    <description>Web Maven Project of the Help Desk Frontend</description>
 
     <properties>
         <dir.codequality>${project.parent.basedir}/code-quality</dir.codequality>
@@ -21,7 +23,7 @@
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-service</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- security dependencies -->
@@ -74,7 +76,7 @@
             <artifactId>javaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- logging dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
