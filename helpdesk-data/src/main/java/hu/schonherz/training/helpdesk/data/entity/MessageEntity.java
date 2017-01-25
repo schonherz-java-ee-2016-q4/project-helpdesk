@@ -9,8 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,7 +22,6 @@ public class MessageEntity extends BaseEntity {
     @Lob
     private String content;
 
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime sendDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
