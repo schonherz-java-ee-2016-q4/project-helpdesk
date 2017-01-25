@@ -34,5 +34,6 @@ nbdist/
 .nb-gradle/
 nb-configuration.xml
 
-*.versionsBackup
+pom.xml.*
+release.properties
 *.NavData

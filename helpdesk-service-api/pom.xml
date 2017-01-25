@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>hu.schonherz.java.training.project</groupId>
         <artifactId>helpdesk</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.1.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>helpdesk-service-api</artifactId>
+    <name>Help Desk Platform - Help Desk Service API Module</name>
+    <description>EJB API Module of the Help Desk Frontend</description>
 
     <properties>
         <dir.codequality>${project.parent.basedir}/code-quality</dir.codequality>
@@ -20,14 +20,14 @@
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-data</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-       
+
         <!-- logging dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
