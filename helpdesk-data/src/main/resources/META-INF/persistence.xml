@@ -2,7 +2,7 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="hu.schonherz.training.helpdesk.jpa" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <jta-data-source>java:jboss/jdbc/Helpdesk</jta-data-source>
+    <jta-data-source>java:jboss/datasources/Helpdesk</jta-data-source>
     <class>hu.schonherz.training.helpdesk.data.entity.BaseEntity</class>
     <class>hu.schonherz.training.helpdesk.data.entity.TestEntity</class>
     <class>hu.schonherz.training.helpdesk.data.entity.ConversationEntity</class>
