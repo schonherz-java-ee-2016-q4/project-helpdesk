@@ -4,7 +4,6 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>java:jboss/datasources/Helpdesk</jta-data-source>
     <class>hu.schonherz.training.helpdesk.data.entity.BaseEntity</class>
-    <class>hu.schonherz.training.helpdesk.data.entity.TestEntity</class>
     <class>hu.schonherz.training.helpdesk.data.entity.ConversationEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
