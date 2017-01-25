@@ -11,7 +11,6 @@
     </parent>
 
     <artifactId>helpdesk-web</artifactId>
-    
     <packaging>war</packaging>
 
     <properties>
@@ -91,7 +90,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -115,15 +113,15 @@
                 <artifactId>maven-pmd-plugin</artifactId>
             </plugin>
             <!-- /Code Quality Plugins -->
-        
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    </configuration>
+                </configuration>
             </plugin>
-        
         </plugins>
     </build>
 
