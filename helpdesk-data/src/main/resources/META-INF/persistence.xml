@@ -6,13 +6,15 @@
     <class>hu.schonherz.training.helpdesk.data.entity.BaseEntity</class>
     <class>hu.schonherz.training.helpdesk.data.entity.ConversationEntity</class>
     <class>hu.schonherz.training.helpdesk.data.entity.LoginEntity</class>
+    <class>hu.schonherz.training.helpdesk.data.entity.ClientActivityEntity</class>
+    <class>hu.schonherz.training.helpdesk.data.entity.MessageEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>
       <property name="hibernate.default_schema" value="public"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
     </properties>
   </persistence-unit>
 </persistence>

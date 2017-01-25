@@ -1,10 +1,10 @@
 package hu.schonherz.training.helpdesk.data.repository;
 
-import hu.schonherz.training.helpdesk.data.entity.ConversationEntity;
+import hu.schonherz.training.helpdesk.data.entity.ClientActivityEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ConversationRepository extends JpaRepository<ConversationEntity, Long> {
+public interface ClientActivityRepository extends JpaRepository<ClientActivityEntity, Long> {
 
 }
