@@ -285,7 +285,7 @@
                     <artifactId>maven-release-plugin</artifactId>
                     <version>${version.plugin.release}</version>
                     <configuration>
-                        <tagNameFormat>helpdesk-platform-frontend-v${project.version}</tagNameFormat>
+                        <tagNameFormat>${project.version}</tagNameFormat>
                         <releaseProfiles>skipChecks</releaseProfiles>
                     </configuration>
                 </plugin>
