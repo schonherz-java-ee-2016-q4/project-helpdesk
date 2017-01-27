@@ -17,7 +17,7 @@
 
 
     <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>/public/login.xhtml</welcome-file>
     </welcome-file-list>
 
     <context-param>
@@ -40,6 +40,5 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-
 
 </web-app>
