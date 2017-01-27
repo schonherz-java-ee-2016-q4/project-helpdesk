@@ -1,10 +1,21 @@
-#myBut {
+.myBut {
     margin-top: 20px;
 }
-#chatbox{
-    margin-top: 200px;
+#textBox{
+    width: 400px;
+    height: 200px;
+    overflow: scroll;
 }
 
 #myText {
     margin-top: 20px;
+}
+#messageNav{
+    text-align: center;
+    height: 50px;
+    width: 400px;
+    background-color:#f1f8e9 ;
+}
+.well{
+    background-color:#f1f8e9 !important;
 }
