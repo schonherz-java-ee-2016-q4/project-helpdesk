@@ -31,6 +31,12 @@
             <version>${project.version}</version>
             <type>war</type>
         </dependency>
+        <dependency>
+            <groupId>hu.schonherz.java.training.project</groupId>
+            <artifactId>helpdesk-rest</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -52,6 +58,11 @@
                             <groupId>hu.schonherz.java.training.project</groupId>
                             <artifactId>helpdesk-web</artifactId>
                             <contextRoot>helpdesk</contextRoot>
+                        </webModule>
+                        <webModule>
+                            <groupId>hu.schonherz.java.training.project</groupId>
+                            <artifactId>helpdesk-rest</artifactId>
+                            <contextRoot>helpdesk/api</contextRoot>
                         </webModule>
                     </modules>
                 </configuration>
