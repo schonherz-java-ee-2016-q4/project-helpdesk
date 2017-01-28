@@ -5,7 +5,7 @@
     <parent>
         <groupId>hu.schonherz.java.training.project</groupId>
         <artifactId>helpdesk</artifactId>
-        <version>0.1.10-SNAPSHOT</version>
+        <version>0.1.13-SNAPSHOT</version>
     </parent>
 
     <artifactId>helpdesk-service-api</artifactId>
@@ -43,7 +43,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>

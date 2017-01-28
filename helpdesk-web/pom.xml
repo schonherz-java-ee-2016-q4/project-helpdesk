@@ -5,7 +5,7 @@
     <parent>
         <groupId>hu.schonherz.java.training.project</groupId>
         <artifactId>helpdesk</artifactId>
-        <version>0.1.10-SNAPSHOT</version>
+        <version>0.1.13-SNAPSHOT</version>
     </parent>
 
     <artifactId>helpdesk-web</artifactId>
@@ -36,6 +36,12 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- web dependencies -->
@@ -70,9 +76,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <scope>provided</scope>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
         </dependency>
 
         <!-- logging dependencies -->
@@ -124,5 +129,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

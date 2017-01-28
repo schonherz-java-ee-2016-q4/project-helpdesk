@@ -4,7 +4,7 @@
 
     <groupId>hu.schonherz.java.training.project</groupId>
     <artifactId>helpdesk</artifactId>
-    <version>0.1.10-SNAPSHOT</version>
+    <version>0.1.13-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Help Desk Platform - Help Desk Parent</name>
@@ -83,12 +83,13 @@
         <java.version>1.8</java.version>
         <dir.codequality>${project.basedir}/code-quality</dir.codequality>
 
+        <javaee.version>7.0</javaee.version>
         <servlet.version>3.1.0</servlet.version>
         <jstl.version>1.2</jstl.version>
         <jsf.version>2.2.14</jsf.version>
         <primefaces.version>6.0</primefaces.version>
         <primefaces.themes.version>1.0.10</primefaces.themes.version>
-        <javaee.version>7.0</javaee.version>
+        <omnifaces.version>1.4.1</omnifaces.version>
         <spring.version>4.3.2.RELEASE</spring.version>
         <hibernate.version>5.2.6.Final</hibernate.version>
         <hibernate.annotations.version>5.0.1.Final</hibernate.annotations.version>
@@ -110,6 +111,17 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>${dozer.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
@@ -147,6 +159,12 @@
                 <groupId>org.primefaces.themes</groupId>
                 <artifactId>all-themes</artifactId>
                 <version>${primefaces.themes.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.omnifaces</groupId>
+                <artifactId>omnifaces</artifactId>
+                <version>${omnifaces.version}</version>
             </dependency>
 
             <dependency>
@@ -215,12 +233,6 @@
             </dependency>
 
             <dependency>
-                <groupId>net.sf.dozer</groupId>
-                <artifactId>dozer</artifactId>
-                <version>${dozer.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-web</artifactId>
                 <version>${spring.security.version}</version>
@@ -234,12 +246,6 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-core</artifactId>
                 <version>${spring.security.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
             </dependency>
 
             <!-- logging dependencies -->
