@@ -42,4 +42,5 @@
     <welcome-file-list>
         <welcome-file>/public/login.xhtml</welcome-file>
     </welcome-file-list>
+
 </web-app>
