@@ -51,12 +51,12 @@ function on_button_clicked(element) {
         target = element.value;
     }
     if (element.attr('id') != undefined) {
-        element.attr('id');
+        target = element.attr('id');
     }
     else {
-        element.attr('id');
+        target = element.attr('id');
     }
-    doPost(uuid, "BUTTON_CLICK", target;
+    doPost(uuid, "BUTTON_CLICK", target);
 }
 
 
