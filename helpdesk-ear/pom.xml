@@ -5,7 +5,7 @@
     <parent>
         <groupId>hu.schonherz.java.training.project</groupId>
         <artifactId>helpdesk</artifactId>
-        <version>0.1.6-SNAPSHOT</version>
+        <version>0.1.10-SNAPSHOT</version>
     </parent>
 
     <artifactId>helpdesk-ear</artifactId>
@@ -41,7 +41,7 @@
                 <version>2.10.1</version>
                 <configuration>
                     <finalName>helpdesk-platform-frontend</finalName>
-                    <version>6</version>
+                    <version>7</version>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <modules>
                         <ejbModule>
