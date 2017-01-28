@@ -38,6 +38,12 @@
             <artifactId>spring-security-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- web dependencies -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -70,9 +76,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <scope>provided</scope>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
         </dependency>
 
         <!-- logging dependencies -->
@@ -124,5 +129,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
