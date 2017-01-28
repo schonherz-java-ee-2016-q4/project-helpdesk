@@ -5,7 +5,6 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
-
     <context-param>
         <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
         <param-value>.xhtml</param-value>
@@ -42,5 +41,8 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
-
+    <context-param>
+        <param-name>org.omnifaces.FACES_VIEWS_SCAN_PATHS</param-name>
+        <param-value>/*.xhtml</param-value>
+    </context-param>
 </web-app>
