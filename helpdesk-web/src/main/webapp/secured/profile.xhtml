@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                rel="stylesheet"/>
+        <h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                rel="stylesheet"/>
+
+        <h:outputStylesheet library="css" name="profile.css"/>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputScript library="primefaces" name="jquery/jquery.js"
+                        target="head"/>
+        <h:outputScript library="primefaces" name="jquery/jquery-plugins.js"
+                        target="head"/>
+
+
+        <ui:define name="pageTitle">Agent Profile</ui:define>
+    </h:head>
+    <h:body>
+        <div class="container">
+
+            <h2 style="text-align: center">Agent profile:</h2>
+
+            <!--Agent profile -->
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6 col-md-offset-3">
+                <table class="table responsive">
+                    <tr class="text-centered">
+                        <td colspan="2"><div style="display:flex"><img  src="https://randomuser.me/api/portraits/women/26.jpg" style="margin:auto" class="img-thumbnail"></img></div></td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>Emily Smith</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>emily@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Username</td>
+                        <td>emily12345</td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td>female</td>
+                    </tr>
+                    <tr>
+                        <td>Company</td>
+                        <td>company</td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td>+36-30-1112367</td>
+                    </tr>
+                </table>
+                    <a href="activity" class="btn btn-info" role="button">See your activity</a>
+            </div>
+
+            </div>
+        </div>
+    </h:body>
+
+</ui:composition>
