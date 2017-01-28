@@ -1,7 +1,7 @@
 package hu.schonherz.training.helpdesk.data.additional;
 
 public enum ActivityType {
-    CLICK,
+    BUTTON_CLICK,
     NAVIGATION,
-    TYPING
+    INPUT_FOCUSLOSS
 }

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ClientActivityEntity extends BaseEntity {
 
-    private int clientId;
+    private String clientId;
 
     @Enumerated(EnumType.STRING)
     private ActivityType type;
