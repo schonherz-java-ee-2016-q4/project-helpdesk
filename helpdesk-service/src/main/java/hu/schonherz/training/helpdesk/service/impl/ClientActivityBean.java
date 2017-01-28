@@ -27,7 +27,7 @@ public class ClientActivityBean implements ClientActivityService {
 
     @Override
     public Collection<ClientActivityVO> finById(final Long id) {
-        return  ClientActivityMapper.toVO(clientActivityRepository.findById(id));
+        return ClientActivityMapper.toVO(clientActivityRepository.findById(id));
     }
 
     @Override

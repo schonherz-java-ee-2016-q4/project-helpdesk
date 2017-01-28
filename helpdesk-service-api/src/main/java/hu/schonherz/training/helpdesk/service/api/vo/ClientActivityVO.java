@@ -14,6 +14,4 @@ public class ClientActivityVO {
     private ActivityType type;
     private String target;
     private LocalDateTime createdAt;
-    }
-
-
+}

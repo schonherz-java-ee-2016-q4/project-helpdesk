@@ -8,9 +8,7 @@ import org.dozer.Mapper;
 
 import hu.schonherz.training.helpdesk.data.entity.ClientActivityEntity;
 import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;
-import lombok.Data;
 
-@Data
 public final class ClientActivityMapper {
 
     private static Mapper mapper = new DozerBeanMapper();
