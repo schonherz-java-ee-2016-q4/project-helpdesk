@@ -1,35 +1,45 @@
 @charset "utf-8";
 
 .helpdesk_plugin {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    text-align: center;
     background-color: #263238;
+    padding: 10px;
+    border-top-left-radius: 10px;
     position: fixed;
     bottom: 0;
-    right: 100px;
-    padding: 10px;
+    right: 0;
 }
 
 .helpdesk_plugin_text {
-    margin-right: 10px;
-    margin-left: 10px;
-    color: #ffffff;
     margin: 5px;
     font-family: sans-serif;
+    color: #ffffff;
+    float: left;
+}
+
+.helpdesk_plugin_text_parent {
+    display: flex;
+    justify-content: center;
 }
 
 .helpdesk_plugin_link {
     background-color: #1976D2;
-    border: none;
-    border-radius: 4px;
-    color: #ffffff;
     padding: 2px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
+    margin: 5px;
+    border-radius: 4px;
     font-family: sans-serif;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
     cursor: pointer;
 }
 
+.helpdesk_error_text {
+    background-color: #c62828;
+    padding: 4px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    color: #ffffff;
+    text-align: center;
+
+}
