@@ -43,4 +43,9 @@
         <welcome-file>/public/login.xhtml</welcome-file>
     </welcome-file-list>
 
+    <ejb-ref>
+        <ejb-ref-name>ejb.clientActivityService</ejb-ref-name>
+        <remote>hu.schonherz.training.helpdesk.service.api.service.ClientActivityService</remote>
+    </ejb-ref>
+
 </web-app>

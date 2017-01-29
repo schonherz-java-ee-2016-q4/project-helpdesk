@@ -17,4 +17,7 @@
  - sent JSON by js plugin
      - {"source":"https://somecompany.com/" }
  - reponse: in json
-     - {"isAvailable":"true"}  
+ 	 - if available
+       - {"agentId":"12"}
+     - else
+       - {"agentid": "null"}  

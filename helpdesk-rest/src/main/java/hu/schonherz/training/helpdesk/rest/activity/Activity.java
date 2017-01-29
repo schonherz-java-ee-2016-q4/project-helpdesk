@@ -1,7 +1,6 @@
 package hu.schonherz.training.helpdesk.rest.activity;
 
 import hu.schonherz.training.helpdesk.service.api.service.ClientActivityService;
-import hu.schonherz.training.helpdesk.service.api.service.ClientActivityServiceRemote;
 import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;
 
 import javax.ejb.EJB;
@@ -22,6 +21,7 @@ public class Activity {
     @Path("/")
     @Consumes({MediaType.APPLICATION_JSON})
     public Response getProductInJSON(final ClientActivityVO clientActivityVO) {
+        //TODO: when the target string is empty  --> should return badrequest
         clientActivityVO.setCreatedAt(LocalDateTime.now());
         clientActivityService.save(clientActivityVO);
 
