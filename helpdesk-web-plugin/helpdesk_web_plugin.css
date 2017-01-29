@@ -30,5 +30,6 @@
     display: inline-block;
     font-size: 14px;
     font-family: sans-serif;
+    cursor: pointer;
 }
 
