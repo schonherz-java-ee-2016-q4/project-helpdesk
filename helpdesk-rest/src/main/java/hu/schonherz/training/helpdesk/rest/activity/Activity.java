@@ -28,8 +28,4 @@ public class Activity {
         return Response.accepted().build();
     }
 
-
-
-
-
 }

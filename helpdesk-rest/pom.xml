@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
-            <artifactId>helpdesk-service-api</artifactId>
+            <artifactId>helpdesk-service</artifactId>
             <version>${project.version}</version>
         </dependency>
 
