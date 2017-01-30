@@ -1,22 +1,19 @@
 package hu.schonherz.training.helpdesk.service.mapper;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
-
-import hu.schonherz.training.helpdesk.data.entity.ClientActivityEntity;
 import hu.schonherz.training.helpdesk.data.entity.LoginEntity;
-import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;
 import hu.schonherz.training.helpdesk.service.api.vo.LoginVO;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-public class LoginMapper {
+public final class LoginMapper {
 
     private static Mapper mapper = new DozerBeanMapper();
+
+    private LoginMapper(){
+
+    };
 
     public static LoginVO toVO(final LoginEntity login) {
         if (login == null) {

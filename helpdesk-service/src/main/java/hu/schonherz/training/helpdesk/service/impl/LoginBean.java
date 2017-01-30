@@ -27,22 +27,22 @@ public class LoginBean implements LoginService {
     }
 
     @Override
-    public LoginVO findById(Long Id) {
-        return LoginMapper.toVO(loginRepository.findById(Id));
+    public LoginVO findById(final Long id) {
+        return LoginMapper.toVO(loginRepository.findById(id));
     }
 
     @Override
-    public Collection<LoginVO> findByAgentId(int agentId) {
+    public Collection<LoginVO> findByAgentId(final int agentId) {
         return LoginMapper.toVO(loginRepository.findByAgentId(agentId));
     }
 
     @Override
-    public Collection<LoginVO> findByDate(LocalDateTime loginDate) {
+    public Collection<LoginVO> findByDate(final LocalDateTime loginDate) {
         return LoginMapper.toVO(loginRepository.findByLoginDate(loginDate));
     }
 
     @Override
-    public Long save(LoginVO login) {
+    public Long save(final LoginVO login) {
         return loginRepository.save(LoginMapper.toEntity(login)).getId();
     }
 }
