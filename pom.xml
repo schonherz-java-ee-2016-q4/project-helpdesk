@@ -4,7 +4,7 @@
 
     <groupId>hu.schonherz.java.training.project</groupId>
     <artifactId>helpdesk</artifactId>
-    <version>0.1.15-SNAPSHOT</version>
+    <version>0.1.16-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Help Desk Platform - Help Desk Parent</name>
@@ -89,6 +89,7 @@
         <primefaces.version>6.0</primefaces.version>
         <primefaces.themes.version>1.0.10</primefaces.themes.version>
         <omnifaces.version>1.4.1</omnifaces.version>
+        <prettyfaces.version>3.4.1.Final</prettyfaces.version>
         <spring.version>4.3.2.RELEASE</spring.version>
         <hibernate.version>5.2.6.Final</hibernate.version>
         <hibernate.annotations.version>5.0.1.Final</hibernate.annotations.version>
@@ -159,13 +160,16 @@
                 <artifactId>all-themes</artifactId>
                 <version>${primefaces.themes.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>org.omnifaces</groupId>
-                <artifactId>omnifaces</artifactId>
-                <version>${omnifaces.version}</version>
+                <groupId>org.ocpsoft.rewrite</groupId>
+                <artifactId>rewrite-servlet</artifactId>
+                <version>${prettyfaces.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.ocpsoft.rewrite</groupId>
+                <artifactId>rewrite-config-prettyfaces</artifactId>
+                <version>${prettyfaces.version}</version>
+            </dependency>
             <dependency>
                 <groupId>javax</groupId>
                 <artifactId>javaee-api</artifactId>

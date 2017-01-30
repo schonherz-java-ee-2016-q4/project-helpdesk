@@ -5,7 +5,7 @@
     <parent>
         <groupId>hu.schonherz.java.training.project</groupId>
         <artifactId>helpdesk</artifactId>
-        <version>0.1.15-SNAPSHOT</version>
+        <version>0.1.16-SNAPSHOT</version>
     </parent>
 
     <artifactId>helpdesk-web</artifactId>
@@ -76,10 +76,13 @@
         </dependency>
 
         <dependency>
-            <groupId>org.omnifaces</groupId>
-            <artifactId>omnifaces</artifactId>
+            <groupId>org.ocpsoft.rewrite</groupId>
+            <artifactId>rewrite-servlet</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.ocpsoft.rewrite</groupId>
+            <artifactId>rewrite-config-prettyfaces</artifactId>
+        </dependency>
         <!-- logging dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
