@@ -27,7 +27,7 @@ public class LoginBean implements LoginService {
     }
 
     @Override
-    public Collection<LoginVO> findById(Long Id) {
+    public LoginVO findById(Long Id) {
         return LoginMapper.toVO(loginRepository.findById(Id));
     }
 
