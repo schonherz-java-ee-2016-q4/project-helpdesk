@@ -17,12 +17,12 @@
                         target="head"/>
 
 
-        <ui:define name="pageTitle">Agent Profile</ui:define>
+        <ui:define name="pageTitle">#{out.agent} #{out.profile}</ui:define>
     </h:head>
     <h:body>
         <div class="container">
 
-            <h2 style="text-align: center">Agent profile:</h2>
+            <h2 style="text-align: center">#{out.agent} #{out.profile}</h2>
 
             <!--Agent profile -->
             <div class="row">
@@ -32,31 +32,31 @@
                         <td colspan="2"><div style="display:flex"><img  src="https://randomuser.me/api/portraits/women/26.jpg" style="margin:auto" class="img-thumbnail"></img></div></td>
                     </tr>
                     <tr>
-                        <td>Name</td>
+                        <td>#{out.name}</td>
                         <td>Emily Smith</td>
                     </tr>
                     <tr>
-                        <td>Email</td>
+                        <td>#{out.email}</td>
                         <td>emily@gmail.com</td>
                     </tr>
                     <tr>
-                        <td>Username</td>
+                        <td>#{out.username2}</td>
                         <td>emily12345</td>
                     </tr>
                     <tr>
-                        <td>Gender</td>
+                        <td>#{out.gender}</td>
                         <td>female</td>
                     </tr>
                     <tr>
-                        <td>Company</td>
+                        <td>#{out.company}</td>
                         <td>company</td>
                     </tr>
                     <tr>
-                        <td>Phone</td>
+                        <td>#{out.phone}</td>
                         <td>+36-30-1112367</td>
                     </tr>
                 </table>
-                    <a href="activity" class="btn btn-info" role="button">See your activity</a>
+                    <a href="activity" class="btn btn-info" role="button">#{out.see_your_activity}</a>
             </div>
 
             </div>

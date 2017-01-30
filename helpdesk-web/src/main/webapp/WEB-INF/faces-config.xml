@@ -6,5 +6,18 @@
 
     <application>
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>hu</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>helpdesk.Messages</base-name>
+            <var>out</var>
+        </resource-bundle>
+        <message-bundle>helpdesk.Messages</message-bundle>
+
     </application>
+
+
 </faces-config>
