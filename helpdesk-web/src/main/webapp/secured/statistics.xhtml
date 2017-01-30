@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                rel="stylesheet"/>
+        <h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                rel="stylesheet"/>
+
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="statistics.css"/>
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+        <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap.min.js"/>
+
+        <ui:define name="pageTitle">Agent Statistics</ui:define>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <!--Agent statistics-->
+            <h2>Agent Statistics</h2>
+            <table class="table table-condensed col-sm-6 col-md-6 col-lg-6">
+                <thead>
+                <tr class="text-centered">
+                    <td colspan="2">
+                        <div style="display:flex">
+                            <img src="https://randomuser.me/api/portraits/men/34.jpg"
+                                 class="img-thumbnail profilePicture"/>
+                        </div>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>Jack Murray</td>
+                </tr>
+                <tr>
+                    <td>Number of logins:</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>Number of conversations:</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>Number of issues raised:</td>
+                    <td>64</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="knob-container ui-corner-all fa-align-center">
+
+                <!-- If the knobView bean will exist: value="#{knobView.value}"-->
+
+                <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80" disabled="true"/>
+                <p>The percentage of calls when an error has been recorded</p>
+            </div>
+            <!--/Agent statistics-->
+        </div>
+    </h:body>
+
+</ui:composition>
