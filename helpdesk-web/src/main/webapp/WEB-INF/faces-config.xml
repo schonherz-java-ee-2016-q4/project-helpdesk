@@ -13,7 +13,7 @@
         </locale-config>
         <resource-bundle>
             <base-name>helpdesk.Messages</base-name>
-            <var>out</var>
+            <var>msg</var>
         </resource-bundle>
         <message-bundle>helpdesk.Messages</message-bundle>
 

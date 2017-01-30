@@ -11,7 +11,7 @@
 				rel="stylesheet"/>
 		<h:outputStylesheet library="css" name="bootstrap.min.css" />
 		<h:outputStylesheet library="css" name="login.css" />
-		<ui:define name="pageTitle">Login</ui:define>
+		<ui:define name="pageTitle">#{msg.login}</ui:define>
 	</h:head>
 	<h:body>
 		<h:form>
@@ -30,13 +30,13 @@
 
 				<div class="col-xs-12 col-sm-4 col-lg-4">
 					<div class="login-flex-login">
-						<h:outputLabel class="login-label">#{out.login}</h:outputLabel>
-						<p:inputText class="login-input" placeholder="#{out.username}" />
+						<h:outputLabel class="login-label">#{msg.login}</h:outputLabel>
+						<p:inputText class="login-input" placeholder="#{msg.username}" />
 						<p:spacer height="10" />
 						<p:password id="password" value="#{passwordView.password}"
-							class="login-input" placeholder="#{out.password}" />
+							class="login-input" placeholder="#{msg.password}" />
 						<p:spacer height="10" />
-						<p:commandButton value="#{out.login}" id="login-button" update="growl"
+						<p:commandButton value="#{msg.login}" id="login-button" update="growl"
 							actionListener="#{buttonView.buttonAction}"
 							styleClass="ui-priority-primary" />
 						<p:spacer height="10" />

@@ -17,12 +17,12 @@
                         target="head"/>
 
 
-        <ui:define name="pageTitle">#{out.agent} #{out.profile}</ui:define>
+        <ui:define name="pageTitle">#{msg.agent} #{msg.profile}</ui:define>
     </h:head>
     <h:body>
         <div class="container">
 
-            <h2 style="text-align: center">#{out.agent} #{out.profile}</h2>
+            <h2 style="text-align: center">#{msg.agent} #{msg.profile}</h2>
 
             <!--Agent profile -->
             <div class="row">
@@ -32,31 +32,31 @@
                         <td colspan="2"><div style="display:flex"><img  src="https://randomuser.me/api/portraits/women/26.jpg" style="margin:auto" class="img-thumbnail"></img></div></td>
                     </tr>
                     <tr>
-                        <td>#{out.name}</td>
+                        <td>#{msg.name}:</td>
                         <td>Emily Smith</td>
                     </tr>
                     <tr>
-                        <td>#{out.email}</td>
+                        <td>#{msg.email}:</td>
                         <td>emily@gmail.com</td>
                     </tr>
                     <tr>
-                        <td>#{out.username2}</td>
+                        <td>#{msg.username}:</td>
                         <td>emily12345</td>
                     </tr>
                     <tr>
-                        <td>#{out.gender}</td>
+                        <td>#{msg.gender}:</td>
                         <td>female</td>
                     </tr>
                     <tr>
-                        <td>#{out.company}</td>
+                        <td>#{msg.company}:</td>
                         <td>company</td>
                     </tr>
                     <tr>
-                        <td>#{out.phone}</td>
+                        <td>#{msg.phone}:</td>
                         <td>+36-30-1112367</td>
                     </tr>
                 </table>
-                    <a href="activity" class="btn btn-info" role="button">#{out.see_your_activity}</a>
+                    <a href="activity" class="btn btn-info" role="button">#{msg.see_your_activity}</a>
             </div>
 
             </div>
