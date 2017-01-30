@@ -16,11 +16,6 @@
     <dependencies>
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
-            <artifactId>helpdesk-data</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-service</artifactId>
             <version>${project.version}</version>
             <type>ejb</type>
@@ -28,12 +23,6 @@
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-web</artifactId>
-            <version>${project.version}</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>hu.schonherz.java.training.project</groupId>
-            <artifactId>helpdesk-rest</artifactId>
             <version>${project.version}</version>
             <type>war</type>
         </dependency>
@@ -58,11 +47,6 @@
                             <groupId>hu.schonherz.java.training.project</groupId>
                             <artifactId>helpdesk-web</artifactId>
                             <contextRoot>helpdesk</contextRoot>
-                        </webModule>
-                        <webModule>
-                            <groupId>hu.schonherz.java.training.project</groupId>
-                            <artifactId>helpdesk-rest</artifactId>
-                            <contextRoot>helpdesk/api</contextRoot>
                         </webModule>
                     </modules>
                 </configuration>

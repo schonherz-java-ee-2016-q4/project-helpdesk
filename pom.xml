@@ -75,7 +75,6 @@
         <module>helpdesk-service</module>
         <module>helpdesk-web</module>
         <module>helpdesk-ear</module>
-        <module>helpdesk-rest</module>
     </modules>
 
     <properties>

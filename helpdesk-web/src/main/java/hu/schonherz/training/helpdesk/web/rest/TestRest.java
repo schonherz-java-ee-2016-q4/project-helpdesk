@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.rest;
+package hu.schonherz.training.helpdesk.web.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

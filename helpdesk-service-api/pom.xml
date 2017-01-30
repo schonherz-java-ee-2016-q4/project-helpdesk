@@ -17,11 +17,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>hu.schonherz.java.training.project</groupId>
-            <artifactId>helpdesk-data</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -24,6 +24,11 @@
             <artifactId>helpdesk-service-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>hu.schonherz.java.training.project</groupId>
+            <artifactId>helpdesk-data</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>net.sf.dozer</groupId>

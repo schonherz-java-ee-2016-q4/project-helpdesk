@@ -1,9 +1,10 @@
-package hu.schonherz.training.helpdesk.rest.activity;
+package hu.schonherz.training.helpdesk.web.rest.activity;
 
 import hu.schonherz.training.helpdesk.service.api.service.ClientActivityService;
 import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
 
 @Path("/activities")
+@Stateless(mappedName = "activity")
 public class Activity {
 
     @EJB
