@@ -1,7 +1,6 @@
 package hu.schonherz.training.helpdesk.web.config.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,7 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    CustomUserdetailsService userdetailsService;
+    private CustomUserdetailsService userDetailsService;
+
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -25,8 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout");
    }
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(userdetailsService);
+    public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
+            auth.userDetailsService(userDetailsService);
     }
     @Override
     public void configure(final WebSecurity web) throws Exception {

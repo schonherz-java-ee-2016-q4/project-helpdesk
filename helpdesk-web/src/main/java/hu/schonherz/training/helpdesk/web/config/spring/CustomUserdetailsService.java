@@ -10,16 +10,14 @@ import hu.schonherz.training.helpdesk.web.mock.MockedAdminStuff;
 @Service("customUserDetailsService")
 public class CustomUserdetailsService implements UserDetailsService {
 
-    private MockedAdminStuff userService = new MockedAdminStuff();
+    private final MockedAdminStuff userService = new MockedAdminStuff();
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        try { 
+        try {
             return userService.findByName(username);
-        }
-        catch (UsernameNotFoundException e) {
-            throw new UsernameNotFoundException(e.getMessage());
+        } catch (UsernameNotFoundException e) {
+            throw e;
         }
     }
 }
-
