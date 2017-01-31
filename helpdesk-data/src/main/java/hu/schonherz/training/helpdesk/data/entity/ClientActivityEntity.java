@@ -1,12 +1,14 @@
 package hu.schonherz.training.helpdesk.data.entity;
 
 import hu.schonherz.training.helpdesk.data.additional.ActivityType;
+
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

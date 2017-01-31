@@ -1,33 +1,31 @@
 package hu.schonherz.training.helpdesk.service.mapper;
 
+import hu.schonherz.training.helpdesk.data.entity.ClientActivityEntity;
+import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;
+import hu.schonherz.training.helpdesk.service.common.Mappers;
+import org.dozer.DozerBeanMapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
-
-import hu.schonherz.training.helpdesk.data.entity.ClientActivityEntity;
-import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;
-
 public final class ClientActivityMapper {
+    private static DozerBeanMapper dozerBeanMapper = Mappers.createDozerBeanMapper();
 
-    private static Mapper mapper = new DozerBeanMapper();
+    private ClientActivityMapper() {}
 
-    private ClientActivityMapper(){
-    };
 
     public static ClientActivityVO toVO(final ClientActivityEntity activity) {
         if (activity == null) {
             return null;
         }
-        return mapper.map(activity, ClientActivityVO.class);
+        return dozerBeanMapper.map(activity, ClientActivityVO.class);
     }
 
     public static ClientActivityEntity toEntity(final ClientActivityVO activityVO) {
         if (activityVO == null) {
             return null;
         }
-        return mapper.map(activityVO, ClientActivityEntity.class);
+        return dozerBeanMapper.map(activityVO, ClientActivityEntity.class);
     }
 
     public static List<ClientActivityVO> toVO(final List<ClientActivityEntity> activities) {

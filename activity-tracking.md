@@ -13,11 +13,11 @@
  
 
 #get available agents (to be discloused)
- - url: helpdesk/api/isagenavailable
+ - url: helpdesk/api/isagentavailable
  - sent JSON by js plugin
      - {"source":"https://somecompany.com/" }
  - reponse: in json
  	 - if available
        - {"agentId":"12"}
      - else
-       - {"agentid": "null"}  
+       - {"agentId": "null"}  

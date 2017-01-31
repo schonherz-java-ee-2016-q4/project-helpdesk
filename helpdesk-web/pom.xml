@@ -22,6 +22,7 @@
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-service-api</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- security dependencies -->

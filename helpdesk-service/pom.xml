@@ -23,6 +23,7 @@
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-service-api</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
@@ -33,6 +34,11 @@
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.craftsman</groupId>
+            <artifactId>dozer-jdk8-support</artifactId>
         </dependency>
 
         <!-- enterprise dependency -->

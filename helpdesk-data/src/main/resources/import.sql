@@ -31,13 +31,13 @@ INSERT INTO message(id,content,senddate,conversation_id) VALUES (28,'és te?', t
 INSERT INTO message(id,content,senddate,conversation_id) VALUES (29,'élek', to_timestamp('2017-02-01 10:22:13.341489','YYYY/MM/DD HH24:MI:SS.FF3'),2);
 INSERT INTO message(id,content,senddate,conversation_id) VALUES (30,'na örulök', to_timestamp('2014-03-15 00:00:00.001489','YYYY/MM/DD HH24:MI:SS.FF3'),2);
 
-INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (31,1111,to_timestamp('2012-08-12 22:20:58.611489','YYYY/MM/DD HH24:MI:SS.FF3'),'button','type');
-INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (32,3333,to_timestamp('2011-07-02 19:26:20.411489','YYYY/MM/DD HH24:MI:SS.FF3'),'nav','type');
-INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (33,4444,to_timestamp('2016-06-15 15:14:30.311489','YYYY/MM/DD HH24:MI:SS.FF3'),'menu','type');
-INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (34,9999,to_timestamp('2017-05-24 10:05:40.671489','YYYY/MM/DD HH24:MI:SS.FF3'),'button','type');
-INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (35,1221,to_timestamp('2010-10-30 10:56:12.161489','YYYY/MM/DD HH24:MI:SS.FF3'),'footer','type');
-INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (36,6578,to_timestamp('2012-11-20 23:45:11.461489','YYYY/MM/DD HH24:MI:SS.FF3'),'header','type');
-INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (37,9123,to_timestamp('2009-12-10 04:24:09.611489','YYYY/MM/DD HH24:MI:SS.FF3'),'chat','type');
-INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (38,7456,to_timestamp('2016-01-9 07:24:56.211489','YYYY/MM/DD HH24:MI:SS.FF3'),'plugin','type');
-INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (39,1487,to_timestamp('2014-02-23 02:29:32.111489','YYYY/MM/DD HH24:MI:SS.FF3'),'button','type');
-INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (40,8437,to_timestamp('2013-05-13 15:28:25.511489','YYYY/MM/DD HH24:MI:SS.FF3'),'button','type');
+INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (31,1111,to_timestamp('2012-08-12 22:20:58.611489','YYYY/MM/DD HH24:MI:SS.FF3'),'button','NAVIGATION');
+INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (32,3333,to_timestamp('2011-07-02 19:26:20.411489','YYYY/MM/DD HH24:MI:SS.FF3'),'nav','BUTTON_CLICK');
+INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (33,4444,to_timestamp('2016-06-15 15:14:30.311489','YYYY/MM/DD HH24:MI:SS.FF3'),'menu','INPUT_FOCUSLOSS');
+INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (34,9999,to_timestamp('2017-05-24 10:05:40.671489','YYYY/MM/DD HH24:MI:SS.FF3'),'button','FORM_SUBMIT');
+INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (35,1221,to_timestamp('2010-10-30 10:56:12.161489','YYYY/MM/DD HH24:MI:SS.FF3'),'footer','BUTTON_CLICK');
+INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (36,6578,to_timestamp('2012-11-20 23:45:11.461489','YYYY/MM/DD HH24:MI:SS.FF3'),'header','INPUT_FOCUSLOSS');
+INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (37,9123,to_timestamp('2009-12-10 04:24:09.611489','YYYY/MM/DD HH24:MI:SS.FF3'),'chat','INPUT_FOCUSLOSS');
+INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (38,7456,to_timestamp('2016-01-9 07:24:56.211489','YYYY/MM/DD HH24:MI:SS.FF3'),'plugin','BUTTON_CLICK');
+INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (39,1487,to_timestamp('2014-02-23 02:29:32.111489','YYYY/MM/DD HH24:MI:SS.FF3'),'button','NAVIGATION');
+INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (40,8437,to_timestamp('2013-05-13 15:28:25.511489','YYYY/MM/DD HH24:MI:SS.FF3'),'button','INPUT_FOCUSLOSS');
