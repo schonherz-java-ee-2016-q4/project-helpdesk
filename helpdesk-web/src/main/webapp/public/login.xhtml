@@ -5,10 +5,12 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:head>
-		<h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-				rel="stylesheet"/>
-		<h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-				rel="stylesheet"/>
+		<h:link
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+			rel="stylesheet" />
+		<h:link
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+			rel="stylesheet" />
 		<h:outputStylesheet library="css" name="bootstrap.min.css" />
 		<h:outputStylesheet library="css" name="login.css" />
 		<ui:define name="pageTitle">Login</ui:define>
@@ -30,16 +32,18 @@
 
 				<div class="col-xs-12 col-sm-4 col-lg-4">
 					<div class="login-flex-login">
-						<h:outputLabel class="login-label">Login</h:outputLabel>
-						<p:inputText class="login-input" placeholder="Username" />
-						<p:spacer height="10" />
-						<p:password id="password" value="#{passwordView.password}"
-							class="login-input" placeholder="Password" />
-						<p:spacer height="10" />
-						<p:commandButton value="Sign in" id="login-button" update="growl"
-							actionListener="#{buttonView.buttonAction}"
-							styleClass="ui-priority-primary" />
-						<p:spacer height="10" />
+						<h:form id="loginForm" prependId="false">
+							<h:outputLabel class="login-label">Login</h:outputLabel>
+							<h:inputText id="username" required="true" label="username" />
+							<p:spacer height="10" />
+							<h:inputSecret id="password" label="password" required="true" />
+							<p:spacer height="10" />
+							<h:commandButton type="submit" id="login" value="Login"
+								onclick="$('#loginForm').attr('action','#{request.contextPath}/public/login')" />
+							<p:spacer height="10" />
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+						</h:form>
 					</div>
 				</div>
 			</div>
