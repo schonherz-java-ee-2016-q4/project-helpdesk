@@ -18,7 +18,7 @@ public class MessageBean implements MessageService {
     private MessageRepository messageRepository;
 
     @Override
-    public Long save(MessageVO message) {
+    public Long save(final MessageVO message) {
         return messageRepository.save(MessageMapper.toEntity(message)).getId();
     }
 }

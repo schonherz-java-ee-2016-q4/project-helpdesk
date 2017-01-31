@@ -20,17 +20,17 @@ public class ConversationBean implements ConversationService {
     private ConversationRepository conversationRepository;
 
     @Override
-    public long save(ConversationVO conversation) {
+    public long save(final ConversationVO conversation) {
         return conversationRepository.save(ConversationMapper.toEntity(conversation)).getId();
     }
 
     @Override
-    public ConversationVO findById(Long id) {
+    public ConversationVO findById(final Long id) {
         return ConversationMapper.toVO(conversationRepository.findById(id));
     }
 
     @Override
-    public Collection<ConversationVO> findByAgentIdAndClientId(int agentId, int clientId) {
+    public Collection<ConversationVO> findByAgentIdAndClientId(final int agentId, final int clientId) {
         return ConversationMapper.toVO(conversationRepository.findByAgentIdAndClientId(agentId, clientId));
     }
 }

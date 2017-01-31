@@ -13,7 +13,9 @@ import java.util.List;
 public final class ConversationMapper {
 
     private static Mapper mapper = new DozerBeanMapper();
-    public ConversationMapper(){}
+
+    private ConversationMapper() {
+    }
 
     public static ConversationVO toVO(final ConversationEntity conversation) {
         if (conversation == null) {

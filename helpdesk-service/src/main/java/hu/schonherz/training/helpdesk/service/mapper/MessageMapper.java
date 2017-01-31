@@ -13,35 +13,36 @@ import java.util.List;
 public final class MessageMapper {
     private static Mapper mapper = new DozerBeanMapper();
 
-    public MessageMapper(){}
-
-    public static MessageVO toVo(final MessageEntity message){
-        if(message == null){
-            return null;
-        }
-        return mapper.map(message,MessageVO.class);
+    private MessageMapper() {
     }
 
-    public static MessageEntity toEntity(final MessageVO messageVO){
-        if(messageVO == null){
+    public static MessageVO toVo(final MessageEntity message) {
+        if (message == null) {
             return null;
         }
-        return mapper.map(messageVO,MessageEntity.class);
+        return mapper.map(message, MessageVO.class);
     }
 
-    public static List<MessageVO> toVo(final Collection<MessageEntity> messages){
+    public static MessageEntity toEntity(final MessageVO messageVO) {
+        if (messageVO == null) {
+            return null;
+        }
+        return mapper.map(messageVO, MessageEntity.class);
+    }
+
+    public static List<MessageVO> toVo(final Collection<MessageEntity> messages) {
         List<MessageVO> rv = new ArrayList<>();
 
-        for(MessageEntity message:messages){
+        for (MessageEntity message : messages) {
             rv.add(toVo(message));
         }
         return rv;
     }
 
-    public static List<MessageEntity> toEntity(final Collection<MessageVO> messageVOs){
+    public static List<MessageEntity> toEntity(final Collection<MessageVO> messageVOs) {
         List<MessageEntity> rv = new ArrayList<>();
 
-        for(MessageVO messageVO:messageVOs){
+        for (MessageVO messageVO : messageVOs) {
             rv.add(toEntity(messageVO));
         }
         return rv;
