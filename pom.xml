@@ -4,7 +4,7 @@
 
     <groupId>hu.schonherz.java.training.project</groupId>
     <artifactId>helpdesk</artifactId>
-    <version>0.1.19-SNAPSHOT</version>
+    <version>0.1.20-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Help Desk Platform - Help Desk Parent</name>
