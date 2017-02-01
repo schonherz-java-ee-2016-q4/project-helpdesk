@@ -1,8 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<h:head>
 		<h:link
@@ -16,8 +15,7 @@
 		<ui:define name="pageTitle">Login</ui:define>
 	</h:head>
 	<h:body>
-		<h:form>
-			<p:growl id="growl" life="2000" />
+	
 			<div class="login-flex-container">
 				<div class="col-xs-12 col-sm-5 col-lg-5">
 					<div class="login-flex-item">
@@ -32,22 +30,16 @@
 
 				<div class="col-xs-12 col-sm-4 col-lg-4">
 					<div class="login-flex-login">
-						<h:form id="loginForm" prependId="false">
-							<h:outputLabel class="login-label">Login</h:outputLabel>
-							<h:inputText id="username" required="true" label="username" />
-							<p:spacer height="10" />
-							<h:inputSecret id="password" label="password" required="true"/>
-							<p:spacer height="10" />
-							<h:commandButton type="submit" id="login" value="Login"
-								action="#{loginController.doLogin}"/>
-							<p:spacer height="10" />
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" />
-						</h:form>
+						<form id="loginForm" action="/helpdesk/public/login" method="POST">
+							<label class="login-label">Login</label>
+							<input  name="username" id="user" class="form-control" placeholder="Username" required="required" />
+                            <input type="password"  name="password" id="password" class="form-control" placeholder="Password" required="required" />
+							<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+						</form>
 					</div>
 				</div>
 			</div>
-		</h:form>
+	
 
 	</h:body>
 </ui:composition>

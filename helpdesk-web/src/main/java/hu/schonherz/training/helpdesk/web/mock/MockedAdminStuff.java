@@ -11,7 +11,7 @@ public class MockedAdminStuff {
 
     public User findByName(final String username) {
         Set<GrantedAuthority> auths = new HashSet<GrantedAuthority>();
-        auths.add(new SimpleGrantedAuthority("USER"));
+        auths.add(new SimpleGrantedAuthority("ROLE_USER"));
         return new User(username, "123", true, true, true, true, auths);
     }
 
