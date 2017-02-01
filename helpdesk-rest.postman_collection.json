@@ -30,7 +30,7 @@
 		{
 			"name": "Get clientactivity",
 			"request": {
-				"url": "http://localhost:8080/helpdesk/api/activities/1",
+				"url": "http://localhost:8080/helpdesk/api/activities/35",
 				"method": "GET",
 				"header": [
 					{
@@ -90,7 +90,7 @@
 		{
 			"name": "Get available agent",
 			"request": {
-				"url": "http://localhost:8080/helpdesk/api/isagentavailable",
+				"url": "http://localhost:8080/helpdesk/api/agents/available",
 				"method": "POST",
 				"header": [
 					{

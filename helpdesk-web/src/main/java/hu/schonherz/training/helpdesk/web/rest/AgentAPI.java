@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Random;
 
-@Path("/")
+@Path("/agents")
 @Stateless(mappedName = "agentApi")
 public class AgentAPI {
 
@@ -30,7 +30,7 @@ public class AgentAPI {
     }
 
     @POST
-    @Path("/isagentavailable")
+    @Path("/available")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response getClientActivity(final CompanyVO company) {
@@ -45,8 +45,6 @@ public class AgentAPI {
 
         return Response.accepted(agent).build();
 
-
     }
-
 
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class ClientActivityMapper {
-    private static DozerBeanMapper dozerBeanMapper = Mappers.createDozerBeanMapper();
+    private static DozerBeanMapper dozerBeanMapper = Mappers.getDozerBeanMapper();
 
     private ClientActivityMapper() {}
 

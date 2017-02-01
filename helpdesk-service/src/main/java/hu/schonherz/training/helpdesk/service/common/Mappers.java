@@ -7,16 +7,20 @@ import java.util.List;
 
 public final class Mappers {
 
-    private Mappers() {
-    }
+    private static DozerBeanMapper dozerBeanMapper;
 
-    public static DozerBeanMapper createDozerBeanMapper() {
-        DozerBeanMapper dozerBeanMapper = new DozerBeanMapper();
+    static {
+        dozerBeanMapper = new DozerBeanMapper();
         List<String> mappingFiles = new ArrayList<>();
         mappingFiles.add("dozerJdk8Converters.xml");
 
         dozerBeanMapper.setMappingFiles(mappingFiles);
+    }
 
+    private Mappers() {
+    }
+
+    public static DozerBeanMapper getDozerBeanMapper() {
         return dozerBeanMapper;
     }
 }
