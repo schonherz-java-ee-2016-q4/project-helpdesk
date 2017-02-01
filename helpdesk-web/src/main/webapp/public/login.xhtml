@@ -36,10 +36,10 @@
 							<h:outputLabel class="login-label">Login</h:outputLabel>
 							<h:inputText id="username" required="true" label="username" />
 							<p:spacer height="10" />
-							<h:inputSecret id="password" label="password" required="true" />
+							<h:inputSecret id="password" label="password" required="true"/>
 							<p:spacer height="10" />
 							<h:commandButton type="submit" id="login" value="Login"
-								onclick="$('#loginForm').attr('action','#{request.contextPath}/public/login')" />
+								action="#{loginController.doLogin}"/>
 							<p:spacer height="10" />
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />

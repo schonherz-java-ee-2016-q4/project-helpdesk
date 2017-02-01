@@ -1,11 +1,18 @@
 package hu.schonherz.training.helpdesk.web.mock;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 public class MockedAdminStuff {
 
     public User findByName(final String username) {
-        return null;
+        Set<GrantedAuthority> auths = new HashSet<GrantedAuthority>();
+        auths.add(new SimpleGrantedAuthority("USER"));
+        return new User(username, "123", true, true, true, true, auths);
     }
 
 }
