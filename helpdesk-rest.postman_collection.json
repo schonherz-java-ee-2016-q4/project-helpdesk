@@ -30,7 +30,7 @@
 		{
 			"name": "Get clientactivity",
 			"request": {
-				"url": "http://localhost:8080/helpdesk/api/activities/35",
+				"url": "http://localhost:8080/helpdesk/api/activities/1",
 				"method": "GET",
 				"header": [
 					{
@@ -43,7 +43,7 @@
 					"mode": "raw",
 					"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"NAVIGATION\",\n  \"target\":\"kispista.com#verynagyonbutton\"\n}"
 				},
-				"description": "Should respond with 200 OK and a similar JSON:\n\n{\n  \"id\": 1,\n  \"clientId\": \"200\",\n  \"type\": \"NAVIGATION\",\n  \"target\": \"kispista.com#verynagyonbutton\",\n  \"createdAt\": {\n    \"dayOfMonth\": 31,\n    \"dayOfWeek\": \"TUESDAY\",\n    \"dayOfYear\": 31,\n    \"monthValue\": 1,\n    \"month\": \"JANUARY\",\n    \"year\": 2017,\n    \"hour\": 23,\n    \"minute\": 35,\n    \"second\": 17,\n    \"nano\": 818000000,\n    \"chronology\": {\n      \"id\": \"ISO\",\n      \"calendarType\": \"iso8601\"\n    }\n  }\n}"
+				"description": "Should respond with 200 OK and a similar JSON:\n\n{\n    \"id\": 31,\n    \"clientId\": \"1111\",\n    \"type\": \"NAVIGATION\",\n    \"target\": \"button\",\n    \"createdAt\": \"2012-08-12T22:20:58.611\"\n  }"
 			},
 			"response": []
 		},

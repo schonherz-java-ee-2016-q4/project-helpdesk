@@ -288,13 +288,20 @@
             <!--- jackson dependecies -->
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-jackson-provider</artifactId>
+                <artifactId>resteasy-jackson2-provider</artifactId>
                 <version>${resteasy.version}</version>
+                <scope>provided</scope>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
 
@@ -375,6 +382,7 @@
                             <ruleset>${dir.codequality}/pmd/unnecessary.xml</ruleset>
                             <ruleset>${dir.codequality}/pmd/unusedcode.xml</ruleset>
                         </rulesets>
+                        <verbose>true</verbose>
                     </configuration>
                 </plugin>
                 <!-- /Code Quality Plugins -->
