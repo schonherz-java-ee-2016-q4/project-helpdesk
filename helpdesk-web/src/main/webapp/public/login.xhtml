@@ -15,31 +15,34 @@
 		<ui:define name="pageTitle">#{msg.login}</ui:define>
 	</h:head>
 	<h:body>
-	
-			<div class="login-flex-container">
-				<div class="col-xs-12 col-sm-5 col-lg-5">
-					<div class="login-flex-item">
-						<a href="#"> <h:graphicImage library="images"
-								name="helpdesk.png" class="login-image img-rounded" />
-						</a> <a class="label label-default login-label" href="#">Partners</a>
-						<a class="label label-default login-label" href="#">About</a>
-					</div>
-				</div>
 
-				<div class="col-xs-1 col-sm-1 col-lg-1 "></div>
-
-				<div class="col-xs-12 col-sm-4 col-lg-4">
-					<div class="login-flex-login">
-						<form id="loginForm" action="/helpdesk/public/login" method="POST">
-							<label class="login-label">Login</label>
-							<input  name="username" id="user" class="form-control" placeholder="Username" required="required" />
-                            <input type="password"  name="password" id="password" class="form-control" placeholder="Password" required="required" />
-							<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-						</form>
-					</div>
+		<div class="login-flex-container">
+			<div class="col-xs-12 col-sm-5 col-lg-5">
+				<div class="login-flex-item">
+					<a href="#"> <h:graphicImage library="images"
+							name="helpdesk.png" class="login-image img-rounded" />
+					</a> <a class="label label-default login-label" href="#">Partners</a> <a
+						class="label label-default login-label" href="#">About</a>
 				</div>
 			</div>
-	
+
+			<div class="col-xs-1 col-sm-1 col-lg-1 "></div>
+
+			<div class="col-xs-12 col-sm-4 col-lg-4">
+				<div class="login-flex-login">
+					<form id="loginForm" action="/helpdesk/login" method="POST">
+						<label class="login-label">#{msg.login}</label> <input
+							name="username" id="user" class="form-control"
+							placeholder="#{msg.username}" required="required" /> <input
+							type="password" name="password" id="password"
+							class="form-control" placeholder="#{msg.password}"
+							required="required" />
+						<button class="btn btn-lg btn-primary btn-block" type="submit">#{msg.login}</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
 
 	</h:body>
 </ui:composition>

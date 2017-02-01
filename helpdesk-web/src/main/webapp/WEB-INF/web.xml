@@ -35,7 +35,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/login</welcome-file>
+        <welcome-file>/public/login.xhtml</welcome-file>
     </welcome-file-list>
 
     <ejb-ref>

@@ -17,10 +17,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/secured/**", "/agent/**", "/client").hasRole("USER").and().formLogin()
-                .loginPage("/public/login").failureUrl("/public/login?error").permitAll()
-                .usernameParameter("username")
-                .passwordParameter("password").and().logout().logoutSuccessUrl("/public/login?logout");
+        http.authorizeRequests()
+            .antMatchers("/").permitAll()
+            .antMatchers("/secured/**", "/agent/**", "/client/**", "/chat/**").hasRole("USER")
+            .and()
+                .formLogin()
+                     .loginPage("/login").failureUrl("/login?error")
+                     .usernameParameter("username")
+                     .passwordParameter("password")
+            .and()
+                .logout().logoutSuccessUrl("/login?logout");
         http.csrf().disable();
     }
 
