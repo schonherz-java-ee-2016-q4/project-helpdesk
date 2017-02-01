@@ -12,7 +12,7 @@ public final class Mappers {
 
     public static DozerBeanMapper createDozerBeanMapper() {
         DozerBeanMapper dozerBeanMapper = new DozerBeanMapper();
-        List<String> mappingFiles = new ArrayList();
+        List<String> mappingFiles = new ArrayList<>();
         mappingFiles.add("dozerJdk8Converters.xml");
 
         dozerBeanMapper.setMappingFiles(mappingFiles);

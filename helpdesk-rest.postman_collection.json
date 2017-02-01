@@ -1,0 +1,131 @@
+{
+	"variables": [],
+	"info": {
+		"name": "helpdesk-rest",
+		"_postman_id": "8fb56208-c781-5a1c-6afb-4d1d83382a73",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add new clientactivity",
+			"request": {
+				"url": "http://localhost:8080/helpdesk/api/activities/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"NAVIGATION\",\n  \"target\":\"kispista.com#verynagyonbutton\"\n}"
+				},
+				"description": "should respond with 202 Accepted"
+			},
+			"response": []
+		},
+		{
+			"name": "Get clientactivity",
+			"request": {
+				"url": "http://localhost:8080/helpdesk/api/activities/35",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"NAVIGATION\",\n  \"target\":\"kispista.com#verynagyonbutton\"\n}"
+				},
+				"description": "Should respond with 200 OK and a similar JSON:\n\n{\n  \"id\": 1,\n  \"clientId\": \"200\",\n  \"type\": \"NAVIGATION\",\n  \"target\": \"kispista.com#verynagyonbutton\",\n  \"createdAt\": {\n    \"dayOfMonth\": 31,\n    \"dayOfWeek\": \"TUESDAY\",\n    \"dayOfYear\": 31,\n    \"monthValue\": 1,\n    \"month\": \"JANUARY\",\n    \"year\": 2017,\n    \"hour\": 23,\n    \"minute\": 35,\n    \"second\": 17,\n    \"nano\": 818000000,\n    \"chronology\": {\n      \"id\": \"ISO\",\n      \"calendarType\": \"iso8601\"\n    }\n  }\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all clientactivites",
+			"request": {
+				"url": "http://localhost:8080/helpdesk/api/activities/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"NAVIGATION\",\n  \"target\":\"kispista.com#verynagyonbutton\"\n}"
+				},
+				"description": "Should respond with 200 ok and all activities in JSON format as body."
+			},
+			"response": []
+		},
+		{
+			"name": "Add new clientactivity target missing",
+			"request": {
+				"url": "http://localhost:8080/helpdesk/api/activities/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"clientId\":\"200\",\n  \"target\":\"\",\n  \"type\":\"NAVIGATION\"\n}"
+				},
+				"description": "Should respond with 400 Bad request"
+			},
+			"response": []
+		},
+		{
+			"name": "Get available agent",
+			"request": {
+				"url": "http://localhost:8080/helpdesk/api/isagentavailable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"source\":\"datcompany.com\"\n}"
+				},
+				"description": "Should respond with 202 accepted and a similar JSON:\n{\n  \"id\": null\n}\nOR\n{\n  \"id\": 24\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Add new clientactivity large text in target",
+			"request": {
+				"url": "http://localhost:8080/helpdesk/api/activities/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"NAVIGATION\",\n  \"target\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit laoreet augue, in dictum ante ultricies a. Proin sit amet lobortis mauris, ut viverra mi. Phasellus sollicitudin est id urna ultricies ultrices. Aenean lobortis nunc sed nibh aliquam, nec condimentum libero accumsan. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec auctor in ex vitae aliquam. Fusce mollis sapien a arcu aliquet, a pharetra massa tempor. Praesent nec libero at nunc feugiat congue sed non quam. Etiam lacinia, ipsum at pretium rhoncus, urna odio lobortis dolor, id lacinia sem ante eget erat. Maecenas sit amet faucibus dolor. Duis et ligula libero.  Morbi id arcu eu lectus rutrum aliquet id eu urna. Nam eleifend nisl velit, vel bibendum libero porta eu. Phasellus lorem metus, sodales eget vulputate vitae, tempus et nibh. Ut non venenatis ex. Ut bibendum molestie augue. Ut finibus mauris leo, a blandit augue ultrices eu. Aenean aliquam, nisl sit amet ornare molestie, mi nisi rutrum massa, eget laoreet nunc leo vitae velit. Donec imperdiet risus non ultrices viverra. Ut nec ex fermentum, fringilla lectus vitae, gravida ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in augue in dui commodo tincidunt at non nisi. Ut non magna malesuada, ultrices ipsum eu, posuere arcu. Curabitur dapibus tempus ipsum eget lacinia. Curabitur lobortis rhoncus augue, non porta lectus fringilla eget.  Phasellus hendrerit sit amet mi quis semper. Nam id metus condimentum, fermentum felis et, mollis ex. Donec urna ipsum, vulputate at blandit vitae, vulputate nec metus. Cras accumsan ex quam, eget scelerisque neque fermentum ac. Phasellus eu tortor iaculis nibh venenatis volutpat at et turpis. Suspendisse potenti. Fusce ultrices aliquet lacus, vitae finibus ligula sodales a.  Nullam sit amet cursus magna. Phasellus vitae dignissim lectus, sed lobortis elit. Integer sit amet consectetur velit. Nunc eu enim eu metus efficitur consectetur. Sed vel aliquam libero. Pellentesque fermentum mauris sit amet sollicitudin laoreet. Aenean neque ante, congue non molestie sit amet, lobortis sit amet sapien. Mauris dignissim ante eget facilisis ornare.  Maecenas ac augue ut enim pharetra viverra in ac dolor. Nulla vitae lobortis eros. Phasellus aliquam dictum dui sed mollis. Fusce varius imperdiet eleifend. Duis sit amet auctor quam. Aenean nec enim fringilla elit ornare viverra. Suspendisse potenti. Ut vitae facilisis eros, sed fermentum enim. In convallis eleifend venenatis. Integer vulputate, dolor sit amet finibus fermentum, mi lorem rhoncus ante, et vehicula diam lectus nec eros. Vivamus lacinia scelerisque turpis. Cras sodales vel massa eget tincidunt. Aliquam mollis massa et eros viverra, vel finibus magna bibendum. Nullam eu odio aliquam, venenatis lorem vel, pellentesque lorem. Aenean venenatis arcu non accumsan sodales.  Vestibulum porta vulputate nisi ut blandit. Quisque aliquet lobortis posuere. Phasellus in augue lectus. Duis laoreet sollicitudin condimentum. Mauris sollicitudin, mi vitae aliquet imperdiet, leo augue iaculis risus, a porttitor tellus tellus et lacus. Duis tellus libero, euismod at metus nec, aliquet pharetra est. Nunc urna nisl, luctus vel quam vitae, consectetur accumsan mi. Ut quam purus, interdum sed diam ac, rhoncus commodo metus. Praesent ornare lacinia ullamcorper. Phasellus enim mauris, congue lobortis diam ut, malesuada pulvinar metus. Suspendisse consectetur imperdiet odio quis suscipit. Aenean eu odio ac lectus viverra scelerisque. Maecenas fermentum eu ex ac sagittis.  Ut lorem dui, iaculis a tempor a, egestas sit amet ipsum. Phasellus sit amet porta purus. Curabitur facilisis dictum felis. Integer a nisi eu velit vestibulum vestibulum. Nam pharetra augue et felis pretium, nec tempor enim molestie. Vestibulum sollicitudin tincidunt egestas. Quisque at iaculis mauris. Donec id quam elementum eros vulputate imperdiet at sed urna. Praesent efficitur lectus id neque placerat, eget congue dolor molestie. Praesent a magna eu massa laoreet euismod.  In hac habitasse platea dictumst. Donec consectetur porta porta. Quisque placerat et ante a rhoncus. Pellentesque ut elit ac ligula convallis euismod. Phasellus volutpat finibus ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fringilla nisl sit amet imperdiet accumsan. Ut consequat ante quis nibh ornare, gravida malesuada lorem mollis. Nam mollis libero in blandit tincidunt. Phasellus venenatis, mi vitae vestibulum mattis, erat urna maximus justo, ac posuere lectus ex egestas odio.  Pellentesque varius augue sed sodales rhoncus. Sed pretium purus at urna cursus semper. Maecenas eu hendrerit lectus, ultricies maximus nibh. Cras hendrerit maximus porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra ante vitae sapien dictum lacinia. In nulla ligula, dignissim quis iaculis nec, egestas vel eros. Vestibulum facilisis tempor turpis, eu sollicitudin elit iaculis eget. Maecenas egestas ligula eget diam elementum, consequat lobortis mauris hendrerit. Aliquam congue eros enim, eu pulvinar sapien luctus in.  Morbi pellentesque porta leo consequat congue. Mauris quis nibh eros. Praesent pulvinar feugiat nunc, et venenatis tellus finibus at. Nullam porttitor facilisis quam et volutpat. Nullam id nisl elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla velit urna, pellentesque a ante vitae, elementum sollicitudin tortor. Morbi magna metus, efficitur vel felis id, hendrerit tincidunt augue. Cras congue fringilla eros, a imperdiet diam molestie at. Aenean blandit pretium urna sit amet porttitor. Ut porta libero vitae urna dictum facilisis eget et lacus. Ut eget leo nec turpis aliquam finibus ut a enim. Fusce quis nulla nec arcu malesuada venenatis. In eget ex lobortis eros semper malesuada. Nunc varius justo vel placerat posuere.  Vivamus viverra porttitor tincidunt. Etiam id augue vel enim venenatis elementum sed ut lorem. Suspendisse potenti. Praesent vitae metus eu neque lobortis laoreet non nec enim. Duis at sapien nulla. Integer porttitor nibh ac orci interdum, et consequat sem feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla quis tortor bibendum, finibus ex sed, varius odio. Suspendisse lobortis gravida mi vitae cursus. Fusce consequat augue consequat eros dignissim vestibulum. Fusce ante nibh, convallis ut laoreet sed, dapibus in diam. Proin pellentesque molestie massa, at cursus sem elementum eget.  Suspendisse tempus interdum congue. Nam at venenatis lorem. Quisque accumsan nulla ipsum, sit amet facilisis leo sodales dictum. Donec ornare gravida quam sed mattis. Praesent rhoncus mollis porttitor. Cras sit amet risus ut erat fringilla scelerisque. Morbi sed est.\"\n}"
+				},
+				"description": "should respond with 202 Accepted"
+			},
+			"response": []
+		}
+	]
+}
