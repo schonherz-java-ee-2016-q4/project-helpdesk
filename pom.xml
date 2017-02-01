@@ -289,7 +289,7 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!--- jackson dependecies -->
+            <!-- jackson dependencies -->
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-jackson2-provider</artifactId>
