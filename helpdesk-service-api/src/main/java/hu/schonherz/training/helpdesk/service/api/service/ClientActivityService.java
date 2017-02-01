@@ -8,4 +8,6 @@ public interface ClientActivityService {
     Collection<ClientActivityVO> findAll();
     ClientActivityVO findById(Long id);
     long save(ClientActivityVO activity);
+    Collection<ClientActivityVO> findByClientIdOrderByCreatedAtDesc(String clientId);
+    Collection<ClientActivityVO> findByTargetContainingOrderByCreatedAtDesc(String searchString);
 }

@@ -36,8 +36,8 @@
     <div class="container">
 
 
-        <h2>Activity details for the user:</h2>
-        <h3>200</h3>
+        <h2>Activity details for the site:</h2>
+        <h3>testsite</h3>
         <!-- User activity details -->
         <h:form id="activityTableEntries">
             <div class="activityDetails">
@@ -46,14 +46,16 @@
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
+                        <th>#{msg.client_id}</th>
                         <th>#{msg.timestamp}</th>
                         <th>#{msg.type}</th>
                         <th>#{msg.target}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <ui:repeat value='#{clientActivityView.refreshActivities("200")}' var="clientActivity">
+                    <ui:repeat value='#{clientActivityView.refreshSiteActivities("testsite.com")}' var="clientActivity">
                         <tr>
+                            <td>#{clientActivity.clientId}</td>
                             <td>#{clientActivity.createdAt}</td>
                             <td>#{clientActivity.type}</td>
                             <td>#{clientActivity.target}</td>
