@@ -96,10 +96,14 @@
         <hibernate.validator.version>5.3.4.Final</hibernate.validator.version>
         <spring.data.version>1.10.2.RELEASE</spring.data.version>
         <dozer.version>5.5.1</dozer.version>
+        <dozer.jdk8.support.version>1.0.2</dozer.jdk8.support.version>
         <spring.security.version>4.2.1.RELEASE</spring.security.version>
         <lombok.version>1.16.12</lombok.version>
         <slf4j.version>1.7.22</slf4j.version>
         <logback.version>1.1.9</logback.version>
+
+        <resteasy.version>3.1.0.Final</resteasy.version>
+        <jackson.version>2.8.6</jackson.version>
 
         <version.plugin.versions>2.3</version.plugin.versions>
         <version.plugin.release>2.5.3</version.plugin.release>
@@ -121,6 +125,13 @@
                 <artifactId>dozer</artifactId>
                 <version>${dozer.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.craftsman</groupId>
+                <artifactId>dozer-jdk8-support</artifactId>
+                <version>${dozer.jdk8.support.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -269,6 +280,35 @@
                 <artifactId>logback-core</artifactId>
                 <version>${logback.version}</version>
             </dependency>
+
+            <!-- resteasy dependency -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxrs</artifactId>
+                <version>${resteasy.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!--- jackson dependecies -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jackson2-provider</artifactId>
+                <version>${resteasy.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -346,6 +386,7 @@
                             <ruleset>${dir.codequality}/pmd/unnecessary.xml</ruleset>
                             <ruleset>${dir.codequality}/pmd/unusedcode.xml</ruleset>
                         </rulesets>
+                        <verbose>true</verbose>
                     </configuration>
                 </plugin>
                 <!-- /Code Quality Plugins -->
