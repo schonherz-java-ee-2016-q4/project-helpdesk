@@ -102,8 +102,8 @@
 
         <!-- Template dependency -->
         <dependency>
-            <groupId>hu.schonherz.java.training.project</groupId>
-            <artifactId>template</artifactId>
+            <groupId>com.github.schonherz-java-ee-2016-q4</groupId>
+            <artifactId>project</artifactId>
         </dependency>
     </dependencies>
 
