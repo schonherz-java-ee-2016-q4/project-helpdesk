@@ -141,9 +141,9 @@ function getAvailableAgent() {
     form["source"] = window.location.host;
 
     $.ajax({
-        type: "GET",
+        type: "POST",
         contentType: "application/json",
-        url: "http://javatraining.neuron.hu/helpdesk/api/isagenavailable",
+        url: "http://javatraining.neuron.hu/helpdesk/api/agents/available",
         data: JSON.stringify(form),
         dataType: 'json',
         timeout: 100000,
