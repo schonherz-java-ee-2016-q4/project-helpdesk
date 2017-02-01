@@ -1,35 +1,29 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-                rel="stylesheet"/>
-        <h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-                rel="stylesheet"/>
+                template="/templates/masterLayout.xhtml">
 
+    <ui:define name="customHead">
         <h:outputStylesheet library="css" name="profile.css"/>
-        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-        <h:outputScript library="primefaces" name="jquery/jquery.js"
-                        target="head"/>
-        <h:outputScript library="primefaces" name="jquery/jquery-plugins.js"
-                        target="head"/>
+    </ui:define>
 
+    <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
+    <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
+    <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
 
-        <ui:define name="pageTitle">#{msg.agent} #{msg.profile}</ui:define>
-    </h:head>
-    <h:body>
+    <ui:define name="customBody">
         <div class="container">
 
             <h2 style="text-align: center">#{msg.agent} #{msg.profile}</h2>
 
             <!--Agent profile -->
-            <div class="row">
-                <div class="col-md-offset-3 col-md-6 col-md-offset-3">
+            <div class="col-md-offset-3 col-md-6 col-md-offset-3">
                 <table class="table responsive">
                     <tr class="text-centered">
-                        <td colspan="2"><div style="display:flex"><img  src="https://randomuser.me/api/portraits/women/26.jpg" style="margin:auto" class="img-thumbnail"></img></div></td>
+                        <td colspan="2">
+                            <div style="display:flex"><img src="https://randomuser.me/api/portraits/women/26.jpg"
+                                                           style="margin:auto" class="img-thumbnail"></img></div>
+                        </td>
                     </tr>
                     <tr>
                         <td>#{msg.name}:</td>
@@ -56,11 +50,10 @@
                         <td>+36-30-1112367</td>
                     </tr>
                 </table>
-                    <a href="/helpdesk/client/activity" class="btn btn-info" role="button">#{msg.see_your_activity}</a>
+                <a href="/helpdesk/client/activity" class="btn btn-info" role="button">#{msg.see_your_activity}</a>
             </div>
 
-            </div>
         </div>
-    </h:body>
+    </ui:define>
 
 </ui:composition>

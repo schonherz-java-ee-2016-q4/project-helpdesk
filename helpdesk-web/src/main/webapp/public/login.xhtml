@@ -1,49 +1,47 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/masterLayout.xhtml">
 
-	<h:head>
-		<h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-				rel="stylesheet"/>
-		<h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-				rel="stylesheet"/>
-		<h:outputStylesheet library="css" name="bootstrap.min.css" />
-		<h:outputStylesheet library="css" name="login.css" />
-		<ui:define name="pageTitle">#{msg.login}</ui:define>
-	</h:head>
-	<h:body>
-		<h:form>
-			<p:growl id="growl" life="2000" />
-			<div class="login-flex-container">
-				<div class="col-xs-12 col-sm-5 col-lg-5">
-					<div class="login-flex-item">
-						<a href="#"> <h:graphicImage library="images"
-								name="helpdesk.png" class="login-image img-rounded" />
-						</a> <a class="label label-default login-label" href="#">Partners</a>
-						<a class="label label-default login-label" href="#">About</a>
-					</div>
-				</div>
+    <ui:define name="customHead">
+        <h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
+    </ui:define>
 
-				<div class="col-xs-1 col-sm-1 col-lg-1 "></div>
+    <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
+    <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
+    <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
 
-				<div class="col-xs-12 col-sm-4 col-lg-4">
-					<div class="login-flex-login">
-						<h:outputLabel class="login-label">#{msg.login}</h:outputLabel>
-						<p:inputText class="login-input" placeholder="#{msg.username}" />
-						<p:spacer height="10" />
-						<p:password id="password" value="#{passwordView.password}"
-							class="login-input" placeholder="#{msg.password}" />
-						<p:spacer height="10" />
-						<p:commandButton value="#{msg.login}" id="login-button" update="growl"
-							actionListener="#{buttonView.buttonAction}"
-							styleClass="ui-priority-primary" />
-						<p:spacer height="10" />
-					</div>
-				</div>
-			</div>
-		</h:form>
+    <ui:define name="customBody">
+        <h:form>
+            <p:growl id="growl" life="2000"/>
+            <div class="login-flex-container">
+                <div class="col-xs-12 col-sm-5 col-lg-5">
+                    <div class="login-flex-item">
+                        <a href="#"> <h:graphicImage library="images"
+                                                     name="helpdesk.png" class="login-image img-rounded"/>
+                        </a> <a class="label label-default login-label" href="#">#{msg.partners}</a>
+                        <a class="label label-default login-label" href="#">#{msg.about}</a>
+                    </div>
+                </div>
 
-	</h:body>
+                <div class="col-xs-1 col-sm-1 col-lg-1 "></div>
+
+                <div class="col-xs-12 col-sm-4 col-lg-4">
+                    <div class="login-flex-login">
+                        <h:outputLabel class="login-label">#{msg.login}</h:outputLabel>
+                        <p:inputText class="login-input" placeholder="#{msg.username}"/>
+                        <p:spacer height="10"/>
+                        <p:password id="password" value="#{passwordView.password}"
+                                    class="login-input" placeholder="#{msg.password}"/>
+                        <p:spacer height="10"/>
+                        <p:commandButton value="#{msg.login}" id="login-button" update="growl"
+                                         actionListener="#{buttonView.buttonAction}"
+                                         styleClass="ui-priority-primary"/>
+                        <p:spacer height="10"/>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
 </ui:composition>
