@@ -16,7 +16,6 @@ public class LoginEntity extends BaseEntity {
 
     private static final long serialVersionUID = -6201828861327999500L;
     private int agentId;
-
     private LocalDateTime loginDate;
 
 }

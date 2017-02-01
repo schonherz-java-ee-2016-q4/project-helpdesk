@@ -16,11 +16,6 @@
     </context-param>
 
     <context-param>
-        <param-name>org.omnifaces.FACES_VIEWS_SCAN_PATHS</param-name>
-        <param-value>/*.xhtml</param-value>
-    </context-param>
-
-    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring-context.xml</param-value>
     </context-param>
@@ -40,7 +35,46 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/public/login.xhtml</welcome-file>
+        <welcome-file>/login</welcome-file>
     </welcome-file-list>
+
+    <ejb-ref>
+        <ejb-ref-name>ejb.clientActivityService</ejb-ref-name>
+        <remote>hu.schonherz.training.helpdesk.service.api.service.ClientActivityService</remote>
+    </ejb-ref>
+
+    <!-- REST -->
+
+    <!-- Auto scan REST service -->
+    <context-param>
+        <param-name>resteasy.scan</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <!-- this need same with resteasy servlet url-pattern -->
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/api</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+        </listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>resteasy-servlet</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>resteasy-servlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- /REST -->
 
 </web-app>

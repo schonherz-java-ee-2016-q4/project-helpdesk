@@ -5,7 +5,7 @@
     <parent>
         <groupId>hu.schonherz.java.training.project</groupId>
         <artifactId>helpdesk</artifactId>
-        <version>0.1.16-SNAPSHOT</version>
+        <version>0.1.21-SNAPSHOT</version>
     </parent>
 
     <artifactId>helpdesk-service</artifactId>
@@ -23,11 +23,22 @@
             <groupId>hu.schonherz.java.training.project</groupId>
             <artifactId>helpdesk-service-api</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>hu.schonherz.java.training.project</groupId>
+            <artifactId>helpdesk-data</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.craftsman</groupId>
+            <artifactId>dozer-jdk8-support</artifactId>
         </dependency>
 
         <!-- enterprise dependency -->

@@ -5,7 +5,7 @@
     <parent>
         <groupId>hu.schonherz.java.training.project</groupId>
         <artifactId>helpdesk</artifactId>
-        <version>0.1.16-SNAPSHOT</version>
+        <version>0.1.21-SNAPSHOT</version>
     </parent>
 
     <artifactId>helpdesk-web</artifactId>
@@ -20,8 +20,9 @@
     <dependencies>
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
-            <artifactId>helpdesk-service</artifactId>
+            <artifactId>helpdesk-service-api</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- security dependencies -->
@@ -86,10 +87,13 @@
         </dependency>
 
         <dependency>
-            <groupId>org.omnifaces</groupId>
-            <artifactId>omnifaces</artifactId>
+            <groupId>org.ocpsoft.rewrite</groupId>
+            <artifactId>rewrite-servlet</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.ocpsoft.rewrite</groupId>
+            <artifactId>rewrite-config-prettyfaces</artifactId>
+        </dependency>
         <!-- logging dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -104,6 +108,23 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
+        </dependency>
+
+        <!-- REST dependencies -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson2-provider</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Jackson dependencies -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
     </dependencies>
 
@@ -134,7 +155,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <failOnMissingWebXml>true</failOnMissingWebXml>
                 </configuration>
             </plugin>
         </plugins>

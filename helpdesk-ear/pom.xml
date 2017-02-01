@@ -5,7 +5,7 @@
     <parent>
         <groupId>hu.schonherz.java.training.project</groupId>
         <artifactId>helpdesk</artifactId>
-        <version>0.1.16-SNAPSHOT</version>
+        <version>0.1.21-SNAPSHOT</version>
     </parent>
 
     <artifactId>helpdesk-ear</artifactId>
@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>hu.schonherz.java.training.project</groupId>
-            <artifactId>helpdesk-data</artifactId>
+            <artifactId>helpdesk-service-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
