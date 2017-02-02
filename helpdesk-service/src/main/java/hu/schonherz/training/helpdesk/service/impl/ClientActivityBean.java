@@ -35,4 +35,14 @@ public class ClientActivityBean implements ClientActivityService {
         return clientActivityRepository.save(ClientActivityMapper.toEntity(activity)).getId();
     }
 
+    @Override
+    public Collection<ClientActivityVO> findByClientIdOrderByCreatedAtDesc(final String clientId) {
+        return  ClientActivityMapper.toVO(clientActivityRepository.findByClientIdOrderByCreatedAtDesc(clientId));
+    }
+
+    @Override
+    public Collection<ClientActivityVO> findByTargetContainingOrderByCreatedAtDesc(final String searchString) {
+        return ClientActivityMapper.toVO(clientActivityRepository.findByTargetContainingOrderByCreatedAtDesc(searchString));
+    }
+
 }

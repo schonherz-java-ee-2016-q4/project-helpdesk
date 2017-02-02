@@ -1,6 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
                 template="/templates/masterLayout.xhtml">
 
     <ui:define name="customTitle">Activity</ui:define>
@@ -15,41 +16,32 @@
 
     <ui:define name="customBody">
         <div class="container">
-
             <h2>#{msg.user_activity_details}</h2>
-            <h3>123e4567-e89b-12d3-a456-426655440000</h3>
+            <h3>200</h3>
             <!-- User activity details -->
-            <div class="activityDetails">
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>#{msg.timestamp}</th>
-                        <th>#{msg.type}</th>
-                        <th>#{msg.target}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>2017-01-26 23:01:05 CET</td>
-                        <td>NAVIGATION</td>
-                        <td><h:link value="http://examplecompany.com/index"></h:link></td>
-                    </tr>
-                    <tr>
-                        <td>2017-01-26 23:01:15 CET</td>
-                        <td>CLICK</td>
-                        <td>examplecompany/index#menuitem_about</td>
-                    </tr>
-
-                    <tr>
-                        <td>2017-01-26 23:01:40 CET</td>
-                        <td>NAVIGATION</td>
-                        <td><h:link value="http://examplecompany/about"></h:link></td>
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
-            <!-- /User activity details -->
+            <h:form id="activityTableEntries">
+                <div class="activityDetails">
+                    <p:poll async="true" delay="2500" update="activityTableEntries"></p:poll>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>#{msg.timestamp}</th>
+                            <th>#{msg.type}</th>
+                            <th>#{msg.target}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <ui:repeat value='#{clientActivityView.refreshActivities("200")}' var="clientActivity">
+                                <tr>
+                                    <td>#{clientActivity.createdAt}</td>
+                                    <td>#{clientActivity.type}</td>
+                                    <td>#{clientActivity.target}</td>
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
+                    </table>
+                </div>
+            </h:form>
         </div>
     </ui:define>
 </ui:composition>

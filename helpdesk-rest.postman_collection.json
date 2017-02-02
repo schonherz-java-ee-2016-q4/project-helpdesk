@@ -21,7 +21,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"NAVIGATION\",\n  \"target\":\"kispista.com#verynagyonbutton\"\n}"
+					"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"NAVIGATION\",\n  \"target\":\"www.testsite.com#testbutton\"\n}"
 				},
 				"description": "should respond with 202 Accepted"
 			},
