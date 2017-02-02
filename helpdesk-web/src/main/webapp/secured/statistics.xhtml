@@ -1,26 +1,25 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/templates/masterLayout.xhtml"
                 xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-                rel="stylesheet"/>
-        <h:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-                rel="stylesheet"/>
+    <ui:define name="customTitle">Statistics</ui:define>
 
-        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-        <h:outputStylesheet library="css" name="statistics.css"/>
+    <ui:define name="customHead">
+        <h:outputStylesheet library="css" name="statistics.css"></h:outputStylesheet>
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
         <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
-        <h:outputScript library="js" name="bootstrap.min.js"/>
+    </ui:define>
 
-        <ui:define name="pageTitle">Agent Statistics</ui:define>
-    </h:head>
-    <h:body>
+    <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
+    <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
+    <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
+
+    <ui:define name="customBody">
         <div class="container">
             <!--Agent statistics-->
-            <h2>Agent Statistics</h2>
+            <h2>#{msg.agent} #{msg.statistics}</h2>
             <table class="table table-condensed col-sm-6 col-md-6 col-lg-6">
                 <thead>
                 <tr class="text-centered">
@@ -34,32 +33,35 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>Name</td>
+                    <td>#{msg.name}</td>
                     <td>Jack Murray</td>
                 </tr>
                 <tr>
-                    <td>Number of logins:</td>
+                    <td>#{msg.num_of_logins}</td>
                     <td>200</td>
                 </tr>
                 <tr>
-                    <td>Number of conversations:</td>
+                    <td>#{msg.num_of_conversations}</td>
                     <td>80</td>
                 </tr>
                 <tr>
-                    <td>Number of issues raised:</td>
+                    <td>#{msg.num_of_issues}</td>
                     <td>64</td>
                 </tr>
                 </tbody>
             </table>
-            <div class="knob-container ui-corner-all fa-align-center">
 
-                <!-- If the knobView bean will exist: value="#{knobView.value}"-->
-
-                <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80" disabled="true"/>
-                <p>The percentage of calls when an error has been recorded</p>
-            </div>
             <!--/Agent statistics-->
         </div>
-    </h:body>
+        <div class="knob-container ui-corner-all fa-align-center">
+
+            <!-- If the knobView bean will exist: value="#{knobView.value}"-->
+            <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80" disabled="true"/>
+            <p>#{msg.issue_rate}</p>
+        </div>
+    </ui:define>
+    <ui:define name="customScripts">
+
+    </ui:define>
 
 </ui:composition>

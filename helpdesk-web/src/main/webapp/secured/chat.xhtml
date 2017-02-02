@@ -1,98 +1,94 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-        <h:outputScript library="js" name="bootstrap.min.js"/>
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/masterLayout.xhtml">
+
+    <ui:define name="customTitle">Chat</ui:define>
+
+    <ui:define name="customHead">
         <h:outputStylesheet library="css" name="chat.css"/>
-        <h:outputScript library="primefaces" name="jquery/jquery.js"
-                        target="head"/>
-        <h:outputScript library="primefaces" name="jquery/jquery-plugins.js"
-                        target="head"/>
-        <!-- BOOTSTRAP SCRIPTS -->
-        <h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+    </ui:define>
 
-        <ui:define name="pageTitle">Chat</ui:define>
-    </h:head>
-    <h:body>
+    <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
+    <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
+    <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
+
+    <ui:define name="customBody">
         <div class="container">
-            <div class="row">
-                <div class="col-md-offset-3 col-md-6 col-md-offset-3">
-                    <h1 style="text-align: center">Initial Chat Page</h1>
+            <div class="col-md-offset-3 col-md-6 col-md-offset-3">
+                <h1 style="text-align: center">Initial Chat Page</h1>
 
-                    <h:form id="messageForm">
-                        <div style="display: flex">
-                            <div style="margin: auto">
-                                <div id="messageNav">
-                                    <h2 style="text-align: center">Client name</h2>
-                                </div>
-                                <div class="well" id="textBox">
-                                    <p>Mizu?</p>
-                                    <p style="text-align: right">semmmi</p>
-                                    <p>az nem sok minden</p>
-                                    <p style="text-align: right">hát ja</p>
-                                    <p>jajaja</p>
-                                    <p>igen</p>
-                                    <p>igen</p>
-                                    <p>igen</p>
-                                    <p>igen</p>
-                                    <p>igen</p>
-
-                                </div>
-                                <div id="myText">
-                                    <p:inputTextarea style="width: 400px"></p:inputTextarea>
-                                </div>
-                                <div id="myBut">
-                                    <button type="submit" class="btn btn-primary">Küldés</button>
-                                    <button type="button" class="btn btn-info" data-toggle="modal"
-                                            data-target="#myModal">#{msg.error_ticket}
-                                    </button>
-
-                                </div>
+                <h:form id="messageForm">
+                    <div style="display: flex">
+                        <div style="margin: auto">
+                            <div id="messageNav">
+                                <h2 style="text-align: center">#{msg.client} #{msg.name}</h2>
                             </div>
+                            <div class="well" id="textBox">
+                                <p>Mizu?</p>
+                                <p style="text-align: right">semmmi</p>
+                                <p>az nem sok minden</p>
+                                <p style="text-align: right">hát ja</p>
+                                <p>jajaja</p>
+                                <p>igen</p>
+                                <p>igen</p>
+                                <p>igen</p>
+                                <p>igen</p>
+                                <p>igen</p>
 
-                        </div>
-                    </h:form>
-
-                    <div id="myModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&#215;</button>
-                                    <h4 class="modal-title">#{msg.error_ticket}</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <h:form>
-                                        <div class="form-group">
-                                            <label for="title">#{msg.issue_name}:</label>
-                                            <input type="text" class="form-control" id="title"></input>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="description">#{msg.issue_decription}:</label>
-                                            <input type="text" class="form-control" id="description"></input>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="type">#{msg.issue_type}:</label>
-                                            <input type="text" class="form-control" id="type"></input>
-                                        </div>
-                                        <button type="submit" class="btn btn-info">#{msg.send}</button>
-
-                                    </h:form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{msg.close}</button>
-                                </div>
                             </div>
+                            <div id="myText">
+                                <p:inputTextarea style="width: 400px"></p:inputTextarea>
+                            </div>
+                            <div id="myBut">
+                                <button type="submit" class="btn btn-primary">#{msg.send}</button>
+                                <button type="button" class="btn btn-info" data-toggle="modal"
+                                        data-target="#myModal">#{msg.error_ticket}
+                                </button>
 
+                            </div>
                         </div>
+
+                    </div>
+                </h:form>
+
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&#215;</button>
+                                <h4 class="modal-title">#{msg.error_ticket}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h:form>
+                                    <div class="form-group">
+                                        <label for="title">#{msg.issue_name}:</label>
+                                        <input type="text" class="form-control" id="title"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">#{msg.issue_decription}:</label>
+                                        <input type="text" class="form-control" id="description"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="type">#{msg.issue_type}:</label>
+                                        <input type="text" class="form-control" id="type"></input>
+                                    </div>
+                                    <button type="submit" class="btn btn-info">#{msg.send}</button>
+
+                                </h:form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default"
+                                        data-dismiss="modal">#{msg.close}</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-    </h:body>
-
+    </ui:define>
 </ui:composition>

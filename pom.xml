@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>hu.schonherz.java.training.project</groupId>
@@ -55,11 +56,16 @@
 
     <repositories>
         <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
             <id>prime-repo</id>
             <name>PrimeFaces Maven Repository</name>
             <url>http://repository.primefaces.org</url>
             <layout>default</layout>
         </repository>
+
     </repositories>
 
     <scm>
@@ -132,6 +138,12 @@
                 <version>${dozer.jdk8.support.version}</version>
             </dependency>
 
+            <!-- Template dependency -->
+            <dependency>
+                <groupId>com.github.schonherz-java-ee-2016-q4</groupId>
+                <artifactId>project</artifactId>
+                <version>19e6394cdcd24957a9bb59e6c3eb77e580eb59a8</version>
+            </dependency>
 
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -308,7 +320,6 @@
                 <artifactId>jackson-datatype-jsr310</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
