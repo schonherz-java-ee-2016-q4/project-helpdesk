@@ -16,4 +16,7 @@
     <jee:local-slsb id="clientActivityService" jndi-name="ejb.clientActivityService"
                     business-interface="hu.schonherz.training.helpdesk.service.api.service.ClientActivityService"/>
 
+    <jee:local-slsb id="LoginService" jndi-name="ejb.LoginService"
+                    business-interface="hu.schonherz.training.helpdesk.service.api.service.LoginService"/>
+
 </beans>

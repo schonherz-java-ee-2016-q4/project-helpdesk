@@ -13,7 +13,6 @@ public final class ClientActivityMapper {
 
     private ClientActivityMapper() {}
 
-
     public static ClientActivityVO toVO(final ClientActivityEntity activity) {
         if (activity == null) {
             return null;

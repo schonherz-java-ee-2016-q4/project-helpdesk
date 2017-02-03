@@ -15,6 +15,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    private CustomAuthenticationSuccesHandler authenticationSuccesHandler;
+
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -25,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                      .loginPage("/login").failureUrl("/login?error")
                      .usernameParameter("username")
                      .passwordParameter("password")
+                     .successHandler(authenticationSuccesHandler)
             .and()
                 .logout().logoutSuccessUrl("/login?logout");
         http.csrf().disable();

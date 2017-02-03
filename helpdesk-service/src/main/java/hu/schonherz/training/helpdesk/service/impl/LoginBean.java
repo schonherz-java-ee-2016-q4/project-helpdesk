@@ -3,6 +3,7 @@ package hu.schonherz.training.helpdesk.service.impl;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 
@@ -15,6 +16,7 @@ import hu.schonherz.training.helpdesk.service.api.vo.LoginVO;
 import hu.schonherz.training.helpdesk.service.mapper.LoginMapper;
 
 @Stateless(mappedName = "LoginService")
+@Local(LoginService.class)
 @Interceptors(SpringBeanAutowiringInterceptor.class)
 public class LoginBean implements LoginService {
 

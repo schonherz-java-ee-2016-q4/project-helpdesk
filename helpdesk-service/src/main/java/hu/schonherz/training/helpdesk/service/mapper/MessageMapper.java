@@ -1,17 +1,18 @@
 package hu.schonherz.training.helpdesk.service.mapper;
 
 
-import hu.schonherz.training.helpdesk.data.entity.MessageEntity;
-import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.dozer.DozerBeanMapper;
+
+import hu.schonherz.training.helpdesk.data.entity.MessageEntity;
+import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
+import hu.schonherz.training.helpdesk.service.common.Mappers;
+
 public final class MessageMapper {
-    private static Mapper mapper = new DozerBeanMapper();
+    private static DozerBeanMapper mapper = Mappers.getDozerBeanMapper();
 
     private MessageMapper() {
     }
