@@ -7,38 +7,39 @@
     <ui:define name="customHead">
         <h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
     </ui:define>
-    <ui:define name="customTitle">Login</ui:define>
-    <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
-    <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
-    <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
 
     <ui:define name="customBody">
-        <div class="panel-parent">
-            <p></p>
+        <div class="panel-parent ">
+
             <c:if test="#{not empty error}">
                 <div class="alert alert-danger" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> There was an error!
+                    There was an error!
                 </div>
-
             </c:if>
-            <div class="col-sm-5">
-                <div class="panel panel-info">
+
+            <div class="jumbotron col-lg-4 col-md-7 col-sm-11 col-xs-11">
+                <h2>#{msg.welcome}!</h2>
+                <p>#{msg.if_agent_text}!</p>
+            </div>
+
+            <div class=" col-lg-4 col-md-7 col-sm-11 col-xs-11">
+                <div class="panel panel-info ">
+
                     <div class="panel-heading helpdesk-login-panel-head">
                         <label>
                             #{msg.login}
                         </label>
                     </div>
-                    <div class="panel-body">
 
+                    <div class="panel-body">
                         <form id="loginForm" class="form-horizontal" role="form" action="/helpdesk/login"
                               method="post">
-
                             <div class="input-group helpdesk-login-input">
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-user"/>
                                 </span>
                                 <input id="username" type="text" class="form-control" name="username"
-                                       placeholder="username or email"/>
+                                       placeholder="#{msg.username}"/>
                             </div>
 
                             <div class="input-group helpdesk-login-input">
@@ -46,7 +47,7 @@
                                     <i class="glyphicon glyphicon-lock"/>
                                 </span>
                                 <input id="password" type="password" class="form-control" name="password"
-                                       placeholder="password"/>
+                                       placeholder="#{msg.password}"/>
                             </div>
                             <div class="input-group col-sm-12">
                                 <button type="submit" class="btn btn-info col-sm-3">
@@ -57,11 +58,14 @@
                         </form>
 
                     </div>
+
                     <div class="panel-footer">
-                        Not registered yet? Plese visit your company's administrator.
+                        #{msg.not_registered}!
                     </div>
+
                 </div>
             </div>
+
         </div>
 
     </ui:define>
