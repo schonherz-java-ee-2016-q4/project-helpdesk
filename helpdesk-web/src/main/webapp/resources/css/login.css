@@ -20,6 +20,10 @@
     color: #ffffff;
 }
 
+.panel-info > .panel-body {
+    background-color: #F5F5F5;
+}
+
 .panel-info > .panel-footer {
     background-image: none;
     background-color: #78909C !important;
@@ -37,7 +41,7 @@
     padding-right: 30px;
     padding-left: 30px;
     border-radius: 10px;
-    background-color: #ECEFF1;
+    background-color: #F5F5F5;
     color: #455A64;
     text-align: center;
 }
