@@ -1,58 +1,71 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/templates/masterLayout.xhtml">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:sec="http://www.springframework.org/security/tags"
+    template="/templates/masterLayout.xhtml">
 
     <ui:define name="customHead">
-        <h:outputStylesheet library="css" name="profile.css"/>
+        <h:outputStylesheet library="css" name="profile.css" />
     </ui:define>
 
-    <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
-    <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
-    <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
+    <ui:define name="customLink1">
+        <a href="/helpdesk/agent/profile">#{msg.profile}</a>
+    </ui:define>
+    <ui:define name="customLink2">
+        <a href="/helpdesk/chat">#{msg.chat}</a>
+    </ui:define>
+    <ui:define name="customLink3">
+        <a href="/helpdesk/login">#{msg.login}</a>
+    </ui:define>
 
     <ui:define name="customTitle">Profile</ui:define>
 
     <ui:define name="customBody">
         <div class="container">
 
-            <h2 style="text-align: center">#{msg.agent} #{msg.profile}</h2>
+            <h2 style="text-align: center">#{msg.agent}
+                #{msg.profile}</h2>
 
             <!--Agent profile -->
             <div class="col-md-offset-3 col-md-6 col-md-offset-3">
                 <table class="table responsive">
                     <tr class="text-centered">
                         <td colspan="2">
-                            <div style="display:flex"><img src="https://randomuser.me/api/portraits/women/26.jpg"
-                                                           style="margin:auto" class="img-thumbnail"></img></div>
+                            <div style="display: flex">
+                                <img
+                                    src="#{profileView.user.picture}"
+                                    style="margin: auto"
+                                    class="img-thumbnail"></img>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td>#{msg.name}:</td>
-                        <td>Emily Smith</td>
+                        <td>#{profileView.user.name}</td>
                     </tr>
                     <tr>
                         <td>#{msg.email}:</td>
-                        <td>emily@gmail.com</td>
+                        <td>#{profileView.user.email}</td>
                     </tr>
                     <tr>
                         <td>#{msg.username}:</td>
-                        <td>emily12345</td>
+                        <td>#{profileView.user.username}</td>
                     </tr>
                     <tr>
                         <td>#{msg.gender}:</td>
-                        <td>female</td>
+                        <td>#{profileView.user.gender}</td>
                     </tr>
                     <tr>
                         <td>#{msg.company}:</td>
-                        <td>company</td>
+                        <td>#{profileView.user.company}</td>
                     </tr>
                     <tr>
                         <td>#{msg.phone}:</td>
-                        <td>+36-30-1112367</td>
+                        <td>#{profileView.user.phone}</td>
                     </tr>
                 </table>
-                <a href="/helpdesk/client/activity" class="btn btn-info" role="button">#{msg.see_your_activity}</a>
+                <a href="/helpdesk/client/activity" class="btn btn-info"
+                    role="button">#{msg.see_your_activity}</a>
             </div>
 
         </div>
