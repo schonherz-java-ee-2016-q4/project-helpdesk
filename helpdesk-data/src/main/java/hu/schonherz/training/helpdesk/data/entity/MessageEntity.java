@@ -24,6 +24,6 @@ public class MessageEntity extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "conversation_id")
-    private ConversationEntity conversation;
+    private ConversationEntity conv;
 
 }

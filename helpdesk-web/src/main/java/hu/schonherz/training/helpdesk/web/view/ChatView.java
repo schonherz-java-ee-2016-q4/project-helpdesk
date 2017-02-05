@@ -2,6 +2,7 @@ package hu.schonherz.training.helpdesk.web.view;
 
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.service.MessageService;
+import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,22 +27,23 @@ public class ChatView {
     @EJB
     private ConversationService conversationService;
 
-    private int agentId = 55;
-    private String clientId = "46m9z";
+    private ConversationVO conversationVO;
+    private Long id = 5L;
     private String content;
     private LocalDateTime now = LocalDateTime.now();
 
     public void send(){
         MessageVO message = new MessageVO();
         message.setContent(content);
-        message.setAgentId(agentId);
-        message.setClientId(clientId);
+        message.setAgentId(conversationVO.getAgentId());
+        message.setClientId(conversationVO.getClientId());
         message.setSendDate(now);
+        message.setConversation(conversationVO);
         messageService.save(message);
     }
     public Collection<MessageVO> getMessages(){
-
-            List<MessageVO> list = (List<MessageVO>)conversationService.findById(5L).getMessages();
+            conversationVO = conversationService.findById(id);
+            List<MessageVO> list = conversationVO.getMessages();
             log.error("A lista"+ list);
             return list;
     }

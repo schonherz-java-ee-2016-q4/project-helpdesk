@@ -22,7 +22,7 @@ public class ConversationEntity extends BaseEntity {
 
     private boolean closed;
 
-    @OneToMany
+    @OneToMany(mappedBy = "conv")
     private List<MessageEntity> messages;
 
 }
