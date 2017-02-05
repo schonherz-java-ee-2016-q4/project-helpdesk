@@ -9,7 +9,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class MessageVO {
     private long id;
+    private String clientId;
+
+    private int agentId;
     private String content;
     private LocalDateTime sendDate;
-    private ConversationVO conversation;
+    //private ConversationVO conversation;
 }

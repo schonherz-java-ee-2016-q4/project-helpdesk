@@ -16,9 +16,9 @@ public class ConversationEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private String clientId;
-
     private int agentId;
+
+    private String clientId;
 
     private boolean closed;
 

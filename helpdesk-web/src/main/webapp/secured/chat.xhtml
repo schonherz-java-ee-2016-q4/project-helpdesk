@@ -8,8 +8,16 @@
 
     <ui:define name="customHead">
         <h:outputStylesheet library="css" name="chat.css"/>
+        <h:outputStylesheet library="primefaces" name="primefaces.css" />
     </ui:define>
+    <ui:define name="customScripts">
+        <h:outputScript library="js" name="chat.js"/>
+        <h:outputScript library="javax.faces" name="jsf.js" />
+        <h:outputScript library="primefaces" name="jquery/jquery.js" />
 
+        <h:outputStylesheet library="primefaces-aristo" name="theme.css" />
+        <h:outputStylesheet library="primefaces-vader" name="theme.css" />
+    </ui:define>
     <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
     <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
     <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
@@ -25,24 +33,21 @@
                             <div id="messageNav">
                                 <h2 style="text-align: center">#{msg.client} #{msg.name}</h2>
                             </div>
-                            <div class="well" id="textBox">
-                                <p>Mizu?</p>
-                                <p style="text-align: right">semmmi</p>
-                                <p>az nem sok minden</p>
-                                <p style="text-align: right">hát ja</p>
-                                <p>jajaja</p>
-                                <p>igen</p>
-                                <p>igen</p>
-                                <p>igen</p>
-                                <p>igen</p>
-                                <p>igen</p>
+                            <div id="textBox">
+
+                                <ui:repeat var="message" value="#{chatView.messages}"  varStatus="status">
+                                    <div class="myMessage">#{message.content}</div>
+
+                                </ui:repeat>
+
 
                             </div>
                             <div id="myText">
-                                <p:inputTextarea style="width: 400px"></p:inputTextarea>
+                                <p:inputTextarea style="width: 400px" id="chatText" value="#{chatView.content}"></p:inputTextarea>
                             </div>
                             <div id="myBut">
-                                <button type="submit" class="btn btn-primary">#{msg.send}</button>
+                                <p:commandButton value="#{msg.send}" onclick="clearText()" actionListener="#{chatView.send}"
+                                                 update="messageForm" styleClass="ui-priority-primary"></p:commandButton>
                                 <button type="button" class="btn btn-info" data-toggle="modal"
                                         data-target="#myModal">#{msg.error_ticket}
                                 </button>

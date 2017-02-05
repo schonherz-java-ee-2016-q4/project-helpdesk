@@ -10,5 +10,5 @@ import java.util.Collection;
 public interface ConversationRepository extends JpaRepository<ConversationEntity, Long> {
     ConversationEntity findById(Long id);
 
-    Collection<ConversationEntity> findByAgentIdAndClientId(int agentId, int clientId);
+    Collection<ConversationEntity> findByAgentIdAndClientId(int agentId, String clientId);
 }

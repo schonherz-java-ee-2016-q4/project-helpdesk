@@ -5,6 +5,8 @@
 #textBox{
     width: 400px;
     height: 200px;
+    background-color:#f1f8e9;
+    padding: 10px;
     overflow-y: scroll;
     overflow-x:hidden;
 }
@@ -18,7 +20,17 @@
     width: 400px;
     background-color:#f1f8e9 ;
 }
-.well{
-    background-color:#f1f8e9 !important;
 
+.myMessage{
+    margin: 10px;
+    justify-content:center;
+    align-content:center;
+    flex-direction:column;
+    background-color:#2196F3;
+    width:120px !important;
+    word-wrap:break-word;
+    border-radius: 10px;
+    color: white;
+    padding: 4px;
 }
+

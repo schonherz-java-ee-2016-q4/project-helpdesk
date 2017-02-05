@@ -19,13 +19,17 @@ public class MessageEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Lob
+    private int agentId;
+
+    private String clientId;
+
+
     private String content;
 
     private LocalDateTime sendDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+   /* @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "conversation_id")
-    private ConversationEntity conversation;
+    private ConversationEntity conversation;*/
 
 }
