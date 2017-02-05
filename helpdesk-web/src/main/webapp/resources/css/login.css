@@ -45,3 +45,8 @@
     color: #455A64;
     text-align: center;
 }
+
+.helpdesk-login-button:hover {
+    background-image: none;
+    background-color: #039BE5;
+}

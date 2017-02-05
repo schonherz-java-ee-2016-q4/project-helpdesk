@@ -17,7 +17,7 @@
                 </div>
             </c:if>
 
-            <div class="jumbotron col-lg-4 col-md-7 col-sm-11 col-xs-11">
+            <div class="jumbotron col-lg-5 col-md-7 col-sm-11 col-xs-11">
                 <h2>#{msg.welcome}!</h2>
                 <p>#{msg.if_agent_text}!</p>
             </div>
@@ -49,12 +49,13 @@
                                 <input id="password" type="password" class="form-control" name="password"
                                        placeholder="#{msg.password}"/>
                             </div>
-                            <div class="input-group col-sm-12">
-                                <button type="submit" class="btn btn-info col-sm-3">
-                                    #{msg.login}
-                                    <i class="glyphicon glyphicon-chevron-right"/>
-                                </button>
-                            </div>
+
+                            <button type="submit"
+                                    class="btn btn-info col-sm-4 col-md-4 col-lg-4 helpdesk-login-button">
+                                #{msg.login}
+                                <i class="glyphicon glyphicon-chevron-right"/>
+                            </button>
+
                         </form>
 
                     </div>
