@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                template="/templates/masterLayout.xhtml"
+                template="/templates/menuLayout.xhtml"
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="customTitle">Statistics</ui:define>
@@ -11,10 +11,6 @@
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
         <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
     </ui:define>
-
-    <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
-    <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
-    <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
 
     <ui:define name="customBody">
         <div class="container">

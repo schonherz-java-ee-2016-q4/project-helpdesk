@@ -2,17 +2,13 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                template="/templates/masterLayout.xhtml">
+                template="/templates/menuLayout.xhtml">
 
     <ui:define name="customTitle">Activity</ui:define>
 
     <ui:define name="customHead">
-        <h:outputStylesheet library="css" name="activity.css"></h:outputStylesheet>
+        <h:outputStylesheet library="css" name="activity.css"/>
     </ui:define>
-
-    <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
-    <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
-    <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
 
     <ui:define name="customBody">
         <div class="container">
