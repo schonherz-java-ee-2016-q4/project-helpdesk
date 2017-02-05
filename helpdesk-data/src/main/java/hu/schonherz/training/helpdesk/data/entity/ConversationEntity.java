@@ -4,9 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Data
@@ -21,8 +19,4 @@ public class ConversationEntity extends BaseEntity {
     private String clientId;
 
     private boolean closed;
-
-    @OneToMany(mappedBy = "conv")
-    private List<MessageEntity> messages;
-
 }

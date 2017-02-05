@@ -6,8 +6,6 @@ import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -20,7 +18,6 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 public class ChatView {
-    private final Logger LOGGER = LoggerFactory.getLogger(ChatView.class);
     @EJB
     private MessageService messageService;
     @EJB
@@ -35,13 +32,13 @@ public class ChatView {
         message.setAgentId(conversationVO.getAgentId());
         message.setClientId(conversationVO.getClientId());
         message.setSendDate(LocalDateTime.now());
-        message.setConversation(conversationVO);
+        message.setConv(conversationVO);
         messageService.save(message);
     }
 
     public Collection<MessageVO> getMessages() {
         conversationVO = conversationService.findById(Long.parseLong("5"));
-        return conversationVO.getMessages();
+        return messageService.findMessages(conversationVO.getAgentId(), conversationVO.getClientId());
     }
 
 }
