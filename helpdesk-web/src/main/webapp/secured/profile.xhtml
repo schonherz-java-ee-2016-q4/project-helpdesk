@@ -1,22 +1,33 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
                 template="/templates/masterLayout.xhtml">
 
     <ui:define name="customHead">
         <h:outputStylesheet library="css" name="profile.css"/>
     </ui:define>
 
-    <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
-    <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
-    <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
+    <ui:define name="customLink1"><p:link href="/agent/profile">#{msg.profile}</p:link></ui:define>
+    <ui:define name="customLink2"><p:link href="/chat">#{msg.chat}</p:link></ui:define>
+
+    <ui:define name="customLink3">
+        <c:choose>
+            <c:when test="#{p:userPrincipal().name==null}">
+               <p:link href="/login">#{msg.login}</p:link>
+            </c:when>
+            <c:otherwise>
+                <p:link href="/logout">#{msg.logout}</p:link>
+            </c:otherwise>
+        </c:choose>
+    </ui:define>
+
 
     <ui:define name="customTitle">Profile</ui:define>
 
     <ui:define name="customBody">
         <div class="container">
-
-            <h2 style="text-align: center">#{msg.agent} #{msg.profile}</h2>
 
             <!--Agent profile -->
             <div class="col-md-offset-3 col-md-6 col-md-offset-3">
@@ -24,7 +35,7 @@
                     <tr class="text-centered">
                         <td colspan="2">
                             <div style="display:flex"><img src="https://randomuser.me/api/portraits/women/26.jpg"
-                                                           style="margin:auto" class="img-thumbnail"></img></div>
+                                                           style="margin:auto" class="img-thumbnail"/></div>
                         </td>
                     </tr>
                     <tr>
