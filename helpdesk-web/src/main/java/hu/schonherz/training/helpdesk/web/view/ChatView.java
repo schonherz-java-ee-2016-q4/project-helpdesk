@@ -14,38 +14,34 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 
 @ManagedBean(name = "chatView")
 @ViewScoped
 @Data
 @NoArgsConstructor
 public class ChatView {
-    Logger log = LoggerFactory.getLogger(ChatView.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ChatView.class);
     @EJB
     private MessageService messageService;
     @EJB
     private ConversationService conversationService;
 
     private ConversationVO conversationVO;
-    private Long id = 5L;
     private String content;
-    private LocalDateTime now = LocalDateTime.now();
 
-    public void send(){
+    public void send() {
         MessageVO message = new MessageVO();
         message.setContent(content);
         message.setAgentId(conversationVO.getAgentId());
         message.setClientId(conversationVO.getClientId());
-        message.setSendDate(now);
+        message.setSendDate(LocalDateTime.now());
         message.setConversation(conversationVO);
         messageService.save(message);
     }
-    public Collection<MessageVO> getMessages(){
-            conversationVO = conversationService.findById(id);
-            List<MessageVO> list = conversationVO.getMessages();
-            log.error("A lista"+ list);
-            return list;
+
+    public Collection<MessageVO> getMessages() {
+        conversationVO = conversationService.findById(Long.parseLong("5"));
+        return conversationVO.getMessages();
     }
 
 }

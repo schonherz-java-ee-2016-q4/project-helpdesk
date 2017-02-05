@@ -10,7 +10,6 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
-import java.util.Collection;
 
 @Stateless(mappedName = "ConversationService")
 @Interceptors(SpringBeanAutowiringInterceptor.class)

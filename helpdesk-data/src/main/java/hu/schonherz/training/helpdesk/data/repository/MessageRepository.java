@@ -12,5 +12,5 @@ import java.util.Collection;
 public interface MessageRepository extends JpaRepository<MessageEntity, Long> {
 
     @Query("Select m from MessageEntity m where (m.agentId=:agent and m.clientId=:client)")
-    Collection<MessageEntity> findMessages(@Param("agent") int agentId,@Param("client") String clientId);
+    Collection<MessageEntity> findMessages(@Param("agent") int agentId, @Param("client") String clientId);
 }

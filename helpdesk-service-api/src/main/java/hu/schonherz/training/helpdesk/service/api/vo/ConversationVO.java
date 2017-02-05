@@ -15,5 +15,5 @@ public class ConversationVO {
 
     private boolean closed;
 
-    List<MessageVO> messages;
+    private List<MessageVO> messages;
 }
