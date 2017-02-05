@@ -5,13 +5,13 @@ import hu.schonherz.training.helpdesk.service.api.service.MessageService;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,9 +20,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class ChatView {
-
+    Logger log = LoggerFactory.getLogger(ChatView.class);
     @EJB
     private MessageService messageService;
+    @EJB
+    private ConversationService conversationService;
 
     private int agentId = 55;
     private String clientId = "46m9z";
@@ -38,7 +40,9 @@ public class ChatView {
         messageService.save(message);
     }
     public Collection<MessageVO> getMessages(){
-            List<MessageVO> list = (List<MessageVO>)messageService.findMessages(agentId,clientId);
+
+            List<MessageVO> list = (List<MessageVO>)conversationService.findById(5L).getMessages();
+            log.error("A lista"+ list);
             return list;
     }
 

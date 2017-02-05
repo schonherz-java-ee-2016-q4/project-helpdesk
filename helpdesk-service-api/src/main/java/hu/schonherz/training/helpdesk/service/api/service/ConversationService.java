@@ -10,5 +10,5 @@ public interface ConversationService {
 
     ConversationVO findById(Long id);
 
-    Collection<ConversationVO> findByAgentIdAndClientId(int agentId, String clientId);
+
 }

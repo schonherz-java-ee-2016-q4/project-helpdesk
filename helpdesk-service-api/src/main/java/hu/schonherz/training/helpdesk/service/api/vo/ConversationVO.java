@@ -3,6 +3,8 @@ package hu.schonherz.training.helpdesk.service.api.vo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 public class ConversationVO {
@@ -12,4 +14,6 @@ public class ConversationVO {
     private int agentId;
 
     private boolean closed;
+
+    List<MessageVO> messages;
 }

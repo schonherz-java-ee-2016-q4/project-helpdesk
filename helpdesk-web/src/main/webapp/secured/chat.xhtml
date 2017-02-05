@@ -8,7 +8,6 @@
 
     <ui:define name="customHead">
         <h:outputStylesheet library="css" name="chat.css"/>
-        <h:outputStylesheet library="primefaces" name="primefaces.css" />
     </ui:define>
     <ui:define name="customScripts">
         <h:outputScript library="js" name="chat.js"/>
@@ -27,7 +26,7 @@
             <div class="col-md-offset-3 col-md-6 col-md-offset-3">
                 <h1 style="text-align: center">Initial Chat Page</h1>
 
-                <h:form id="messageForm">
+                <h:form id="messageForm" onkeypress="if (event.keyCode == 13) { document.getElementById('messageForm:cmdBtn').click(); return false;}">
                     <div style="display: flex">
                         <div style="margin: auto">
                             <div id="messageNav">
@@ -46,7 +45,7 @@
                                 <p:inputTextarea style="width: 400px" id="chatText" value="#{chatView.content}"></p:inputTextarea>
                             </div>
                             <div id="myBut">
-                                <p:commandButton value="#{msg.send}" onclick="clearText()" actionListener="#{chatView.send}"
+                                <p:commandButton value="#{msg.send}" id="cmdBtn" oncomplete="clearText()" actionListener="#{chatView.send}"
                                                  update="messageForm" styleClass="ui-priority-primary"></p:commandButton>
                                 <button type="button" class="btn btn-info" data-toggle="modal"
                                         data-target="#myModal">#{msg.error_ticket}

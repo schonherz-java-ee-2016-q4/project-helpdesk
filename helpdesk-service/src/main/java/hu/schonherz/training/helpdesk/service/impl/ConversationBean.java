@@ -28,9 +28,4 @@ public class ConversationBean implements ConversationService {
     public ConversationVO findById(final Long id) {
         return ConversationMapper.toVO(conversationRepository.findById(id));
     }
-
-    @Override
-    public Collection<ConversationVO> findByAgentIdAndClientId(final int agentId, final String clientId) {
-        return ConversationMapper.toVO(conversationRepository.findByAgentIdAndClientId(agentId, clientId));
-    }
 }

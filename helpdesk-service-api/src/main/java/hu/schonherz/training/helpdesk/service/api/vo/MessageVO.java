@@ -14,5 +14,5 @@ public class MessageVO {
     private int agentId;
     private String content;
     private LocalDateTime sendDate;
-    //private ConversationVO conversation;
+    private ConversationVO conversation;
 }
