@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.data.additional;
+package hu.schonherz.training.helpdesk.data.enums;
 
 public enum ActivityType {
     BUTTON_CLICK,

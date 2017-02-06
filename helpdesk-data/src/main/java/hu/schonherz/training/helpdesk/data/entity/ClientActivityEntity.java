@@ -1,6 +1,6 @@
 package hu.schonherz.training.helpdesk.data.entity;
 
-import hu.schonherz.training.helpdesk.data.additional.ActivityType;
+import hu.schonherz.training.helpdesk.data.enums.ActivityType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
