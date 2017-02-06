@@ -8,8 +8,8 @@
     height: 200px;
     background-color: #f1f8e9;
     padding: 10px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    /*overflow-y: scroll;*/
+    /*overflow-x: hidden;*/
     display: flex;
     flex-direction: column;
 }
@@ -23,20 +23,6 @@
     height: 50px;
     width: 400px;
     background-color: #f1f8e9;
-}
-
-.myMessageLeft {
-    margin: 10px;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    background-color: #2196F3;
-    width: 120px !important;
-    word-wrap: break-word;
-    border-radius: 10px;
-    color: white;
-    padding: 4px;
-    align-self: flex-start;
 }
 
 .myMessageRight {
@@ -53,3 +39,16 @@
     align-self: flex-end;
 }
 
+.myMessageLeft {
+    margin: 10px;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    background-color: #2196F3;
+    width: 120px !important;
+    word-wrap: break-word;
+    border-radius: 10px;
+    color: white;
+    padding: 4px;
+    align-self: flex-start;
+}
