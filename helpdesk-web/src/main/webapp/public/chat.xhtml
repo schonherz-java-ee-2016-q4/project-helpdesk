@@ -11,11 +11,11 @@
     </ui:define>
     <ui:define name="customScripts">
         <h:outputScript library="js" name="chat.js"/>
-        <h:outputScript library="javax.faces" name="jsf.js" />
-        <h:outputScript library="primefaces" name="jquery/jquery.js" />
+        <h:outputScript library="javax.faces" name="jsf.js"/>
+        <h:outputScript library="primefaces" name="jquery/jquery.js"/>
 
-        <h:outputStylesheet library="primefaces-aristo" name="theme.css" />
-        <h:outputStylesheet library="primefaces-vader" name="theme.css" />
+        <h:outputStylesheet library="primefaces-aristo" name="theme.css"/>
+        <h:outputStylesheet library="primefaces-vader" name="theme.css"/>
     </ui:define>
     <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
     <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
@@ -26,7 +26,8 @@
             <div class="col-md-offset-3 col-md-6 col-md-offset-3">
                 <h1 style="text-align: center">Initial Chat Page</h1>
 
-                <h:form id="messageForm" onkeypress="if (event.keyCode == 13) { document.getElementById('messageForm:cmdBtn').click(); return false;}">
+                <h:form id="messageForm"
+                        onkeypress="if (event.keyCode == 13) { document.getElementById('messageForm:cmdBtn').click(); return false;}">
                     <div style="display: flex">
                         <div style="margin: auto">
                             <div id="messageNav">
@@ -34,19 +35,36 @@
                             </div>
                             <div id="textBox">
 
-                                <ui:repeat var="message" value="#{chatView.messages}"  varStatus="status">
-                                    <div class="myMessage">#{message.content}</div>
-
+                                <ui:repeat var="message" value="#{chatView.messages}" varStatus="status">
+                                    <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
+                                        <div class="myMessage"
+                                             style="align-self: flex-end">#{message.sentBy} #{message.content}</div>
+                                    </ui:fragment>
+                                    <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
+                                        <div class="myMessage"
+                                             style="align-self: flex-start">#{message.sentBy} #{message.content}</div>
+                                    </ui:fragment>
+                                    <ui:fragment rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
+                                        <div class="myMessage"
+                                             style="align-self: flex-start">#{message.sentBy} #{message.content}</div>
+                                    </ui:fragment>
+                                    <ui:fragment rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
+                                        <div class="myMessage"
+                                             style="align-self: flex-end">#{message.sentBy} #{message.content}</div>
+                                    </ui:fragment>
                                 </ui:repeat>
 
 
                             </div>
                             <div id="myText">
-                                <p:inputTextarea style="width: 400px" id="chatText" value="#{chatView.content}"></p:inputTextarea>
+                                <p:inputTextarea style="width: 400px" id="chatText"
+                                                 value="#{chatView.content}"></p:inputTextarea>
                             </div>
                             <div id="myBut">
-                                <p:commandButton value="#{msg.send}" id="cmdBtn" oncomplete="clearText()" actionListener="#{chatView.send}"
-                                                 update="messageForm" styleClass="ui-priority-primary"></p:commandButton>
+                                <p:commandButton value="#{msg.send}" id="cmdBtn" oncomplete="clearText()"
+                                                 actionListener="#{chatView.send}"
+                                                 update="messageForm"
+                                                 styleClass="ui-priority-primary"></p:commandButton>
                                 <button type="button" class="btn btn-info" data-toggle="modal"
                                         data-target="#myModal">#{msg.error_ticket}
                                 </button>
