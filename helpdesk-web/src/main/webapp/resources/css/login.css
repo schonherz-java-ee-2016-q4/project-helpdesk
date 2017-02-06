@@ -1,56 +1,52 @@
-html, body {
-	background-color: 212121;
-	margin: 10px;
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
+.panel-parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
 }
 
-.login-flex-container {
-	display: flex;
-	width: 100%;
-	height: 100%;
-	margin: 10;
-	flex-wrap: wrap;
-	align-items: center;
+.panel-info {
+    border-color: #455A64;
+    font-family: sans-serif;
 }
 
-.login-flex-item {
-	display: flex;
-	margin: 10;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 20px;
+.panel-info > .panel-heading {
+    background-image: none;
+    background-color: #78909C !important;
+    border: none;
+    color: #ffffff;
 }
 
-.login-flex-login {
-	display: flex;
-	margin: 10;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background-color: BDBDBD;
-	border-style: solid;
-	border-color: 00BCD4;
-	border-radius: 5px;
+.panel-info > .panel-body {
+    background-color: #F5F5F5;
 }
 
-.login-image {
-	width: 200px;
-	height: 100px;
-	margin: 10;
+.panel-info > .panel-footer {
+    background-image: none;
+    background-color: #78909C !important;
+    border: none;
+    color: #ffffff;
 }
 
-.login-link {
-	color: 29B6F6;
-	font-size: 300%;
-	text-align: center;
-	border-radius: 17px;
-	margin: 10;
+.helpdesk-login-input {
+    margin-bottom: 25px
 }
 
-.login-label {
-	color: 29B6F6;
-	font-size: 300%;
-	text-align: center;
-	margin: 10;
+.jumbotron {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 10px;
+    background-color: #F5F5F5;
+    color: #455A64;
+    text-align: center;
 }
 
+.helpdesk-login-button:hover {
+    background-image: none;
+    background-color: #039BE5;
+}

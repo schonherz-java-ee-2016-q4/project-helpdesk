@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/masterLayout.xhtml">
+    <ui:define name="customLink1">
+        <c:if test="#{p:userPrincipal().name!=null}">
+            <p:link href="/agent/profile">#{msg.profile}</p:link>
+        </c:if>
+    </ui:define>
+    <ui:define name="customLink2">
+        <c:if test="#{p:userPrincipal().name!=null}">
+            <p:link href="/chat">#{msg.chat}</p:link>
+        </c:if>
+    </ui:define>
+
+    <ui:define name="customLink3">
+        <c:choose>
+            <c:when test="#{p:userPrincipal().name==null}">
+                <p:link href="/login">#{msg.login}</p:link>
+            </c:when>
+            <c:otherwise>
+                <p:link href="/logout">#{msg.logout}</p:link>
+            </c:otherwise>
+        </c:choose>
+    </ui:define>
+</ui:composition>
