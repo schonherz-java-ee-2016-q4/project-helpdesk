@@ -3,6 +3,8 @@ package hu.schonherz.training.helpdesk.web.config.spring;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -16,7 +18,7 @@ import hu.schonherz.training.helpdesk.web.mock.MockedAdminStuff;
 
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
-
+    private static Mapper mapper = new DozerBeanMapper();
     private final MockedAdminStuff userService = new MockedAdminStuff();
 
     @Override
@@ -27,12 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public User createUser(final Agent agent) {
         CustomUser user = new CustomUser(agent.getUsername(), agent.getPassword(), true, true, true, true,
                 auths(agent.getRoles()));
-        user.setName(agent.getName());
-        user.setCompany(agent.getCompany());
-        user.setEmail(agent.getEmail());
-        user.setGender(agent.getGender());
-        user.setPhone(agent.getPhone());
-        user.setPicture(agent.getPicture());
+        mapper.map(agent, user);
         return user;
     }
 
