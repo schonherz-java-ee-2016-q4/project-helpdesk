@@ -59,7 +59,7 @@
                                                  value="#{chatView.content}"></p:inputTextarea>
                             </div>
                             <div id="myBut">
-                                <p:commandButton value="#{msg.send}" id="cmdBtn" oncomplete="clearText()"
+                                <p:commandButton value="#{msg.send}" id="cmdBtn" oncomplete="onSubmissionComplete()"
                                                  actionListener="#{chatView.send}"
                                                  update="messageForm"
                                                  styleClass="ui-priority-primary"></p:commandButton>

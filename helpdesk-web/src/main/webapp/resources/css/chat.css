@@ -8,8 +8,8 @@
     height: 200px;
     background-color: #f1f8e9;
     padding: 10px;
-    /*overflow-y: scroll;*/
-    /*overflow-x: hidden;*/
+    overflow-y: hidden;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 }
