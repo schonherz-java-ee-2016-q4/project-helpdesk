@@ -13,6 +13,9 @@ function ifEnterClear() {
 
 function showScroll() {
     $('#textBox').slimscroll({
+        railVisible: true,
+        alwaysVisible: false,
+        wheelStep: 10,
         height: '250px'
     });
 }
