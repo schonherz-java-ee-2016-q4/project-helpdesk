@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 public class MessageVO {
     private long id;
     private String clientId;
-
     private int agentId;
     private String content;
     private LocalDateTime sendDate;
+    private String sentBy;
     private ConversationVO conv;
 }

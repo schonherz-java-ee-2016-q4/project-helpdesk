@@ -22,6 +22,8 @@ public class MessageEntity extends BaseEntity {
 
     private String clientId;
 
+    private String sentBy;
+
     private String content;
 
     private LocalDateTime sendDate;

@@ -37,20 +37,16 @@
 
                                 <ui:repeat var="message" value="#{chatView.messages}" varStatus="status">
                                     <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
-                                        <div class="myMessage"
-                                             style="align-self: flex-end">#{message.sentBy} #{message.content}</div>
+                                        <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
                                     </ui:fragment>
                                     <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
-                                        <div class="myMessage"
-                                             style="align-self: flex-start">#{message.sentBy} #{message.content}</div>
+                                        <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
                                     </ui:fragment>
                                     <ui:fragment rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
-                                        <div class="myMessage"
-                                             style="align-self: flex-start">#{message.sentBy} #{message.content}</div>
+                                        <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
                                     </ui:fragment>
                                     <ui:fragment rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
-                                        <div class="myMessage"
-                                             style="align-self: flex-end">#{message.sentBy} #{message.content}</div>
+                                        <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
                                     </ui:fragment>
                                 </ui:repeat>
 
