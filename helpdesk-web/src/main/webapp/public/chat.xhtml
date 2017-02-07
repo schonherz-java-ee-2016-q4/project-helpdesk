@@ -2,7 +2,9 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
                 template="/templates/masterLayout.xhtml">
+
 
     <ui:define name="customTitle">Chat</ui:define>
 
@@ -10,6 +12,9 @@
         <h:outputStylesheet library="css" name="chat.css"/>
         <h:outputStylesheet library="primefaces-aristo" name="theme.css"/>
         <h:outputStylesheet library="primefaces-vader" name="theme.css"/>
+        <f:metadata>
+            <f:viewParam name="id" value="#{chatView.conversationId}"/>
+        </f:metadata>
     </ui:define>
     <ui:define name="customScripts">
         <h:outputScript library="js" name="chat.js"/>
@@ -22,55 +27,53 @@
     <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
 
     <ui:define name="customBody">
-        <div class="container">
-            <div class="col-md-offset-3 col-md-6 col-md-offset-3">
-                <h1 style="text-align: center">Initial Chat Page</h1>
+        <div class="container-fluid" style="display: flex; flex-direction: column">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7" style="align-self: center">
 
-                <h:form id="messageForm"
-                        onkeypress="if (event.keyCode == 13) { document.getElementById('messageForm:cmdBtn').click(); return false;}">
-                    <div style="display: flex">
-                        <div style="margin: auto">
-                            <div id="messageNav">
-                                <h2 style="text-align: center">#{msg.client} #{msg.name}</h2>
-                            </div>
-                            <div id="textBox">
-
-                                <ui:repeat var="message" value="#{chatView.messages}" varStatus="status">
-                                    <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
-                                        <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
-                                    </ui:fragment>
-                                    <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
-                                        <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
-                                    </ui:fragment>
-                                    <ui:fragment
-                                            rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
-                                        <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
-                                    </ui:fragment>
-                                    <ui:fragment
-                                            rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
-                                        <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
-                                    </ui:fragment>
-                                </ui:repeat>
+                <h:form id="messageForm" styleClass="col-xs-12 col-sm-12 col-md-12 col-lg-12" method="post"
+                        action="/helpdesk/chat"
+                        onkeypress="if (event.keyCode == 13) { document.getElementById('messageForm:cmdBtn').click(); return false;}"
+                >
+                    <p:poll async="true" delay="1000" update="messagesList" onstart="saveScrollPos()"
+                            oncomplete="autoScroll()"></p:poll>
 
 
-                            </div>
-                            <div id="myText">
-                                <p:inputTextarea style="width: 400px" id="chatText"
-                                                 value="#{chatView.content}"></p:inputTextarea>
-                            </div>
-                            <div id="myBut">
-                                <p:commandButton value="#{msg.send}" id="cmdBtn" oncomplete="onSubmissionComplete()"
-                                                 actionListener="#{chatView.send}"
-                                                 update="messageForm"
-                                                 styleClass="ui-priority-primary"></p:commandButton>
-                                <button type="button" class="btn btn-info" data-toggle="modal"
-                                        data-target="#myModal">#{msg.error_ticket}
-                                </button>
+                    <h:inputHidden id="scrollPos"/>
+                    <p:outputPanel id="messagesList" itemType="none" styleClass="textBox">
+                        <ui:repeat value="#{chatView.messages}" var="message">
+                            <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
+                                <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
+                            </ui:fragment>
+                            <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
+                                <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
+                            </ui:fragment>
+                            <ui:fragment
+                                    rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
+                                <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
+                            </ui:fragment>
+                            <ui:fragment
+                                    rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
+                                <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
+                            </ui:fragment>
+                        </ui:repeat>
+                    </p:outputPanel>
 
-                            </div>
-                        </div>
+                    <div id="myText">
+                        <p:inputTextarea id="chatText" styleClass="areaText col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                                         value="#{chatView.content}"></p:inputTextarea>
+                    </div>
+                    <div id="myBut">
+                        <p:commandButton value="#{msg.send}" oncomplete="onSubmissionComplete()"
+                                         actionListener="#{chatView.send}"
+                                         update="messageForm"
+                                         styleClass="cmdButton"></p:commandButton>
+
+                        <button type="button" class="btn btn-info" data-toggle="modal"
+                                data-target="#myModal">#{msg.error_ticket}
+                        </button>
 
                     </div>
+
                 </h:form>
 
                 <div id="myModal" class="modal fade" role="dialog">

@@ -1,21 +1,25 @@
 
 #myBut {
-    margin-top: 20px;
+
 }
 
-#textBox {
-    width: 400px;
-    height: 200px;
-    background-color: #f1f8e9;
-    padding: 10px;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
+.textBox {
+    height: 400px !important;
+    background-image: none !important;
+    margin-top: 40px !important;
+    background-color: #ffffff !important;
+    padding: 20px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border: 1px solid #cccccc !important;
+    border-bottom: transparent !important;
+    border-radius: 10px 10px 0 0 !important;
 }
 
 #myText {
-    margin-top: 20px;
+    box-shadow: 0 0 0 0 !important;
 }
 
 #messageNav {
@@ -26,29 +30,60 @@
 }
 
 .myMessageRight {
-    margin: 10px;
+    margin: 1px;
     justify-content: center;
     align-content: center;
     flex-direction: column;
     background-color: #2196F3;
     width: 120px !important;
     word-wrap: break-word;
-    border-radius: 10px;
+    border-radius: 12px 2px 2px 12px;
     color: white;
     padding: 4px;
     align-self: flex-end;
 }
 
 .myMessageLeft {
-    margin: 10px;
+    margin: 1px;
     justify-content: center;
     align-content: center;
     flex-direction: column;
     background-color: #2196F3;
     width: 120px !important;
     word-wrap: break-word;
-    border-radius: 10px;
+    border-radius: 2px 12px 12px 2px;
     color: white;
     padding: 4px;
     align-self: flex-start;
+}
+.areaText{
+    border-radius: 0px 0px 10px 10px !important;
+}
+.cmdButton{
+    display: inline-block !important;
+    padding: 5px 10px !important;
+    margin-bottom: 0 !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    text-shadow: none !important;
+    line-height: 1.42857143 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    -ms-touch-action: manipulation !important;
+    touch-action: manipulation !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    background-image: none !important;
+    border-radius: 4px !important;
+    color: #fff !important;
+    background-color: #337ab7 !important;
+    background-image: -webkit-linear-gradient(top,#337ab7 0,#265a88 100%) !important;
+    background-image: -o-linear-gradient(top,#337ab7 0,#265a88 100%) !important;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#337ab7),to(#265a88)) !important;
+    background-image: linear-gradient(to bottom,#337ab7 0,#265a88 100%) !important;
+    background-repeat: repeat-x !important;
+    border-color: #245580 !important;
 }
