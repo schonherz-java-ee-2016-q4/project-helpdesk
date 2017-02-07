@@ -32,7 +32,6 @@ function onSubmissionComplete() {
     scrollLog();
 }
 
-
 function scrollLog() {
     var mydiv = $(".textBox");
     mydiv.scrollTop(mydiv.prop("scrollHeight"));
@@ -46,5 +45,5 @@ function saveScrollPos() {
 
 function autoScroll() {
     var scrollPos = document.getElementById('messageForm:scrollPos').value;
-    jQuery('#messageForm\\:messagesList.ui-outputpanel.ui-widget.textBox').animate({scrollTop:scrollPos}, scrollPos);
+    jQuery('#messageForm\\:messagesList.ui-outputpanel.ui-widget.textBox').animate({scrollTop:scrollPos}, 0);
 }
