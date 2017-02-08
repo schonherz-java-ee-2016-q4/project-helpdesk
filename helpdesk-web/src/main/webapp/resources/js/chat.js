@@ -47,3 +47,14 @@ function autoScroll() {
         scrollTo: scrollPos + 'px'
     });
 }
+
+function addNewlines(str) {
+    console.log('string: ');
+    var result = '';
+    while (str.length > 0) {
+        result += str.substring(0, 40) + '\n';
+        str = str.substring(40);
+    }
+    // console.log('result: ' + result);
+    return result;
+}

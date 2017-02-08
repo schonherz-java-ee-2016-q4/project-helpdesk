@@ -43,18 +43,22 @@
                         <div id="scrollable">
                             <ui:repeat value="#{chatView.messages}" var="message">
                                 <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
-                                    <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
+                                    <div class="myMessageRight"
+                                         onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
                                 </ui:fragment>
                                 <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
-                                    <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
+                                    <div class="myMessageLeft"
+                                         onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
                                 </ui:fragment>
                                 <ui:fragment
                                         rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
-                                    <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
+                                    <div class="myMessageLeft"
+                                         onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
                                 </ui:fragment>
                                 <ui:fragment
                                         rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
-                                    <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
+                                    <div class="myMessageRight"
+                                         onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
                                 </ui:fragment>
 
                             </ui:repeat>
