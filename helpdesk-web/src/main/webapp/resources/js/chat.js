@@ -10,7 +10,7 @@ $(document).ready(function () {
 function showScroll() {
     $('#scrollable').slimscroll({
         wheelStep: 10,
-        height: '350px',
+        height: '310px',
         start: 'bottom',
         alwaysVisible: true,
         disableFadeOut: true

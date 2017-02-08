@@ -1,14 +1,15 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
 
 #myBut {
-
+    margin-top: 100px;
 }
 
 .textBox {
     height: 400px !important;
     background-image: none !important;
-    margin-top: 40px !important;
+    margin-top: 50px !important;
     background-color: #ffffff !important;
-    padding: 20px !important;
+    padding: 5px 20px 20px 20px;
     overflow-y: hidden !important;
     overflow-x: hidden !important;
     display: flex !important;
@@ -16,6 +17,15 @@
     border: 1px solid #cccccc !important;
     border-bottom: transparent !important;
     border-radius: 10px 10px 0 0 !important;
+}
+
+.outPanelHeader {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #scrollable {
@@ -62,7 +72,26 @@
     border-radius: 2px 12px 12px 2px;
     color: white;
     padding: 5px 10px;
-    align-self: flex-start;
+    align-self: flex-end;
+    float: left;
+
+}
+
+.myMessageLeftWithoutPic {
+    margin: 1px;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    background-color: #9E9E9E;
+    word-wrap: break-word;
+    min-width: 0px !important;
+    max-width: 150px !important;
+    border-radius: 2px 12px 12px 2px;
+    color: white;
+    padding: 5px 10px;
+    align-self: flex-end;
+    float: left;
+    margin-left: 59px;
 }
 
 .areaText {
@@ -96,4 +125,71 @@
     background-image: linear-gradient(to bottom, #337ab7 0, #265a88 100%) !important;
     background-repeat: repeat-x !important;
     border-color: #245580 !important;
+}
+
+.yesButton {
+    display: inline-block !important;
+    padding: 5px 10px !important;
+    margin-bottom: 0 !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    text-shadow: none !important;
+    line-height: 1.42857143 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    -ms-touch-action: manipulation !important;
+    touch-action: manipulation !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    background-image: none !important;
+    border-radius: 4px !important;
+    color: #fff !important;
+    background-color: #b71c1c !important;
+    border-color: #b71c1c !important;
+    margin-left: 30px;
+}
+
+.noButton {
+    display: inline-block !important;
+    padding: 5px 10px !important;
+    margin-bottom: 0 !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    text-shadow: none !important;
+    line-height: 1.42857143 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    -ms-touch-action: manipulation !important;
+    touch-action: manipulation !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    background-image: none !important;
+    border-radius: 4px !important;
+    color: #fff !important;
+    background-color: #8BC34A !important;
+    border-color: #8BC34A !important;
+}
+
+.senderPic {
+    width: 54px;
+    height: 54px;
+    align-self: center;
+    border-radius: 50%;
+}
+
+.senderPicDiv {
+    display: flex;
+    flex-direction: row;
+    margin-right: 5px;
+}
+
+.messageWithPic {
+    display: flex;
+    flex-direction: row;
 }

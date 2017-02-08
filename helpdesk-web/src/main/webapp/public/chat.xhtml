@@ -39,29 +39,77 @@
 
 
                     <h:inputHidden id="scrollPos"/>
-                    <p:outputPanel id="messagesList" itemType="none" styleClass="textBox">
-                        <div id="scrollable">
-                            <ui:repeat value="#{chatView.messages}" var="message">
-                                <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
-                                    <div class="myMessageRight"
-                                         onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
-                                </ui:fragment>
-                                <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
-                                    <div class="myMessageLeft"
-                                         onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
-                                </ui:fragment>
-                                <ui:fragment
-                                        rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
-                                    <div class="myMessageLeft"
-                                         onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
-                                </ui:fragment>
-                                <ui:fragment
-                                        rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
-                                    <div class="myMessageRight"
-                                         onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
-                                </ui:fragment>
 
-                            </ui:repeat>
+                    <p:outputPanel id="messagesList" itemType="none" styleClass="textBox">
+                        <ui:fragment rendered='#{chatView.isAgent}'>
+                            <div class="outPanelHeader">
+                                <h4>Client ID: #{chatView.conversationVO.clientId}</h4>
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#myModalClose"><span
+                                        class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </ui:fragment>
+                        <div id="scrollable">
+                            <ui:fragment rendered='#{chatView.messageNum}'>
+                                <ui:repeat value="#{chatView.messages}" var="message">
+
+                                    <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
+                                        <div class="myMessageRight"
+                                             onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
+                                    </ui:fragment>
+                                    <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
+
+                                        <div class="messageWithPic">
+                                            <ui:fragment
+                                                    rendered='#{message.nextMember.equals("agent")  and message.nextMember != null}'>
+                                                <div class="senderPicDiv"><img class="senderPic"
+                                                                               src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
+                                                </div>
+
+                                                <div class="myMessageLeft"
+                                                     onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}
+                                                </div>
+                                            </ui:fragment>
+                                            <ui:fragment
+                                                    rendered='#{!(message.nextMember.equals("agent") and message.nextMember != null)}'>
+                                                <div class="myMessageLeftWithoutPic"
+                                                     onclick="addNewlines('#{message.content}')">
+                                                    #{message.sentBy} #{message.content}
+                                                </div>
+                                            </ui:fragment>
+                                        </div>
+                                    </ui:fragment>
+                                    <ui:fragment
+                                            rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
+                                        <div class="messageWithPic">
+                                            <ui:fragment
+                                                    rendered='#{message.nextMember.equals("client") and message.nextMember != null}'>
+                                                <div class="senderPicDiv"><img class="senderPic"
+                                                                               src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
+                                                </div>
+                                                <div class="myMessageLeft"
+                                                     onclick="addNewlines('#{message.content}')">
+                                                    #{message.sentBy} #{message.content}
+                                                </div>
+                                            </ui:fragment>
+                                            <ui:fragment
+                                                    rendered='#{!(message.nextMember.equals("client") and message.nextMember != null)}'>
+                                                <div class="myMessageLeftWithoutPic"
+                                                     onclick="addNewlines('#{message.content}')">
+                                                    #{message.sentBy} #{message.content}
+                                                </div>
+                                            </ui:fragment>
+                                        </div>
+                                    </ui:fragment>
+                                    <ui:fragment
+                                            rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
+                                        <div class="myMessageRight"
+                                             onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
+                                    </ui:fragment>
+
+                                </ui:repeat>
+                            </ui:fragment>
                         </div>
                     </p:outputPanel>
 
@@ -70,7 +118,7 @@
                                          value="#{chatView.content}"></p:inputTextarea>
                     </div>
                     <div id="myBut">
-                        <p:commandButton value="#{msg.send}" oncomplete="onSubmissionComplete()"
+                        <p:commandButton id='cmdBtn' value="#{msg.send}" oncomplete="onSubmissionComplete()"
                                          actionListener="#{chatView.send}"
                                          update="messageForm"
                                          styleClass="cmdButton"></p:commandButton>
@@ -113,6 +161,25 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default"
                                         data-dismiss="modal">#{msg.close}</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="myModalClose" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&#215;</button>
+                                <h4 class="modal-title">#{msg.close_conversation}</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <p:commandButton id='noBtn' value="#{msg.yes}"
+                                                 styleClass="yesButton"
+                                                 actionListener="#{chatView.updateConversation}"></p:commandButton>
+                                <button class="btn btn-success" type="button" data-dismiss="modal">#{msg.no}</button>
                             </div>
                         </div>
 

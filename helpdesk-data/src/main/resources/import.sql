@@ -1,13 +1,13 @@
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(1,55,'46m9z',true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(2,10,3333,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(3,2,4444,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(4,11,9999,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(5,40,'ok45',true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(6,16,6578,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(7,20,9123,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(8,25,7456,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(9,28,1487,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(10,30,8437,true);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(1,55,'46m9z',false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(2,10,3333,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(3,2,4444,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(4,11,9999,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(5,40,'ok45',false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(6,16,6578,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(7,20,9123,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(8,25,7456,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(9,28,1487,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(10,30,8437,false);
 
 INSERT INTO login(id,agentid,logindate) VALUES (11,1,to_timestamp('2012-01-03 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
 INSERT INTO login(id,agentid,logindate) VALUES (12,1,to_timestamp('2011-02-22 15:22:11.253','YYYY/MM/DD HH24:MI:SS.MS'));

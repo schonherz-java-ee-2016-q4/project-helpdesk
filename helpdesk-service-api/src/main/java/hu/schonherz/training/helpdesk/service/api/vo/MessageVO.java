@@ -15,4 +15,5 @@ public class MessageVO {
     private LocalDateTime sendDate;
     private String sentBy;
     private ConversationVO conv;
+    private String nextMember;
 }

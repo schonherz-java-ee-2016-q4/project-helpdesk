@@ -6,6 +6,8 @@ import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 @ManagedBean(name = "chatView")
 @ViewScoped
@@ -27,10 +30,14 @@ public class ChatView {
     @EJB
     private ConversationService conversationService;
 
+    Logger log = LoggerFactory.getLogger(ChatView.class);
+
     private ConversationVO conversationVO;
     private String content;
     private Boolean isAgent;
     private long conversationId;
+    private List<MessageVO> messageList;
+
 
     @PostConstruct
     public void init() {
@@ -38,6 +45,16 @@ public class ChatView {
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         Principal principal = request.getUserPrincipal();
         isAgent = principal != null;
+    }
+
+    public boolean getMessageNum() {
+        conversationVO = conversationService.findById(conversationId);
+        messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO
+                .getClientId());
+        if (messageList == null || messageList.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     public void send() {
@@ -53,6 +70,32 @@ public class ChatView {
 
     public Collection<MessageVO> getMessages() {
         conversationVO = conversationService.findById(conversationId);
-        return messageService.findMessages(conversationVO.getAgentId(), conversationVO.getClientId());
+        messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO
+                .getClientId());
+        MessageVO prev = messageList.get(0);
+
+        if (prev.getSentBy().equals("client")) {
+            prev.setNextMember("client");
+        } else if (prev.getSentBy().equals("agent")) {
+            prev.setNextMember("agent");
+        }
+
+        messageList.set(0, prev);
+
+        log.error(messageList.get(0).getNextMember());
+        for (int i = 1; i < messageList.size(); i++) {
+            if (!messageList.get(i).getSentBy().equals(prev.getSentBy())) {
+                messageList.get(i).setNextMember(messageList.get(i).getSentBy());
+            } else {
+                messageList.get(i).setNextMember(null);
+            }
+            prev = messageList.get(i);
+        }
+        return messageList;
+    }
+
+    public void updateConversation() {
+        conversationVO.setClosed(true);
+        conversationService.save(conversationVO);
     }
 }
