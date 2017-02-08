@@ -9,13 +9,19 @@
     margin-top: 40px !important;
     background-color: #ffffff !important;
     padding: 20px !important;
-    overflow-y: auto !important;
+    overflow-y: hidden !important;
     overflow-x: hidden !important;
     display: flex !important;
     flex-direction: column !important;
     border: 1px solid #cccccc !important;
     border-bottom: transparent !important;
     border-radius: 10px 10px 0 0 !important;
+}
+
+#scrollable {
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 #myText {
@@ -56,10 +62,12 @@
     padding: 4px;
     align-self: flex-start;
 }
-.areaText{
+
+.areaText {
     border-radius: 0px 0px 10px 10px !important;
 }
-.cmdButton{
+
+.cmdButton {
     display: inline-block !important;
     padding: 5px 10px !important;
     margin-bottom: 0 !important;
@@ -80,10 +88,10 @@
     border-radius: 4px !important;
     color: #fff !important;
     background-color: #337ab7 !important;
-    background-image: -webkit-linear-gradient(top,#337ab7 0,#265a88 100%) !important;
-    background-image: -o-linear-gradient(top,#337ab7 0,#265a88 100%) !important;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#337ab7),to(#265a88)) !important;
-    background-image: linear-gradient(to bottom,#337ab7 0,#265a88 100%) !important;
+    background-image: -webkit-linear-gradient(top, #337ab7 0, #265a88 100%) !important;
+    background-image: -o-linear-gradient(top, #337ab7 0, #265a88 100%) !important;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#337ab7), to(#265a88)) !important;
+    background-image: linear-gradient(to bottom, #337ab7 0, #265a88 100%) !important;
     background-repeat: repeat-x !important;
     border-color: #245580 !important;
 }

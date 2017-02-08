@@ -17,10 +17,10 @@
         </f:metadata>
     </ui:define>
     <ui:define name="customScripts">
-        <h:outputScript library="js" name="chat.js"/>
         <h:outputScript library="javax.faces" name="jsf.js"/>
         <h:outputScript library="primefaces" name="jquery/jquery.js"/>
-        <h:outputScript library="js" name="jquery.slimscroll.min.js"/>
+        <h:outputScript library="js" name="jquery.slimscroll.js"/>
+        <h:outputScript library="js" name="chat.js"/>
     </ui:define>
     <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
     <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
@@ -40,22 +40,25 @@
 
                     <h:inputHidden id="scrollPos"/>
                     <p:outputPanel id="messagesList" itemType="none" styleClass="textBox">
-                        <ui:repeat value="#{chatView.messages}" var="message">
-                            <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
-                                <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
-                            </ui:fragment>
-                            <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
-                                <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
-                            </ui:fragment>
-                            <ui:fragment
-                                    rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
-                                <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
-                            </ui:fragment>
-                            <ui:fragment
-                                    rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
-                                <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
-                            </ui:fragment>
-                        </ui:repeat>
+                        <div id="scrollable">
+                            <ui:repeat value="#{chatView.messages}" var="message">
+                                <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
+                                    <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
+                                </ui:fragment>
+                                <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
+                                    <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
+                                </ui:fragment>
+                                <ui:fragment
+                                        rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
+                                    <div class="myMessageLeft">#{message.sentBy} #{message.content}</div>
+                                </ui:fragment>
+                                <ui:fragment
+                                        rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
+                                    <div class="myMessageRight">#{message.sentBy} #{message.content}</div>
+                                </ui:fragment>
+
+                            </ui:repeat>
+                        </div>
                     </p:outputPanel>
 
                     <div id="myText">

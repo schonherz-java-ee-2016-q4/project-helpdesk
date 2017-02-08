@@ -3,22 +3,17 @@ $(document).ready(function () {
     $("textarea").keyup(function (event) {
         ifEnterClear();
     });
-    //  showScroll();
+    showScroll();
     scrollbarid = ".textBox";
 });
 
-function ifEnterClear() {
-    if (event.keyCode == 13) {
-        $("form").submit();
-    }
-}
-
 function showScroll() {
-    $('#textBox').slimscroll({
-        railVisible: true,
-        alwaysVisible: false,
+    $('#scrollable').slimscroll({
         wheelStep: 10,
-        height: '250px'
+        height: '350px',
+        start: 'bottom',
+        alwaysVisible: true,
+        disableFadeOut: true
     });
 }
 
@@ -27,7 +22,7 @@ function clearText() {
 }
 
 function onSubmissionComplete() {
-    //  showScroll();
+    showScroll();
     clearText();
     scrollLog();
 }
@@ -39,11 +34,16 @@ function scrollLog() {
 
 function saveScrollPos() {
 
-    var scrollPos = jQuery('#messageForm\\:messagesList.ui-outputpanel.ui-widget.textBox').prop('scrollTop');
+    var scrollPos = jQuery('#scrollable').prop('scrollTop');
     document.getElementById('messageForm:scrollPos').value = scrollPos;
 }
 
 function autoScroll() {
+
     var scrollPos = document.getElementById('messageForm:scrollPos').value;
-    jQuery('#messageForm\\:messagesList.ui-outputpanel.ui-widget.textBox').animate({scrollTop:scrollPos}, 0);
+    // jQuery('#messageForm\\:messagesList.ui-outputpanel.ui-widget.textBox').animate({scrollTop: scrollPos}, 0);
+    showScroll();
+    $('#scrollable').slimscroll({
+        scrollTo: scrollPos + 'px'
+    });
 }
