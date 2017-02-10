@@ -12,9 +12,9 @@
         <h:outputStylesheet library="css" name="chat.css"/>
         <h:outputStylesheet library="primefaces-aristo" name="theme.css"/>
         <h:outputStylesheet library="primefaces-vader" name="theme.css"/>
-        <f:metadata>
+     <!--   <f:metadata>
             <f:viewParam name="id" value="#{chatView.conversationId}"/>
-        </f:metadata>
+        </f:metadata>-->
     </ui:define>
     <ui:define name="customScripts">
         <h:outputScript library="javax.faces" name="jsf.js"/>
@@ -27,7 +27,9 @@
     <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
 
     <ui:define name="customBody">
-        <div class="container-fluid" style="display: flex; flex-direction: column">
+
+        <div class="container-fluid" id="main" style="display: flex; flex-direction: column">
+            <ui:fragment rendered="#{chatView.thereId}">
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7" style="align-self: center">
 
                 <h:form id="messageForm" styleClass="col-xs-12 col-sm-12 col-md-12 col-lg-12" method="post"
@@ -37,7 +39,7 @@
                     <p:poll async="true" delay="1000" update="messagesList" onstart="saveScrollPos()"
                             oncomplete="autoScroll()"></p:poll>
 
-
+                    <h:inputHidden id="closed"></h:inputHidden>
                     <h:inputHidden id="scrollPos"/>
 
                     <p:outputPanel id="messagesList" itemType="none" styleClass="textBox">
@@ -176,7 +178,8 @@
                             <div class="modal-footer">
                                 <p:commandButton id='noBtn' value="#{msg.yes}"
                                                  styleClass="yesButton"
-                                                 actionListener="#{chatView.updateConversation}"></p:commandButton>
+                                                 actionListener="#{chatView.updateConversation}"
+                                action="#{chatView.agentRedirect}"></p:commandButton>
                                 <button class="btn btn-success" type="button" data-dismiss="modal">#{msg.no}</button>
                             </div>
                         </div>
@@ -184,6 +187,12 @@
                     </div>
                 </div>
             </div>
+            </ui:fragment>
+            <ui:fragment rendered="#{chatView.thereId}">
+                <p style="margin-top: 200px">nem jó</p>
+            </ui:fragment>
         </div>
+
+
     </ui:define>
 </ui:composition>

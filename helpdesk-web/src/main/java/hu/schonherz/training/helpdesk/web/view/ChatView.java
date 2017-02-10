@@ -13,10 +13,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @ManagedBean(name = "chatView")
 @ViewScoped
@@ -31,8 +33,9 @@ public class ChatView {
     private ConversationVO conversationVO;
     private String content;
     private Boolean isAgent;
-    private long conversationId;
+    private Long conversationId;
     private List<MessageVO> messageList;
+    boolean hasId = true;
 
 
     @PostConstruct
@@ -41,8 +44,21 @@ public class ChatView {
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         Principal principal = request.getUserPrincipal();
         isAgent = principal != null;
+        if(request.getParameterMap().containsKey("id")) {
+            conversationId = Long.parseLong(request.getParameterMap().get("id")[0]);
+        }else{
+            hasId = false;
+        }
     }
 
+    public String agentRedirect(){
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("agent/profile");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "profile.xhtml";
+    }
     public boolean getMessageNum() {
         conversationVO = conversationService.findById(conversationId);
         messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO
@@ -92,5 +108,12 @@ public class ChatView {
     public void updateConversation() {
         conversationVO.setClosed(true);
         conversationService.save(conversationVO);
+    }
+
+    public boolean isThereId(){
+        if(conversationId >= 0 || hasId ){
+            return true;
+        }
+        return false;
     }
 }
