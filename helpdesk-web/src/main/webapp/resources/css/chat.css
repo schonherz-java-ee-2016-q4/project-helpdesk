@@ -194,8 +194,23 @@
     flex-direction: row;
 }
 
-#ErrorAlert{
+.error_parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.error_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.error_text {
     align-self: center;
-    height: 150px;
-    text-align: center;
 }
