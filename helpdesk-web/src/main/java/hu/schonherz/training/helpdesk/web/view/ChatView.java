@@ -6,6 +6,8 @@ import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -35,8 +37,7 @@ public class ChatView {
     private Boolean isAgent;
     private Long conversationId;
     private List<MessageVO> messageList;
-    boolean hasId = true;
-
+    Logger log = LoggerFactory.getLogger(ChatView.class);
 
     @PostConstruct
     public void init() {
@@ -46,9 +47,8 @@ public class ChatView {
         isAgent = principal != null;
         if(request.getParameterMap().containsKey("id")) {
             conversationId = Long.parseLong(request.getParameterMap().get("id")[0]);
-        }else{
-            hasId = false;
         }
+        log.error("id:" + conversationId);
     }
 
     public String agentRedirect(){
@@ -111,9 +111,14 @@ public class ChatView {
     }
 
     public boolean isThereId(){
-        if(conversationId >= 0 || hasId ){
-            return true;
+        if(conversationId == null){
+            return false;
         }
-        return false;
+        if(conversationId < 0){
+            return false;
+        }
+        return true;
+
     }
+
 }

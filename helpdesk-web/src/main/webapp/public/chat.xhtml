@@ -188,8 +188,10 @@
                 </div>
             </div>
             </ui:fragment>
-            <ui:fragment rendered="#{chatView.thereId}">
-                <p style="margin-top: 200px">nem jó</p>
+            <ui:fragment rendered="#{!chatView.thereId}">
+               <div class="col-sm-6 col-md-4 col-lg-3" style="display: flex; flex-direction: column;justify-content: center">
+                <div class="alert-danger" id="ErrorAlert">NEM ELÉRHETŐ TARTALOM</div>
+               </div>
             </ui:fragment>
         </div>
 

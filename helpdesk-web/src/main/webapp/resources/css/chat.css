@@ -193,3 +193,9 @@
     display: flex;
     flex-direction: row;
 }
+
+#ErrorAlert{
+    align-self: center;
+    height: 150px;
+    text-align: center;
+}
