@@ -20,7 +20,6 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 @ManagedBean(name = "chatView")
 @ViewScoped
@@ -45,13 +44,13 @@ public class ChatView {
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         Principal principal = request.getUserPrincipal();
         isAgent = principal != null;
-        if(request.getParameterMap().containsKey("id")) {
+        if (request.getParameterMap().containsKey("id")) {
             conversationId = Long.parseLong(request.getParameterMap().get("id")[0]);
         }
         log.error("id:" + conversationId);
     }
 
-    public String agentRedirect(){
+    public String agentRedirect() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("agent/profile");
         } catch (IOException e) {
@@ -59,6 +58,16 @@ public class ChatView {
         }
         return "profile.xhtml";
     }
+
+    public String clientRedirect() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("https://www.google.hu");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "profile.xhtml";
+    }
+
     public boolean getMessageNum() {
         conversationVO = conversationService.findById(conversationId);
         messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO
@@ -81,6 +90,12 @@ public class ChatView {
     }
 
     public Collection<MessageVO> getMessages() {
+
+        if (conversationVO.isClosed() && !isAgent) {
+            clientRedirect();
+            return null;
+        }
+
         conversationVO = conversationService.findById(conversationId);
         messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO
                 .getClientId());
@@ -110,11 +125,11 @@ public class ChatView {
         conversationService.save(conversationVO);
     }
 
-    public boolean isThereId(){
-        if(conversationId == null){
+    public boolean isThereId() {
+        if (conversationId == null) {
             return false;
         }
-        if(conversationId < 0){
+        if (conversationId < 0) {
             return false;
         }
         return true;
