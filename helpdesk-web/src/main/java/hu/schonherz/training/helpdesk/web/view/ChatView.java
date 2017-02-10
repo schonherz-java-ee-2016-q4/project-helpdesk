@@ -6,8 +6,6 @@ import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -29,8 +27,6 @@ public class ChatView {
     private MessageService messageService;
     @EJB
     private ConversationService conversationService;
-
-    Logger log = LoggerFactory.getLogger(ChatView.class);
 
     private ConversationVO conversationVO;
     private String content;
@@ -82,7 +78,6 @@ public class ChatView {
 
         messageList.set(0, prev);
 
-        log.error(messageList.get(0).getNextMember());
         for (int i = 1; i < messageList.size(); i++) {
             if (!messageList.get(i).getSentBy().equals(prev.getSentBy())) {
                 messageList.get(i).setNextMember(messageList.get(i).getSentBy());
