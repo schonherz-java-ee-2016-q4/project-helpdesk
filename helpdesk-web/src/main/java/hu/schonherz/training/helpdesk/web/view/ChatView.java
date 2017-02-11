@@ -53,26 +53,6 @@ public class ChatView {
         }
     }
 
-    public void agentRedirect() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("agent/profile");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void clientRedirect() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("https://www.google.hu");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean getMessageNum() {
-        return !(messageList == null || messageList.isEmpty());
-    }
-
     public void send() {
         MessageVO message = new MessageVO();
         message.setContent(content);
@@ -115,6 +95,10 @@ public class ChatView {
         return messageList;
     }
 
+    public boolean getMessageNum() {
+        return !(messageList == null || messageList.isEmpty());
+    }
+
     public void updateConversation() {
         conversationVO.setClosed(true);
         conversationService.save(conversationVO);
@@ -124,4 +108,19 @@ public class ChatView {
         return !(conversationVO == null || conversationVO.isClosed());
     }
 
+    public void agentRedirect() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("agent/profile");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clientRedirect() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("https://www.google.hu");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

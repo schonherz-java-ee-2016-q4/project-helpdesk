@@ -1,17 +1,7 @@
 var scrollbarid;
 $(document).ready(function () {
-    $("textarea").keyup(function (event) {
-        ifEnterClear();
-    });
-    //  showScroll();
     scrollbarid = ".textBox";
 });
-
-function ifEnterClear() {
-    if (event.keyCode == 13) {
-        $("form").submit();
-    }
-}
 
 function showScroll() {
     $('#textBox').slimscroll({
@@ -27,7 +17,6 @@ function clearText() {
 }
 
 function onSubmissionComplete() {
-    //  showScroll();
     clearText();
     scrollLog();
 }
