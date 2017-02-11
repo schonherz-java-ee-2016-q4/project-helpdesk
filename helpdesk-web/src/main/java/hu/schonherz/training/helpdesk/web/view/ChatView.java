@@ -100,7 +100,7 @@ public class ChatView {
         return messageList;
     }
 
-    public boolean getMessageNum() {
+    public boolean isAvailableMessage() {
         return !(messageList == null || messageList.isEmpty());
     }
 

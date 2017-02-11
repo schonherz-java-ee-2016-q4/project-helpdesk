@@ -44,7 +44,7 @@
                                 </div>
                             </ui:fragment>
                             <div class="scrollable" id="messageDiv">
-                                <ui:fragment rendered='#{chatView.messageNum}'>
+                                <ui:fragment rendered='#{chatView.availableMessage}'>
                                     <ui:repeat value="#{chatView.messages}" var="message">
 
                                         <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
