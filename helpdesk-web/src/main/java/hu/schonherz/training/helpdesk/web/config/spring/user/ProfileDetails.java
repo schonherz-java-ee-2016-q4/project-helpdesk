@@ -1,12 +1,17 @@
-package hu.schonherz.training.helpdesk.web.mock;
+package hu.schonherz.training.helpdesk.web.config.spring.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class Agent {
+@Builder
+public class ProfileDetails {
     private String name;
+    private String email;
     private String gender;
     private String company;
     private String phone;

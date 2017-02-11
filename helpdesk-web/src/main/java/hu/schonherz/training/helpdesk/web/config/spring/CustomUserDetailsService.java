@@ -4,7 +4,8 @@ import hu.schonherz.project.admin.service.api.rpc.FailedRpcLoginAttemptException
 import hu.schonherz.project.admin.service.api.rpc.RpcLoginServiceRemote;
 import hu.schonherz.project.admin.service.api.vo.UserData;
 import hu.schonherz.project.admin.service.api.vo.UserRole;
-import hu.schonherz.training.helpdesk.web.mock.MockedAdminStuff;
+import hu.schonherz.training.helpdesk.web.config.spring.user.CustomUser;
+import hu.schonherz.training.helpdesk.web.config.spring.user.ProfileDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -35,8 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         try {
             userData = rpcLoginServiceRemote.rpcLogin(username);
         } catch (FailedRpcLoginAttemptException e) {
-            log.error(e.toString());
-            throw new UsernameNotFoundException(username + "not found");
+            throw new UsernameNotFoundException(username + "not found", e);
         }
 
         CustomUser user = CustomUser.builder()
@@ -47,19 +47,29 @@ public class CustomUserDetailsService implements UserDetailsService {
             .credentialsNonExpired(true)
             .accountNonLocked(true)
             .authorities(auths(userData.getUserRole()))
-            //here the CustomUser part starts.
-            .email(userData.getEmail())
+            .agent(
+                ProfileDetails.builder()
+                    .email(userData.getEmail())
+                    //dummy code starts here
+                    .name("Bruce Wayne")
+                    .gender("male")
+                    .company("Wayne Enterprises, Inc")
+                    .phone("+36-30-1112367")
+                    .picture("https://pbs.twimg.com/profile_images/649259478332784640/7Pjcfx_v_reasonably_small.jpg")
+                    //dummy code ends here
+                    .build()
+            )
             .build();
 
 
         log.info("User in CustomUserDetailsService: " + user.toString());
         log.info("Username: " + user.getUsername() + " User roles: " + user.getAuthorities().toString()
-            + " User email: " + user.getEmail());
+            + " User email: " + user.getProfileDetails().getEmail());
 
-        mapper.map(MockedAdminStuff.getDummy(), user);
         return user;
     }
 
+    @SuppressWarnings("PMD")
     private static Set<GrantedAuthority> auths(final UserRole userRole) {
         Set<GrantedAuthority> auths = new HashSet<>();
 
