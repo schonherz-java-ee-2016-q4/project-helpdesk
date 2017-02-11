@@ -36,72 +36,74 @@
                         <p:outputPanel id="messagesList" itemType="none" styleClass="textBox">
                             <ui:fragment rendered='#{chatView.isAgent}'>
                                 <div class="outPanelHeader">
-                                    <h4>Client ID: #{chatView.conversationVO.clientId}</h4>
+                                    <h4 style="float: left">Client ID: #{chatView.conversationVO.clientId}</h4>
                                     <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#myModalClose">
+                                            data-target="#myModalClose" style="float: right">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>
                             </ui:fragment>
-                            <ui:fragment rendered='#{chatView.messageNum}'>
-                                <ui:repeat value="#{chatView.messages}" var="message">
+                            <div class="scrollable" id="messageDiv">
+                                <ui:fragment rendered='#{chatView.messageNum}'>
+                                    <ui:repeat value="#{chatView.messages}" var="message">
 
-                                    <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
-                                        <div class="myMessageRight"
-                                             onclick="addNewlines('#{message.content}')">
-                                            #{message.sentBy} #{message.content}
-                                        </div>
-                                    </ui:fragment>
-                                    <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
-
-                                        <ui:fragment
-                                                rendered='#{message.nextMember.equals("agent")  and message.nextMember != null}'>
-                                            <div class="messageWithPic">
-                                                <img class="senderPic" style="display: inline-block"
-                                                     src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
-
-                                                <div class="myMessageLeftNextToPic" style="display: inline-block">
-                                                    #{message.sentBy} #{message.content}
-                                                </div>
-                                            </div>
-                                        </ui:fragment>
-                                        <ui:fragment
-                                                rendered='#{!(message.nextMember.equals("agent") and message.nextMember != null)}'>
-                                            <div class="myMessageLeft"
+                                        <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
+                                            <div class="myMessageRight"
                                                  onclick="addNewlines('#{message.content}')">
-                                                #{message.sentBy} #{message.content}
+                                                #{message.content}
                                             </div>
                                         </ui:fragment>
-                                    </ui:fragment>
-                                    <ui:fragment
-                                            rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
-                                        <ui:fragment
-                                                rendered='#{message.nextMember.equals("client") and message.nextMember != null}'>
-                                            <div class="messageWithPic">
-                                                <img class="senderPic" style="display: inline-block"
-                                                     src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
+                                        <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
 
-                                                <div class="myMessageLeftNextToPic" style="display: inline-block">
-                                                    #{message.sentBy} #{message.content}
+                                            <ui:fragment
+                                                    rendered='#{message.nextMember.equals("agent")  and message.nextMember != null}'>
+                                                <div class="messageWithPic">
+                                                    <img class="senderPic" style="display: inline-block"
+                                                         src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
+
+                                                    <div class="myMessageLeftNextToPic" style="display: inline-block">
+                                                        #{message.content}
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </ui:fragment>
+                                            <ui:fragment
+                                                    rendered='#{!(message.nextMember.equals("agent") and message.nextMember != null)}'>
+                                                <div class="myMessageLeft"
+                                                     onclick="addNewlines('#{message.content}')">
+                                                    #{message.content}
+                                                </div>
+                                            </ui:fragment>
                                         </ui:fragment>
                                         <ui:fragment
-                                                rendered='#{!(message.nextMember.equals("client") and message.nextMember != null)}'>
-                                            <div class="myMessageLeft"
-                                                 onclick="addNewlines('#{message.content}')">
-                                                #{message.sentBy} #{message.content}
-                                            </div>
-                                        </ui:fragment>
-                                    </ui:fragment>
-                                    <ui:fragment
-                                            rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
-                                        <div class="myMessageRight"
-                                             onclick="addNewlines('#{message.content}')">#{message.sentBy} #{message.content}</div>
-                                    </ui:fragment>
+                                                rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
+                                            <ui:fragment
+                                                    rendered='#{message.nextMember.equals("client") and message.nextMember != null}'>
+                                                <div class="messageWithPic">
+                                                    <img class="senderPic" style="display: inline-block"
+                                                         src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
 
-                                </ui:repeat>
-                            </ui:fragment>
+                                                    <div class="myMessageLeftNextToPic" style="display: inline-block">
+                                                        #{message.content}
+                                                    </div>
+                                                </div>
+                                            </ui:fragment>
+                                            <ui:fragment
+                                                    rendered='#{!(message.nextMember.equals("client") and message.nextMember != null)}'>
+                                                <div class="myMessageLeft"
+                                                     onclick="addNewlines('#{message.content}')">
+                                                    #{message.content}
+                                                </div>
+                                            </ui:fragment>
+                                        </ui:fragment>
+                                        <ui:fragment
+                                                rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
+                                            <div class="myMessageRight"
+                                                 onclick="addNewlines('#{message.content}')"> #{message.content}</div>
+                                        </ui:fragment>
+
+                                    </ui:repeat>
+                                </ui:fragment>
+                            </div>
                         </p:outputPanel>
 
                         <div id="myText">

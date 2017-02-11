@@ -54,6 +54,9 @@ public class ChatView {
     }
 
     public void send() {
+        if ("".equals(content)) {
+            return;
+        }
         MessageVO message = new MessageVO();
         message.setContent(content);
         message.setAgentId(conversationVO.getAgentId());
@@ -66,10 +69,12 @@ public class ChatView {
 
     public Collection<MessageVO> getMessages() {
         ConversationVO conversationVO = conversationService.findById(conversationId);
+
         if (conversationVO.isClosed() && !isAgent) {
             clientRedirect();
             return null;
         }
+
         messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO
                 .getClientId());
         MessageVO prev = messageList.get(0);
@@ -112,7 +117,7 @@ public class ChatView {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("agent/profile");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Can't redirect the user" + e.getStackTrace());
         }
     }
 
@@ -120,7 +125,7 @@ public class ChatView {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("https://www.google.hu");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Can't redirect the user" + e.getStackTrace());
         }
     }
 }

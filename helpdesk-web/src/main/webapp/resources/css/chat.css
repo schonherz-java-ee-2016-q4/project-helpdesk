@@ -4,14 +4,23 @@
     margin-top: 100px;
 }
 
+#myText {
+    box-shadow: 0 0 0 0 !important;
+}
+
+#messageNav {
+    text-align: center;
+    height: 50px;
+    width: 400px;
+    background-color: #f1f8e9;
+}
+
 .textBox {
     height: 400px !important;
     background-image: none !important;
     margin-top: 50px !important;
     background-color: #ffffff !important;
     padding: 5px 20px 20px 20px;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
@@ -24,20 +33,7 @@
     padding-bottom: 5px;
     border-bottom: 1px solid #cccccc;
     margin-bottom: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#myText {
-    box-shadow: 0 0 0 0 !important;
-}
-
-#messageNav {
-    text-align: center;
-    height: 50px;
-    width: 400px;
-    background-color: #f1f8e9;
+    position: relative;
 }
 
 .myMessageRight {
@@ -76,6 +72,7 @@
     padding: 5px 10px;
     display: inline-block;
     margin-left: 58px;
+    align-self: flex-start;
 }
 
 .messageWithPic {
@@ -189,4 +186,10 @@
 
 .error_text {
     align-self: center;
+}
+
+.scrollable {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
