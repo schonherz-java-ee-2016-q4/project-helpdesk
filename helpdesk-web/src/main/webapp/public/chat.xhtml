@@ -11,9 +11,6 @@
         <h:outputStylesheet library="css" name="chat.css"/>
         <h:outputStylesheet library="primefaces-aristo" name="theme.css"/>
         <h:outputStylesheet library="primefaces-vader" name="theme.css"/>
-        <!--   <f:metadata>
-               <f:viewParam name="id" value="#{chatView.conversationId}"/>
-           </f:metadata>-->
     </ui:define>
     <ui:define name="customScripts">
         <h:outputScript library="javax.faces" name="jsf.js"/>
@@ -38,7 +35,6 @@
                         <p:poll async="true" delay="1000" update="messagesList" onstart="saveScrollPos()"
                                 oncomplete="autoScroll()"></p:poll>
 
-                        <h:inputHidden id="closed"></h:inputHidden>
                         <h:inputHidden id="scrollPos"/>
 
                         <p:outputPanel id="messagesList" itemType="none" styleClass="textBox">

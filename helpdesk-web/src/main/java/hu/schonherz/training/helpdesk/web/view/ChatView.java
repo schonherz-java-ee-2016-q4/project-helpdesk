@@ -31,12 +31,12 @@ public class ChatView {
     @EJB
     private ConversationService conversationService;
 
-    private ConversationVO conversationVO;
     private String content;
     private Boolean isAgent;
-    private Long conversationId;
     private List<MessageVO> messageList;
-    Logger log = LoggerFactory.getLogger(ChatView.class);
+    private Long conversationId;
+    private ConversationVO conversationVO;
+    private final Logger logger = LoggerFactory.getLogger(ChatView.class);
 
     @PostConstruct
     public void init() {
@@ -47,35 +47,30 @@ public class ChatView {
         if (request.getParameterMap().containsKey("id")) {
             conversationId = Long.parseLong(request.getParameterMap().get("id")[0]);
         }
-        log.error("id:" + conversationId);
+        conversationVO = conversationService.findById(conversationId);
+        if (conversationVO != null) {
+            messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO.getClientId());
+        }
     }
 
-    public String agentRedirect() {
+    public void agentRedirect() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("agent/profile");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "profile.xhtml";
     }
 
-    public String clientRedirect() {
+    public void clientRedirect() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("https://www.google.hu");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "profile.xhtml";
     }
 
     public boolean getMessageNum() {
-        conversationVO = conversationService.findById(conversationId);
-        messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO
-                .getClientId());
-        if (messageList == null || messageList.isEmpty()) {
-            return false;
-        }
-        return true;
+        return !(messageList == null || messageList.isEmpty());
     }
 
     public void send() {
@@ -90,32 +85,32 @@ public class ChatView {
     }
 
     public Collection<MessageVO> getMessages() {
-
+        ConversationVO conversationVO = conversationService.findById(conversationId);
         if (conversationVO.isClosed() && !isAgent) {
             clientRedirect();
             return null;
         }
-
-        conversationVO = conversationService.findById(conversationId);
         messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO
                 .getClientId());
         MessageVO prev = messageList.get(0);
 
-        if (prev.getSentBy().equals("client")) {
+        if ("client".equals(prev.getSentBy())) {
             prev.setNextMember("client");
-        } else if (prev.getSentBy().equals("agent")) {
+        } else if ("agent".equals(prev.getSentBy())) {
             prev.setNextMember("agent");
         }
 
         messageList.set(0, prev);
 
         for (int i = 1; i < messageList.size(); i++) {
-            if (!messageList.get(i).getSentBy().equals(prev.getSentBy())) {
-                messageList.get(i).setNextMember(messageList.get(i).getSentBy());
+            MessageVO tmpMessage = messageList.get(i);
+            if (!tmpMessage.getSentBy().equals(prev.getSentBy())) {
+                tmpMessage.setNextMember(tmpMessage.getSentBy());
             } else {
-                messageList.get(i).setNextMember(null);
+                tmpMessage.setNextMember(null);
             }
-            prev = messageList.get(i);
+            messageList.set(i, tmpMessage);
+            prev = tmpMessage;
         }
         return messageList;
     }
@@ -126,14 +121,7 @@ public class ChatView {
     }
 
     public boolean isThereId() {
-        if (conversationId == null) {
-            return false;
-        }
-        if (conversationId < 0) {
-            return false;
-        }
-        return true;
-
+        return !(conversationVO == null || conversationVO.isClosed());
     }
 
 }
