@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>hu.schonherz.java.training.project</groupId>
@@ -109,7 +110,7 @@
 
         <resteasy.version>3.1.0.Final</resteasy.version>
         <jackson.version>2.8.6</jackson.version>
-        <templates.version>97ebafeee7e398c8b65ffa74774b071cc8c5e1c8</templates.version>
+
         <version.plugin.versions>2.3</version.plugin.versions>
         <version.plugin.release>2.5.3</version.plugin.release>
 
@@ -141,7 +142,7 @@
             <dependency>
                 <groupId>com.github.schonherz-java-ee-2016-q4</groupId>
                 <artifactId>project</artifactId>
-                <version>${templates.version}</version>
+                <version>66787db6f5e5bdef1f23a389762308121ec62cbb</version>
             </dependency>
 
             <dependency>

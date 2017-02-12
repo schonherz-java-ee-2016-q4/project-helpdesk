@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ConversationVO {
     private long id;
-    private int clientId;
+    private String clientId;
 
     private int agentId;
 

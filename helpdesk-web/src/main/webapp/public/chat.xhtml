@@ -1,0 +1,196 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/masterLayout.xhtml">
+
+
+    <ui:define name="customTitle">Chat</ui:define>
+
+    <ui:define name="customHead">
+        <h:outputStylesheet library="css" name="chat.css"/>
+        <h:outputStylesheet library="primefaces-aristo" name="theme.css"/>
+        <h:outputStylesheet library="primefaces-vader" name="theme.css"/>
+    </ui:define>
+    <ui:define name="customScripts">
+        <h:outputScript library="javax.faces" name="jsf.js"/>
+        <h:outputScript library="js" name="chat.js"/>
+    </ui:define>
+    <ui:define name="customLink1"><a href="/helpdesk/agent/profile">#{msg.profile}</a></ui:define>
+    <ui:define name="customLink2"><a href="/helpdesk/chat">#{msg.chat}</a></ui:define>
+    <ui:define name="customLink3"><a href="/helpdesk/login">#{msg.login}</a></ui:define>
+
+    <ui:define name="customBody">
+
+        <div class="container-fluid" id="main" style="display: flex; flex-direction: column">
+            <ui:fragment rendered="#{chatView.thereId}">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7" style="align-self: center">
+
+                    <h:form id="messageForm" styleClass="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                            onkeypress="if (event.keyCode == 13) { document.getElementById('messageForm:cmdBtn').click(); return false;}">
+
+                        <p:poll async="true" delay="1000" update="messagesList" onstart="saveScrollPos()"
+                                oncomplete="autoScroll()"/>
+                        <h:inputHidden id="scrollPos"/>
+
+                        <p:outputPanel id="messagesList" itemType="none" styleClass="textBox">
+                            <ui:fragment rendered='#{chatView.isAgent}'>
+                                <div class="outPanelHeader">
+                                    <h4 style="float: left">Client ID: #{chatView.conversationVO.clientId}</h4>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#myModalClose" style="float: right">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                            </ui:fragment>
+                            <div class="scrollable" id="messageDiv">
+                                <ui:fragment rendered='#{chatView.availableMessage}'>
+                                    <ui:repeat value="#{chatView.messages}" var="message">
+
+                                        <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
+                                            <div class="myMessageRight"
+                                                 onclick="addNewlines('#{message.content}')">
+                                                #{message.content}
+                                            </div>
+                                        </ui:fragment>
+                                        <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
+
+                                            <ui:fragment
+                                                    rendered='#{message.nextMember.equals("agent")  and message.nextMember != null}'>
+                                                <div class="messageWithPic">
+                                                    <img class="senderPic" style="display: inline-block"
+                                                         src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
+
+                                                    <div class="myMessageLeftNextToPic" style="display: inline-block">
+                                                        #{message.content}
+                                                    </div>
+                                                </div>
+                                            </ui:fragment>
+                                            <ui:fragment
+                                                    rendered='#{!(message.nextMember.equals("agent") and message.nextMember != null)}'>
+                                                <div class="myMessageLeft"
+                                                     onclick="addNewlines('#{message.content}')">
+                                                    #{message.content}
+                                                </div>
+                                            </ui:fragment>
+                                        </ui:fragment>
+                                        <ui:fragment
+                                                rendered='#{message.sentBy.equals("client" ) and chatView.isAgent}'>
+                                            <ui:fragment
+                                                    rendered='#{message.nextMember.equals("client") and message.nextMember != null}'>
+                                                <div class="messageWithPic">
+                                                    <img class="senderPic" style="display: inline-block"
+                                                         src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
+
+                                                    <div class="myMessageLeftNextToPic" style="display: inline-block">
+                                                        #{message.content}
+                                                    </div>
+                                                </div>
+                                            </ui:fragment>
+                                            <ui:fragment
+                                                    rendered='#{!(message.nextMember.equals("client") and message.nextMember != null)}'>
+                                                <div class="myMessageLeft"
+                                                     onclick="addNewlines('#{message.content}')">
+                                                    #{message.content}
+                                                </div>
+                                            </ui:fragment>
+                                        </ui:fragment>
+                                        <ui:fragment
+                                                rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
+                                            <div class="myMessageRight"
+                                                 onclick="addNewlines('#{message.content}')"> #{message.content}</div>
+                                        </ui:fragment>
+
+                                    </ui:repeat>
+                                </ui:fragment>
+                            </div>
+                        </p:outputPanel>
+
+                        <div id="myText">
+                            <p:inputTextarea id="chatText" styleClass="areaText col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                                             value="#{chatView.content}"></p:inputTextarea>
+                        </div>
+                        <div id="myBut">
+                            <p:commandButton id='cmdBtn' value="#{msg.send}" oncomplete="onSubmissionComplete()"
+                                             actionListener="#{chatView.send}"
+                                             update="messagesList"
+                                             styleClass="cmdButton"></p:commandButton>
+
+                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                    data-target="#myModal">#{msg.error_ticket}
+                            </button>
+
+                        </div>
+
+                    </h:form>
+
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&#215;</button>
+                                    <h4 class="modal-title">#{msg.error_ticket}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <h:form>
+                                        <div class="form-group">
+                                            <label for="title">#{msg.issue_name}:</label>
+                                            <input type="text" class="form-control" id="title"></input>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">#{msg.issue_decription}:</label>
+                                            <input type="text" class="form-control" id="description"></input>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="type">#{msg.issue_type}:</label>
+                                            <input type="text" class="form-control" id="type"></input>
+                                        </div>
+                                        <button type="submit" class="btn btn-info">#{msg.send}</button>
+
+                                    </h:form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">#{msg.close}</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="myModalClose" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&#215;</button>
+                                    <h4 class="modal-title">#{msg.close_conversation}</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <p:commandButton id='noBtn' value="#{msg.yes}"
+                                                     styleClass="yesButton"
+                                                     actionListener="#{chatView.updateConversation}"
+                                                     action="#{chatView.agentRedirect}"></p:commandButton>
+                                    <button class="btn btn-success" type="button"
+                                            data-dismiss="modal">#{msg.no}</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </ui:fragment>
+        </div>
+
+        <ui:fragment rendered="#{!chatView.thereId}">
+            <div class="col-sm-12 col-md-12 col-lg-12 container error_parent">
+                <div class="col-sm-6 col-md-4 col-lg-3 alert alert-danger error_box">
+                    <div id="ErrorAlert" class="error_text">#{msg.not_avilable}</div>
+                </div>
+            </div>
+        </ui:fragment>
+
+    </ui:define>
+</ui:composition>

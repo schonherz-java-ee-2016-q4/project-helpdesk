@@ -10,8 +10,9 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
+import java.util.Collection;
 
-@Stateless(mappedName = "ConversationService")
+@Stateless(mappedName = "MessageService")
 @Interceptors(SpringBeanAutowiringInterceptor.class)
 public class MessageBean implements MessageService {
     @Autowired
@@ -20,5 +21,10 @@ public class MessageBean implements MessageService {
     @Override
     public Long save(final MessageVO message) {
         return messageRepository.save(MessageMapper.toEntity(message)).getId();
+    }
+
+    @Override
+    public Collection<MessageVO> findMessages(final int agentId, final String clientId) {
+        return MessageMapper.toVo(messageRepository.findMessages(agentId, clientId));
     }
 }

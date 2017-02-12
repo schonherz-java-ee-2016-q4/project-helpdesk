@@ -13,7 +13,7 @@
     </url-mapping>
     <url-mapping id="chat">
         <pattern value="/chat"/>
-        <view-id value="/secured/chat.xhtml"/>
+        <view-id value="/public/chat.xhtml"/>
     </url-mapping>
     <url-mapping id="profile">
         <pattern value="/agent/profile"/>

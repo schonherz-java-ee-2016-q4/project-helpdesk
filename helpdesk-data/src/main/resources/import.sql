@@ -1,13 +1,13 @@
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(1,7,1111,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(2,10,3333,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(3,2,4444,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(4,11,9999,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(5,14,1221,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(6,16,6578,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(7,20,9123,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(8,25,7456,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(9,28,1487,true);
-INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(10,30,8437,true);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(1,55,'46m9z',false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(2,10,3333,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(3,2,4444,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(4,11,9999,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(5,40,'ok45',false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(6,16,6578,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(7,20,9123,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(8,25,7456,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(9,28,1487,false);
+INSERT INTO public.conversation(id,agentid,clientid,closed) VALUES(10,30,8437,false);
 
 INSERT INTO login(id,agentid,logindate) VALUES (11,1,to_timestamp('2012-01-03 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
 INSERT INTO login(id,agentid,logindate) VALUES (12,1,to_timestamp('2011-02-22 15:22:11.253','YYYY/MM/DD HH24:MI:SS.MS'));
@@ -20,16 +20,16 @@ INSERT INTO login(id,agentid,logindate) VALUES (18,4,to_timestamp('2017-01-27 18
 INSERT INTO login(id,agentid,logindate) VALUES (19,5,to_timestamp('2017-01-05 15:27:33.311','YYYY/MM/DD HH24:MI:SS.MS'));
 INSERT INTO login(id,agentid,logindate) VALUES (20,5,to_timestamp('2014-08-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'));
 
-INSERT INTO message(id,content,senddate,conversation_id) VALUES (21,'csao', to_timestamp('2012-08-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1);
-INSERT INTO message(id,content,senddate,conversation_id) VALUES (22,'mizu?', to_timestamp('2015-08-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1);
-INSERT INTO message(id,content,senddate,conversation_id) VALUES (23,'nemsok', to_timestamp('2011-07-18 20:23:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1);
-INSERT INTO message(id,content,senddate,conversation_id) VALUES (24,'veled?', to_timestamp('2017-08-21 23:26:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1);
-INSERT INTO message(id,content,senddate,conversation_id) VALUES (25,'itt se sok', to_timestamp('2010-03-11 04:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1);
-INSERT INTO message(id,content,senddate,conversation_id) VALUES (26,'hogy vagy?', to_timestamp('2016-08-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),2);
-INSERT INTO message(id,content,senddate,conversation_id) VALUES (27,'köszi meg vagyok', to_timestamp('2017-01-10 14:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),2);
-INSERT INTO message(id,content,senddate,conversation_id) VALUES (28,'és te?', to_timestamp('2009-04-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),2);
-INSERT INTO message(id,content,senddate,conversation_id) VALUES (29,'élek', to_timestamp('2017-02-01 10:22:13.341','YYYY/MM/DD HH24:MI:SS.MS'),2);
-INSERT INTO message(id,content,senddate,conversation_id) VALUES (30,'na örulök', to_timestamp('2014-03-15 00:00:00.001','YYYY/MM/DD HH24:MI:SS.MS'),2);
+INSERT INTO message(id,agentid,clientid,content,senddate,conversation_id, sentby) VALUES (21,55,'46m9z','csao', to_timestamp('2012-08-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1, 'agent');
+INSERT INTO message(id,agentid,clientid,content,senddate,conversation_id, sentby) VALUES (22,55,'46m9z', 'mizu?', to_timestamp('2015-08-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1, 'client');
+INSERT INTO message(id,agentid,clientid,content,senddate,conversation_id, sentby) VALUES (23,40,'ok45', 'nemsok', to_timestamp('2011-07-18 20:23:58.611','YYYY/MM/DD HH24:MI:SS.MS'),5, 'agent');
+INSERT INTO message(id,agentid,clientid,content,senddate,conversation_id, sentby) VALUES (24,40, 'ok45', 'veled?', to_timestamp('2017-08-21 23:26:58.611','YYYY/MM/DD HH24:MI:SS.MS'),5, 'agent');
+INSERT INTO message(id,agentid,clientid,content,senddate,conversation_id, sentby) VALUES (25,55,'46m9z', 'itt se sok', to_timestamp('2010-03-11 04:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1, 'client');
+INSERT INTO message(id,agentid,clientid,content,senddate,conversation_id, sentby) VALUES (26,55, '46m9z',  'hogy vagy?', to_timestamp('2016-08-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1, 'client');
+INSERT INTO message(id,agentid,clientid,content,senddate,conversation_id, sentby) VALUES (27,55, '46m9z', 'koszi meg vagyok', to_timestamp('2017-01-10 14:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1, 'client');
+INSERT INTO message(id,agentid,clientid,content,senddate,conversation_id, sentby) VALUES (28,40, 'ok45', 'es te?', to_timestamp('2009-04-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),5, 'agent');
+INSERT INTO message(id,agentid,clientid,content,senddate,conversation_id, sentby)VALUES (29,40, 'ok45',  'elek', to_timestamp('2017-02-01 10:22:13.341','YYYY/MM/DD HH24:MI:SS.MS'),5, 'agent');
+INSERT INTO message(id,agentid,clientid,content,senddate,conversation_id, sentby) VALUES (30,40,'ok45', 'na orulok', to_timestamp('2014-03-15 00:00:00.001','YYYY/MM/DD HH24:MI:SS.MS'),5, 'client');
 
 INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (31,1111,to_timestamp('2012-08-12 22:20:58.611','YYYY/MM/DD HH24:MI:SS.MS'),'button','NAVIGATION');
 INSERT INTO client_activity(id,clientid,createdat,target,type) VALUES (32,3333,to_timestamp('2011-07-02 19:26:20.411','YYYY/MM/DD HH24:MI:SS.MS'),'nav','BUTTON_CLICK');

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
@@ -19,13 +18,18 @@ public class MessageEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Lob
+    private int agentId;
+
+    private String clientId;
+
+    private String sentBy;
+
     private String content;
 
     private LocalDateTime sendDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "conversation_id")
-    private ConversationEntity conversation;
+    private ConversationEntity conv;
 
 }
