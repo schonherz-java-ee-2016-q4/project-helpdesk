@@ -47,7 +47,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             .credentialsNonExpired(true)
             .accountNonLocked(true)
             .authorities(auths(userData.getUserRole()))
-            .agent(
+            .profileDetails(
                 ProfileDetails.builder()
                     .email(userData.getEmail())
                     //dummy code starts here

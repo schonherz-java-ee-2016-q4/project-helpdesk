@@ -50,7 +50,7 @@ public final class CustomUserBuilder {
         return this;
     }
 
-    public CustomUserBuilder agent(final ProfileDetails profileDetails) {
+    public CustomUserBuilder profileDetails(final ProfileDetails profileDetails) {
         this.profileDetails = profileDetails;
         return this;
     }
