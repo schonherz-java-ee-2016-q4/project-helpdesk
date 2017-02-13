@@ -4,7 +4,7 @@
 
     <groupId>hu.schonherz.java.training.project</groupId>
     <artifactId>helpdesk</artifactId>
-    <version>0.1.29-SNAPSHOT</version>
+    <version>0.1.30-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Help Desk Platform - Help Desk Parent</name>
@@ -125,7 +125,7 @@
             <dependency>
                 <groupId>hu.schonherz.java.training.project</groupId>
                 <artifactId>admin-service-api</artifactId>
-                <version>${admin.project.version}</version>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
