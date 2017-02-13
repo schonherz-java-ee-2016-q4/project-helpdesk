@@ -3,6 +3,14 @@ var $textParent = $('<div />').appendTo($pluginLayout);
 var $pluginMainText = $('<div />').appendTo($textParent);
 var $pluginLink = $('<a/>').appendTo($textParent);
 var $errorMessage = $('<div />').appendTo($pluginLayout);
+var $modalParent = $('<div />').appendTo('body');
+var $modalBody = $('<div />').appendTo($modalParent);
+var $modalClose = $('<a />').appendTo($modalBody);
+var $modalTitle = $('<h2 />').appendTo($modalBody);
+var $modalText = $('<p />').appendTo($modalBody);
+var $modalEmailLabel = $('<label />').appendTo($modalBody);
+var $modalEmailInput = $('<input />').appendTo($modalBody);
+var $modalButton = $('<button />').appendTo($modalBody);
 
 var uuid;
 
@@ -12,16 +20,42 @@ $(document).ready(function () {
     $pluginMainText.attr('class', 'helpdesk_plugin_text');
     $pluginLink.attr('class', 'helpdesk_plugin_link');
     $errorMessage.attr('class', 'helpdesk_error_text');
+    $modalParent.attr('class', 'modalDialog');
+    $modalClose.attr('href', '#close');
+    $modalClose.attr('class', 'closeModal');
+    $modalClose.attr('title', 'Close');
+    $modalEmailLabel.attr('for', "email_input");
+    $modalEmailLabel.attr('id', "email_input");
+    $modalEmailLabel.attr('type', "text");
+    $modalEmailLabel.attr('name', "email_input");
+    $modalEmailLabel.attr('placeholder', 'E-mail address');
+    $modalEmailInput.attr('class', 'modal_email_input');
+    $modalButton.attr('class', 'modal_submit_button');
 
     $pluginMainText.append("If you have any problem with this site");
     $pluginLink.append("Click here");
+    $modalClose.append('X');
+    $modalTitle.append('Helpdesk Platform');
+    $modalText.append('Kérem add meg az e-mail címedet a segítségnyújtás megkezdéséhez!');
+    $modalEmailLabel.append('E-mail:');
+    $modalButton.append('OK');
 
 
     generateUUID();
 
     $pluginLink.on('click', function () {
-        getAvailableAgent();
+        $modalParent.fadeTo(500, 1);
+        $(".modalDialog").css({"pointer-events": "auto"});
     });
+
+    $modalButton.on('click', function () {
+        getAvailableAgent();
+    })
+
+    $modalClose.on('click', function () {
+        $(".modalDialog").fadeTo(500, 0);
+        $(".modalDialog").css({"pointer-events": "none"});
+    })
 
     $("form").on('submit', function () {
         onFormSubmit(this);
