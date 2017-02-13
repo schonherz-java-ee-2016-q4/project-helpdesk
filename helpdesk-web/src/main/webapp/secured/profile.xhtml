@@ -10,16 +10,6 @@
         <h:outputStylesheet library="css" name="profile.css" />
     </ui:define>
 
-    <ui:define name="customLink1">
-        <a href="/helpdesk/agent/profile">#{msg.profile}</a>
-    </ui:define>
-    <ui:define name="customLink2">
-        <a href="/helpdesk/chat">#{msg.chat}</a>
-    </ui:define>
-    <ui:define name="customLink3">
-        <a href="/helpdesk/login">#{msg.login}</a>
-    </ui:define>
-
     <ui:define name="customTitle">Profile</ui:define>
 
     <ui:define name="customBody">
@@ -32,7 +22,7 @@
                     <tr class="text-centered">
                         <td colspan="2">
                             <div style="display: flex">
-                                <img src="#{profileView.user.picture}"
+                                <img src="#{profileView.user.profileDetails.picture}"
                                      style="margin: auto"
                                      class="img-thumbnail">
                                 </img>
@@ -41,11 +31,11 @@
                     </tr>
                     <tr>
                         <td>#{msg.name}:</td>
-                        <td>#{profileView.user.name}</td>
+                        <td>#{profileView.user.profileDetails.name}</td>
                     </tr>
                     <tr>
                         <td>#{msg.email}:</td>
-                        <td>#{profileView.user.email}</td>
+                        <td>#{profileView.user.profileDetails.email}</td>
                     </tr>
                     <tr>
                         <td>#{msg.username}:</td>
@@ -53,15 +43,15 @@
                     </tr>
                     <tr>
                         <td>#{msg.gender}:</td>
-                        <td>#{profileView.user.gender}</td>
+                        <td>#{profileView.user.profileDetails.gender}</td>
                     </tr>
                     <tr>
                         <td>#{msg.company}:</td>
-                        <td>#{profileView.user.company}</td>
+                        <td>#{profileView.user.profileDetails.company}</td>
                     </tr>
                     <tr>
                         <td>#{msg.phone}:</td>
-                        <td>#{profileView.user.phone}</td>
+                        <td>#{profileView.user.profileDetails.phone}</td>
                     </tr>
                 </table>
                 <a href="/helpdesk/client/activity"
