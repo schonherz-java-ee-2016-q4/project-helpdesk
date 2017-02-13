@@ -25,22 +25,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/secured/**", "/agent/**", "/client/**").hasRole("USER")
-            .and()
+                .antMatchers("/secured/**", "/agent/**", "/client/**").hasRole("AGENT")
+                .and()
                 .formLogin()
                 .loginPage("/login").failureUrl("/login?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler(authenticationSuccesHandler)
-            .and()
+                .and()
                 .logout().logoutSuccessUrl("/login?logout")
-            .and()
+                .and()
                 .csrf().disable();
     }
 
     public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder());
     }
 
 

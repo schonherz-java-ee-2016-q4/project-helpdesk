@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private static Mapper mapper = new DozerBeanMapper();
 
     @EJB(mappedName = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcLoginServiceBean!"
-        + "hu.schonherz.project.admin.service.api.rpc.RpcLoginServiceRemote")
+            + "hu.schonherz.project.admin.service.api.rpc.RpcLoginServiceRemote")
     private RpcLoginServiceRemote rpcLoginServiceRemote;
 
     @Override
@@ -40,31 +40,31 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         CustomUser user = CustomUser.builder()
-            .username(userData.getUsername())
-            .password(userData.getPassword())
-            .enabled(true)
-            .accountNonExpired(true)
-            .credentialsNonExpired(true)
-            .accountNonLocked(true)
-            .authorities(auths(userData.getUserRole()))
-            .profileDetails(
-                ProfileDetails.builder()
-                    .email(userData.getEmail())
-                    //dummy code starts here
-                    .name("Bruce Wayne")
-                    .gender("male")
-                    .company("Wayne Enterprises, Inc")
-                    .phone("+36-30-1112367")
-                    .picture("https://pbs.twimg.com/profile_images/649259478332784640/7Pjcfx_v_reasonably_small.jpg")
-                    //dummy code ends here
-                    .build()
-            )
-            .build();
+                .username(userData.getUsername())
+                .password(userData.getPassword())
+                .enabled(true)
+                .accountNonExpired(true)
+                .credentialsNonExpired(true)
+                .accountNonLocked(true)
+                .authorities(auths(userData.getUserRole()))
+                .profileDetails(
+                        ProfileDetails.builder()
+                                .email(userData.getEmail())
+                                //dummy code starts here
+                                .name("Bruce Wayne")
+                                .gender("male")
+                                .company("Wayne Enterprises, Inc")
+                                .phone("+36-30-1112367")
+                                .picture("https://pbs.twimg.com/profile_images/649259478332784640/7Pjcfx_v_reasonably_small.jpg")
+                                //dummy code ends here
+                                .build()
+                )
+                .build();
 
 
         log.info("User in CustomUserDetailsService: " + user.toString());
         log.info("Username: " + user.getUsername() + " User roles: " + user.getAuthorities().toString()
-            + " User email: " + user.getProfileDetails().getEmail());
+                + " User email: " + user.getProfileDetails().getEmail());
 
         return user;
     }
