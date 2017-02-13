@@ -5,7 +5,7 @@ import javax.faces.bean.ViewScoped;
 import java.util.Locale;
 
 @ManagedBean(name = "languageView")
-@ViewScoped
+@SessionScoped
 public class LanguageView {
     private static String locale = Locale.getDefault().getDisplayLanguage();
 
