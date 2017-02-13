@@ -2,7 +2,6 @@ var $pluginLayout = $('<div />').appendTo('body');
 var $textParent = $('<div />').appendTo($pluginLayout);
 var $pluginMainText = $('<div />').appendTo($textParent);
 var $pluginLink = $('<a/>').appendTo($textParent);
-var $errorMessage = $('<div />').appendTo($pluginLayout);
 var $modalParent = $('<div />').appendTo('body');
 var $modalBody = $('<div />').appendTo($modalParent);
 var $modalClose = $('<a />').appendTo($modalBody);
@@ -11,6 +10,7 @@ var $modalText = $('<p />').appendTo($modalBody);
 var $modalEmailLabel = $('<label />').appendTo($modalBody);
 var $modalEmailInput = $('<input />').appendTo($modalBody);
 var $modalButton = $('<button />').appendTo($modalBody);
+var $errorMessage = $('<div />').appendTo($modalBody);
 
 var uuid;
 
@@ -40,16 +40,22 @@ $(document).ready(function () {
     $modalEmailLabel.append('E-mail:');
     $modalButton.append('OK');
 
-
     generateUUID();
 
     $pluginLink.on('click', function () {
+        // $pluginLayout.slideUp('slow');
         $modalParent.fadeTo(500, 1);
         $(".modalDialog").css({"pointer-events": "auto"});
     });
 
     $modalButton.on('click', function () {
-        getAvailableAgent();
+        var email = $modalEmailInput.val();
+        if (validateEmailAddress(email)) {
+            getAvailableAgent(email);
+        }
+        else {
+            displayError('The e-mail address is invalid');
+        }
     })
 
     $modalClose.on('click', function () {
@@ -143,11 +149,14 @@ function onButtonClicked(element) {
 }
 
 function displayError(message) {
-
     $errorMessage.html(message);
     $errorMessage.slideDown("fast").delay(5000);
     $errorMessage.slideUp("slow");
+}
 
+function validateEmailAddress(email) {
+    var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email);
 }
 
 function postActivity(uuid, type, target) {
@@ -167,12 +176,14 @@ function postActivity(uuid, type, target) {
     });
 }
 
-function getAvailableAgent() {
+function getAvailableAgent(email) {
 
     $pluginLink.fadeOut("fast");
 
     var form = {};
     form["source"] = window.location.host;
+    form["clientId"] = uuid;
+    form["clientEmail"] = email;
 
     $.ajax({
         type: "POST",
@@ -183,8 +194,8 @@ function getAvailableAgent() {
         timeout: 100000,
         success: function (response) {
             console.log(response);
-            if (response.agentId == null) {
-                displayError("There isn't any available agent!");
+            if (response.conversationId == null) {
+                displayError("There is not any available agent!");
             }
             else {
                 var chatPage = window.open('http://javatraining.neuron.hu/helpdesk/secured/chat' + agentId);
