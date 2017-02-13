@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import hu.schonherz.project.admin.service.api.vo.UserRole;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -25,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/secured/**", "/agent/**", "/client/**").hasRole("USER")
+                .antMatchers("/secured/**", "/agent/**", "/client/**").hasRole(UserRole.AGENT.name())
             .and()
                 .formLogin()
                 .loginPage("/login").failureUrl("/login?error")
