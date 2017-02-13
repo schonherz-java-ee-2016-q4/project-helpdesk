@@ -30,14 +30,14 @@ Request type: POST
  - reponse: in json
  - example:
  	 - if available
-```json
-{
-    "conversationId": "12"
-}
-```
- 	 - else
-     ```json
-{
-    "conversationId":"null"
-}
-```
+    ```json
+    {
+        "conversationId": "12"
+    }
+    ```
+   - else
+    ```json
+    {
+    	"conversationId":"null"
+    }
+    ```
