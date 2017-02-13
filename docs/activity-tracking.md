@@ -1,23 +1,43 @@
-#in the context of the rest api 
+#Create new activity
+Request type: POST
  - url: helpdesk/api/activites/
- - sent JSON by js plugin:
-   - {"clientId":"sdasasd", "type":"CLICK", "target":"sadas.com/about#strangebutton4"}
- - response: 202 ACCEPTED
- 
- - if any of theese attributes missing
-    - response: 400 BAD REQUEST
- 
+ - sent JSON example by js plugin:
+```json
+{
+    "clientId":"sdasasd",
+    "type":"NAVIGATION",
+    "target":"sadas.com/about#strangebutton4"
+}
+```
+ - response:
+   - 202 ACCEPTED
+ - if any of theese attributes missing:
+  - response: 400 BAD REQUEST
  - if any of theese malformed
     - response: 400 BAD REQUEST
- 
- 
 
-#get available agents (to be discloused)
- - url: helpdesk/api/isagentavailable
- - sent JSON by js plugin
-     - {"source":"https://somecompany.com/" }
+#Get available agents
+Request type: POST
+ - url: helpdesk/api/agents/available
+ - sent JSON example by js plugin:
+```json
+{
+    "source": "https://somecompany.com/",
+    "clientId": "uuid",
+    "clientEmail": "testclient@test.com"
+}
+```
  - reponse: in json
+ - example:
  	 - if available
-       - {"agentId":"12"}
-     - else
-       - {"agentId": "null"}  
+```json
+{
+    "conversationId": "12"
+}
+```
+ 	 - else
+     ```json
+{
+    "conversationId":"null"
+}
+```
