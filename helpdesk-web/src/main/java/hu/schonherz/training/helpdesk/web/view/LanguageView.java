@@ -1,7 +1,7 @@
 package hu.schonherz.training.helpdesk.web.view;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import java.util.Locale;
 
 @ManagedBean(name = "languageView")
