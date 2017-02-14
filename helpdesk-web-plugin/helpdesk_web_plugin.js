@@ -41,7 +41,7 @@ $(document).ready(function () {
     $pluginLink.append('Click here');
     $modalClose.append('X');
     $modalTitle.append('Welcome to the Helpdesk Platform');
-    $modalText.append('Kérem add meg az e-mail címedet a segítségnyújtás megkezdéséhez!');
+    $modalText.append('Please enter your e-mail address to connect to your helpdesk agent!');
     $modalEmailLabel.append('E-mail:');
     $modalButton.append('OK');
 
@@ -63,27 +63,7 @@ $(document).ready(function () {
     });
 
     $slideDownParent.on('click', function () {
-
-        if (slided == 0) {
-            $pluginContentParent.slideUp('fast');
-            setTimeout(function () {
-                $pluginLayout.animate({width: '30px'}, 350)
-            }, 350);
-
-            slided = 1;
-        }
-        else {
-
-            $pluginLayout.animate({
-                width: '400px',
-                right: 0
-            }, 350);
-            slided = 0;
-            setTimeout(function () {
-                $pluginContentParent.slideDown('fast')
-            }, 350);
-        }
-        rotateDiv()
+        slidePlugin();
     });
 
     $modalClose.on('click', function () {
@@ -111,7 +91,26 @@ $(document).ready(function () {
 
 });
 
-function rotateDiv() {
+function slidePlugin() {
+    if (slided == 0) {
+        $pluginContentParent.slideUp('fast');
+        setTimeout(function () {
+            $pluginLayout.animate({width: '30px'}, 350)
+        }, 350);
+
+        slided = 1;
+    }
+    else {
+
+        $pluginLayout.animate({
+            width: '400px',
+            right: 0
+        }, 350);
+        slided = 0;
+        setTimeout(function () {
+            $pluginContentParent.slideDown('fast')
+        }, 350);
+    }
     $slideDownArrow.css({'transform': 'rotate(' + slided * 180 + 'deg)'});
 }
 

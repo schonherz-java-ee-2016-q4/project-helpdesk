@@ -93,11 +93,7 @@
     width: 24px;
     text-decoration: none;
     font-weight: bold;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
     border-radius: 12px;
-    -moz-box-shadow: 1px 1px 3px #000;
-    -webkit-box-shadow: 1px 1px 3px #000;
     box-shadow: 1px 1px 3px #000;
 }
 
@@ -128,8 +124,6 @@
 
 .modal_email_input {
     display: inline-block;
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
     box-sizing: content-box;
     padding: 5px 10px;
     margin-left: 10px;
@@ -156,7 +150,7 @@
     margin-top: 30px;
 }
 
-.slide_down_arrow { /* The circle inside the menu */
+.slide_down_arrow {
     width: 20px;
     height: 20px;
     background: rgba(0, 0, 0, 0.3);
@@ -169,7 +163,11 @@
     margin: auto 0;
 }
 
-.slide_down_arrow::before { /* The white arrow inside the circle */
+slide_down_arrow:hover {
+    border-left: #b7b7b7;
+}
+
+.slide_down_arrow::before {
     content: '';
     display: block;
     width: 0;
