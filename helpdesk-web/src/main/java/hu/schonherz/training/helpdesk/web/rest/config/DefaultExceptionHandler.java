@@ -10,13 +10,13 @@ import org.slf4j.LoggerFactory;
 
 
 @Provider
-public class DefaultExceptionHandler implements ExceptionMapper<WebApplicationException>{
+public class DefaultExceptionHandler implements ExceptionMapper<WebApplicationException> {
     private static Logger logger = LoggerFactory.getLogger(DefaultExceptionHandler.class);
 
     @Override
     public Response toResponse(final WebApplicationException e) {
         logger.error(e.getLocalizedMessage());
-        return Response.status(e.getResponse().getStatus()).entity(e.getMessage()).type("application/json").build(); 
+        return Response.status(e.getResponse().getStatus()).entity(e.getMessage()).type("application/json").build();
     }
 
 }
