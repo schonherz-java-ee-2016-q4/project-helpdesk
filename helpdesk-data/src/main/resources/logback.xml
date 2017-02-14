@@ -5,7 +5,7 @@
 		<file>../standalone/log/helpdesk/info.log</file>
 		<append>true</append>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>log/info.%i.log</fileNamePattern>
+			<fileNamePattern>../standalone/log/helpdesk/info.%i.log</fileNamePattern>
 			<minIndex>1</minIndex>
 			<maxIndex>3</maxIndex>
 		</rollingPolicy>
@@ -27,7 +27,7 @@
 		<file>../standalone/log/helpdesk/error.log</file>
 		<append>true</append>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>log/error.%i.log</fileNamePattern>
+			<fileNamePattern>../standalone/log/helpdesk/error.%i.log</fileNamePattern>
 			<minIndex>1</minIndex>
 			<maxIndex>3</maxIndex>
 		</rollingPolicy>
