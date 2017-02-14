@@ -98,7 +98,8 @@
                                         <ui:fragment
                                                 rendered='#{message.sentBy.equals("client") and !chatView.isAgent}'>
                                             <div class="myMessageRight"
-                                                 onclick="addNewlines('#{message.content}')"> #{message.content}</div>
+                                                 onclick="addNewlines('#{message.content}')"> #{message.content}
+                                            </div>
                                         </ui:fragment>
 
                                     </ui:repeat>
@@ -115,10 +116,11 @@
                                              actionListener="#{chatView.send}"
                                              update="messagesList"
                                              styleClass="cmdButton"></p:commandButton>
-
-                            <button type="button" class="btn btn-info" data-toggle="modal"
-                                    data-target="#myModal">#{msg.error_ticket}
-                            </button>
+                            <ui:fragment rendered='#{chatView.isAgent}'>
+                                <button type="button" class="btn btn-info" data-toggle="modal"
+                                        data-target="#myModal">#{msg.error_ticket}
+                                </button>
+                            </ui:fragment>
 
                         </div>
 
@@ -153,7 +155,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">#{msg.close}</button>
+                                            data-dismiss="modal">#{msg.close}
+                                    </button>
                                 </div>
                             </div>
 
@@ -174,7 +177,8 @@
                                                      actionListener="#{chatView.updateConversation}"
                                                      action="#{chatView.agentRedirect}"></p:commandButton>
                                     <button class="btn btn-success" type="button"
-                                            data-dismiss="modal">#{msg.no}</button>
+                                            data-dismiss="modal">#{msg.no}
+                                    </button>
                                 </div>
                             </div>
 
