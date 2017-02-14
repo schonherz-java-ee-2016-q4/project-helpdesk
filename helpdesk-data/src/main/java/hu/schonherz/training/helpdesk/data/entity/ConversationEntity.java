@@ -18,5 +18,7 @@ public class ConversationEntity extends BaseEntity {
 
     private String clientId;
 
+    private String clientEmail;
+
     private boolean closed;
 }

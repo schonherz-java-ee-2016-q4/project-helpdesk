@@ -1,5 +1,6 @@
 package hu.schonherz.training.helpdesk.web.config.spring;
 
+import hu.schonherz.project.admin.service.api.vo.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/secured/**", "/agent/**", "/client/**").hasRole("AGENT")
-                .and()
+                .antMatchers("/secured/**", "/agent/**", "/client/**").hasRole(UserRole.AGENT.name())
+            .and()
                 .formLogin()
                 .loginPage("/login").failureUrl("/login?error")
                 .usernameParameter("username")
