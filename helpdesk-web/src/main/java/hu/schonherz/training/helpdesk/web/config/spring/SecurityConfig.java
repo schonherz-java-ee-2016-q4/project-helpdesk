@@ -29,12 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/secured/**", "/agent/**", "/client/**").hasRole(UserRole.AGENT.name())
             .and()
                 .formLogin()
-                .loginPage("/login").failureUrl("/login?error")
+                .loginPage("/").failureUrl("/?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler(authenticationSuccesHandler)
                 .and()
-                .logout().logoutSuccessUrl("/login?logout")
+                .logout().logoutSuccessUrl("/?logout")
                 .and()
                 .csrf().disable();
     }

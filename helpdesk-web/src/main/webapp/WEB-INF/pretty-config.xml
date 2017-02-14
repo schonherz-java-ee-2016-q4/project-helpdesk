@@ -3,10 +3,6 @@
                xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
                       http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 
-    <url-mapping id="login">
-        <pattern value="/login"/>
-        <view-id value="/public/login.xhtml"/>
-    </url-mapping>
     <url-mapping id="activity">
         <pattern value="/client/activity"/>
         <view-id value="/secured/activity.xhtml"/>
