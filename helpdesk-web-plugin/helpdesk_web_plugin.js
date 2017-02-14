@@ -23,8 +23,8 @@ $(document).ready(function () {
     $pluginMainText.attr('class', 'helpdesk_plugin_text');
     $pluginLink.attr('class', 'helpdesk_plugin_link');
     $errorMessage.attr('class', 'helpdesk_error_text');
-    $slideDownParent.attr('class', 'slide_down_parent');
-    $slideDownArrow.attr('class', 'slide_down_arrow');
+    $slideDownParent.attr('class', 'slide_right_parent');
+    $slideDownArrow.attr('class', 'slide_right_arrow');
     $modalParent.attr('class', 'modalDialog');
     $modalClose.attr('href', '#close');
     $modalClose.attr('class', 'closeModal');
@@ -103,7 +103,7 @@ function slidePlugin() {
     else {
 
         $pluginLayout.animate({
-            width: '400px',
+            width: '370px',
             right: 0
         }, 350);
         slided = 0;
@@ -163,7 +163,16 @@ function onAnchorClicked(element) {
 }
 
 function onInputFocusloss(element) {
-    postActivity(uuid, "INPUT_FOCUSLOSS", element.value);
+    var target;
+
+    if ($(element).attr('id') != undefined) {
+        target = $(element).attr('id');
+    }
+    else if ($(element).attr('name') != undefined) {
+        target = $(element).attr('name');
+    }
+    target = target + "= " + (element.value);
+    postActivity(uuid, "NAVIGATION", target);
 }
 
 function onButtonClicked(element) {
@@ -186,7 +195,7 @@ function onButtonClicked(element) {
 
 function displayError(message) {
     $errorMessage.html(message);
-    $errorMessage.slideDown("fast").delay(5000);
+    $errorMessage.slideDown("fast").delay(1000);
     $errorMessage.slideUp("slow");
 }
 
@@ -202,6 +211,8 @@ function postActivity(uuid, type, target) {
     form["type"] = type;
     form["target"] = target;
 
+    console.log(form);
+
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -213,9 +224,7 @@ function postActivity(uuid, type, target) {
 }
 
 function getAvailableAgent(email) {
-
-    $pluginLink.fadeOut("fast");
-
+    $modalButton.fadeOut('fast');
     var form = {};
     form["source"] = window.location.host;
     form["clientId"] = uuid;
@@ -224,7 +233,7 @@ function getAvailableAgent(email) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "http://localhost:8080/helpdesk/api/agents/available",
+        url: "http://javatraining.neuron.hu/helpdesk/api/agents/available",
         data: form,
         dataType: 'json',
         timeout: 100000,
@@ -234,7 +243,7 @@ function getAvailableAgent(email) {
                 displayError("There is not any available agent!");
             }
             else {
-                var chatPage = window.open('http://localhost:8080/helpdesk/secured/chat?id=' + conversationId);
+                var chatPage = window.open('http://javatraining.neuron.hu/helpdesk/secured/chat?id=' + conversationId);
                 chatPage.focus();
             }
         },
@@ -242,7 +251,7 @@ function getAvailableAgent(email) {
             displayError("We couldn't connect to the helpdesk site");
         },
         complete: function () {
-            $pluginLink.fadeIn("fast");
+            $modalButton.fadeIn("fast");
         }
     });
 }
