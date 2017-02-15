@@ -1,14 +1,14 @@
-package hu.schonherz.training.helpdesk.web.config.spring.user;
+package hu.schonherz.training.helpdesk.web.security.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProfileDetails {
     private String name;
     private String email;

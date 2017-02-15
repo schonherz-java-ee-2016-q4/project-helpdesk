@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.rest;
+package hu.schonherz.training.helpdesk.web.rest.api;
 
 import hu.schonherz.training.helpdesk.service.api.service.ClientActivityService;
 import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;

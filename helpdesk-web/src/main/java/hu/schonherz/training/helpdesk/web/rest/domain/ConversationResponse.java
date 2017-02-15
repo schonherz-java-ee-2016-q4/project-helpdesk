@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.domain.rest.agent;
+package hu.schonherz.training.helpdesk.web.rest.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

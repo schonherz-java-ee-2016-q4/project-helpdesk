@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.config.spring;
+package hu.schonherz.training.helpdesk.web.security.successhandlers;
 
 import hu.schonherz.training.helpdesk.service.api.service.LoginService;
 import hu.schonherz.training.helpdesk.service.api.vo.LoginVO;

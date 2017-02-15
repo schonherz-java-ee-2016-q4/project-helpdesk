@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.config.spring;
+package hu.schonherz.training.helpdesk.web.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

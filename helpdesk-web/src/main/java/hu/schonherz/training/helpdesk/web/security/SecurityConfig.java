@@ -1,6 +1,8 @@
-package hu.schonherz.training.helpdesk.web.config.spring;
+package hu.schonherz.training.helpdesk.web.security;
 
 import hu.schonherz.project.admin.service.api.vo.UserRole;
+import hu.schonherz.training.helpdesk.web.security.successhandlers.CustomAuthenticationSuccessHandler;
+import hu.schonherz.training.helpdesk.web.security.service.AgentUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private AgentUserDetailsService userDetailsService;
 
     @Autowired
     private CustomAuthenticationSuccessHandler authenticationSuccessHandler;

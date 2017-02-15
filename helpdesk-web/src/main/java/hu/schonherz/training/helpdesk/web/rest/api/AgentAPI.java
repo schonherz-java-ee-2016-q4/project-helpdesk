@@ -1,9 +1,9 @@
-package hu.schonherz.training.helpdesk.web.rest;
+package hu.schonherz.training.helpdesk.web.rest.api;
 
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
-import hu.schonherz.training.helpdesk.web.domain.rest.agent.ClientDetailsRequest;
-import hu.schonherz.training.helpdesk.web.domain.rest.agent.ConversationResponse;
+import hu.schonherz.training.helpdesk.web.rest.domain.ClientDetailsRequest;
+import hu.schonherz.training.helpdesk.web.rest.domain.ConversationResponse;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
