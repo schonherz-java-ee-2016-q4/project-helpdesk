@@ -15,44 +15,44 @@
     <ui:define name="customBody">
         <div class="container" style="margin-top: 20px">
             <!--Agent statistics-->
-            <table class="table table-condensed col-sm-6 col-md-6 col-lg-6">
-                <thead>
-                <tr class="text-centered">
-                    <td colspan="2">
-                        <div style="display:flex">
-                            <img src="https://randomuser.me/api/portraits/men/34.jpg"
-                                 class="img-thumbnail profilePicture"/>
-                        </div>
-                    </td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>#{msg.name}</td>
-                    <td>Jack Murray</td>
-                </tr>
-                <tr>
-                    <td>#{msg.num_of_logins}</td>
-                    <td>200</td>
-                </tr>
-                <tr>
-                    <td>#{msg.num_of_conversations}</td>
-                    <td>80</td>
-                </tr>
-                <tr>
-                    <td>#{msg.num_of_issues}</td>
-                    <td>64</td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="col-md-offset-3 col-md-6 col-md-offset-3">
+                <table class="table responsive">
+                    <tr class="text-centered">
+                        <td colspan="2">
+                            <div style="display: flex">
+                               <img src="https://randomuser.me/api/portraits/men/34.jpg"
+                                     style="margin: auto"
+                                     class="img-thumbnail profilePicture">
+                                </img>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msg.name}</td>
+                        <td>Jack Murray</td>
+                    </tr>
+                    <tr>
+                        <td>#{msg.num_of_logins}</td>
+                        <td>200</td>
+                    </tr>
+                    <tr>
+                        <td>#{msg.num_of_conversations}</td>
+                        <td>80</td>
+                    </tr>
+                    <tr>
+                        <td>#{msg.num_of_issues}</td>
+                        <td>64</td>
+                    </tr>
+                </table>
+                <!--/Agent statistics-->
+                <div class="knob-container ui-corner-all fa-align-center">
 
-            <!--/Agent statistics-->
-        </div>
-        <div class="knob-container ui-corner-all fa-align-center">
+                    <!-- If the knobView bean will exist: value="#{knobView.value}"-->
+                    <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80" disabled="true"/>
+                    <p>#{msg.issue_rate}</p>
+                </div>
+            </div>
 
-            <!-- If the knobView bean will exist: value="#{knobView.value}"-->
-            <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80" disabled="true"/>
-            <p>#{msg.issue_rate}</p>
         </div>
     </ui:define>
     <ui:define name="customScripts">
