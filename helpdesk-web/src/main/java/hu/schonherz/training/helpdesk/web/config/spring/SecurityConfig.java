@@ -20,22 +20,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    private CustomAuthenticationSuccessHandler authenticationSuccesHandler;
+    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/secured/**", "/agent/**", "/client/**").hasRole(UserRole.AGENT.name())
+                .antMatchers("/agent/**", "/client/**").hasRole(UserRole.AGENT.name())
             .and()
                 .formLogin()
                 .loginPage("/").failureUrl("/?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .successHandler(authenticationSuccesHandler)
-                .and()
+                .loginProcessingUrl("/login")
+                .successHandler(authenticationSuccessHandler)
+            .and()
                 .logout().logoutSuccessUrl("/?logout")
-                .and()
+            .and()
                 .csrf().disable();
     }
 

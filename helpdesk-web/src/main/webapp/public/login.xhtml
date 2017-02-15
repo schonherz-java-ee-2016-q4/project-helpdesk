@@ -1,9 +1,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:c="http://java.sun.com/jsp/jstl/core"
-    xmlns:p="http://primefaces.org/ui"
-    template="/templates/menuLayout.xhtml">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/menuLayout.xhtml">
 
     <ui:define name="customHead">
         <h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
@@ -12,11 +12,9 @@
     <ui:define name="customTitle">Login</ui:define>
 
     <ui:define name="customBody">
-        <div class="panel-parent ">
-
+        <div class="panel-parent">
             <c:if test="#{not empty error}">
-                <div class="alert alert-danger" role="alert">
-                    There was an error!</div>
+                <div class="alert alert-danger" role="alert">There was an error!</div>
             </c:if>
 
             <div class="jumbotron col-lg-5 col-md-7 col-sm-11 col-xs-11">
@@ -24,7 +22,7 @@
                 <p>#{msg.if_agent_text}!</p>
             </div>
 
-            <div class=" col-lg-4 col-md-7 col-sm-11 col-xs-11">
+            <div class="col-lg-4 col-md-7 col-sm-11 col-xs-11">
                 <div class="panel panel-info ">
 
                     <div class="panel-heading helpdesk-login-panel-head">
@@ -32,41 +30,38 @@
                     </div>
 
                     <div class="panel-body">
-                        <form id="loginForm" class="form-horizontal"
-                            role="form" action="/helpdesk"
-                            method="post">
-                            <c:if test="#{param['error'] !=null}">
-                                <div class="alert alert-danger"
-                                    role="alert">
-                                    <span
-                                        class="glyphicon glyphicon-exclamation-sign"
-                                        aria-hidden="true"></span> <span
-                                        class="sr-only">Error:</span>
-                                    #{msg.bad_credentials}
+                        <form id="loginForm" class="form-horizontal" action="login" method="post">
+                            <c:if test="#{param['error'] != null}">
+                                <div class="alert alert-danger" role="alert">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <span class="sr-only">Error: #{msg.bad_credentials}</span>
                                 </div>
                             </c:if>
-                            <div
-                                class="input-group helpdesk-login-input">
+
+                            <div class="input-group helpdesk-login-input">
                                 <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-user" />
-                                </span> <input id="username" type="text"
-                                    class="form-control" name="username"
-                                    placeholder="#{msg.username}" />
+                                    <i class="glyphicon glyphicon-user"/>
+                                </span>
+                                <input id="username"
+                                       type="text"
+                                       class="form-control"
+                                       name="username"
+                                       placeholder="#{msg.username}"/>
+                            </div>
+                            <div class="input-group helpdesk-login-input">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock"/>
+                                </span>
+                                <input id="password"
+                                       type="password"
+                                       class="form-control"
+                                       name="password"
+                                       placeholder="#{msg.password}"/>
                             </div>
 
-                            <div
-                                class="input-group helpdesk-login-input">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-lock" />
-                                </span> <input id="password" type="password"
-                                    class="form-control" name="password"
-                                    placeholder="#{msg.password}" />
-                            </div>
-
-                            <button type="submit"
-                                class="btn btn-info col-sm-4 col-md-4 col-lg-4 helpdesk-login-button">
-                                #{msg.login} <i
-                                    class="glyphicon glyphicon-chevron-right" />
+                            <button type="submit" class="btn btn-info col-sm-4 col-md-4 col-lg-4 helpdesk-login-button">
+                                <span>#{msg.login}</span>
+                                <i class="glyphicon glyphicon-chevron-right" />
                             </button>
                         </form>
                     </div>
@@ -74,7 +69,6 @@
                     <div class="panel-footer">#{msg.not_registered}!</div>
                 </div>
             </div>
-
         </div>
 
     </ui:define>
