@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ConversationVO {
     private long id;
+
     private String clientId;
 
     private String clientEmail;
 
-    private int agentId;
+    private Long agentId;
 
     private boolean closed;
 }

@@ -24,7 +24,7 @@ public class MessageBean implements MessageService {
     }
 
     @Override
-    public Collection<MessageVO> findMessages(final int agentId, final String clientId) {
+    public Collection<MessageVO> findMessages(final Long agentId, final String clientId) {
         return MessageMapper.toVo(messageRepository.findMessages(agentId, clientId));
     }
 }
