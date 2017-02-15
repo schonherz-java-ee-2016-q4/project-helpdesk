@@ -126,7 +126,7 @@ function postActivity(uuid, type, target) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "http://javatraining.neuron.hu/helpdesk/api/activites/",
+        url: "http://localhost:8080/helpdesk/api/activites/",
         data: JSON.stringify(form),
         dataType: 'json',
         timeout: 100000,
@@ -143,7 +143,7 @@ function getAvailableAgent() {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "http://javatraining.neuron.hu/helpdesk/api/agents/available",
+        url: "http://localhost:8080/helpdesk/api/agents/available",
         data: JSON.stringify(form),
         dataType: 'json',
         timeout: 100000,
@@ -153,7 +153,7 @@ function getAvailableAgent() {
                 displayError("There isn't any available agent!");
             }
             else {
-                var chatPage = window.open('http://javatraining.neuron.hu/helpdesk/secured/chat' + agentId);
+                var chatPage = window.open('http://localhost:8080/helpdesk/secured/chat' + agentId);
                 chatPage.focus();
             }
         },

@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.view;
+package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
 import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import org.springframework.security.core.context.SecurityContextHolder;
