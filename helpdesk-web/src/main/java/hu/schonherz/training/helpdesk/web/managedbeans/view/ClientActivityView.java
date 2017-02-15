@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.view;
+package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
 import hu.schonherz.training.helpdesk.service.api.service.ClientActivityService;
 import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;

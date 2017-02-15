@@ -1,6 +1,8 @@
-package hu.schonherz.training.helpdesk.web.config.spring;
+package hu.schonherz.training.helpdesk.web.security;
 
 import hu.schonherz.project.admin.service.api.vo.UserRole;
+import hu.schonherz.training.helpdesk.web.security.successhandlers.CustomAuthenticationSuccessHandler;
+import hu.schonherz.training.helpdesk.web.security.service.AgentUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,31 +19,31 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private AgentUserDetailsService userDetailsService;
 
     @Autowired
-    private CustomAuthenticationSuccessHandler authenticationSuccesHandler;
+    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/secured/**", "/agent/**", "/client/**").hasRole(UserRole.AGENT.name())
+                .antMatchers("/agent/**", "/client/**").hasRole(UserRole.AGENT.name())
             .and()
                 .formLogin()
-                .loginPage("/login").failureUrl("/login?error")
+                .loginPage("/").failureUrl("/?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .successHandler(authenticationSuccesHandler)
-                .and()
-                .logout().logoutSuccessUrl("/login?logout")
-                .and()
+                .loginProcessingUrl("/login")
+                .successHandler(authenticationSuccessHandler)
+            .and()
+                .logout().logoutSuccessUrl("/?logout")
+            .and()
                 .csrf().disable();
     }
 
     public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
 

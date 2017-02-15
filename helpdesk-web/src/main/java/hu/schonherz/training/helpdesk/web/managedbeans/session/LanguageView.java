@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.view;
+package hu.schonherz.training.helpdesk.web.managedbeans.session;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

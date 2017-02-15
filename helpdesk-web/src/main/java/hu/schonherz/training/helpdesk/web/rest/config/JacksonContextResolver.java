@@ -9,6 +9,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
+/**
+ * Custom {@link ContextResolver} for the Jackson JSON serialization library.
+ * It is used to provide meaningful JSON-formatted HTTP responses, serializing
+ * Java 8 Dates appropriately.
+ */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
 public class JacksonContextResolver implements ContextResolver<ObjectMapper> {

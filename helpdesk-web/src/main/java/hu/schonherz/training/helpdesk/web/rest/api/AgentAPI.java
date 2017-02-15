@@ -1,9 +1,9 @@
-package hu.schonherz.training.helpdesk.web.rest;
+package hu.schonherz.training.helpdesk.web.rest.api;
 
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
-import hu.schonherz.training.helpdesk.web.domain.rest.agent.ClientDetailsRequest;
-import hu.schonherz.training.helpdesk.web.domain.rest.agent.ConversationResponse;
+import hu.schonherz.training.helpdesk.web.rest.domain.ClientDetailsRequest;
+import hu.schonherz.training.helpdesk.web.rest.domain.ConversationResponse;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -16,6 +16,8 @@ import javax.ws.rs.core.Response;
 
 @Path("/agents")
 @Stateless(mappedName = "agentApi")
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON })
 public class AgentAPI {
 
     private static final int RANDOM_TRESHOLD = 25;
@@ -23,12 +25,8 @@ public class AgentAPI {
     @EJB
     private ConversationService conversationService;
 
-
-
     @POST
     @Path("/available")
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
     public Response getAvailableAgent(final ClientDetailsRequest clientDetailsRequest) {
         //half dummy implementation for testing the functionality of the js plugin
 

@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.view;
+package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.service.MessageService;
@@ -6,8 +6,7 @@ import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -21,13 +20,18 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-@ManagedBean(name = "chatView")
-@ViewScoped
+@Slf4j
 @Data
 @NoArgsConstructor
+@ManagedBean(name = "chatView")
+@ViewScoped
 public class ChatView {
+    private static final String SENT_BY_AGENT = "agent";
+    private static final String SENT_BY_CLIENT = "client";
+
     @EJB
     private MessageService messageService;
+
     @EJB
     private ConversationService conversationService;
 
@@ -36,7 +40,6 @@ public class ChatView {
     private List<MessageVO> messageList;
     private Long conversationId;
     private ConversationVO conversationVO;
-    private final Logger logger = LoggerFactory.getLogger(ChatView.class);
 
     @PostConstruct
     public void init() {
@@ -44,9 +47,11 @@ public class ChatView {
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         Principal principal = request.getUserPrincipal();
         isAgent = principal != null;
+
         if (request.getParameterMap().containsKey("id")) {
             conversationId = Long.parseLong(request.getParameterMap().get("id")[0]);
         }
+
         conversationVO = conversationService.findById(conversationId);
         if (conversationVO != null) {
             messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO.getClientId());
@@ -54,16 +59,18 @@ public class ChatView {
     }
 
     public void send() {
-        if ("".equals(content)) {
+        if (content.isEmpty()) {
             return;
         }
+
         MessageVO message = new MessageVO();
         message.setContent(content);
         message.setAgentId(conversationVO.getAgentId());
         message.setClientId(conversationVO.getClientId());
         message.setSendDate(LocalDateTime.now());
         message.setConv(conversationVO);
-        message.setSentBy(isAgent ? "agent" : "client");
+        message.setSentBy(isAgent ? SENT_BY_AGENT : SENT_BY_CLIENT);
+
         messageService.save(message);
     }
 
@@ -75,20 +82,23 @@ public class ChatView {
             return null;
         }
 
-        messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO
-                .getClientId());
+        messageList = (List<MessageVO>) messageService.findMessages(
+            conversationVO.getAgentId(),
+            conversationVO.getClientId());
+
         MessageVO prev = messageList.get(0);
 
-        if ("client".equals(prev.getSentBy())) {
-            prev.setNextMember("client");
-        } else if ("agent".equals(prev.getSentBy())) {
-            prev.setNextMember("agent");
+        if (SENT_BY_CLIENT.equals(prev.getSentBy())) {
+            prev.setNextMember(SENT_BY_CLIENT);
+        } else if (SENT_BY_AGENT.equals(prev.getSentBy())) {
+            prev.setNextMember(SENT_BY_AGENT);
         }
 
         messageList.set(0, prev);
 
         for (int i = 1; i < messageList.size(); i++) {
             MessageVO tmpMessage = messageList.get(i);
+
             if (!tmpMessage.getSentBy().equals(prev.getSentBy())) {
                 tmpMessage.setNextMember(tmpMessage.getSentBy());
             } else {
@@ -97,6 +107,7 @@ public class ChatView {
             messageList.set(i, tmpMessage);
             prev = tmpMessage;
         }
+
         return messageList;
     }
 
@@ -114,18 +125,18 @@ public class ChatView {
     }
 
     public void agentRedirect() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("agent/profile");
-        } catch (IOException e) {
-            logger.error("Can't redirect the user" + e.getStackTrace());
-        }
+        redirectTo("agent/profile");
     }
 
     public void clientRedirect() {
+        redirectTo("https://www.google.hu");
+    }
+
+    private static void redirectTo(final String url) {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("https://www.google.hu");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(url);
         } catch (IOException e) {
-            logger.error("Can't redirect the user" + e.getStackTrace());
+            log.error("Can't redirect to {}!", url, e);
         }
     }
 }

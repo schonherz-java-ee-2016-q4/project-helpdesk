@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.rest;
+package hu.schonherz.training.helpdesk.web.rest.api;
 
 import hu.schonherz.training.helpdesk.service.api.service.ClientActivityService;
 import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;
@@ -18,6 +18,8 @@ import java.util.Collection;
 
 @Path("/activities")
 @Stateless(mappedName = "activityApi")
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON })
 public class ClientActivityAPI {
 
     @EJB
@@ -25,10 +27,8 @@ public class ClientActivityAPI {
 
     @POST
     @Path("/")
-    @Consumes({MediaType.APPLICATION_JSON})
     public Response addClientActivity(final ClientActivityVO clientActivityVO) {
-
-        if (clientActivityVO.getTarget() == null || "".equals(clientActivityVO.getTarget())) {
+        if (clientActivityVO.getTarget() == null || !clientActivityVO.getTarget().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
@@ -40,15 +40,12 @@ public class ClientActivityAPI {
 
     @GET
     @Path("/{id}")
-    @Produces({MediaType.APPLICATION_JSON})
     public ClientActivityVO getClientActivity(@PathParam(value = "id") final Long id) {
         return clientActivityService.findById(id);
-
     }
 
     @GET
     @Path("/")
-    @Produces({MediaType.APPLICATION_JSON})
     public Collection<ClientActivityVO> getClientActivities() {
         return clientActivityService.findAll();
     }
