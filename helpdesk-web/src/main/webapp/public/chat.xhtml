@@ -58,7 +58,7 @@
                                             <ui:fragment
                                                     rendered='#{message.nextMember.equals("agent")  and message.nextMember != null}'>
                                                 <div class="messageWithPic">
-                                                    <img class="senderPic" style="display: inline-block"
+                                                    <img class="senderPic" style="display: inline-block; border-radius: 50%"
                                                          src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
 
                                                     <div class="myMessageLeftNextToPic" style="display: inline-block">
@@ -80,7 +80,7 @@
                                                     rendered='#{message.nextMember.equals("client") and message.nextMember != null}'>
                                                 <div class="messageWithPic">
                                                     <img class="senderPic" style="display: inline-block"
-                                                         src="#{resource['images/client.png']}"/>
+                                                         src="resources/images/client.png"/>
 
                                                     <div class="myMessageLeftNextToPic" style="display: inline-block">
                                                         #{message.content}
