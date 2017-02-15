@@ -10,6 +10,7 @@
         <h:outputStylesheet library="css" name="statistics.css"></h:outputStylesheet>
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
         <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
+        <script src="https://use.fontawesome.com/9f4d39e940.js"></script>
     </ui:define>
 
     <ui:define name="customBody">
@@ -23,14 +24,14 @@
                     </img>
                 </div>
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Napi</a></li>
-                    <li><a data-toggle="tab" href="#menu2">Heti</a></li>
-                    <li><a data-toggle="tab" href="#menu3">Havi</a></li>
+                    <li><a data-toggle="tab" href="#home"><i class="fa fa-user-o" aria-hidden="true"></i></a></li>
+                    <li><a data-toggle="tab" href="#menu1">#{msg.daily}</a></li>
+                    <li><a data-toggle="tab" href="#menu2">#{msg.weekly}</a></li>
+                    <li><a data-toggle="tab" href="#menu3">#{msg.monthly}</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
-                       <h3>Jack Murray</h3>
+                        <h3>Jack Murray</h3>
                     </div>
                     <div id="menu1" class="tab-pane fade">
                         <table class="table responsive" style="text-align: left">
