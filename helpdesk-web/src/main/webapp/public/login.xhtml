@@ -19,7 +19,7 @@
 
             <div class="jumbotron col-lg-5 col-md-7 col-sm-11 col-xs-11">
                 <h2>#{msg.welcome}!</h2>
-                <p>#{msg.if_agent_text}!</p>
+                <p>#{msg.if_agent_text}</p>
             </div>
 
             <div class="col-lg-4 col-md-7 col-sm-11 col-xs-11">
@@ -34,7 +34,8 @@
                             <c:if test="#{param['error'] != null}">
                                 <div class="alert alert-danger" role="alert">
                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                    <span class="sr-only">Error: #{msg.bad_credentials}</span>
+                                    <span class="sr-only"></span>
+                                    <span>#{msg.bad_credentials}</span>
                                 </div>
                             </c:if>
 
