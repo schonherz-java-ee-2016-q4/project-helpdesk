@@ -38,6 +38,11 @@
         <welcome-file>/public/login.xhtml</welcome-file>
     </welcome-file-list>
 
+<context-param>
+        <param-name>resteasy.providers</param-name>
+        <param-value>hu.schonherz.training.helpdesk.web.rest.config.DefaultExceptionHandler</param-value>
+</context-param>
+
     <ejb-ref>
         <ejb-ref-name>ejb.clientActivityService</ejb-ref-name>
         <remote>hu.schonherz.training.helpdesk.service.api.service.ClientActivityService</remote>
