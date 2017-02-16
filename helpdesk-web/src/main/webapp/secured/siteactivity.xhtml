@@ -51,8 +51,7 @@
             <!-- /User activity details -->
             <div id="default"/>
             <h:form>
-                <p:poll delay="1000" listener="#{profileView.openConversation}"
-                        rendered="#{profileView.openConversation != null}"
+                <p:poll delay="1000" listener="#{clientActivityView.getOpenConversation}"
                         oncomplete="showGrowl()"/>
             </h:form>
         </div>
