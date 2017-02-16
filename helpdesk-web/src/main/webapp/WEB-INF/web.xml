@@ -48,10 +48,7 @@
         <remote>hu.schonherz.training.helpdesk.service.api.service.ClientActivityService</remote>
     </ejb-ref>
     
-        <ejb-ref>
-        <ejb-ref-name>ejb.LoginService</ejb-ref-name>
-        <remote>hu.schonherz.training.helpdesk.service.api.service.LoginService</remote>
-    </ejb-ref>
+
 
     <!-- REST -->
 

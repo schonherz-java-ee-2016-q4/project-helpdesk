@@ -7,7 +7,6 @@
         <jta-data-source>java:jboss/datasources/Helpdesk</jta-data-source>
         <class>hu.schonherz.training.helpdesk.data.entity.BaseEntity</class>
         <class>hu.schonherz.training.helpdesk.data.entity.ConversationEntity</class>
-        <class>hu.schonherz.training.helpdesk.data.entity.LoginEntity</class>
         <class>hu.schonherz.training.helpdesk.data.entity.ClientActivityEntity</class>
         <class>hu.schonherz.training.helpdesk.data.entity.MessageEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>

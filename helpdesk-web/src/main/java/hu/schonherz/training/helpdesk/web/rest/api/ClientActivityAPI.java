@@ -28,7 +28,7 @@ public class ClientActivityAPI {
     @POST
     @Path("/")
     public Response addClientActivity(final ClientActivityVO clientActivityVO) {
-        if (clientActivityVO.getTarget() == null || !clientActivityVO.getTarget().isEmpty()) {
+        if (clientActivityVO.getTarget() == null || clientActivityVO.getTarget().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
