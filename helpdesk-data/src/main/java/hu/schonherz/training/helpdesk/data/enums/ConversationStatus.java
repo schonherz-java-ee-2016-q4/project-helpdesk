@@ -1,6 +1,6 @@
 package hu.schonherz.training.helpdesk.data.enums;
 
-public enum ConversationType {
+public enum ConversationStatus {
     CLOSED,
     NEW,
     IN_PROGRESS

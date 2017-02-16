@@ -1,7 +1,7 @@
 package hu.schonherz.training.helpdesk.web.rest.api;
 
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
-import hu.schonherz.training.helpdesk.service.api.vo.ConversationTypeVO;
+import hu.schonherz.training.helpdesk.service.api.vo.ConversationStatusVO;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.web.rest.domain.ClientDetailsRequest;
 import hu.schonherz.training.helpdesk.web.rest.domain.ConversationResponse;
@@ -38,7 +38,7 @@ public class AgentAPI {
                 .agentId(2L)
                 .clientId(clientDetailsRequest.getClientId())
                 .clientEmail(clientDetailsRequest.getClientEmail())
-                .type(ConversationTypeVO.NEW)
+                .status(ConversationStatusVO.NEW)
                 .build();
 
         ConversationResponse conversationResponse = new ConversationResponse();

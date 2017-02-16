@@ -1,6 +1,6 @@
 package hu.schonherz.training.helpdesk.data.entity;
 
-import hu.schonherz.training.helpdesk.data.enums.ConversationType;
+import hu.schonherz.training.helpdesk.data.enums.ConversationStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,5 +24,5 @@ public class ConversationEntity extends BaseEntity {
     private String clientEmail;
 
     @Enumerated(EnumType.STRING)
-    private ConversationType type;
+    private ConversationStatus status;
 }
