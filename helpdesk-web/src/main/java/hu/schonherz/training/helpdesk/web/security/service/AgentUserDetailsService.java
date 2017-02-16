@@ -61,6 +61,7 @@ public class AgentUserDetailsService implements UserDetailsService {
             .build();
 
         log.info("Helpdesk agent with username {} successfully authenticated.", username);
+
         return user;
     }
 
