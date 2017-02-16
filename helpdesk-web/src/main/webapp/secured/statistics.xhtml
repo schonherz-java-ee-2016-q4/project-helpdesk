@@ -10,6 +10,8 @@
         <h:outputStylesheet library="css" name="statistics.css"></h:outputStylesheet>
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
         <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
+        <h:outputScript library="js" name="statistics.js"/>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
         <script src="https://use.fontawesome.com/9f4d39e940.js"></script>
     </ui:define>
 
@@ -34,7 +36,25 @@
                         <h3>Jack Murray</h3>
                     </div>
                     <div id="menu1" class="tab-pane fade">
+                        <div class="date-picker" data-date="2014/09/02" data-keyboard="true">
+                            <div class="date-container pull-left">
+                                <h4 class="weekday">Monday</h4>
+                                <h2 class="date">Februray 4th</h2>
+                                <h4 class="year pull-right">2014</h4>
+                            </div>
+                            <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left"></span>
+                            <span data-toggle="datepicker" data-type="add" class="fa fa-angle-right"></span>
+                            <div class="input-group input-datepicker">
+                                <input type="text" class="form-control" data-format="YYYY/MM/DD"
+                                       placeholder="YYYY/MM/DD"></input>
+                                <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                            </div>
+                            <span data-toggle="calendar" class="fa fa-calendar"></span>
+                        </div>
                         <table class="table responsive" style="text-align: left">
+
                             <tr>
                                 <td>#{msg.num_of_logins}</td>
                                 <td>200</td>
@@ -51,11 +71,21 @@
                         <div class="knob-container ui-corner-all fa-align-center">
 
                             <!-- If the knobView bean will exist: value="#{knobView.value}"-->
-                            <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80" disabled="true"/>
+                            <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80"
+                                    disabled="true"/>
                             <p>#{msg.issue_rate}</p>
                         </div>
                     </div>
                     <div id="menu2" class="tab-pane fade">
+                        <div class="date-picker">
+                            <div class="date-container pull-left">
+                                <h4 class="weekday">Monday</h4>
+                                <h2 class="date">Februray 4th</h2>
+                                <h4 class="year pull-right">2014</h4>
+                            </div>
+                            <span data-toggle="datepicker" data-type="subtract" data-amt="7" class="fa fa-angle-left pull-left"></span>
+                            <span data-toggle="datepicker" data-amt="7" class="fa fa-angle-right pull-right"></span>
+                        </div>
                         <table class="table responsive" style="text-align: left">
                             <tr>
                                 <td>#{msg.num_of_logins}</td>
@@ -73,11 +103,21 @@
                         <div class="knob-container ui-corner-all fa-align-center">
 
                             <!-- If the knobView bean will exist: value="#{knobView.value}"-->
-                            <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80" disabled="true"/>
+                            <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80"
+                                    disabled="true"/>
                             <p>#{msg.issue_rate}</p>
                         </div>
                     </div>
                     <div id="menu3" class="tab-pane fade">
+                        <div class="date-picker" data-type="months">
+                            <div class="date-container pull-left">
+                                <h4 class="weekday">Monday</h4>
+                                <h2 class="date">Februray 4th</h2>
+                                <h4 class="year pull-right">2014</h4>
+                            </div>
+                            <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left pull-left"></span>
+                            <span data-toggle="datepicker" class="fa fa-angle-right pull-right"></span>
+                        </div>
                         <table class="table responsive" style="text-align: left">
                             <tr>
                                 <td>#{msg.num_of_logins}</td>
@@ -95,16 +135,17 @@
                         <div class="knob-container ui-corner-all fa-align-center">
 
                             <!-- If the knobView bean will exist: value="#{knobView.value}"-->
-                            <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80" disabled="true"/>
+                            <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80"
+                                    disabled="true"/>
                             <p>#{msg.issue_rate}</p>
                         </div>
                     </div>
                 </div>
-                <!--/Agent statistics-->
-
             </div>
-
         </div>
+        <!--/Agent statistics-->
+
+
     </ui:define>
     <ui:define name="customScripts">
 
