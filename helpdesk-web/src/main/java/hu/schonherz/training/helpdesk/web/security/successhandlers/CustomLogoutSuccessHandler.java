@@ -28,7 +28,7 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
         try {
             rpcLoginServiceRemote.rpcLogout(user.getUsername());
         } catch (FailedRpcLogoutException e) {
-            log.error("User " + user.getUsername() + " couldn't logout at the admin side.");
+            log.error("User {} couldn't logout at the admin side.", user.getUsername(), e);
         }
         super.onLogoutSuccess(request, response, authentication);
     }

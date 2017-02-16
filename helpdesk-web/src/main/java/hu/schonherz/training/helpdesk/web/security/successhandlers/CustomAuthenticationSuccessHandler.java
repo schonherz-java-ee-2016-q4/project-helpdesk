@@ -29,7 +29,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
         try {
             rpcLoginServiceRemote.successfulLoginOf(user.getUsername());
         } catch (FailedRpcLoginAttemptException e) {
-            log.error("User " + user.getUsername() + " couldn't login at the admin side.");
+            log.error("User {} couldn't login at the admin side.", user.getUsername(), e);
         }
 
         super.setDefaultTargetUrl("/agent/profile");
