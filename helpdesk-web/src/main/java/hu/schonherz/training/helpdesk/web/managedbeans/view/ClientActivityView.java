@@ -52,4 +52,5 @@ public class ClientActivityView {
         return openConversation;
     }
 
+
 }
