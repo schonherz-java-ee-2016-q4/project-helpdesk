@@ -1,6 +1,7 @@
 package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
+import hu.schonherz.training.helpdesk.service.api.vo.ConversationTypeVO;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,7 +33,7 @@ public class ProfileView {
         List<ConversationVO> conversationList = (List<ConversationVO>) conversationService.findByAgentId(user.getProfileDetails().getId());
         ConversationVO openConversation = null;
         for (ConversationVO tmpConversation : conversationList) {
-            if (!tmpConversation.isClosed()) {
+            if (!tmpConversation.getType().equals(ConversationTypeVO.CLOSED)) {
                 openConversation = tmpConversation;
                 break;
             }

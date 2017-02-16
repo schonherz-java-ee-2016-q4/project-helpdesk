@@ -2,6 +2,7 @@ package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.service.MessageService;
+import hu.schonherz.training.helpdesk.service.api.vo.ConversationTypeVO;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
 import lombok.Data;
@@ -77,14 +78,14 @@ public class ChatView {
     public Collection<MessageVO> getMessages() {
         ConversationVO conversationVO = conversationService.findById(conversationId);
 
-        if (conversationVO.isClosed() && !isAgent) {
+        if (conversationVO.getType().equals(ConversationTypeVO.CLOSED) && !isAgent) {
             clientRedirect();
             return null;
         }
 
         messageList = (List<MessageVO>) messageService.findMessages(
-            conversationVO.getAgentId(),
-            conversationVO.getClientId());
+                conversationVO.getAgentId(),
+                conversationVO.getClientId());
 
         MessageVO prev = messageList.get(0);
 
@@ -116,12 +117,12 @@ public class ChatView {
     }
 
     public void updateConversation() {
-        conversationVO.setClosed(true);
+        conversationVO.setType(ConversationTypeVO.CLOSED);
         conversationService.save(conversationVO);
     }
 
     public boolean isThereId() {
-        return !(conversationVO == null || conversationVO.isClosed());
+        return !(conversationVO == null || conversationVO.getType().equals(ConversationTypeVO.CLOSED));
     }
 
     public void agentRedirect() {

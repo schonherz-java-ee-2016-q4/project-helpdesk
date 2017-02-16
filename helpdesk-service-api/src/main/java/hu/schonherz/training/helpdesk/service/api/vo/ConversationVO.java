@@ -18,5 +18,5 @@ public class ConversationVO {
 
     private Long agentId;
 
-    private boolean closed;
+    private ConversationTypeVO type;
 }
