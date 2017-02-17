@@ -9,9 +9,12 @@ function showGrowl() {
         $.growl.notice({
             message: $('#conversationState').val() === 'NEW' ? "There is a new conversation for you!" : "Your already have an open conversation!",
             duration: 0,
-            title: "New Conversation"
+            title: "New Conversation",
+            size: "large"
         });
     }
 
-
+}
+function redirectToChat() {
+    window.location.href = "/helpdesk/chat?id=121";
 }

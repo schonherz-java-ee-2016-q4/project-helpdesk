@@ -221,7 +221,7 @@
         };
 
         Growl.prototype.content = function () {
-            return "<div class='" + this.settings.namespace + "-close'>" + this.settings.close + "</div>\n<div class='" + this.settings.namespace + "-title'>" + this.settings.title + "</div>\n<div class='" + this.settings.namespace + "-message'>" + this.settings.message + "</div>";
+            return "<div class='glyphicon glyphicon-plus-sign glyphicon_custom'></div><div class='growl_text_parent'>\n<div class='" + this.settings.namespace + "-title'>" + this.settings.title + "</div>\n<div class='" + this.settings.namespace + "-message'>" + this.settings.message + "</div><div class='chat_link' id='link_to_chat' onclick='redirectToChat()'>Click here to navigate to the chat</div></div>";
         };
 
         Growl.prototype.container = function (content) {
