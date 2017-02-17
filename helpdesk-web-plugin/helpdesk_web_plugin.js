@@ -234,8 +234,6 @@ function getAvailableAgent(email) {
         type: "POST",
         contentType: "application/json",
         url: "http://javatraining.neuron.hu/helpdesk/api/agents/available",
-        data: form,
-        url: "http://localhost:8080/helpdesk/api/agents/available",
         data: JSON.stringify(form),
         dataType: 'json',
         timeout: 100000,
@@ -246,8 +244,6 @@ function getAvailableAgent(email) {
             }
             else {
                 var chatPage = window.open('http://javatraining.neuron.hu/helpdesk/secured/chat?id=' + conversationId);
-
-                var chatPage = window.open('http://localhost:8080/helpdesk/secured/chat' + agentId);
                 chatPage.focus();
             }
         },

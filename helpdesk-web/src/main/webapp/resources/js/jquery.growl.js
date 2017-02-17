@@ -101,9 +101,10 @@
             if (this.settings.fixed) {
                 this.present();
             }
-            // else {
-            //     this.cycle();
-            // }
+//itt
+            else {
+                this.cycle();
+            }
         }
         ;
 
@@ -166,7 +167,7 @@
         Growl.prototype.waitAndDismiss = function () {
             var $growl;
             $growl = this.$growl();
-            return $growl.delay(this.settings.duration).queue(this.dismiss).queue(this.remove);
+            return this.dismiss.queue(this.remove);
         };
 
         Growl.prototype.present = function (callback) {
