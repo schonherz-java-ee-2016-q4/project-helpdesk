@@ -27,14 +27,14 @@ public class StatisticsView {
     private RpcLoginStatisticsService rpcLoginStatisticsService;
 
     private List<LocalDateTime> allLoginDates;
-    public int allSize = allLoginDates.size();
+    private int allLoginsize;
 
     @PostConstruct
     public void createLoginDatas() {
         try {
             final String userName = getUser().getUsername();
             allLoginDates = rpcLoginStatisticsService.getAllLoginsOf(userName);
-
+            allLoginsize = allLoginDates.size();
         } catch (LoginDataRetrievalException e) {
             log.error("Couldn't retrieve the login dates for user {}!", getUser().getUsername(), e);
         }
