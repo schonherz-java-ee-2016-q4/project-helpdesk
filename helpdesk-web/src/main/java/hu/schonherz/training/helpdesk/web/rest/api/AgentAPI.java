@@ -13,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDateTime;
 
 @Path("/agents")
 @Stateless(mappedName = "agentApi")
@@ -38,6 +39,7 @@ public class AgentAPI {
             .clientId(clientDetailsRequest.getClientId())
             .clientEmail(clientDetailsRequest.getClientEmail())
             .closed(false)
+                .begindate(LocalDateTime.now())
             .build();
 
         ConversationResponse conversationResponse = new ConversationResponse();

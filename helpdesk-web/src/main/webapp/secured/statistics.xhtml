@@ -42,7 +42,7 @@
                                 <h2 class="date">Februray 4th</h2>
                                 <h4 class="year pull-right"></h4>
                             </div>
-                            <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left"></span>
+                            <span data-toggle="datepicker" onclick="" data-type="subtract" class="fa fa-angle-left"></span>
                             <span data-toggle="datepicker" data-type="add" class="fa fa-angle-right"></span>
                             <div class="input-group input-datepicker">
                                 <input type="text" class="form-control" data-format="YYYY/MM/DD"
@@ -77,7 +77,7 @@
                         <p>#{msg.issue_rate}</p>
                     </div>
                     <div id="menu2" class="tab-pane fade">
-                        <div class="date-picker" data-date="#{statisticsView.today}" data-keyboard="true">
+                        <div id="datepicker" class="date-picker" data-date="#{statisticsView.today}" data-keyboard="true">
                             <div class="date-container pull-left">
                                 <h4 class="weekday">Monday</h4>
                                 <h2 class="date"></h2>

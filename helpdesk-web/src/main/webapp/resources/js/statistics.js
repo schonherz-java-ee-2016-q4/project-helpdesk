@@ -21,7 +21,7 @@ $(document).ready(function() {
             $datepicker.find('.date-container > .weekday').text(cur_date.format(format.weekday));
             $datepicker.find('.date-container > .date').text(cur_date.format(format.date));
             $datepicker.find('.date-container > .year').text(cur_date.format(format.year));
-            $datepicker.data('date', cur_date.format('YYYY/MM/DD'));
+            $datepicker.attr('data-date', cur_date.format('YYYY/MM/DD'));
             $datepicker.find('.input-datepicker').removeClass('show-input');
         }
 
@@ -46,7 +46,7 @@ $(document).ready(function() {
         $datepicker.on('click', '[data-toggle="datepicker"]', function(event) {
             event.preventDefault();
 
-            var cur_date = moment($(this).closest('.date-picker').data('date'), "YYYY/MM/DD"),
+            var cur_date = moment($(this).closest('.date-picker').attr('data-date'), "YYYY/MM/DD"),
                 date_type = ($datepicker.data('type') ? $datepicker.data('type') : "days"),
                 type = ($(this).data('type') ? $(this).data('type') : "add"),
                 amt = ($(this).data('amt') ? $(this).data('amt') : 1);
