@@ -5,6 +5,7 @@ import hu.schonherz.training.helpdesk.service.api.service.MessageService;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationStatusVO;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
+import hu.schonherz.training.helpdesk.web.managedbeans.session.LanguageBean;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @Slf4j
 @Data
@@ -35,6 +38,9 @@ public class ChatView {
 
     @EJB
     private ConversationService conversationService;
+
+    @ManagedProperty(value = "#{languageBean}")
+    private LanguageBean localeManagerBean;
 
     private String content;
     private Boolean isAgent;
@@ -64,6 +70,10 @@ public class ChatView {
             return;
         }
 
+        if (isAgent && conversationVO.getStatus().equals(ConversationStatusVO.NEW)) {
+            conversationVO.setStatus(ConversationStatusVO.IN_PROGRESS);
+        }
+
         MessageVO message = new MessageVO();
         message.setContent(content);
         message.setAgentId(conversationVO.getAgentId());
@@ -77,6 +87,7 @@ public class ChatView {
 
     public Collection<MessageVO> getMessages() {
         ConversationVO conversationVO = conversationService.findById(conversationId);
+        ResourceBundle localMessages = localeManagerBean.getLocaleMessages();
 
         if (conversationVO.getStatus().equals(ConversationStatusVO.CLOSED) && !isAgent) {
             clientRedirect();
@@ -86,6 +97,22 @@ public class ChatView {
         messageList = (List<MessageVO>) messageService.findMessages(
                 conversationVO.getAgentId(),
                 conversationVO.getClientId());
+
+        log.error(messageList.toString());
+
+        if (messageList == null || messageList.isEmpty()) {
+            MessageVO firstMessage = new MessageVO();
+            firstMessage.setNextMember("agent");
+            firstMessage.setSentBy("agent");
+            firstMessage.setAgentId(conversationVO.getAgentId());
+            firstMessage.setClientId(conversationVO.getClientId());
+            firstMessage.setContent(localMessages.getString("wait_for_agent"));
+            firstMessage.setConv(conversationVO);
+            firstMessage.setSendDate(LocalDateTime.now());
+            messageService.save(firstMessage);
+            messageList.add(firstMessage);
+            log.error(firstMessage.toString());
+        }
 
         MessageVO prev = messageList.get(0);
 
@@ -110,10 +137,6 @@ public class ChatView {
         }
 
         return messageList;
-    }
-
-    public boolean isAvailableMessage() {
-        return !(messageList == null || messageList.isEmpty());
     }
 
     public void updateConversation() {

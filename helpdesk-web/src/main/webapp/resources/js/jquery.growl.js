@@ -167,7 +167,7 @@
         Growl.prototype.waitAndDismiss = function () {
             var $growl;
             $growl = this.$growl();
-            return this.dismiss.queue(this.remove);
+            return this.queue(this.dismiss).queue(this.remove);
         };
 
         Growl.prototype.present = function (callback) {
