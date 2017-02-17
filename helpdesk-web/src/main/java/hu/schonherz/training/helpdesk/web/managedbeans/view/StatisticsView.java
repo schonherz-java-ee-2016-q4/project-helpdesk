@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
@@ -27,17 +28,51 @@ public class StatisticsView {
     private RpcLoginStatisticsService rpcLoginStatisticsService;
 
     private List<LocalDateTime> allLoginDates;
-    private int allLoginsize;
+    private List<LocalDate> allDate;
+    LocalDate today = LocalDate.now();
+    private int dayLoginSize = 0;
+    private int weekLoginSize = 0;
+    private int monthLoginSize = 0;
 
     @PostConstruct
     public void createLoginDatas() {
         try {
             final String userName = getUser().getUsername();
             allLoginDates = rpcLoginStatisticsService.getAllLoginsOf(userName);
-            allLoginsize = allLoginDates.size();
+
+
         } catch (LoginDataRetrievalException e) {
             log.error("Couldn't retrieve the login dates for user {}!", getUser().getUsername(), e);
         }
+    }
+
+    public int getPastDayStats() {
+        LocalDateTime now = LocalDateTime.now();
+        for (int i = 0; i < allLoginDates.size(); i++) {
+            if (allLoginDates.get(i).toLocalDate().equals(now.toLocalDate())) {
+                dayLoginSize++;
+            }
+        }
+        return dayLoginSize;
+    }
+
+    public int getPastWeekStats(){
+        LocalDateTime now = LocalDateTime.now().minusDays(7);
+        for (int i = 0; i < allLoginDates.size(); i++) {
+            if (allLoginDates.get(i).toLocalDate().isAfter(now.toLocalDate())) {
+                weekLoginSize++;
+            }
+        }
+        return weekLoginSize;
+    }
+    public int getPastMonthStats(){
+        LocalDateTime now = LocalDateTime.now().minusDays(30);
+        for (int i = 0; i < allLoginDates.size(); i++) {
+            if (allLoginDates.get(i).toLocalDate().isAfter(now.toLocalDate())) {
+                monthLoginSize++;
+            }
+        }
+        return monthLoginSize;
     }
 
     public List<LocalDateTime> getThisMonthLogins() {

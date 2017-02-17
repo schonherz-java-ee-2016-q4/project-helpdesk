@@ -36,11 +36,11 @@
                         <h3>Jack Murray</h3>
                     </div>
                     <div id="menu1" class="tab-pane fade">
-                        <div class="date-picker" data-date="2014/09/02" data-keyboard="true">
+                        <div class="date-picker" data-date="#{statisticsView.today}" data-keyboard="true">
                             <div class="date-container pull-left">
                                 <h4 class="weekday">Monday</h4>
                                 <h2 class="date">Februray 4th</h2>
-                                <h4 class="year pull-right">2014</h4>
+                                <h4 class="year pull-right"></h4>
                             </div>
                             <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left"></span>
                             <span data-toggle="datepicker" data-type="add" class="fa fa-angle-right"></span>
@@ -57,7 +57,7 @@
 
                             <tr>
                                 <td>#{msg.num_of_logins}</td>
-                                <td>#{statisticsView.allLoginsize}</td>
+                                <td>#{statisticsView.pastDayStats}</td>
                             </tr>
                             <tr>
                                 <td>#{msg.num_of_conversations}</td>
@@ -77,10 +77,10 @@
                         <p>#{msg.issue_rate}</p>
                     </div>
                     <div id="menu2" class="tab-pane fade">
-                        <div class="date-picker">
+                        <div class="date-picker" data-date="#{statisticsView.today}" data-keyboard="true">
                             <div class="date-container pull-left">
                                 <h4 class="weekday">Monday</h4>
-                                <h2 class="date">Februray 4th</h2>
+                                <h2 class="date"></h2>
                                 <h4 class="year pull-right">2014</h4>
                             </div>
                             <span data-toggle="datepicker" data-type="subtract" data-amt="7" class="fa fa-angle-left pull-left"></span>
@@ -89,7 +89,7 @@
                         <table class="table responsive" style="text-align: left">
                             <tr>
                                 <td>#{msg.num_of_logins}</td>
-                                <td>200</td>
+                                <td>#{statisticsView.pastWeekStats}</td>
                             </tr>
                             <tr>
                                 <td>#{msg.num_of_conversations}</td>
@@ -109,7 +109,7 @@
                         <p>#{msg.issue_rate}</p>
                     </div>
                     <div id="menu3" class="tab-pane fade">
-                        <div class="date-picker" data-type="months">
+                        <div class="date-picker" data-date="#{statisticsView.today}" data-keyboard="true" data-type="months">
                             <div class="date-container pull-left">
                                 <h4 class="weekday">Monday</h4>
                                 <h2 class="date">Februray 4th</h2>
@@ -121,7 +121,7 @@
                         <table class="table responsive" style="text-align: left">
                             <tr>
                                 <td>#{msg.num_of_logins}</td>
-                                <td><h:outputText value="#{statisticsView.allLoginDates}"></h:outputText> </td>
+                                <td>#{statisticsView.pastMonthStats} </td>
                             </tr>
                             <tr>
                                 <td>#{msg.num_of_conversations}</td>
