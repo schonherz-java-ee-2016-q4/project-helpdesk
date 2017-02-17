@@ -26,10 +26,6 @@ public class ChatPopupView {
         user = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public AgentUser getUser() {
-        return user;
-    }
-
     public ConversationVO getOpenConversation() {
         List<ConversationVO> conversationList = (List<ConversationVO>) conversationService.findNotClosedConversations(user.getProfileDetails()
                 .getId());

@@ -8,11 +8,23 @@
 
     <ui:define name="customHead">
         <h:outputStylesheet library="css" name="activity.css"/>
-        <h:outputScript name="primeui.min.js" library="js"/>
+        <h:outputStylesheet library="css" name="jquery.growl.css"/>
+    </ui:define>
+
+    <ui:define name="customScripts">
+        <!--<h:outputScript name="primeui.min.js" library="js"/>-->
+        <h:outputScript library="js" name="jquery.growl.js"/>
         <h:outputScript name="showPopUp.js" library="js"/>
     </ui:define>
 
     <ui:define name="customBody">
+        <!-- poll open conversation for the growl -->
+        <h:form>
+            <p:poll interval="1" update="conversationState" oncomplete="showGrowl()"/>
+        </h:form>
+
+        <!--store the value for the criterion of the growl-->
+        <h:inputHidden id="conversationState" value="#{chatPopupView.openConversation.status}"/>
 
         <div class="container">
 

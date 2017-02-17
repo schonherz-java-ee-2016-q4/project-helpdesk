@@ -6,14 +6,28 @@
 
     <ui:define name="customHead">
         <h:outputStylesheet library="css" name="profile.css"/>
-        <h:outputScript name="primeui.min.js" library="js"/>
+        <h:outputStylesheet library="css" name="jquery.growl.css"/>
+    </ui:define>
+
+    <ui:define name="customScripts">
+        <!--<h:outputScript name="primeui.min.js" library="js"/>-->
+        <h:outputScript library="js" name="jquery.growl.js"/>
         <h:outputScript name="showPopUp.js" library="js"/>
     </ui:define>
 
     <ui:define name="customTitle">Profile</ui:define>
 
     <ui:define name="customBody">
+        <!-- poll open conversation for the growl -->
+        <h:form>
+            <p:poll interval="1" update="conversationState" oncomplete="showGrowl()"/>
+        </h:form>
+
+        <!--store the value for the criterion of the growl-->
+        <h:inputHidden id="conversationState" value="#{chatPopupView.openConversation.status}"/>
+
         <div class="container">
+
             <h2 style="text-align: center">#{msg.agent}#{msg.profile}</h2>
 
             <!-- Agent profile -->
@@ -58,11 +72,7 @@
                    class="btn btn-info"
                    role="button">#{msg.see_your_activity}</a>
             </div>
-            <div id="default"/>
-            <h:form>
-                <p:poll delay="1000" listener="#{profileView.getOpenConversation}"
-                        oncomplete="showGrowl()"/>
-            </h:form>
+
         </div>
     </ui:define>
 

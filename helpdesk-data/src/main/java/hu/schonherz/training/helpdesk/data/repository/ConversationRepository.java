@@ -12,6 +12,6 @@ import java.util.Collection;
 public interface ConversationRepository extends JpaRepository<ConversationEntity, Long> {
     ConversationEntity findById(Long id);
 
-    @Query("Select c from ConversationEntity c where (c.agentId=:agent and not c.status=:CLOSED)")
+    @Query("Select c from ConversationEntity c where (c.agentId=:agent and  c.status<>'CLOSED')")
     Collection<ConversationEntity> findNotClosedConversations(@Param("agent") Long agentId);
 }
