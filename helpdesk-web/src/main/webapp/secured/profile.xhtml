@@ -23,8 +23,10 @@
             <p:poll interval="1" update="conversationState" oncomplete="showGrowl()"/>
         </h:form>
 
-        <!--store the value for the criterion of the growl-->
-        <h:inputHidden id="conversationState" value="#{chatPopupView.openConversation.status}"/>
+        <!--store information about the not closed conversation-->
+        <h:inputHidden id="conversationState"
+                       value="#{chatPopupView.openConversation.status} #{chatPopupView.openConversation.id}"/>
+
 
         <div class="container">
 

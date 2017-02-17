@@ -10,7 +10,6 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
-import java.util.Collection;
 
 @Stateless(mappedName = "ConversationService")
 @Interceptors(SpringBeanAutowiringInterceptor.class)
@@ -30,8 +29,8 @@ public class ConversationBean implements ConversationService {
     }
 
     @Override
-    public Collection<ConversationVO> findNotClosedConversations(final Long agentId) {
-        return ConversationMapper.toVO(conversationRepository.findNotClosedConversations(agentId));
+    public ConversationVO findNotClosedConversation(final Long agentId) {
+        return ConversationMapper.toVO(conversationRepository.findNotClosedConversation(agentId));
     }
 
 }

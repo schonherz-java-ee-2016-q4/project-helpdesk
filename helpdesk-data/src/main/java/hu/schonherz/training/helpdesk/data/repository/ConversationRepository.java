@@ -6,12 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-
 @Repository
 public interface ConversationRepository extends JpaRepository<ConversationEntity, Long> {
     ConversationEntity findById(Long id);
 
     @Query("Select c from ConversationEntity c where (c.agentId=:agent and  c.status<>'CLOSED')")
-    Collection<ConversationEntity> findNotClosedConversations(@Param("agent") Long agentId);
+    ConversationEntity findNotClosedConversation(@Param("agent") Long agentId);
 }
