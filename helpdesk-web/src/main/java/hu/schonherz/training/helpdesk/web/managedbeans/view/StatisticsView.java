@@ -4,6 +4,7 @@ import hu.schonherz.project.admin.service.api.rpc.LoginDataRetrievalException;
 import hu.schonherz.project.admin.service.api.rpc.RpcLoginStatisticsService;
 import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -17,20 +18,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@ManagedBean(name = "profileView")
+@ManagedBean(name = "statisticsView")
 @ViewScoped
 @Data
+@NoArgsConstructor
 public class StatisticsView {
     @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcLoginStatisticsBean")
     private RpcLoginStatisticsService rpcLoginStatisticsService;
 
     private List<LocalDateTime> allLoginDates;
+    public int allSize = allLoginDates.size();
 
     @PostConstruct
     public void createLoginDatas() {
         try {
             final String userName = getUser().getUsername();
             allLoginDates = rpcLoginStatisticsService.getAllLoginsOf(userName);
+
         } catch (LoginDataRetrievalException e) {
             log.error("Couldn't retrieve the login dates for user {}!", getUser().getUsername(), e);
         }
