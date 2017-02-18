@@ -108,8 +108,8 @@ public class ChatView {
 
         if (messageList == null || messageList.isEmpty()) {
             MessageVO firstMessage = new MessageVO();
-            firstMessage.setNextMember("SENT_BY_AGENT");
-            firstMessage.setSentBy("SENT_BY_AGENT");
+            firstMessage.setNextMember(SENT_BY_AGENT);
+            firstMessage.setSentBy(SENT_BY_AGENT);
             firstMessage.setAgentId(conversationVO.getAgentId());
             firstMessage.setClientId(conversationVO.getClientId());
             firstMessage.setContent(localeManagerBean.localize("wait_for_agent"));
