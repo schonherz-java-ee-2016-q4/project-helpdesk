@@ -7,7 +7,7 @@
 }
 
 .navigationClass {
-    background-color: rgba(178, 235, 242, 0.8);
+    background-color: rgba(178, 235, 242, 0.7);
 }
 
 .inputFocuslossClass {
@@ -19,7 +19,7 @@
 }
 
 .buttonClickClass:hover {
-    background-color: rgba(255, 249, 196, 1.0);
+    background-color: rgba(255, 245, 157, 0.8);
 }
 
 .navigationClass:hover {

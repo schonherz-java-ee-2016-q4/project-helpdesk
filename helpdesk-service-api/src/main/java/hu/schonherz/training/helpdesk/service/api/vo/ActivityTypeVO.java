@@ -8,7 +8,7 @@ public enum ActivityTypeVO {
 
     private final String text;
 
-    ActivityTypeVO(String text) {
+    ActivityTypeVO(final String text) {
         this.text = text;
     }
 
