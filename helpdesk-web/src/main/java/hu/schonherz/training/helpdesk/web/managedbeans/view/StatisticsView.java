@@ -2,6 +2,8 @@ package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
 import hu.schonherz.project.admin.service.api.rpc.LoginDataRetrievalException;
 import hu.schonherz.project.admin.service.api.rpc.RpcLoginStatisticsService;
+import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
+import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,26 +29,32 @@ public class StatisticsView {
     @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcLoginStatisticsBean")
     private RpcLoginStatisticsService rpcLoginStatisticsService;
 
+    @EJB
+    private ConversationService conversationService;
     private List<LocalDateTime> allLoginDates;
+    private List<ConversationVO> allConversations;
     private List<LocalDate> allDate;
     LocalDate today = LocalDate.now();
     private int dayLoginSize = 0;
     private int weekLoginSize = 0;
     private int monthLoginSize = 0;
+    private int dayConvsSize = 0;
+    private int monthConvsSize =0;
+    private int weekConvsSize = 0;
 
     @PostConstruct
     public void createLoginDatas() {
         try {
             final String userName = getUser().getUsername();
             allLoginDates = rpcLoginStatisticsService.getAllLoginsOf(userName);
-
-
+            final Long agentId = getUser().getProfileDetails().getId();
+            allConversations = conversationService.findByAgentId(agentId.intValue());
         } catch (LoginDataRetrievalException e) {
             log.error("Couldn't retrieve the login dates for user {}!", getUser().getUsername(), e);
         }
     }
 
-    public int getPastDayStats() {
+    public int getPastDayLogin() {
         LocalDateTime now = LocalDateTime.now();
         for (int i = 0; i < allLoginDates.size(); i++) {
             if (allLoginDates.get(i).toLocalDate().equals(now.toLocalDate())) {
@@ -56,7 +64,7 @@ public class StatisticsView {
         return dayLoginSize;
     }
 
-    public int getPastWeekStats(){
+    public int getPastWeekLogin() {
         LocalDateTime now = LocalDateTime.now().minusDays(7);
         for (int i = 0; i < allLoginDates.size(); i++) {
             if (allLoginDates.get(i).toLocalDate().isAfter(now.toLocalDate())) {
@@ -65,7 +73,8 @@ public class StatisticsView {
         }
         return weekLoginSize;
     }
-    public int getPastMonthStats(){
+
+    public int getPastMonthLogin() {
         LocalDateTime now = LocalDateTime.now().minusDays(30);
         for (int i = 0; i < allLoginDates.size(); i++) {
             if (allLoginDates.get(i).toLocalDate().isAfter(now.toLocalDate())) {
@@ -75,6 +84,35 @@ public class StatisticsView {
         return monthLoginSize;
     }
 
+    public int getPastDayConvs() {
+        LocalDateTime now = LocalDateTime.now();
+        for (int i = 0; i < allConversations.size(); i++) {
+            if (allConversations.get(i).getBegindate().toLocalDate().equals(now.toLocalDate())) {
+                dayConvsSize++;
+            }
+
+        }
+        return dayConvsSize;
+    }
+
+    public int getPastWeekConvs(){
+        LocalDateTime now = LocalDateTime.now().minusDays(7);
+        for(int i = 0; i < allConversations.size(); i++){
+            if(allConversations.get(i).getBegindate().toLocalDate().isAfter(now.toLocalDate())){
+                weekConvsSize++;
+            }
+        }
+        return weekConvsSize;
+    }
+    public int getPastMonthConvs(){
+        LocalDateTime now = LocalDateTime.now().minusDays(30);
+        for (int i = 0; i < allConversations.size(); i++){
+            if(allConversations.get(i).getBegindate().toLocalDate().isAfter(now.toLocalDate())){
+                monthConvsSize++;
+            }
+        }
+        return monthConvsSize;
+    }
     public List<LocalDateTime> getThisMonthLogins() {
         LocalDateTime actualDateTime = LocalDateTime.now();
         LocalDateTime firstDayOfThisMonth = actualDateTime.with(TemporalAdjusters.firstDayOfMonth())

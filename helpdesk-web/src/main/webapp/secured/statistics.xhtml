@@ -42,7 +42,8 @@
                                 <h2 class="date">Februray 4th</h2>
                                 <h4 class="year pull-right"></h4>
                             </div>
-                            <span data-toggle="datepicker" onclick="" data-type="subtract" class="fa fa-angle-left"></span>
+                            <span data-toggle="datepicker" onclick="" data-type="subtract"
+                                  class="fa fa-angle-left"></span>
                             <span data-toggle="datepicker" data-type="add" class="fa fa-angle-right"></span>
                             <div class="input-group input-datepicker">
                                 <input type="text" class="form-control" data-format="YYYY/MM/DD"
@@ -57,11 +58,11 @@
 
                             <tr>
                                 <td>#{msg.num_of_logins}</td>
-                                <td>#{statisticsView.pastDayStats}</td>
+                                <td>#{statisticsView.pastDayLogin}</td>
                             </tr>
                             <tr>
                                 <td>#{msg.num_of_conversations}</td>
-                                <td>80</td>
+                                <td>#{statisticsView.pastDayConvs}</td>
                             </tr>
                             <tr>
                                 <td>#{msg.num_of_issues}</td>
@@ -69,31 +70,34 @@
                             </tr>
                         </table>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
-                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
+                            <div class="progress-bar progress-bar-success progress-bar-striped active"
+                                 role="progressbar"
+                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                             </div>
 
                         </div>
                         <p>#{msg.issue_rate}</p>
                     </div>
                     <div id="menu2" class="tab-pane fade">
-                        <div id="datepicker" class="date-picker" data-date="#{statisticsView.today}" data-keyboard="true">
+                        <div id="datepicker" class="date-picker" data-date="#{statisticsView.today}"
+                             data-keyboard="true">
                             <div class="date-container pull-left">
                                 <h4 class="weekday">Monday</h4>
                                 <h2 class="date"></h2>
                                 <h4 class="year pull-right">2014</h4>
                             </div>
-                            <span data-toggle="datepicker" data-type="subtract" data-amt="7" class="fa fa-angle-left pull-left"></span>
+                            <span data-toggle="datepicker" data-type="subtract" data-amt="7"
+                                  class="fa fa-angle-left pull-left"></span>
                             <span data-toggle="datepicker" data-amt="7" class="fa fa-angle-right pull-right"></span>
                         </div>
                         <table class="table responsive" style="text-align: left">
                             <tr>
                                 <td>#{msg.num_of_logins}</td>
-                                <td>#{statisticsView.pastWeekStats}</td>
+                                <td>#{statisticsView.pastWeekLogin}</td>
                             </tr>
                             <tr>
                                 <td>#{msg.num_of_conversations}</td>
-                                <td>80</td>
+                                <td>#{statisticsView.pastWeekConvs}</td>
                             </tr>
                             <tr>
                                 <td>#{msg.num_of_issues}</td>
@@ -101,31 +105,34 @@
                             </tr>
                         </table>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
-                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
+                            <div class="progress-bar progress-bar-success progress-bar-striped active"
+                                 role="progressbar"
+                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                             </div>
 
                         </div>
                         <p>#{msg.issue_rate}</p>
                     </div>
                     <div id="menu3" class="tab-pane fade">
-                        <div class="date-picker" data-date="#{statisticsView.today}" data-keyboard="true" data-type="months">
+                        <div class="date-picker" data-date="#{statisticsView.today}" data-keyboard="true"
+                             data-type="months">
                             <div class="date-container pull-left">
                                 <h4 class="weekday">Monday</h4>
                                 <h2 class="date">Februray 4th</h2>
                                 <h4 class="year pull-right">2014</h4>
                             </div>
-                            <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left pull-left"></span>
+                            <span data-toggle="datepicker" data-type="subtract"
+                                  class="fa fa-angle-left pull-left"></span>
                             <span data-toggle="datepicker" class="fa fa-angle-right pull-right"></span>
                         </div>
                         <table class="table responsive" style="text-align: left">
                             <tr>
                                 <td>#{msg.num_of_logins}</td>
-                                <td>#{statisticsView.pastMonthStats} </td>
+                                <td>#{statisticsView.pastMonthLogin} </td>
                             </tr>
                             <tr>
                                 <td>#{msg.num_of_conversations}</td>
-                                <td>80</td>
+                                <td>#{statisticsView.pastMonthConvs}</td>
                             </tr>
                             <tr>
                                 <td>#{msg.num_of_issues}</td>
@@ -133,8 +140,9 @@
                             </tr>
                         </table>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
-                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
+                            <div class="progress-bar progress-bar-success progress-bar-striped active"
+                                 role="progressbar"
+                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                             </div>
 
                         </div>

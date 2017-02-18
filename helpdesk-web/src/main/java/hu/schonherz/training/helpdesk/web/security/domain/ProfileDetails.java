@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProfileDetails {
+    private Long id;
     private String name;
     private String email;
     private String gender;
