@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui"
 >
 
-<f:view locale="#{languageView.locale}">
+<f:view locale="#{languageBean.locale}">
 
     <h:head>
 
@@ -55,13 +55,13 @@
                     <div class="navbar-button navbar-login"><ui:insert name="customLogin"></ui:insert></div>
                     <div>
                         <h:form>
-                            <p:commandButton action="#{languageView.setLocale('en')}" id="lang1" value=""
+                            <p:commandButton action="#{languageBean.setLanguage('en')}" id="lang1" value=""
                                              styleClass="locale-en" update="@all"/>
                         </h:form>
                     </div>
                     <div>
                         <h:form>
-                            <p:commandButton action="#{languageView.setLocale('hu')}" value=""
+                            <p:commandButton action="#{languageBean.setLanguage('hu')}" value=""
                                              styleClass="locale-hu" update="@all"/>
                         </h:form>
                     </div>

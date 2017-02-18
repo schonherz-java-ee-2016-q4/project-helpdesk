@@ -1,13 +1,15 @@
 package hu.schonherz.training.helpdesk.web.managedbeans.session;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+@Slf4j
 @ManagedBean(name = "languageBean")
 @SessionScoped
 public class LanguageBean {
@@ -22,6 +24,7 @@ public class LanguageBean {
     }
 
     public void setLanguage(final String language) {
+        Locale facesLocale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
         if (!locale.getLanguage().equals(language)) {
             locale = new Locale(language);
             updateLocaleMessages();
@@ -37,26 +40,8 @@ public class LanguageBean {
         return locale;
     }
 
-    public ResourceBundle getLocaleMessages() {
-        return localeMessages;
-    }
-
-    public String localize(String key, String... params) {
-        String pattern = getLocalizedPattern(key);
-        return format(pattern, params);
-    }
-
-    private String getLocalizedPattern(String key) {
-        return getLocaleMessages().getString(key);
-    }
-
-    private String format(String pattern, String... params) {
-        MessageFormat formatter = new MessageFormat(pattern, getLocale());
-        return formatter.format(params);
-    }
-
-    public void setLocale(final String locale) {
-        this.locale = new Locale(locale);
+    public String localize(final String key) {
+        return localeMessages.getString(key);
     }
 
     public String changeLanguage() {

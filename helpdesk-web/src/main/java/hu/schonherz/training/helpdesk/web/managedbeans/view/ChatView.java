@@ -22,7 +22,6 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-import java.util.ResourceBundle;
 
 @Slf4j
 @Data
@@ -87,7 +86,6 @@ public class ChatView {
 
     public Collection<MessageVO> getMessages() {
         ConversationVO conversationVO = conversationService.findById(conversationId);
-        ResourceBundle localMessages = localeManagerBean.getLocaleMessages();
 
         if (conversationVO.getStatus().equals(ConversationStatusVO.CLOSED) && !isAgent) {
             clientRedirect();
@@ -106,7 +104,7 @@ public class ChatView {
             firstMessage.setSentBy("agent");
             firstMessage.setAgentId(conversationVO.getAgentId());
             firstMessage.setClientId(conversationVO.getClientId());
-            firstMessage.setContent(localMessages.getString("wait_for_agent"));
+            firstMessage.setContent(localeManagerBean.localize("wait_for_agent"));
             firstMessage.setConv(conversationVO);
             firstMessage.setSendDate(LocalDateTime.now());
             messageService.save(firstMessage);
