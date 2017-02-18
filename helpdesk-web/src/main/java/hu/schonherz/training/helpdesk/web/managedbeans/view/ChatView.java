@@ -6,9 +6,11 @@ import hu.schonherz.training.helpdesk.service.api.vo.ConversationStatusVO;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
 import hu.schonherz.training.helpdesk.web.managedbeans.session.LanguageBean;
+import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -41,6 +43,7 @@ public class ChatView {
     @ManagedProperty(value = "#{languageBean}")
     private LanguageBean localeManagerBean;
 
+    private AgentUser user;
     private String content;
     private Boolean isAgent;
     private List<MessageVO> messageList;
@@ -52,7 +55,12 @@ public class ChatView {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         Principal principal = request.getUserPrincipal();
+        log.error(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         isAgent = principal != null;
+
+        if (isAgent) {
+            user = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
 
         if (request.getParameterMap().containsKey("id")) {
             conversationId = Long.parseLong(request.getParameterMap().get("id")[0]);
@@ -100,8 +108,8 @@ public class ChatView {
 
         if (messageList == null || messageList.isEmpty()) {
             MessageVO firstMessage = new MessageVO();
-            firstMessage.setNextMember("agent");
-            firstMessage.setSentBy("agent");
+            firstMessage.setNextMember("SENT_BY_AGENT");
+            firstMessage.setSentBy("SENT_BY_AGENT");
             firstMessage.setAgentId(conversationVO.getAgentId());
             firstMessage.setClientId(conversationVO.getClientId());
             firstMessage.setContent(localeManagerBean.localize("wait_for_agent"));
@@ -144,6 +152,10 @@ public class ChatView {
 
     public boolean isThereId() {
         return !(conversationVO == null || conversationVO.getStatus().equals(ConversationStatusVO.CLOSED));
+    }
+
+    public boolean isOwnConversation() {
+        return isAgent ? conversationVO.getAgentId().equals(user.getProfileDetails().getId()) : true;
     }
 
     public void agentRedirect() {

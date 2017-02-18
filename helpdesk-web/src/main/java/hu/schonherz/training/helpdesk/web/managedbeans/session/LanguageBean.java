@@ -24,7 +24,6 @@ public class LanguageBean {
     }
 
     public void setLanguage(final String language) {
-        Locale facesLocale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
         if (!locale.getLanguage().equals(language)) {
             locale = new Locale(language);
             updateLocaleMessages();

@@ -1,5 +1,5 @@
 INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(55,'example.mail@example.com','46m9z','CLOSED');
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(10,'example.mail@example.com',3333,'CLOSED');
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(10,'example.mail@example.com',3333,'NEW');
 INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(2,'example.mail@example.com',4444,'IN_PROGRESS');
 INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(11,'example.mail@example.com',9999,'CLOSED');
 INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(40,'example.mail@example.com','ok45','CLOSED');
