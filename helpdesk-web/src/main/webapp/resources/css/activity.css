@@ -3,17 +3,33 @@
 }
 
 .buttonClickClass {
-    background-color: #FFD54F;
+    background-color: rgba(255, 249, 196, 0.8);
 }
 
 .navigationClass {
-    background-color: #4DD0E1;
+    background-color: rgba(178, 235, 242, 0.8);
 }
 
 .inputFocuslossClass {
-    background-color: #ef5350;
+    background-color: rgba(255, 205, 210, 0.8);
 }
 
 .formSubmitClass {
-    background-color: #FF8A65;
+    background-color: rgba(255, 204, 188, 0.8);
+}
+
+.buttonClickClass:hover {
+    background-color: rgba(255, 249, 196, 1.0);
+}
+
+.navigationClass:hover {
+    background-color: rgba(178, 235, 242, 1.0);
+}
+
+.inputFocuslossClass:hover {
+    background-color: rgba(255, 205, 210, 1.0);
+}
+
+.formSubmitClass:hover {
+    background-color: rgba(255, 204, 188, 1.0);
 }

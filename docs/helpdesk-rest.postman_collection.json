@@ -2,30 +2,96 @@
 	"variables": [],
 	"info": {
 		"name": "helpdesk-rest",
-		"_postman_id": "8fb56208-c781-5a1c-6afb-4d1d83382a73",
+		"_postman_id": "c54c37cf-d74e-8f1d-3696-f1d2781e9620",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Add new clientactivity",
-			"request": {
-				"url": "http://localhost:8080/helpdesk/api/activities/",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"NAVIGATION\",\n  \"target\":\"www.testsite.com/messages\"\n}"
+			"name": "Add client activities",
+			"description": "",
+			"item": [
+				{
+					"name": "Add new clientactivity navigation",
+					"request": {
+						"url": "http://localhost:8080/helpdesk/api/activities/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"NAVIGATION\",\n  \"target\":\"www.testsite.com/messages\"\n}"
+						},
+						"description": "should respond with 202 Accepted"
+					},
+					"response": []
 				},
-				"description": "should respond with 202 Accepted"
-			},
-			"response": []
+				{
+					"name": "Add new clientactivity focusloss",
+					"request": {
+						"url": "http://localhost:8080/helpdesk/api/activities/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"INPUT_FOCUSLOSS\",\n  \"target\":\"www.testsite.com/messages\"\n}"
+						},
+						"description": "should respond with 202 Accepted"
+					},
+					"response": []
+				},
+				{
+					"name": "Add new clientactivity form submit",
+					"request": {
+						"url": "http://localhost:8080/helpdesk/api/activities/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"FORM_SUBMIT\",\n  \"target\":\"www.testsite.com/messages\"\n}"
+						},
+						"description": "should respond with 202 Accepted"
+					},
+					"response": []
+				},
+				{
+					"name": "Add new clientactivity button click",
+					"request": {
+						"url": "http://localhost:8080/helpdesk/api/activities/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientId\":\"200\",\n  \"type\":\"BUTTON_CLICK\",\n  \"target\":\"www.testsite.com/messages\"\n}"
+						},
+						"description": "should respond with 202 Accepted"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Get clientactivity",

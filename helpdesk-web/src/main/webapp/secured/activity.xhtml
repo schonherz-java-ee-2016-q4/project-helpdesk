@@ -17,8 +17,8 @@
             <!-- User activity details -->
             <h:form id="activityTableEntries">
                 <div class="activityDetails">
-                    <!--<p:poll async="true" delay="2500" update="activityTableEntries"></p:poll>-->
-                    <table class="table table-striped table-hover">
+                    <p:poll async="true" delay="2500" update="activityTableEntries"></p:poll>
+                    <table class="table table-responsive">
                         <thead>
                         <tr>
                             <th>#{msg.timestamp}</th>
@@ -28,36 +28,12 @@
                         </thead>
                         <tbody>
                         <ui:repeat value='#{clientActivityView.refreshActivities("200")}' var="clientActivity">
-                            <tr>
+                            <tr class="#{clientActivity.type.getText()}Class">
                                 <td>#{clientActivity.createdAt}</td>
 
-                                <c:choose>
-                                    <c:when test="#{clientActivity.type} == 'BUTTON_CLICK'">
-                                        <td class="buttonClickClass">
-                                            #{clientActivity.type}
-                                        </td>
-                                    </c:when>
-                                    <c:when test="#{clientActivity.type} == 'NAVIGATION'">
-                                        <td class="navigationClass">
-                                            #{clientActivity.type}
-                                        </td>
-                                    </c:when>
-                                    <c:when test="#{clientActivity.type} == 'INPUT_FOCUSLOSS'">
-                                        <td class="inputFocuslossClass">
-                                            #{clientActivity.type}
-                                        </td>
-                                    </c:when>
-                                    <c:when test="#{clientActivity.type} == 'FORM_SUBMIT'">
-                                        <td class="formSubmitClass">
-                                            #{clientActivity.type}
-                                        </td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>
-                                            #{clientActivity.type}
-                                        </td>
-                                    </c:otherwise>
-                                </c:choose>
+                                <td>
+                                    #{clientActivity.type}
+                                </td>
 
                                 <td>#{clientActivity.target}</td>
                             </tr>
