@@ -8,5 +8,5 @@ import java.util.Collection;
 public interface MessageService {
     Long save(MessageVO message);
 
-    Collection<MessageVO> findMessages(int agentId, String clientId);
+    Collection<MessageVO> findMessages(Long agentId, String clientId);
 }

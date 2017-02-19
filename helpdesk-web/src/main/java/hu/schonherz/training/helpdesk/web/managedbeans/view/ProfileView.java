@@ -21,14 +21,17 @@ import java.util.stream.Collectors;
 @ViewScoped
 @Data
 public class ProfileView {
-
     @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcLoginStatisticsBean")
     private RpcLoginStatisticsService rpcLoginStatisticsService;
+
+    private AgentUser user;
 
     private List<LocalDateTime> allLoginDates;
 
     @PostConstruct
-    public void createLoginDatas() {
+    public void init() {
+        user = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         try {
             final String userName = getUser().getUsername();
             allLoginDates = rpcLoginStatisticsService.getAllLoginsOf(userName);
@@ -39,15 +42,19 @@ public class ProfileView {
 
     public List<LocalDateTime> getThisMonthLogins() {
         LocalDateTime actualDateTime = LocalDateTime.now();
-        LocalDateTime firstDayOfThisMonth = actualDateTime.with(TemporalAdjusters.firstDayOfMonth())
-            .withHour(0).withMinute(0).withSecond(0);
+        LocalDateTime firstDayOfThisMonth = actualDateTime
+                .with(TemporalAdjusters.firstDayOfMonth())
+                .withHour(0)
+                .withMinute(0)
+                .withSecond(0);
+
         return allLoginDates.stream()
-            .filter(e -> e.isAfter(firstDayOfThisMonth))
-            .collect(Collectors.toList());
+                .filter(e -> e.isAfter(firstDayOfThisMonth))
+                .collect(Collectors.toList());
     }
 
     public AgentUser getUser() {
-        return (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return user;
     }
 
 }

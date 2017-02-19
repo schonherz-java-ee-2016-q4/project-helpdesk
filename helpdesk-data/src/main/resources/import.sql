@@ -1,13 +1,13 @@
-INSERT INTO public.conversation(agentid,clientEmail,clientid,closed) VALUES(55,'example.mail@example.com','46m9z',false);
-INSERT INTO public.conversation(agentid,clientEmail,clientid,closed) VALUES(10,'example.mail@example.com',3333,false);
-INSERT INTO public.conversation(agentid,clientEmail,clientid,closed) VALUES(2,'example.mail@example.com',4444,false);
-INSERT INTO public.conversation(agentid,clientEmail,clientid,closed) VALUES(11,'example.mail@example.com',9999,false);
-INSERT INTO public.conversation(agentid,clientEmail,clientid,closed) VALUES(40,'example.mail@example.com','ok45',false);
-INSERT INTO public.conversation(agentid,clientEmail,clientid,closed) VALUES(16,'example.mail@example.com',6578,false);
-INSERT INTO public.conversation(agentid,clientEmail,clientid,closed) VALUES(20,'example.mail@example.com',9123,false);
-INSERT INTO public.conversation(agentid,clientEmail,clientid,closed) VALUES(25,'example.mail@example.com',7456,false);
-INSERT INTO public.conversation(agentid,clientEmail,clientid,closed) VALUES(28,'example.mail@example.com',1487,false);
-INSERT INTO public.conversation(agentid,clientEmail,clientid,closed) VALUES(30,'example.mail@example.com',8437,false);
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(55,'example.mail@example.com','46m9z','CLOSED');
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(10,'example.mail@example.com',3333,'NEW');
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(2,'example.mail@example.com',4444,'IN_PROGRESS');
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(11,'example.mail@example.com',9999,'CLOSED');
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(40,'example.mail@example.com','ok45','CLOSED');
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(16,'example.mail@example.com',6578,'CLOSED');
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(20,'example.mail@example.com',9123,'CLOSED');
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(25,'example.mail@example.com',7456,'CLOSED');
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(28,'example.mail@example.com',1487,'CLOSED');
+INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(30,'example.mail@example.com',8437,'CLOSED');
 
 INSERT INTO login(agentid,logindate) VALUES (1,to_timestamp('2012-01-03 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
 INSERT INTO login(agentid,logindate) VALUES (1,to_timestamp('2011-02-22 15:22:11.253','YYYY/MM/DD HH24:MI:SS.MS'));

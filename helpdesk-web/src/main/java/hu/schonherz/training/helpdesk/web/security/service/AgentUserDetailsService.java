@@ -39,26 +39,27 @@ public class AgentUserDetailsService implements UserDetailsService {
         }
 
         AgentUser user = AgentUser.builder()
-            .username(userData.getUsername())
-            .password(userData.getPassword())
-            .enabled(true)
-            .accountNonExpired(true)
-            .credentialsNonExpired(true)
-            .accountNonLocked(true)
-            .authorities(setAuthorities(userData.getUserRole()))
-            .profileDetails(
-                ProfileDetails.builder()
-                    .email(userData.getEmail())
-                    //dummy code starts here
-                    .name("Bruce Wayne")
-                    .gender("male")
-                    .company("Wayne Enterprises, Inc")
-                    .phone("+36-30-1112367")
-                    .picture("https://pbs.twimg.com/profile_images/649259478332784640/7Pjcfx_v_reasonably_small.jpg")
-                    //dummy code ends here
-                    .build()
-            )
-            .build();
+                .username(userData.getUsername())
+                .password(userData.getPassword())
+                .enabled(true)
+                .accountNonExpired(true)
+                .credentialsNonExpired(true)
+                .accountNonLocked(true)
+                .authorities(setAuthorities(userData.getUserRole()))
+                .profileDetails(
+                        ProfileDetails.builder()
+                                .email(userData.getEmail())
+                                .id(userData.getId())
+                                //dummy code starts here
+                                .name("Bruce Wayne")
+                                .gender("male")
+                                .company("Wayne Enterprises, Inc")
+                                .phone("+36-30-1112367")
+                                .picture("https://pbs.twimg.com/profile_images/649259478332784640/7Pjcfx_v_reasonably_small.jpg")
+                                //dummy code ends here
+                                .build()
+                )
+                .build();
 
         log.info("Helpdesk agent with username {} successfully authenticated.", username);
 

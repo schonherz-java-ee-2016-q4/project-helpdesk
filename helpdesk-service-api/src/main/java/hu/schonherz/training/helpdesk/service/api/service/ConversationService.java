@@ -8,5 +8,5 @@ public interface ConversationService {
 
     ConversationVO findById(Long id);
 
-
+    ConversationVO findNotClosedConversation(Long agentId);
 }

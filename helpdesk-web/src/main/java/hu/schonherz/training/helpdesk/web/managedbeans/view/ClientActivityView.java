@@ -23,4 +23,5 @@ public class ClientActivityView {
         return clientActivityService.findByTargetContainingOrderByCreatedAtDesc(searchString);
     }
 
+
 }
