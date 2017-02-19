@@ -14,7 +14,7 @@
         </c:if>
     </ui:define>
 
-    <ui:define name="customLink3">
+    <ui:define name="customLogin">
         <c:choose>
             <c:when test="#{p:userPrincipal().name==null}">
                 <p:link href="/">#{msg.login}</p:link>
