@@ -34,13 +34,15 @@ public class StatisticsView {
     private List<LocalDateTime> allLoginDates;
     private List<ConversationVO> allConversations;
     private List<LocalDate> allDate;
-    LocalDate today = LocalDate.now();
+    private final LocalDateTime now = LocalDateTime.now();
     private int dayLoginSize = 0;
     private int weekLoginSize = 0;
     private int monthLoginSize = 0;
     private int dayConvsSize = 0;
-    private int monthConvsSize =0;
+    private int monthConvsSize = 0;
     private int weekConvsSize = 0;
+    private static final int WEEK = 7;
+    private static final int MONTH = 30;
 
     @PostConstruct
     public void createLoginDatas() {
@@ -55,7 +57,6 @@ public class StatisticsView {
     }
 
     public int getPastDayLogin() {
-        LocalDateTime now = LocalDateTime.now();
         for (int i = 0; i < allLoginDates.size(); i++) {
             if (allLoginDates.get(i).toLocalDate().equals(now.toLocalDate())) {
                 dayLoginSize++;
@@ -65,9 +66,8 @@ public class StatisticsView {
     }
 
     public int getPastWeekLogin() {
-        LocalDateTime now = LocalDateTime.now().minusDays(7);
         for (int i = 0; i < allLoginDates.size(); i++) {
-            if (allLoginDates.get(i).toLocalDate().isAfter(now.toLocalDate())) {
+            if (allLoginDates.get(i).toLocalDate().isAfter(now.minusDays(WEEK).toLocalDate())) {
                 weekLoginSize++;
             }
         }
@@ -75,9 +75,8 @@ public class StatisticsView {
     }
 
     public int getPastMonthLogin() {
-        LocalDateTime now = LocalDateTime.now().minusDays(30);
         for (int i = 0; i < allLoginDates.size(); i++) {
-            if (allLoginDates.get(i).toLocalDate().isAfter(now.toLocalDate())) {
+            if (allLoginDates.get(i).toLocalDate().isAfter(now.minusDays(MONTH).toLocalDate())) {
                 monthLoginSize++;
             }
         }
@@ -85,7 +84,6 @@ public class StatisticsView {
     }
 
     public int getPastDayConvs() {
-        LocalDateTime now = LocalDateTime.now();
         for (int i = 0; i < allConversations.size(); i++) {
             if (allConversations.get(i).getBegindate().toLocalDate().equals(now.toLocalDate())) {
                 dayConvsSize++;
@@ -95,19 +93,17 @@ public class StatisticsView {
         return dayConvsSize;
     }
 
-    public int getPastWeekConvs(){
-        LocalDateTime now = LocalDateTime.now().minusDays(7);
-        for(int i = 0; i < allConversations.size(); i++){
-            if(allConversations.get(i).getBegindate().toLocalDate().isAfter(now.toLocalDate())){
+    public int getPastWeekConvs() {
+        for (int i = 0; i < allConversations.size(); i++) {
+            if (allConversations.get(i).getBegindate().toLocalDate().isAfter(now.minusDays(WEEK).toLocalDate())) {
                 weekConvsSize++;
             }
         }
         return weekConvsSize;
     }
-    public int getPastMonthConvs(){
-        LocalDateTime now = LocalDateTime.now().minusDays(30);
-        for (int i = 0; i < allConversations.size(); i++){
-            if(allConversations.get(i).getBegindate().toLocalDate().isAfter(now.toLocalDate())){
+    public int getPastMonthConvs() {
+        for (int i = 0; i < allConversations.size(); i++) {
+            if (allConversations.get(i).getBegindate().toLocalDate().isAfter(now.minusDays(MONTH).toLocalDate())) {
                 monthConvsSize++;
             }
         }
