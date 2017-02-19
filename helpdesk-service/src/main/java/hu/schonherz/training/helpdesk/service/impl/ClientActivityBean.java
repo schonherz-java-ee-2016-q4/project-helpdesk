@@ -1,8 +1,11 @@
 package hu.schonherz.training.helpdesk.service.impl;
 
+import hu.schonherz.training.helpdesk.data.enums.ActivityType;
 import hu.schonherz.training.helpdesk.data.repository.ClientActivityRepository;
 import hu.schonherz.training.helpdesk.service.api.service.ClientActivityService;
+import hu.schonherz.training.helpdesk.service.api.vo.ActivityTypeVO;
 import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;
+import hu.schonherz.training.helpdesk.service.mapper.ActivityTypeMapper;
 import hu.schonherz.training.helpdesk.service.mapper.ClientActivityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
@@ -11,6 +14,7 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import java.util.Collection;
+import java.util.List;
 
 @Stateless(mappedName = "ClientActivityService")
 @Local(ClientActivityService.class)
@@ -43,6 +47,12 @@ public class ClientActivityBean implements ClientActivityService {
     @Override
     public Collection<ClientActivityVO> findByTargetContainingOrderByCreatedAtDesc(final String searchString) {
         return ClientActivityMapper.toVO(clientActivityRepository.findByTargetContainingOrderByCreatedAtDesc(searchString));
+    }
+
+    @Override
+    public List<ClientActivityVO> findByTypeOrderByCreatedAtDesc(final ActivityTypeVO activityType) {
+        ActivityType dataActivityType = ActivityTypeMapper.toEntity(activityType);
+        return ClientActivityMapper.toVO(clientActivityRepository.findByTypeOrderByCreatedAtDesc(dataActivityType));
     }
 
 }

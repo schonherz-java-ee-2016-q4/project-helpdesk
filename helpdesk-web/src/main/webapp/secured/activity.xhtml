@@ -11,29 +11,100 @@
     </ui:define>
 
     <ui:define name="customBody">
-        <div class="container">
-            <h2>#{msg.user_activity_details}</h2>
-            <h3>200</h3>
+        <div class="container" id="activityFilterNavbar">
+            <!-- Navbar -->
+            <p:importEnum type="hu.schonherz.training.helpdesk.service.api.vo.ActivityTypeVO" var="activityTypeEnum"
+                          allSuffix="ALL_ENUM_VALUES"/>
+            <nav  class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">#{msg.filter}</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    #{msg.filter_activity_types}<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        <p:commandLink
+                                                actionListener='#{clientActivityView.setActivityTypeVOWithString("BUTTON_CLICK")}'
+                                                update="activityTableEntries">
+                                            BUTTON_CLICK
+                                        </p:commandLink>
+                                    </li>
+                                    <li>
+                                        <p:commandLink
+                                                actionListener='#{clientActivityView.setActivityTypeVOWithString("NAVIGATION")}'
+                                                update="activityTableEntries">
+                                            NAVIGATION
+                                        </p:commandLink>
+                                    </li>
+                                    <li>
+                                        <p:commandLink
+                                                actionListener='#{clientActivityView.setActivityTypeVOWithString("INPUT_FOCUSLOSS")}'
+                                                update="activityTableEntries">
+                                            INPUT_FOCUSLOSS
+                                        </p:commandLink>
+                                    </li>
+
+                                    <li>
+                                        <p:commandLink
+                                                actionListener='#{clientActivityView.setActivityTypeVOWithString("FORM_SUBMIT")}'
+                                                update="activityTableEntries">
+                                            FORM_SUBMIT
+                                        </p:commandLink>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-left">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search"></input>
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+            <!-- /Navbar -->
             <!-- User activity details -->
             <h:form id="activityTableEntries">
                 <div class="activityDetails">
+
+
                     <p:poll async="true" delay="2500" update="activityTableEntries"></p:poll>
                     <table class="table table-responsive">
                         <thead>
                         <tr>
+                            <th>#{msg.client_id}</th>
                             <th>#{msg.timestamp}</th>
                             <th>#{msg.type}</th>
                             <th>#{msg.target}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <ui:repeat value='#{clientActivityView.refreshActivities("200")}' var="clientActivity">
+                        <ui:repeat value='#{clientActivityView.getActivitesByTarget()}' var="clientActivity">
                             <tr class="#{clientActivity.type.getText()}Class">
+                                <td>#{clientActivity.clientId}</td>
+
                                 <td>#{clientActivity.createdAt}</td>
 
-                                <td>
-                                    #{clientActivity.type}
-                                </td>
+                                <td>#{clientActivity.type}</td>
 
                                 <td>#{clientActivity.target}</td>
                             </tr>
