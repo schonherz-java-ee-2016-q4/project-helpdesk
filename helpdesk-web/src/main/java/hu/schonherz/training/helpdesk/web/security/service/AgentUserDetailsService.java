@@ -5,6 +5,7 @@ import hu.schonherz.project.admin.service.api.rpc.RpcLoginServiceRemote;
 import hu.schonherz.project.admin.service.api.vo.UserData;
 import hu.schonherz.project.admin.service.api.vo.UserRole;
 import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
+import hu.schonherz.training.helpdesk.web.security.domain.Gender;
 import hu.schonherz.training.helpdesk.web.security.domain.ProfileDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,6 +39,8 @@ public class AgentUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Invalid username " + username, e);
         }
 
+        Gender convertedGender = Gender.valueOf(userData.getGender().name());
+
         AgentUser user = AgentUser.builder()
             .username(userData.getUsername())
             .password(userData.getPassword())
@@ -50,11 +53,11 @@ public class AgentUserDetailsService implements UserDetailsService {
                 ProfileDetails.builder()
                     .email(userData.getEmail())
                     //dummy code starts here
-                    .name("Bruce Wayne")
-                    .gender("male")
-                    .company("Wayne Enterprises, Inc")
-                    .phone("+36-30-1112367")
-                    .picture("https://pbs.twimg.com/profile_images/649259478332784640/7Pjcfx_v_reasonably_small.jpg")
+                    .name(userData.getFullName())
+                    .gender(convertedGender)
+                    .company(userData.getCompanyName())
+                    .phone(userData.getPhone())
+                    .picture(userData.getPicUrl())
                     //dummy code ends here
                     .build()
             )

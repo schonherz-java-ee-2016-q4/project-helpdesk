@@ -15,7 +15,7 @@ public class ConversationVO {
 
     private String clientEmail;
 
-    private int agentId;
+    private Long agentId;
 
     private boolean closed;
 }
