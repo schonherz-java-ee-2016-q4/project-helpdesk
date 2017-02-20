@@ -57,16 +57,16 @@ public class StatisticsView {
     }
 
 
-
-        public int getPastDayLogin () {
-            LocalDateTime now = LocalDateTime.now();
-            for (int i = 0; i < allLoginDates.size(); i++) {
-                if (allLoginDates.get(i).toLocalDate().equals(now.toLocalDate())) {
-                    dayLoginSize++;
-                }
+    public int getPastDayLogin() {
+        LocalDateTime now = LocalDateTime.now();
+        dayLoginSize = 0;
+        for (int i = 0; i < allLoginDates.size(); i++) {
+            if (allLoginDates.get(i).toLocalDate().equals(now.toLocalDate())) {
+                dayLoginSize++;
             }
-            return dayLoginSize;
         }
+        return dayLoginSize;
+    }
 
     public int getPastWeekLogin() {
         LocalDateTime now = LocalDateTime.now().minusDays(WEEK);
