@@ -150,7 +150,7 @@
             <dependency>
                 <groupId>com.github.schonherz-java-ee-2016-q4</groupId>
                 <artifactId>project</artifactId>
-                <version>4965ad13747be5a4e0590912c322d95570fa3f41</version>
+                <version>f29b5f7a290ba3ecbe5fbbdf31ceaf8c734c59b6</version>
             </dependency>
 
             <dependency>
