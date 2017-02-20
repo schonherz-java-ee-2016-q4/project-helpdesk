@@ -16,13 +16,8 @@
     </ui:define>
 
     <ui:define name="customLink3">
-        <c:choose>
-            <c:when test="#{p:userPrincipal().name==null}">
-                <p:link href="/login">#{msg.login}</p:link>
-            </c:when>
-            <c:otherwise>
-                <p:link href="/logout">#{msg.logout}</p:link>
-            </c:otherwise>
-        </c:choose>
+        <c:if test="#{p:userPrincipal().name!=null}">
+            <p:link href="/logout">#{msg.logout}</p:link>
+        </c:if>
     </ui:define>
 </ui:composition>
