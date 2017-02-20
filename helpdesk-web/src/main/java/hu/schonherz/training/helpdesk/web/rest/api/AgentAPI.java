@@ -29,7 +29,8 @@ public class AgentAPI {
     @EJB
     private ConversationService conversationService;
 
-    @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcAgentAvailabilityServiceBean")
+    @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcAgentAvailabilityServiceBean!"
+        + "hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote")
     private RpcAgentAvailabilityServiceRemote rpcAgentAvailabilityServiceRemote;
 //
 //    @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcLoginServiceBean")
@@ -40,31 +41,36 @@ public class AgentAPI {
     public Response getAvailableAgent(final ClientDetailsRequest clientDetailsRequest) {
         //half dummy implementation for testing the functionality of the js plugin
 
+        ConversationResponse conversationResponse = new ConversationResponse();
+
         try {
             Long agentId = rpcAgentAvailabilityServiceRemote.getAvailableAgent(clientDetailsRequest.getSource());
+            log.info("Got agentid from the admin team: {}", agentId);
 //        try {
 //            rpcLoginServiceRemote.rpcLogin("bruce001");
 //            rpcLoginServiceRemote.rpcLogout("bruce001");
 //        } catch (FailedRpcLoginAttemptException | FailedRpcLogoutException e) {
 //            e.printStackTrace();
 //        }
-        ConversationVO conversationVO = ConversationVO.builder()
-            .agentId(agentId)
-            .clientId(clientDetailsRequest.getClientId())
-            .clientEmail(clientDetailsRequest.getClientEmail())
-            .closed(false)
-            .build();
+            ConversationVO conversationVO = ConversationVO.builder()
+                .agentId(agentId)
+                .clientId(clientDetailsRequest.getClientId())
+                .clientEmail(clientDetailsRequest.getClientEmail())
+                .closed(false)
+                .build();
 
-        ConversationResponse conversationResponse = new ConversationResponse();
-        log.info("Current conversationVO: {}", conversationVO);
+            log.info("Current conversationVO: {}", conversationVO);
 
-        conversationResponse.setConversationId(conversationService.save(conversationVO));
+            conversationResponse.setConversationId(conversationService.save(conversationVO));
 
-        return Response.accepted(conversationResponse).build();
+            return Response.accepted(conversationResponse).build();
         } catch (NoAvailableAgentFoundException e) {
-            log.error("No client is available right now for the requested domain domain.");
+            log.error("No client is available right now for the requested domain.", e);
+
+            conversationResponse.setConversationId(null);
+            return Response.status(Response.Status.BAD_REQUEST).entity(conversationResponse).build();
         }
-        return Response.status(Response.Status.BAD_REQUEST).build();
+
 
     }
 
