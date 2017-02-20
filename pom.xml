@@ -118,6 +118,7 @@
         <version.plugin.pmd>3.6</version.plugin.pmd>
 
         <admin.project.version>0.0.1-SNAPSHOT</admin.project.version>
+        <issue.tracker.version>0.0.1-SNAPSHOT</issue.tracker.version>
     </properties>
 
     <dependencyManagement>
@@ -127,6 +128,13 @@
                 <artifactId>admin-service-api</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
+
+            <dependency>
+                <groupId>hu.schonherz.javatraining</groupId>
+                <artifactId>issue-tracker-client-api</artifactId>
+                <version>${issue.tracker.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
