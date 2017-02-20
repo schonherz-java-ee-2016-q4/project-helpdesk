@@ -79,6 +79,12 @@
                 <ui:insert name="customLink4"></ui:insert>
                 <ui:insert name="customLink5"></ui:insert>
                 <ui:insert name="customLogin"></ui:insert>
+                <div class="local_in_smallnav_parent">
+                    <p:commandButton action="#{languageBean.setLanguage('en')}" id="lang1" value=""
+                                     styleClass="locale-en" update="@all"/>
+                    <p:commandButton action="#{languageBean.setLanguage('hu')}" value=""
+                                     styleClass="locale-hu" update="@all"/>
+                </div>
             </div>
 
             <ui:insert name="customBody" class="custom_body"></ui:insert>
