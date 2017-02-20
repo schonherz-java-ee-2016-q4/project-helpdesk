@@ -22,18 +22,22 @@
     background-color: rgba(255, 204, 188, 0.8);
 }
 
-.buttonClickClass:hover {
+.buttonClickClass:hover, .dropdown-menu>li>.buttonClickClass:focus, .dropdown-menu>li>.buttonClickClass:hover {
     background-color: rgba(255, 245, 157, 0.8);
+    background-image: none;
 }
 
-.navigationClass:hover {
+.navigationClass:hover, .dropdown-menu>li>.navigationClass:focus, .dropdown-menu>li>.navigationClass:hover {
     background-color: rgba(178, 235, 242, 1.0);
+    background-image: none;
 }
 
-.inputFocuslossClass:hover {
+.inputFocuslossClass:hover, .dropdown-menu>li>.inputFocuslossClass:focus, .dropdown-menu>li>.inputFocuslossClass:hover {
     background-color: rgba(255, 205, 210, 1.0);
+    background-image: none;
 }
 
-.formSubmitClass:hover {
+.formSubmitClass:hover, .dropdown-menu>li>.formSubmitClass:focus, .dropdown-menu>li>.formSubmitClass:hover {
     background-color: rgba(255, 204, 188, 1.0);
+    background-image: none;
 }

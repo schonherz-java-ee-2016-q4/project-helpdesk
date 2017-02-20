@@ -27,14 +27,8 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <p:commandButton id="deleteFiltersBtn"
-                                         styleClass="btn btn-danger"
-                                         action="#{clientActivityView.setFiltersCleared(true)}"
-                                         value="#{msg.delete_filters}"
-                                         update="activityTableEntries">
 
-                        </p:commandButton>
-                        <a class="navbar-brand" href="#">#{msg.filter}</a>
+                        <a class="navbar-brand">#{msg.filter}</a>
 
                     </div>
 
@@ -44,43 +38,52 @@
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">
-                                    #{msg.filter_activity_types}<span class="caret"></span>
+                                    #{msg.filter_activity_types}<span class="caret"/>
                                 </a>
                                 <ul class="dropdown-menu">
 
                                     <li>
-                                        <p:commandLink
-                                                actionListener='#{clientActivityView.setActivityTypeVOWithString("BUTTON_CLICK")}'
-                                                update="activityTableEntries">
+                                        <p:commandLink styleClass="buttonClickClass"
+                                                       actionListener='#{clientActivityView.setActivityTypeVOWithString("BUTTON_CLICK")}'
+                                                       update="activityTableEntries">
                                             BUTTON_CLICK
                                         </p:commandLink>
                                     </li>
                                     <li>
-                                        <p:commandLink
-                                                actionListener='#{clientActivityView.setActivityTypeVOWithString("NAVIGATION")}'
-                                                update="activityTableEntries">
+                                        <p:commandLink styleClass="navigationClass"
+                                                       actionListener='#{clientActivityView.setActivityTypeVOWithString("NAVIGATION")}'
+                                                       update="activityTableEntries">
                                             NAVIGATION
                                         </p:commandLink>
                                     </li>
                                     <li>
-                                        <p:commandLink
-                                                actionListener='#{clientActivityView.setActivityTypeVOWithString("INPUT_FOCUSLOSS")}'
-                                                update="activityTableEntries">
+                                        <p:commandLink styleClass="inputFocuslossClass"
+                                                       actionListener='#{clientActivityView.setActivityTypeVOWithString("INPUT_FOCUSLOSS")}'
+                                                       update="activityTableEntries">
                                             INPUT_FOCUSLOSS
                                         </p:commandLink>
                                     </li>
 
                                     <li>
-                                        <p:commandLink
-                                                actionListener='#{clientActivityView.setActivityTypeVOWithString("FORM_SUBMIT")}'
-                                                update="activityTableEntries">
+                                        <p:commandLink styleClass="formSubmitClass"
+                                                       actionListener='#{clientActivityView.setActivityTypeVOWithString("FORM_SUBMIT")}'
+                                                       update="activityTableEntries">
                                             FORM_SUBMIT
                                         </p:commandLink>
                                     </li>
 
+
                                 </ul>
                             </li>
                         </ul>
+                        <div class="navbar-right">
+                            <p:commandButton id="deleteFiltersBtn"
+                                             styleClass="navbar-btn btn-danger"
+                                             action="#{clientActivityView.setFiltersCleared(true)}"
+                                             value="#{msg.delete_filters}"
+                                             update="activityTableEntries">
+                            </p:commandButton>
+                        </div>
 
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
