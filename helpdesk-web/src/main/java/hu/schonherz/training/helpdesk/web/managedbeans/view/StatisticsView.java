@@ -43,6 +43,7 @@ public class StatisticsView {
     private static final int WEEK = 7;
     private static final int MONTH = 30;
 
+
     @PostConstruct
     public void createLoginDatas() {
         try {
@@ -55,41 +56,75 @@ public class StatisticsView {
         }
     }
 
-    public void getPastDayLogin() {
-        LocalDateTime now = LocalDateTime.now();
-        dayLoginSize = 0;
-        dayConvsSize = 0;
-        for (int i = 0; i < allLoginDates.size(); i++) {
-            if (allLoginDates.get(i).toLocalDate().equals(now.toLocalDate())) {
-                dayLoginSize++;
-                dayConvsSize++;
-            }
-        }
-    }
 
-    public void getPastWeekLogin() {
+
+        public int getPastDayLogin () {
+            LocalDateTime now = LocalDateTime.now();
+            for (int i = 0; i < allLoginDates.size(); i++) {
+                if (allLoginDates.get(i).toLocalDate().equals(now.toLocalDate())) {
+                    dayLoginSize++;
+                }
+            }
+            return dayLoginSize;
+        }
+
+    public int getPastWeekLogin() {
         LocalDateTime now = LocalDateTime.now().minusDays(WEEK);
         weekLoginSize = 0;
-        weekConvsSize = 0;
         for (int i = 0; i < allLoginDates.size(); i++) {
             if (allLoginDates.get(i).toLocalDate().isAfter(now.toLocalDate())) {
                 weekLoginSize++;
-                weekConvsSize++;
             }
         }
+        return weekLoginSize;
     }
 
-    public void getPastMonthLogin() {
+    public int getPastMonthLogin() {
         LocalDateTime now = LocalDateTime.now().minusDays(MONTH);
         monthLoginSize = 0;
-        monthConvsSize = 0;
         for (int i = 0; i < allLoginDates.size(); i++) {
             if (allLoginDates.get(i).toLocalDate().isAfter(now.toLocalDate())) {
                 monthLoginSize++;
+            }
+        }
+        return monthLoginSize;
+    }
+
+
+    public int getPastDayConvs() {
+        LocalDateTime now = LocalDateTime.now();
+        dayConvsSize = 0;
+        for (int i = 0; i < allConversations.size(); i++) {
+            if (allConversations.get(i).getBegindate().toLocalDate().equals(now.toLocalDate())) {
+                dayConvsSize++;
+            }
+
+        }
+        return dayConvsSize;
+    }
+
+    public int getPastWeekConvs() {
+        LocalDateTime now = LocalDateTime.now().minusDays(WEEK);
+        weekConvsSize = 0;
+        for (int i = 0; i < allConversations.size(); i++) {
+            if (allConversations.get(i).getBegindate().toLocalDate().isAfter(now.toLocalDate())) {
+                weekConvsSize++;
+            }
+        }
+        return weekConvsSize;
+    }
+
+    public int getPastMonthConvs() {
+        LocalDateTime now = LocalDateTime.now().minusDays(30);
+        monthConvsSize = 0;
+        for (int i = 0; i < allConversations.size(); i++) {
+            if (allConversations.get(i).getBegindate().toLocalDate().isAfter(now.toLocalDate())) {
                 monthConvsSize++;
             }
         }
+        return monthConvsSize;
     }
+
     public List<LocalDateTime> getThisMonthLogins() {
         LocalDateTime actualDateTime = LocalDateTime.now();
         LocalDateTime firstDayOfThisMonth = actualDateTime.with(TemporalAdjusters.firstDayOfMonth())

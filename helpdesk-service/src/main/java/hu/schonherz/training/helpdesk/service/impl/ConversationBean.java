@@ -30,7 +30,7 @@ public class ConversationBean implements ConversationService {
     }
 
     @Override
-    public List<ConversationVO> findByAgentId(final int agentId) {
+    public List<ConversationVO> findByAgentId(int agentId) {
         return ConversationMapper.toVO(conversationRepository.findByAgentId(agentId));
     }
 
