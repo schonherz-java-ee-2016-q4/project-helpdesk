@@ -62,7 +62,6 @@ public class ChatView {
     private String issueDecription;
     private String issueType;
 
-
     @PostConstruct
     public void init() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -81,7 +80,8 @@ public class ChatView {
 
         conversationVO = conversationService.findById(conversationId);
         if (conversationVO != null) {
-            messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO.getClientId());
+            messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(),
+                    conversationVO.getClientId());
         }
     }
 
@@ -90,11 +90,13 @@ public class ChatView {
         TicketVo ticketVo = new TicketVo();
         ticketVo.setTitle(issueName);
         ticketVo.setDescription(issueDecription);
-        if(ticketServiceRemote.save(ticketVo, agent.getUsername())==null){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Something went wrong..."));
-        }
-        else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Succesful", "The ticket has been saved!"));
+        ticketVo.setUid(Long.toString(agent.getProfileDetails().getId()));
+        if (ticketServiceRemote.save(ticketVo, agent.getUsername()) == null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Something went wrong..."));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Succesful", "The ticket has been saved!"));
         }
     }
 
@@ -126,8 +128,7 @@ public class ChatView {
             return null;
         }
 
-        messageList = (List<MessageVO>) messageService.findMessages(
-                conversationVO.getAgentId(),
+        messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(),
                 conversationVO.getClientId());
 
         log.error(messageList.toString());
