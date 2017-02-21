@@ -47,9 +47,10 @@
                         <td>#{msg.gender}:</td>
                         <td>
                             <h:outputText
-                                    rendered="#{profileView.user.profileDetails.gender == genderEnum.MALE}">#{msg.male}</h:outputText>
+                                    rendered="#{profileView.user.profileDetails.gender == 'MALE'}" value="#{msg.male}"/>
                             <h:outputText
-                                    rendered="#{profileView.user.profileDetails.gender == genderEnum.FEMALE}">#{msg.female}</h:outputText>
+                                    rendered="#{profileView.user.profileDetails.gender == 'FEMALE'}"
+                                    value="#{msg.female}"/>
                         </td>
 
                     </tr>
