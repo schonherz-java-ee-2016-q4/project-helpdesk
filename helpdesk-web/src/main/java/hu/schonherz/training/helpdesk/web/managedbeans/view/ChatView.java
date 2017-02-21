@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -84,12 +85,17 @@ public class ChatView {
         }
     }
 
-    public void createTicket(){
+    public void createTicket() {
         AgentUser agent = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TicketVo ticketVo = new TicketVo();
         ticketVo.setTitle(issueName);
         ticketVo.setDescription(issueDecription);
-        ticketServiceRemote.save(ticketVo, agent.getUsername()); 
+        if(ticketServiceRemote.save(ticketVo, agent.getUsername())==null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Something went wrong..."));
+        }
+        else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Succesful", "The ticket has been saved!"));
+        }
     }
 
     public void send() {

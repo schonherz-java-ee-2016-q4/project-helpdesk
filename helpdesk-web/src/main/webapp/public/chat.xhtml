@@ -18,7 +18,7 @@
     </ui:define>
 
     <ui:define name="customBody">
-
+        <p:growl id="growl" showDetail="true" sticky="true" /> 
         <div class="container-fluid" id="main" style="display: flex; flex-direction: column">
             <ui:fragment rendered="#{chatView.thereId and chatView.ownConversation}">
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7" style="align-self: center">
@@ -117,9 +117,7 @@
                                         data-target="#myModal">#{msg.error_ticket}
                                 </button>
                             </ui:fragment>
-
                         </div>
-
                     </h:form>
 
                     <div id="myModal" class="modal fade" role="dialog">
@@ -146,7 +144,8 @@
                                             <h:inputText type="text" value="#{chatView.issueType}" class="form-control" id="type"></h:inputText>
                                         </div>
                                         <p:commandButton id='cmdTicketBtn' value="#{msg.send}"
-                                             styleClass="cmdButton" actionListener="#{chatView.createTicket}"></p:commandButton>
+                                             styleClass="cmdButton" actionListener="#{chatView.createTicket}" update="growl"
+                                             onclick="PF('modal').hide();$('#form').trigger('reset');"></p:commandButton>
                                     </h:form>
                                 </div>
                                 <div class="modal-footer">
@@ -191,6 +190,5 @@
                 </div>
             </div>
         </ui:fragment>
-
     </ui:define>
 </ui:composition>
