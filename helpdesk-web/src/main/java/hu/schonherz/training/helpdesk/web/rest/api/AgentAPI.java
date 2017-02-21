@@ -1,6 +1,7 @@
 package hu.schonherz.training.helpdesk.web.rest.api;
 
 import hu.schonherz.project.admin.service.api.rpc.NoAvailableAgentFoundException;
+import hu.schonherz.project.admin.service.api.rpc.NoSuchDomainException;
 import hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote;
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
@@ -24,34 +25,23 @@ import javax.ws.rs.core.Response;
 @Slf4j
 public class AgentAPI {
 
-    private static final int RANDOM_TRESHOLD = 25;
-
     @EJB
     private ConversationService conversationService;
 
     @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcAgentAvailabilityServiceBean!"
         + "hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote")
     private RpcAgentAvailabilityServiceRemote rpcAgentAvailabilityServiceRemote;
-//
-//    @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcLoginServiceBean")
-//    private RpcLoginServiceRemote rpcLoginServiceRemote;
 
     @POST
     @Path("/available")
     public Response getAvailableAgent(final ClientDetailsRequest clientDetailsRequest) {
-        //half dummy implementation for testing the functionality of the js plugin
 
         ConversationResponse conversationResponse = new ConversationResponse();
 
         try {
             Long agentId = rpcAgentAvailabilityServiceRemote.getAvailableAgent(clientDetailsRequest.getSource());
             log.info("Got agentid from the admin team: {}", agentId);
-//        try {
-//            rpcLoginServiceRemote.rpcLogin("bruce001");
-//            rpcLoginServiceRemote.rpcLogout("bruce001");
-//        } catch (FailedRpcLoginAttemptException | FailedRpcLogoutException e) {
-//            e.printStackTrace();
-//        }
+
             ConversationVO conversationVO = ConversationVO.builder()
                 .agentId(agentId)
                 .clientId(clientDetailsRequest.getClientId())
@@ -65,7 +55,12 @@ public class AgentAPI {
 
             return Response.accepted(conversationResponse).build();
         } catch (NoAvailableAgentFoundException e) {
-            log.error("No client is available right now for the requested domain.", e);
+            log.error("No client is available right now for the requested domain {}", clientDetailsRequest.getSource(), e);
+
+            conversationResponse.setConversationId(null);
+            return Response.status(Response.Status.BAD_REQUEST).entity(conversationResponse).build();
+        } catch (NoSuchDomainException e) {
+            log.error("There is no such domain: {}", clientDetailsRequest.getSource(), e);
 
             conversationResponse.setConversationId(null);
             return Response.status(Response.Status.BAD_REQUEST).entity(conversationResponse).build();

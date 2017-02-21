@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.interceptor.Interceptors;
@@ -21,6 +23,10 @@ public class ConversationBean implements ConversationService {
     @Autowired
     private ConversationRepository conversationRepository;
 
+    //It is needed to create new connection because it can't use the Admin team provided
+    //at the helpdesk.web.rest.api.AgentAPI.getAvailableAgent method. That's why, this method
+    //is annotated like this.
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     @Override
     public long save(final ConversationVO conversation) {
         return conversationRepository.save(ConversationMapper.toEntity(conversation)).getId();

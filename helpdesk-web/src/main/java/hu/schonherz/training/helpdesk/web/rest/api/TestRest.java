@@ -1,7 +1,5 @@
 package hu.schonherz.training.helpdesk.web.rest.api;
 
-import hu.schonherz.project.admin.service.api.rpc.NoAvailableAgentFoundException;
-import hu.schonherz.project.admin.service.api.rpc.NoSuchDomainException;
 import hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote;
 import hu.schonherz.project.admin.service.api.rpc.UsernameNotFoundException;
 
@@ -10,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+import java.text.MessageFormat;
 
 @Path("/test")
 public class TestRest {
@@ -19,24 +18,19 @@ public class TestRest {
     private RpcAgentAvailabilityServiceRemote rpcAgentAvailabilityServiceRemote;
 
     @GET
-    @Path("/{param}")
-    public Response printMessage(@PathParam("param") final String msg) throws NoAvailableAgentFoundException, NoSuchDomainException {
+    @Path("/resetagent/{username}")
+    public Response printMessage(@PathParam("username") final String userName) {
 
-        String result = "Restful example : " + msg;
-        Long id = rpcAgentAvailabilityServiceRemote.getAvailableAgent("dcuniverse.com");
-        return Response.status(Response.Status.OK).entity(id).build();
-
-    }
-
-    @GET
-    @Path("/makeavailable")
-    public Response printMessage() throws NoSuchDomainException, NoAvailableAgentFoundException, UsernameNotFoundException {
-
-        rpcAgentAvailabilityServiceRemote.setAgentAvailabilityToTrue("bruce002");
-        return Response.status(Response.Status.OK).entity("success").build();
+        try {
+            rpcAgentAvailabilityServiceRemote.setAgentAvailabilityToTrue(userName);
+        } catch (UsernameNotFoundException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                .entity(MessageFormat.format("Username {0} not found! Try again!", userName))
+                .build();
+        }
+        return Response.status(Response.Status.OK).entity("Success!").build();
 
     }
-
 
 
 }
