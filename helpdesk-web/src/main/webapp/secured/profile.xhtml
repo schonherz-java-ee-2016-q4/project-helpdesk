@@ -28,9 +28,7 @@
 
 
         <div class="container">
-
             <h2 style="text-align: center">#{msg.agent}#{msg.profile}</h2>
-
             <!-- Agent profile -->
             <div class="col-md-offset-3 col-md-6 col-md-offset-3">
                 <table class="table responsive">
@@ -69,11 +67,14 @@
                         <td>#{profileView.user.profileDetails.phone}</td>
                     </tr>
                 </table>
+
                 <a href="/helpdesk/client/activity"
                    class="btn btn-info"
                    role="button">#{msg.see_your_activity}</a>
+                <a href="/helpdesk/agent/statistics"
+                   class="btn btn-success"
+                   role="button">#{msg.your_statistics}</a>
             </div>
-
         </div>
     </ui:define>
 

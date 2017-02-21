@@ -14,14 +14,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDateTime;
 
 @Path("/agents")
 @Stateless(mappedName = "agentApi")
-@Consumes({MediaType.APPLICATION_JSON})
-@Produces({MediaType.APPLICATION_JSON})
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON })
 public class AgentAPI {
-
-    private static final int RANDOM_TRESHOLD = 25;
 
     @EJB
     private ConversationService conversationService;
@@ -35,11 +34,12 @@ public class AgentAPI {
         //lookup ends here
 
         ConversationVO conversationVO = ConversationVO.builder()
-                .agentId(2L)
-                .clientId(clientDetailsRequest.getClientId())
-                .clientEmail(clientDetailsRequest.getClientEmail())
-                .status(ConversationStatusVO.NEW)
-                .build();
+            .agentId(2L)
+            .clientId(clientDetailsRequest.getClientId())
+            .clientEmail(clientDetailsRequest.getClientEmail())
+            .status(ConversationStatusVO.NEW)
+            .createdAt(LocalDateTime.now())
+            .build();
 
         ConversationResponse conversationResponse = new ConversationResponse();
         conversationResponse.setConversationId(conversationService.save(conversationVO));

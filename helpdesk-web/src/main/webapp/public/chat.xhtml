@@ -18,12 +18,12 @@
     </ui:define>
 
     <ui:define name="customBody">
-
         <div class="container-fluid" id="main" style="display: flex; flex-direction: column">
             <ui:fragment rendered="#{chatView.thereId and chatView.ownConversation}">
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7" style="align-self: center">
 
-                    <h:form id="messageForm" styleClass="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                    <h:form id="messageForm"
+                            styleClass="col-xs-12 col-sm-12 col-md-12 col-lg-12"
                             onkeypress="if (event.keyCode == 13) { document.getElementById('messageForm:cmdBtn').click(); return false;}">
 
                         <p:poll async="true" delay="1000" update="messagesList" onstart="saveScrollPos()"
@@ -41,9 +41,7 @@
                                 </div>
                             </ui:fragment>
                             <div class="scrollable" id="messageDiv">
-
                                 <ui:repeat value="#{chatView.messages}" var="message">
-
                                     <ui:fragment rendered='#{message.sentBy.equals("agent") and chatView.isAgent}'>
                                         <div class="myMessageRight"
                                              onclick="addNewlines('#{message.content}')">
@@ -51,9 +49,7 @@
                                         </div>
                                     </ui:fragment>
                                     <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
-
-                                        <ui:fragment
-                                                rendered='#{message.nextMember.equals("agent")  and message.nextMember != null}'>
+                                        <ui:fragment rendered='#{message.nextMember.equals("agent")  and message.nextMember != null}'>
                                             <div class="messageWithPic">
                                                 <img class="senderPic" style="display: inline-block"
                                                      src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
@@ -63,8 +59,7 @@
                                                 </div>
                                             </div>
                                         </ui:fragment>
-                                        <ui:fragment
-                                                rendered='#{!(message.nextMember.equals("agent") and message.nextMember != null)}'>
+                                        <ui:fragment rendered='#{!(message.nextMember.equals("agent") and message.nextMember != null)}'>
                                             <div class="myMessageLeft"
                                                  onclick="addNewlines('#{message.content}')">
                                                 #{message.content}
@@ -98,28 +93,33 @@
                                              onclick="addNewlines('#{message.content}')"> #{message.content}
                                         </div>
                                     </ui:fragment>
-
                                 </ui:repeat>
                             </div>
                         </p:outputPanel>
 
                         <div id="myText">
-                            <p:inputTextarea id="chatText" styleClass="areaText col-xs-12 col-sm-12 col-md-12 col-lg-12"
-                                             value="#{chatView.content}"></p:inputTextarea>
+                            <p:inputTextarea id="chatText"
+                                             styleClass="areaText col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                                             value="#{chatView.content}">
+                            </p:inputTextarea>
                         </div>
+
                         <div id="myBut">
-                            <p:commandButton id='cmdBtn' value="#{msg.send}" oncomplete="onSubmissionComplete()"
+                            <p:commandButton id='cmdBtn'
+                                             value="#{msg.send}"
+                                             oncomplete="onSubmissionComplete()"
                                              actionListener="#{chatView.send}"
                                              update="messagesList"
-                                             styleClass="cmdButton"></p:commandButton>
+                                             styleClass="cmdButton">
+                            </p:commandButton>
                             <ui:fragment rendered='#{chatView.isAgent}'>
-                                <button type="button" class="btn btn-info" data-toggle="modal"
+                                <button type="button"
+                                        class="btn btn-info"
+                                        data-toggle="modal"
                                         data-target="#myModal">#{msg.error_ticket}
                                 </button>
                             </ui:fragment>
-
                         </div>
-
                     </h:form>
 
                     <div id="myModal" class="modal fade" role="dialog">
@@ -155,9 +155,9 @@
                                     </button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+
                     <div id="myModalClose" class="modal fade" role="dialog">
                         <div class="modal-dialog">
 
@@ -171,13 +171,14 @@
                                     <p:commandButton id='noBtn' value="#{msg.yes}"
                                                      styleClass="yesButton"
                                                      actionListener="#{chatView.updateConversation}"
-                                                     action="#{chatView.agentRedirect}"></p:commandButton>
-                                    <button class="btn btn-success" type="button"
+                                                     action="#{chatView.agentRedirect}">
+                                    </p:commandButton>
+                                    <button class="btn btn-success"
+                                            type="button"
                                             data-dismiss="modal">#{msg.no}
                                     </button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

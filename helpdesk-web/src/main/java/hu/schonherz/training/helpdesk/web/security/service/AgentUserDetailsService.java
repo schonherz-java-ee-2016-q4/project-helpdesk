@@ -4,6 +4,7 @@ import hu.schonherz.project.admin.service.api.rpc.FailedRpcLoginAttemptException
 import hu.schonherz.project.admin.service.api.rpc.RpcLoginServiceRemote;
 import hu.schonherz.project.admin.service.api.vo.UserData;
 import hu.schonherz.project.admin.service.api.vo.UserRole;
+import hu.schonherz.training.helpdesk.web.BeanConstants;
 import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import hu.schonherz.training.helpdesk.web.security.domain.ProfileDetails;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +24,7 @@ import java.util.Set;
 public class AgentUserDetailsService implements UserDetailsService {
     private static final String ROLE_PREFIX = "ROLE_";
 
-    @EJB(mappedName = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcLoginServiceBean!"
-            + "hu.schonherz.project.admin.service.api.rpc.RpcLoginServiceRemote")
+    @EJB(mappedName = BeanConstants.JNDI_LOGIN_SERVICE)
     private RpcLoginServiceRemote rpcLoginServiceRemote;
 
     @Override
@@ -39,30 +39,28 @@ public class AgentUserDetailsService implements UserDetailsService {
         }
 
         AgentUser user = AgentUser.builder()
-                .username(userData.getUsername())
-                .password(userData.getPassword())
-                .enabled(true)
-                .accountNonExpired(true)
-                .credentialsNonExpired(true)
-                .accountNonLocked(true)
-                .authorities(setAuthorities(userData.getUserRole()))
-                .profileDetails(
-                        ProfileDetails.builder()
-                                .email(userData.getEmail())
-                                .id(userData.getId())
-                                //dummy code starts here
-                                .name("Bruce Wayne")
-                                .gender("male")
-                                .company("Wayne Enterprises, Inc")
-                                .phone("+36-30-1112367")
-                                .picture("https://pbs.twimg.com/profile_images/649259478332784640/7Pjcfx_v_reasonably_small.jpg")
-                                //dummy code ends here
-                                .build()
-                )
-                .build();
+            .username(userData.getUsername())
+            .password(userData.getPassword())
+            .enabled(true)
+            .accountNonExpired(true)
+            .credentialsNonExpired(true)
+            .accountNonLocked(true)
+            .authorities(setAuthorities(userData.getUserRole()))
+            .profileDetails(
+                ProfileDetails.builder()
+                    .id(userData.getId())
+                    .email(userData.getEmail())
+                    //dummy code starts here
+                    .name("Bruce Wayne")
+                    .gender("male")
+                    .company("Wayne Enterprises, Inc")
+                    .phone("+36-30-1112367")
+                    .picture("https://pbs.twimg.com/profile_images/649259478332784640/7Pjcfx_v_reasonably_small.jpg")
+                    //dummy code ends here
+                    .build())
+            .build();
 
         log.info("Helpdesk agent with username {} successfully authenticated.", username);
-
         return user;
     }
 
