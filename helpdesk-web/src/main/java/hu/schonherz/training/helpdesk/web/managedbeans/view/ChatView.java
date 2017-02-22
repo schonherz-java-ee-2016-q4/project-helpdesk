@@ -97,7 +97,7 @@ public class ChatView {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Something went wrong..."));
         } else {
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Succesful", "The ticket has been saved!"));
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "The ticket has been saved!"));
         }
     }
 
