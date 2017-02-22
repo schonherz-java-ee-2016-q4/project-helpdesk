@@ -13,8 +13,10 @@ public class ProfileDetails {
     private Long id;
     private String name;
     private String email;
-    private String gender;
+    private Gender gender;
     private String company;
     private String phone;
     private String picture;
+
+
 }

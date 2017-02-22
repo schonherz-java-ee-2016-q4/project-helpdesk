@@ -26,9 +26,12 @@
         <h:inputHidden id="conversationState"
                        value="#{chatPopupView.openConversation.status} #{chatPopupView.openConversation.id}"/>
 
-
         <div class="container">
             <h2 style="text-align: center">#{msg.agent}#{msg.profile}</h2>
+            <p:importEnum type="hu.schonherz.training.helpdesk.web.security.domain.Gender"
+                          var="genderEnum"
+                          allSuffix="ALL_ENUM_VALUES"/>
+
             <!-- Agent profile -->
             <div class="col-md-offset-3 col-md-6 col-md-offset-3">
                 <table class="table responsive">
@@ -56,7 +59,13 @@
                     </tr>
                     <tr>
                         <td>#{msg.gender}:</td>
-                        <td>#{profileView.user.profileDetails.gender}</td>
+                        <td>
+                            <h:outputText rendered="#{profileView.user.profileDetails.gender == 'MALE'}"
+                                          value="#{msg.male}"/>
+                            <h:outputText rendered="#{profileView.user.profileDetails.gender == 'FEMALE'}"
+                                          value="#{msg.female}"/>
+                        </td>
+
                     </tr>
                     <tr>
                         <td>#{msg.company}:</td>
@@ -70,10 +79,12 @@
 
                 <a href="/helpdesk/client/activity"
                    class="btn btn-info"
-                   role="button">#{msg.see_your_activity}</a>
+                   role="button">#{msg.see_your_activity}
+                </a>
                 <a href="/helpdesk/agent/statistics"
                    class="btn btn-success"
-                   role="button">#{msg.your_statistics}</a>
+                   role="button">#{msg.your_statistics}
+                </a>
             </div>
         </div>
     </ui:define>

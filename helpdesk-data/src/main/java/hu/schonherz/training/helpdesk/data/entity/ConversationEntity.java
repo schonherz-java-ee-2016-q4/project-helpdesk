@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class ConversationEntity extends BaseEntity {
     private static final long serialVersionUID = 13243545L;
 
-    private long agentId;
+    private Long agentId;
 
     private String clientId;
 

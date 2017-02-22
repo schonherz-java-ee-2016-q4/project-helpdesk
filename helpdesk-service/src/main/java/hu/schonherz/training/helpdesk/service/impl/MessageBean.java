@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.interceptor.Interceptors;
 import java.util.Collection;
 
 @Stateless(mappedName = "MessageService")
 @Interceptors(SpringBeanAutowiringInterceptor.class)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class MessageBean implements MessageService {
     @Autowired
     private MessageRepository messageRepository;
