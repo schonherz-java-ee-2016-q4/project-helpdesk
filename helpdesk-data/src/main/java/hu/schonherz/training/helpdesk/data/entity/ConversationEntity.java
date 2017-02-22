@@ -1,5 +1,6 @@
 package hu.schonherz.training.helpdesk.data.entity;
 
+import hu.schonherz.training.helpdesk.data.DatabaseConstants;
 import hu.schonherz.training.helpdesk.data.enums.ConversationStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,16 +9,16 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
-@Entity
 @Data
 @NoArgsConstructor
-@Table(name = "conversation", schema = "public")
+@Entity
+@Table(name = "conversation", schema = DatabaseConstants.SCHEMA_NAME)
 public class ConversationEntity extends BaseEntity {
+    private static final long serialVersionUID = 13243545L;
 
-    private static final long serialVersionUID = 1L;
-
-    private long agentId;
+    private Long agentId;
 
     private String clientId;
 
@@ -25,4 +26,6 @@ public class ConversationEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private ConversationStatus status;
+
+    private LocalDateTime createdAt;
 }

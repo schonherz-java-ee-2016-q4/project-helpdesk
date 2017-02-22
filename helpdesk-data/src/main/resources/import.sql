@@ -1,24 +1,13 @@
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(55,'example.mail@example.com','46m9z','CLOSED');
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(10,'example.mail@example.com',3333,'NEW');
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(2,'example.mail@example.com',4444,'IN_PROGRESS');
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(11,'example.mail@example.com',9999,'CLOSED');
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(40,'example.mail@example.com','ok45','CLOSED');
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(16,'example.mail@example.com',6578,'CLOSED');
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(20,'example.mail@example.com',9123,'CLOSED');
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(25,'example.mail@example.com',7456,'CLOSED');
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(28,'example.mail@example.com',1487,'CLOSED');
-INSERT INTO public.conversation(agentid,clientEmail,clientid,status) VALUES(30,'example.mail@example.com',8437,'CLOSED');
-
-INSERT INTO login(agentid,logindate) VALUES (1,to_timestamp('2012-01-03 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
-INSERT INTO login(agentid,logindate) VALUES (1,to_timestamp('2011-02-22 15:22:11.253','YYYY/MM/DD HH24:MI:SS.MS'));
-INSERT INTO login(agentid,logindate) VALUES (1,to_timestamp('2015-07-01 23:05:30.126','YYYY/MM/DD HH24:MI:SS.MS'));
-INSERT INTO login(agentid,logindate) VALUES (2,to_timestamp('2012-10-25 06:14:50.211','YYYY/MM/DD HH24:MI:SS.MS'));
-INSERT INTO login(agentid,logindate) VALUES (2,to_timestamp('2010-01-01 10:55:47.911','YYYY/MM/DD HH24:MI:SS.MS'));
-INSERT INTO login(agentid,logindate) VALUES (3,to_timestamp('2016-11-13 22:10:03.011','YYYY/MM/DD HH24:MI:SS.MS'));
-INSERT INTO login(agentid,logindate) VALUES (4,to_timestamp('2015-05-05 05:55:55.551','YYYY/MM/DD HH24:MI:SS.MS'));
-INSERT INTO login(agentid,logindate) VALUES (4,to_timestamp('2017-01-27 18:17:58.511','YYYY/MM/DD HH24:MI:SS.MS'));
-INSERT INTO login(agentid,logindate) VALUES (5,to_timestamp('2017-01-05 15:27:33.311','YYYY/MM/DD HH24:MI:SS.MS'));
-INSERT INTO login(agentid,logindate) VALUES (5,to_timestamp('2014-08-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'));
+INSERT INTO conversation(agentid,clientEmail,clientid,status,createdAt) VALUES(1,'example.mail@example.com','46m9z','CLOSED',to_timestamp('2017-02-17 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
+INSERT INTO conversation(agentid,clientEmail,clientid,status,createdAt) VALUES(10,'example.mail@example.com',3333,'NEW',to_timestamp('2017-02-15 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
+INSERT INTO conversation(agentid,clientEmail,clientid,status,createdAt) VALUES(1,'example.mail@example.com',4444,'IN_PROGRESS',to_timestamp('2017-02-18 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
+INSERT INTO conversation(agentid,clientEmail,clientid,status,createdAt) VALUES(1,'example.mail@example.com',9999,'CLOSED',to_timestamp('2017-01-03 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
+INSERT INTO conversation(agentid,clientEmail,clientid,status,createdAt) VALUES(40,'example.mail@example.com','ok45','CLOSED',to_timestamp('2016-12-25 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
+INSERT INTO conversation(agentid,clientEmail,clientid,status,createdAt) VALUES(16,'example.mail@example.com',6578,'CLOSED',to_timestamp('2016-12-31 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
+INSERT INTO conversation(agentid,clientEmail,clientid,status,createdAt) VALUES(1,'example.mail@example.com',9123,'CLOSED',to_timestamp('2017-02-17 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
+INSERT INTO conversation(agentid,clientEmail,clientid,status,createdAt) VALUES(25,'example.mail@example.com',7456,'CLOSED',to_timestamp('2017-02-09 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
+INSERT INTO conversation(agentid,clientEmail,clientid,status,createdAt) VALUES(28,'example.mail@example.com',1487,'CLOSED',to_timestamp('2016-12-29 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
+INSERT INTO conversation(agentid,clientEmail,clientid,status,createdAt) VALUES(30,'example.mail@example.com',8437,'CLOSED',to_timestamp('2016-12-23 20:27:53.611','YYYY/MM/DD HH24:MI:SS.MS'));
 
 INSERT INTO message(agentid,clientid,content,senddate,conversation_id, sentby) VALUES (55,'46m9z','csao', to_timestamp('2012-08-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1, 'agent');
 INSERT INTO message(agentid,clientid,content,senddate,conversation_id, sentby) VALUES (55,'46m9z', 'mizu?', to_timestamp('2015-08-22 22:24:58.611','YYYY/MM/DD HH24:MI:SS.MS'),1, 'client');

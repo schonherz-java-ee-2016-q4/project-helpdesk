@@ -1,5 +1,6 @@
 package hu.schonherz.training.helpdesk.data.entity;
 
+import hu.schonherz.training.helpdesk.data.DatabaseConstants;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,13 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "message", schema = "public")
 @Data
 @NoArgsConstructor
+@Entity
+@Table(name = "message", schema = DatabaseConstants.SCHEMA_NAME)
 public class MessageEntity extends BaseEntity {
-
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 194867738L;
 
     private Long agentId;
 
@@ -24,12 +24,12 @@ public class MessageEntity extends BaseEntity {
 
     private String sentBy;
 
-    private String content;
-
     private LocalDateTime sendDate;
+
+    private String content;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "conversation_id")
-    private ConversationEntity conv;
+    private ConversationEntity conversation;
 
 }
