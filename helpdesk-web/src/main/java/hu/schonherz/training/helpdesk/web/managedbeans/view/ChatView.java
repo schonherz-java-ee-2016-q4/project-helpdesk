@@ -91,6 +91,7 @@ public class ChatView {
         ticketVo.setTitle(issueName);
         ticketVo.setDescription(issueDecription);
         ticketVo.setUid(Long.toString(agent.getProfileDetails().getId()));
+        ticketVo.setClientMail(conversationVO.getClientEmail());
         if (ticketServiceRemote.save(ticketVo, agent.getUsername()) == null) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Something went wrong..."));
