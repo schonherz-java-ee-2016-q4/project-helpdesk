@@ -9,14 +9,19 @@ import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.primefaces.event.SelectEvent;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,8 +44,12 @@ public class StatisticsView {
     private List<LocalDateTime> agentLoginDates;
     private List<ConversationVO> agentConversations;
 
+    private Date date;
+
     @PostConstruct
     public void init() {
+        date = new Date();
+        log.info("Default date: " + date.toString());
         final String userName = getUser().getUsername();
         final Long agentId = getUser().getProfileDetails().getId();
 
@@ -58,10 +67,10 @@ public class StatisticsView {
 
     // TODO: Unify date filtering mechanism
     public int getPastDayLogin() {
-        LocalDateTime now = LocalDateTime.now();
         int dayLoginSize = 0;
         for (LocalDateTime login : agentLoginDates) {
-            if (login.toLocalDate().equals(now.toLocalDate())) {
+            if (((login.getYear() - 1900) == date.getYear()) && (login.getMonth().getValue() == (date.getMonth() + 1)) &&
+                    (login.getDayOfWeek().getValue() == date.getDay())) {
                 dayLoginSize++;
             }
         }
@@ -133,4 +142,14 @@ public class StatisticsView {
                 .collect(Collectors.toList());
     }
 
+    public void onDateSelect(SelectEvent event) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            date = format.parse(format.format(event.getObject()));
+            log.info("Selected date: " + date.toString());
+        } catch (ParseException e) {
+            log.error("Date error" + e);
+        }
+
+    }
 }
