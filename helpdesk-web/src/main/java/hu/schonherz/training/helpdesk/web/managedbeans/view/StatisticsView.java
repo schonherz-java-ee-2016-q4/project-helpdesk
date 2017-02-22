@@ -47,6 +47,8 @@ public class StatisticsView {
     private List<LocalDateTime> agentLoginDates;
     private List<ConversationVO> agentConversations;
     private Calendar calendar;
+
+    @SuppressWarnings("PMD")
     private Date date;
 
     @PostConstruct
@@ -74,9 +76,9 @@ public class StatisticsView {
         log.info("évv: " + calendar.get(Calendar.WEEK_OF_YEAR) + "");
         for (LocalDateTime login : agentLoginDates) {
 
-            if (((login.getYear()) == calendar.get(Calendar.YEAR)) &&
-                    (login.getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)) &&
-                    (login.getDayOfMonth() == calendar.get(Calendar.DAY_OF_MONTH))) {
+            if (login.getYear() == calendar.get(Calendar.YEAR)
+                    && login.getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)
+                    && login.getDayOfMonth() == calendar.get(Calendar.DAY_OF_MONTH)) {
                 dayLoginSize++;
             }
         }
@@ -99,8 +101,8 @@ public class StatisticsView {
     public int getPastMonthLogin() {
         int monthLoginSize = 0;
         for (LocalDateTime login : agentLoginDates) {
-            if (((login.getYear()) == calendar.get(Calendar.YEAR)) &&
-                    (login.getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1))) {
+            if (login.getYear() == calendar.get(Calendar.YEAR)
+                    && login.getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)) {
                 monthLoginSize++;
             }
         }
@@ -110,9 +112,9 @@ public class StatisticsView {
     public int getPastDayConvs() {
         int dayConvsSize = 0;
         for (ConversationVO conversation : agentConversations) {
-            if (((conversation.getCreatedAt().getYear()) == calendar.get(Calendar.YEAR)) &&
-                    (conversation.getCreatedAt().getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)) &&
-                    (conversation.getCreatedAt().getDayOfMonth() == calendar.get(Calendar.DAY_OF_MONTH))) {
+            if (conversation.getCreatedAt().getYear() == calendar.get(Calendar.YEAR)
+                    && conversation.getCreatedAt().getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)
+                    && conversation.getCreatedAt().getDayOfMonth() == calendar.get(Calendar.DAY_OF_MONTH)) {
                 dayConvsSize++;
             }
         }
@@ -120,10 +122,11 @@ public class StatisticsView {
     }
 
     public int getPastWeekConvs() {
-        LocalDateTime now = LocalDateTime.now().minusDays(DAYS_IN_WEEK);
         int weekConvsSize = 0;
         for (ConversationVO conversation : agentConversations) {
-            if (conversation.getCreatedAt().toLocalDate().equals(now.toLocalDate())) {
+            WeekFields weekFields = WeekFields.of(Locale.getDefault());
+            int weekNumber = conversation.getCreatedAt().toLocalDate().get(weekFields.weekOfWeekBasedYear());
+            if (weekNumber == calendar.get(Calendar.WEEK_OF_YEAR)) {
                 weekConvsSize++;
             }
         }
@@ -133,8 +136,8 @@ public class StatisticsView {
     public int getPastMonthConvs() {
         int monthConvsSize = 0;
         for (ConversationVO conversation : agentConversations) {
-            if (((conversation.getCreatedAt().getYear()) == calendar.get(Calendar.YEAR)) &&
-                    (conversation.getCreatedAt().getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1))) {
+            if (conversation.getCreatedAt().getYear() == calendar.get(Calendar.YEAR)
+                    && conversation.getCreatedAt().getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)) {
                 monthConvsSize++;
             }
         }
@@ -150,8 +153,8 @@ public class StatisticsView {
                 .collect(Collectors.toList());
     }
 
-    public void onDateSelect(SelectEvent event) {
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    public void onDateSelect(final SelectEvent event) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", new Locale("hu"));
         try {
             calendar.setTime(format.parse(format.format(event.getObject())));
         } catch (ParseException e) {
