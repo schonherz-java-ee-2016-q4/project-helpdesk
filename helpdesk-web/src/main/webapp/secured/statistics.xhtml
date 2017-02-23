@@ -31,13 +31,13 @@
                     </p:calendar>
 
                     <ul class="nav nav-tabs">
-                        <li><a data-toggle="tab" href="#home"><i class="fa fa-user-o" aria-hidden="true"></i></a></li>
-                        <li id="lista1"><a data-toggle="tab" href="#menu1">#{msg.daily}</a></li>
-                        <li><a data-toggle="tab" href="#menu2">#{msg.weekly}</a></li>
-                        <li><a data-toggle="tab" href="#menu3">#{msg.monthly}</a></li>
+                        <li  id="homeTab" class="active"><a data-toggle="tab" href="#home"><i class="fa fa-user-o" aria-hidden="true"></i></a></li>
+                        <li id="tab1"><a data-toggle="tab" href="#menu1">#{msg.daily}</a></li>
+                        <li id="tab2"><a data-toggle="tab" href="#menu2">#{msg.weekly}</a></li>
+                        <li id="tab3"><a data-toggle="tab" href="#menu3">#{msg.monthly}</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div id="home" class="tab-pane fade">
+                        <div id="home" class="tab-pane fade in active">
                             <h3>Jack Murray</h3>
                         </div>
                         <div id="menu1" class="tab-pane fade">
@@ -65,10 +65,10 @@
                             </div>
                             <p>#{msg.issue_rate}</p>
                             <p:commandLink  actionListener='#{statisticsView.changeDate("day", "sub")}'
-                                            styleClass="btn btn-warning left-arrow" update="form"><span class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
+                                            styleClass="btn btn-warning left-arrow" update="form" oncomplete="addFocusMenu1()"><span class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
 
                             <p:commandLink actionListener='#{statisticsView.changeDate("day", "add")}'
-                                           styleClass="btn btn-warning"  update="form"> <span class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
+                                           styleClass="btn btn-warning"  update="form" oncomplete="addFocusMenu1()"> <span class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
                         </div>
                         <div id="menu2" class="tab-pane fade">
                             <table class="table responsive" style="text-align: left">
@@ -94,10 +94,10 @@
                             </div>
                             <p>#{msg.issue_rate}</p>
                             <p:commandLink  actionListener='#{statisticsView.changeDate("week", "sub")}'
-                                            styleClass="btn btn-warning left-arrow" update="form"><span class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
+                                            styleClass="btn btn-warning left-arrow" update="form" oncomplete="addFocusMenu2()"><span class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
 
                             <p:commandLink actionListener='#{statisticsView.changeDate("week", "add")}'
-                                           styleClass="btn btn-warning"  update="form"> <span class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
+                                           styleClass="btn btn-warning" update="form" oncomplete="addFocusMenu2()"> <span class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
                         </div>
                         <div id="menu3" class="tab-pane fade">
 
@@ -125,10 +125,10 @@
                             <p>#{msg.issue_rate}</p>
 
                             <p:commandLink  actionListener='#{statisticsView.changeDate("month", "sub")}'
-                                             styleClass="btn btn-warning left-arrow" update="form"><span class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
+                                             styleClass="btn btn-warning left-arrow" update="form" oncomplete="addFocusMenu3()"><span class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
 
                             <p:commandLink actionListener='#{statisticsView.changeDate("month", "add")}'
-                                           styleClass="btn btn-warning"  update="form"> <span class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
+                                           styleClass="btn btn-warning" update="form" oncomplete="addFocusMenu3()"> <span class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
 
                         </div>
                     </div>
