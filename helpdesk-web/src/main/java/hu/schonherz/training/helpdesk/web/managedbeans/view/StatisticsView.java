@@ -38,13 +38,10 @@ public class StatisticsView {
     @EJB
     private ConversationService conversationService;
 
-    // TODO: Encapsulate agent-related statistics into a type
     private List<LocalDateTime> agentLoginDates;
     private List<ConversationVO> agentConversations;
     private Calendar calendar;
     private Statistic statistic;
-
-    @SuppressWarnings("PMD")
     private Date date;
 
     @PostConstruct
