@@ -9,9 +9,20 @@
 
     <ui:define name="customHead">
         <h:outputStylesheet library="css" name="activity.css"/>
+        <h:outputStylesheet library="css" name="bootstrap-datetimepicker.min.css"/>
+
+
+    </ui:define>
+
+    <ui:define name="customScripts">
+        <h:outputScript library="js" name="moment.min.js"/>
+        <h:outputScript library="js" name="bootstrap-datetimepicker.min.js"/>
+        <h:outputScript library="js" name="activity.js"/>
     </ui:define>
 
     <ui:define name="customBody">
+
+
         <div class="container" id="activityFilterNavbar">
             <!-- Navbar -->
             <p:importEnum type="hu.schonherz.training.helpdesk.service.api.vo.ActivityTypeVO" var="activityTypeEnum"
@@ -76,6 +87,49 @@
                                 </ul>
                             </li>
                         </ul>
+
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown" id="dateDropDown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    #{msg.filter_activity_types}<span class="caret"/>
+                                </a>
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        <a>
+                                            <div class="container">
+                                                <div class='col-md-2 col-sm-1'>
+                                                    <div class="form-group">
+                                                        <div class='input-group date' id='datetimepicker6'
+                                                             aria-readonly="true">
+                                                            <input type='text' class="form-control"/>
+                                                            <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"/>
+                                        </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='col-md-2 col-sm-1'>
+                                                    <div class="form-group">
+                                                        <div class='input-group date' id='datetimepicker7'
+                                                             aria-readonly="true">
+                                                            <input type='text' class="form-control"/>
+                                                            <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"/>
+                                        </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+
                         <div class="navbar-right">
                             <p:commandButton id="deleteFiltersBtn"
                                              styleClass="navbar-btn btn-danger"
