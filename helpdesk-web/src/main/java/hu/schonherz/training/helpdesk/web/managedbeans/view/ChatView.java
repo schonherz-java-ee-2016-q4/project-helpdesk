@@ -173,4 +173,8 @@ public class ChatView {
             log.error("Can't redirect to {}!", url, e);
         }
     }
+
+    public AgentUser getUser() {
+        return (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 }
