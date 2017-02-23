@@ -32,12 +32,12 @@
 
                     <ul class="nav nav-tabs">
                         <li><a data-toggle="tab" href="#home"><i class="fa fa-user-o" aria-hidden="true"></i></a></li>
-                        <li><a data-toggle="tab" href="#menu1">#{msg.daily}</a></li>
+                        <li id="lista1"><a data-toggle="tab" href="#menu1">#{msg.daily}</a></li>
                         <li><a data-toggle="tab" href="#menu2">#{msg.weekly}</a></li>
                         <li><a data-toggle="tab" href="#menu3">#{msg.monthly}</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div id="home" class="tab-pane fade in active">
+                        <div id="home" class="tab-pane fade">
                             <h3>Jack Murray</h3>
                         </div>
                         <div id="menu1" class="tab-pane fade">
@@ -64,10 +64,11 @@
 
                             </div>
                             <p>#{msg.issue_rate}</p>
-                            <p:commandButton actionListener='#{statisticsView.changeDate("day", "sub")}'
-                                             styleClass="glyphicon glyphicon-chevron-left" update="form"/>
-                            <p:commandButton actionListener='#{statisticsView.changeDate("day", "add")}'
-                                             styleClass="glyphicon glyphicon-chevron-right" update="form"/>
+                            <p:commandLink  actionListener='#{statisticsView.changeDate("day", "sub")}'
+                                            styleClass="btn btn-warning left-arrow" update="form"><span class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
+
+                            <p:commandLink actionListener='#{statisticsView.changeDate("day", "add")}'
+                                           styleClass="btn btn-warning"  update="form"> <span class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
                         </div>
                         <div id="menu2" class="tab-pane fade">
                             <table class="table responsive" style="text-align: left">
@@ -92,12 +93,14 @@
 
                             </div>
                             <p>#{msg.issue_rate}</p>
-                            <p:commandButton actionListener='#{statisticsView.changeDate("week", "sub")}'
-                                             styleClass="glyphicon glyphicon-chevron-left" update="form"/>
-                            <p:commandButton actionListener='#{statisticsView.changeDate("week", "add")}'
-                                             styleClass="glyphicon glyphicon-chevron-right" update="form"/>
+                            <p:commandLink  actionListener='#{statisticsView.changeDate("week", "sub")}'
+                                            styleClass="btn btn-warning left-arrow" update="form"><span class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
+
+                            <p:commandLink actionListener='#{statisticsView.changeDate("week", "add")}'
+                                           styleClass="btn btn-warning"  update="form"> <span class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
                         </div>
                         <div id="menu3" class="tab-pane fade">
+
                             <table class="table responsive" style="text-align: left">
                                 <tr>
                                     <td>#{msg.num_of_logins}</td>
@@ -120,10 +123,13 @@
 
                             </div>
                             <p>#{msg.issue_rate}</p>
-                            <p:commandButton actionListener='#{statisticsView.changeDate("month", "sub")}'
-                                             styleClass="glyphicon glyphicon-chevron-left" update="form"/>
-                            <p:commandButton actionListener='#{statisticsView.changeDate("month", "add")}'
-                                             styleClass="glyphicon glyphicon-chevron-right" update="form"/>
+
+                            <p:commandLink  actionListener='#{statisticsView.changeDate("month", "sub")}'
+                                             styleClass="btn btn-warning left-arrow" update="form"><span class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
+
+                            <p:commandLink actionListener='#{statisticsView.changeDate("month", "add")}'
+                                           styleClass="btn btn-warning"  update="form"> <span class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
+
                         </div>
                     </div>
                 </h:form>
