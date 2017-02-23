@@ -5,28 +5,23 @@ import hu.schonherz.project.admin.service.api.rpc.RpcLoginStatisticsService;
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.web.BeanConstants;
+import hu.schonherz.training.helpdesk.web.domain.Statistic;
 import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.primefaces.event.SelectEvent;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Data
@@ -47,12 +42,14 @@ public class StatisticsView {
     private List<LocalDateTime> agentLoginDates;
     private List<ConversationVO> agentConversations;
     private Calendar calendar;
+    private Statistic statistic;
 
     @SuppressWarnings("PMD")
     private Date date;
 
     @PostConstruct
     public void init() {
+        statistic = new Statistic();
         date = new Date();
         calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -65,13 +62,14 @@ public class StatisticsView {
         } catch (LoginDataRetrievalException e) {
             log.error("Couldn't retrieve the login dates for user {}!", userName, e);
         }
+        modifyStatistic();
     }
 
     public AgentUser getUser() {
         return (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public int getPastDayLogin() {
+    public void calcDailyLogin() {
         int dayLoginSize = 0;
         log.info("évv: " + calendar.get(Calendar.WEEK_OF_YEAR) + "");
         for (LocalDateTime login : agentLoginDates) {
@@ -82,10 +80,10 @@ public class StatisticsView {
                 dayLoginSize++;
             }
         }
-        return dayLoginSize;
+        statistic.setNumberOfDailyLogins(dayLoginSize);
     }
 
-    public int getPastWeekLogin() {
+    public void calcWeeklyLogin() {
         int weekLoginSize = 0;
         for (LocalDateTime login : agentLoginDates) {
             WeekFields weekFields = WeekFields.of(Locale.getDefault());
@@ -94,11 +92,11 @@ public class StatisticsView {
                 weekLoginSize++;
             }
         }
-        return weekLoginSize;
+        statistic.setNumberOfWeeklyLogins(weekLoginSize);
 
     }
 
-    public int getPastMonthLogin() {
+    public void calcMonthlyLogin() {
         int monthLoginSize = 0;
         for (LocalDateTime login : agentLoginDates) {
             if (login.getYear() == calendar.get(Calendar.YEAR)
@@ -106,10 +104,10 @@ public class StatisticsView {
                 monthLoginSize++;
             }
         }
-        return monthLoginSize;
+        statistic.setNumberOfMonthlyLogins(monthLoginSize);
     }
 
-    public int getPastDayConvs() {
+    public void calcDailyConversations() {
         int dayConvsSize = 0;
         for (ConversationVO conversation : agentConversations) {
             if (conversation.getCreatedAt().getYear() == calendar.get(Calendar.YEAR)
@@ -118,10 +116,10 @@ public class StatisticsView {
                 dayConvsSize++;
             }
         }
-        return dayConvsSize;
+        statistic.setNumberOfDailyConversations(dayConvsSize);
     }
 
-    public int getPastWeekConvs() {
+    public void calcWeeklyConversations() {
         int weekConvsSize = 0;
         for (ConversationVO conversation : agentConversations) {
             WeekFields weekFields = WeekFields.of(Locale.getDefault());
@@ -130,10 +128,10 @@ public class StatisticsView {
                 weekConvsSize++;
             }
         }
-        return weekConvsSize;
+        statistic.setNumberOfWeeklyConversations(weekConvsSize);
     }
 
-    public int getPastMonthConvs() {
+    public void calcMonthlyConversations() {
         int monthConvsSize = 0;
         for (ConversationVO conversation : agentConversations) {
             if (conversation.getCreatedAt().getYear() == calendar.get(Calendar.YEAR)
@@ -141,25 +139,43 @@ public class StatisticsView {
                 monthConvsSize++;
             }
         }
-        return monthConvsSize;
+        statistic.setNumberOfMonthlyConversations(monthConvsSize);
     }
 
-    public List<LocalDateTime> getThisMonthLogins() {
-        LocalDateTime actualDateTime = LocalDateTime.now();
-        LocalDateTime firstDayOfThisMonth = actualDateTime.with(TemporalAdjusters.firstDayOfMonth())
-                .withHour(0).withMinute(0).withSecond(0);
-        return agentLoginDates.stream()
-                .filter(e -> e.isAfter(firstDayOfThisMonth))
-                .collect(Collectors.toList());
+    public void modifyStatistic() {
+        calendar.setTime(date);
+        calcDailyLogin();
+        calcWeeklyLogin();
+        calcMonthlyLogin();
+        calcDailyConversations();
+        calcWeeklyConversations();
+        calcMonthlyConversations();
     }
 
-    public void onDateSelect(final SelectEvent event) {
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", new Locale("hu"));
-        try {
-            calendar.setTime(format.parse(format.format(event.getObject())));
-        } catch (ParseException e) {
-            log.error("Date error" + e);
+    public void changeDate(final String type, final String operation) {
+        log.info("Date change " + type + " " + operation);
+        if ("day".equals(type)) {
+            if ("sub".equals(operation)) {
+                calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - 1);
+            } else if ("add".equals(operation)) {
+                calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + 1);
+            }
         }
-
+        if ("month".equals(type)) {
+            if ("sub".equals(operation)) {
+                calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
+            } else if ("add".equals(operation)) {
+                calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+            }
+        }
+        if ("week".equals(type)) {
+            if ("sub".equals(operation)) {
+                calendar.set(Calendar.WEEK_OF_YEAR, calendar.get(Calendar.WEEK_OF_YEAR) - 1);
+            } else if ("add".equals(operation)) {
+                calendar.set(Calendar.WEEK_OF_YEAR, calendar.get(Calendar.WEEK_OF_YEAR) + 1);
+            }
+        }
+        date = calendar.getTime();
+        modifyStatistic();
     }
 }

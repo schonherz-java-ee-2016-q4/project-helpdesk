@@ -1,8 +1,10 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
 body {
     text-align: center;
 }
 
-.profilePicture{
+.profilePicture {
     margin: auto;
     border-radius: 50%;
     -webkit-transform: scale(1);
@@ -10,7 +12,8 @@ body {
     -webkit-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
 }
-.profilePicture:hover{
+
+.profilePicture:hover {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
@@ -35,18 +38,22 @@ body {
     user-select: none;
     margin-top: 20px;
 }
+
 .date-container {
     padding: 0px 40px;
 }
+
 .date-picker h2, .date-picker h4 {
     margin: 0px;
     padding: 0px;
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
 }
+
 .date-container .date {
     text-align: center;
 }
+
 .date-picker span.fa {
     position: absolute;
     font-size: 4em;
@@ -55,12 +62,15 @@ body {
     cursor: pointer;
     top: 0px;
 }
+
 .date-picker span.fa[data-type="subtract"] {
     left: 0px;
 }
+
 .date-picker span.fa[data-type="add"] {
     right: 0px;
 }
+
 .date-picker span[data-toggle="calendar"] {
     display: block;
     position: absolute;
@@ -75,20 +85,23 @@ body {
     position: absolute;
     top: 50%;
     margin-top: -17px;
-    width:100%;
+    width: 100%;
 }
+
 .date-picker .input-datepicker.show-input {
     display: table;
 }
 
 @media (min-width: 768px) and (max-width: 1010px) {
-    .date-picker h2{
+    .date-picker h2 {
         font-size: 1.5em;
         font-weight: 400;
     }
+
     .date-picker h4 {
         font-size: 1.1em;
     }
+
     .date-picker span.fa {
         font-size: 3em;
     }
