@@ -109,13 +109,13 @@
                         </div>
 
                         <div id="myBut">
-                            <p:commandButton id='cmdBtn'
+                            <p:commandLink id='cmdBtn'
                                              value="#{msg.send}"
                                              oncomplete="onSubmissionComplete()"
                                              actionListener="#{chatView.send}"
                                              update="messagesList"
-                                             styleClass="cmdButton">
-                            </p:commandButton>
+                                             styleClass="btn btn-primary">
+                            </p:commandLink>
                             <ui:fragment rendered='#{chatView.isAgent}'>
                                 <button type="button"
                                         class="btn btn-info"
@@ -149,9 +149,9 @@
                                             <label for="type">#{msg.issue_type}:</label>
                                             <h:inputText type="text" value="#{chatView.issueType}" class="form-control" id="type"></h:inputText>
                                         </div>
-                                        <p:commandButton id='cmdTicketBtn' value="#{msg.send}"
-                                             styleClass="cmdButton" actionListener="#{chatView.createTicket}" update="growl"
-                                             onclick="PF('modal').hide();$('#form').trigger('reset');"></p:commandButton>
+                                        <p:commandLink id='cmdTicketBtn' value="#{msg.send}"
+                                             styleClass="btn btn-primary" actionListener="#{chatView.createTicket}" update="growl"
+                                             onclick="PF('modal').hide();$('#form').trigger('reset');"></p:commandLink>
                                     </h:form>
                                 </div>
                                 <div class="modal-footer">
@@ -173,11 +173,11 @@
                                     <h4 class="modal-title">#{msg.close_conversation}</h4>
                                 </div>
                                 <div class="modal-footer">
-                                    <p:commandButton id='noBtn' value="#{msg.yes}"
-                                                     styleClass="yesButton"
+                                    <p:commandLink id='noBtn' value="#{msg.yes}"
+                                                     styleClass="btn btn-danger"
                                                      actionListener="#{chatView.updateConversation}"
                                                      action="#{chatView.agentRedirect}">
-                                    </p:commandButton>
+                                    </p:commandLink>
                                     <button class="btn btn-success"
                                             type="button"
                                             data-dismiss="modal">#{msg.no}
