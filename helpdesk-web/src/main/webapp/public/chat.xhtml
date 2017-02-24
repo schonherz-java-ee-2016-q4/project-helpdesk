@@ -18,6 +18,8 @@
     </ui:define>
 
     <ui:define name="customBody">
+        <p:growl id="growl" showDetail="true" sticky="true" />
+
         <div class="container-fluid" id="main" style="display: flex; flex-direction: column">
             <ui:fragment rendered="#{chatView.thereId and chatView.ownConversation}">
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7" style="align-self: center">
@@ -135,18 +137,19 @@
                                     <h:form>
                                         <div class="form-group">
                                             <label for="title">#{msg.issue_name}:</label>
-                                            <input type="text" class="form-control" id="title"></input>
+                                            <h:inputText type="text" value="#{chatView.issueName}" class="form-control" id="title"></h:inputText>
                                         </div>
                                         <div class="form-group">
                                             <label for="description">#{msg.issue_decription}:</label>
-                                            <input type="text" class="form-control" id="description"></input>
+                                            <h:inputText type="text" value="#{chatView.issueDecription}" class="form-control" id="description"></h:inputText>
                                         </div>
                                         <div class="form-group">
                                             <label for="type">#{msg.issue_type}:</label>
-                                            <input type="text" class="form-control" id="type"></input>
+                                            <h:inputText type="text" value="#{chatView.issueType}" class="form-control" id="type"></h:inputText>
                                         </div>
-                                        <button type="submit" class="btn btn-info">#{msg.send}</button>
-
+                                        <p:commandButton id='cmdTicketBtn' value="#{msg.send}"
+                                             styleClass="cmdButton" actionListener="#{chatView.createTicket}" update="growl"
+                                             onclick="PF('modal').hide();$('#form').trigger('reset');"></p:commandButton>
                                     </h:form>
                                 </div>
                                 <div class="modal-footer">
@@ -192,6 +195,5 @@
                 </div>
             </div>
         </ui:fragment>
-
     </ui:define>
 </ui:composition>

@@ -192,3 +192,12 @@
     display: flex;
     flex-direction: column;
 }
+
+.modal {
+   z-index: 99999999999999999999999999999999999;
+}
+
+.ui-growl {   
+    position:fixed;
+    top: 30%;
+}

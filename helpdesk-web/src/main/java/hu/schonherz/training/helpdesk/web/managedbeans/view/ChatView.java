@@ -1,5 +1,24 @@
 package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
+import java.io.IOException;
+import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import hu.schonherz.javatraining.issuetracker.client.api.service.ticket.TicketServiceRemote;
+import hu.schonherz.javatraining.issuetracker.client.api.vo.TicketVo;
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.service.MessageService;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationStatusVO;
@@ -10,20 +29,6 @@ import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.security.Principal;
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
 
 @Slf4j
 @Data
@@ -33,6 +38,10 @@ import java.util.List;
 public class ChatView {
     private static final String SENT_BY_AGENT = "agent";
     private static final String SENT_BY_CLIENT = "client";
+
+    @EJB(mappedName = "java:global/issue-tracker-ear-0.0.1-SNAPSHOT/issue-tracker-service-0.0.1-SNAPSHOT/TicketServiceBean!"
+            + "hu.schonherz.javatraining.issuetracker.client.api.service.ticket.TicketServiceRemote")
+    private TicketServiceRemote ticketServiceRemote;
 
     @EJB
     private MessageService messageService;
@@ -49,6 +58,9 @@ public class ChatView {
     private List<MessageVO> messageList;
     private Long conversationId;
     private ConversationVO conversationVO;
+    private String issueName;
+    private String issueDecription;
+    private String issueType;
 
     @PostConstruct
     public void init() {
@@ -68,7 +80,24 @@ public class ChatView {
 
         conversationVO = conversationService.findById(conversationId);
         if (conversationVO != null) {
-            messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(), conversationVO.getClientId());
+            messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(),
+                    conversationVO.getClientId());
+        }
+    }
+
+    public void createTicket() {
+        AgentUser agent = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TicketVo ticketVo = new TicketVo();
+        ticketVo.setTitle(issueName);
+        ticketVo.setDescription(issueDecription);
+        ticketVo.setUid(Long.toString(agent.getProfileDetails().getId()));
+        ticketVo.setClientMail(conversationVO.getClientEmail());
+        if (ticketServiceRemote.save(ticketVo, agent.getUsername()) == null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Something went wrong..."));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "The ticket has been saved!"));
         }
     }
 
@@ -100,8 +129,7 @@ public class ChatView {
             return null;
         }
 
-        messageList = (List<MessageVO>) messageService.findMessages(
-                conversationVO.getAgentId(),
+        messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(),
                 conversationVO.getClientId());
 
         log.error(messageList.toString());
