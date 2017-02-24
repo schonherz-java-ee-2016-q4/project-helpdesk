@@ -8,15 +8,14 @@
 
     <ui:define name="customHead">
         <h:outputStylesheet library="css" name="statistics.css"></h:outputStylesheet>
-
-    </ui:define>
-    <ui:define name="customScripts">
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
         <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
-        <h:outputScript library="js" name="statistics.js"/>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
         <script src="https://use.fontawesome.com/9f4d39e940.js"></script>
+        <h:outputScript library="js" name="statistics.js"/>
+
     </ui:define>
+
     <ui:define name="customBody">
         <div class="container" style="margin-top: 20px">
             <!--Agent statistics-->
