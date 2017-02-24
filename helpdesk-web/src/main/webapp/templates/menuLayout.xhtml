@@ -8,6 +8,7 @@
             <p:link href="/agent/profile">#{msg.profile}</p:link>
         </c:if>
     </ui:define>
+
     <ui:define name="customLink2">
         <c:if test="#{p:userPrincipal().name!=null}">
             <p:link href="/chat">#{msg.chat}</p:link>

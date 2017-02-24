@@ -10,8 +10,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 @Slf4j
-@ManagedBean(name = "languageBean")
 @SessionScoped
+@ManagedBean(name = "languageBean")
 public class LanguageBean {
     private static final String MESSAGES_FILE = "helpdesk.Messages";
     private Locale locale;
