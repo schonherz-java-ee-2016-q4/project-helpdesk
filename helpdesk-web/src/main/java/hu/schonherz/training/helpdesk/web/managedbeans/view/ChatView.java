@@ -86,7 +86,7 @@ public class ChatView {
         message.setAgentId(conversationVO.getAgentId());
         message.setClientId(conversationVO.getClientId());
         message.setSendDate(LocalDateTime.now());
-        message.setConv(conversationVO);
+        message.setConversation(conversationVO);
         message.setSentBy(isAgent ? SENT_BY_AGENT : SENT_BY_CLIENT);
 
         messageService.save(message);
@@ -113,7 +113,7 @@ public class ChatView {
             firstMessage.setAgentId(conversationVO.getAgentId());
             firstMessage.setClientId(conversationVO.getClientId());
             firstMessage.setContent(localeManagerBean.localize("wait_for_agent"));
-            firstMessage.setConv(conversationVO);
+            firstMessage.setConversation(conversationVO);
             firstMessage.setSendDate(LocalDateTime.now());
             messageService.save(firstMessage);
             messageList.add(firstMessage);
