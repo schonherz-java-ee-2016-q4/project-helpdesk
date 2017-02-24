@@ -1,24 +1,9 @@
 package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
-import java.io.IOException;
-import java.security.Principal;
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import hu.schonherz.javatraining.issuetracker.client.api.service.ticket.TicketServiceRemote;
 import hu.schonherz.javatraining.issuetracker.client.api.vo.TicketVo;
+import hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote;
+import hu.schonherz.project.admin.service.api.rpc.UsernameNotFoundException;
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.service.MessageService;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationStatusVO;
@@ -29,6 +14,21 @@ import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 @Slf4j
 @Data
@@ -43,6 +43,10 @@ public class ChatView {
             + "hu.schonherz.javatraining.issuetracker.client.api.service.ticket.TicketServiceRemote")
     private TicketServiceRemote ticketServiceRemote;
 
+    @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcAgentAvailabilityServiceBean!"
+            + "hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote")
+    private RpcAgentAvailabilityServiceRemote rpcAgentAvailabilityServiceRemote;
+
     @EJB
     private MessageService messageService;
 
@@ -52,7 +56,6 @@ public class ChatView {
     @ManagedProperty(value = "#{languageBean}")
     private LanguageBean localeManagerBean;
 
-    private AgentUser user;
     private String content;
     private Boolean isAgent;
     private List<MessageVO> messageList;
@@ -61,9 +64,11 @@ public class ChatView {
     private String issueName;
     private String issueDecription;
     private String issueType;
+    private AgentUser user;
 
     @PostConstruct
     public void init() {
+        user = (AgentUser) (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         Principal principal = request.getUserPrincipal();
@@ -83,6 +88,7 @@ public class ChatView {
             messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(),
                     conversationVO.getClientId());
         }
+
     }
 
     public void createTicket() {
@@ -174,6 +180,11 @@ public class ChatView {
     }
 
     public void updateConversation() {
+        try {
+            rpcAgentAvailabilityServiceRemote.setAgentAvailabilityToTrue(user.getUsername());
+        } catch (UsernameNotFoundException e) {
+            log.error("Cann't make the user available", e);
+        }
         conversationVO.setStatus(ConversationStatusVO.CLOSED);
         conversationService.save(conversationVO);
     }
