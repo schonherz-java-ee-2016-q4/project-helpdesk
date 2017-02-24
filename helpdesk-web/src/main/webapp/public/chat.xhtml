@@ -51,17 +51,19 @@
                                         </div>
                                     </ui:fragment>
                                     <ui:fragment rendered='#{message.sentBy.equals("agent") and !chatView.isAgent}'>
-                                        <ui:fragment rendered='#{message.nextMember.equals("agent")  and message.nextMember != null}'>
+                                        <ui:fragment
+                                                rendered='#{message.nextMember.equals("agent")  and message.nextMember != null}'>
                                             <div class="messageWithPic">
                                                 <img class="senderPic" style="display: inline-block"
-                                                     src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
+                                                     src="#{chatView.user.profileDetails.picture}"/>
 
                                                 <div class="myMessageLeftNextToPic" style="display: inline-block">
                                                     #{message.content}
                                                 </div>
                                             </div>
                                         </ui:fragment>
-                                        <ui:fragment rendered='#{!(message.nextMember.equals("agent") and message.nextMember != null)}'>
+                                        <ui:fragment
+                                                rendered='#{!(message.nextMember.equals("agent") and message.nextMember != null)}'>
                                             <div class="myMessageLeft"
                                                  onclick="addNewlines('#{message.content}')">
                                                 #{message.content}
@@ -74,7 +76,7 @@
                                                 rendered='#{message.nextMember.equals("client") and message.nextMember != null}'>
                                             <div class="messageWithPic">
                                                 <img class="senderPic" style="display: inline-block"
-                                                     src="https://randomuser.me/api/portraits/med/men/13.jpg"/>
+                                                     src="#{chatView.user.profileDetails.picture}"/>
 
                                                 <div class="myMessageLeftNextToPic" style="display: inline-block">
                                                     #{message.content}

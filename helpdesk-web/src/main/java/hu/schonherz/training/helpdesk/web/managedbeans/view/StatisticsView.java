@@ -5,6 +5,7 @@ import hu.schonherz.project.admin.service.api.rpc.RpcLoginStatisticsService;
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.web.BeanConstants;
+import hu.schonherz.training.helpdesk.web.domain.Statistic;
 import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.WeekFields;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
 @Slf4j
 @Data
@@ -35,12 +38,18 @@ public class StatisticsView {
     @EJB
     private ConversationService conversationService;
 
-    // TODO: Encapsulate agent-related statistics into a type
     private List<LocalDateTime> agentLoginDates;
     private List<ConversationVO> agentConversations;
+    private Calendar calendar;
+    private Statistic statistic;
+    private Date date;
 
     @PostConstruct
     public void init() {
+        statistic = new Statistic();
+        date = new Date();
+        calendar = Calendar.getInstance();
+        calendar.setTime(date);
         final String userName = getUser().getUsername();
         final Long agentId = getUser().getProfileDetails().getId();
 
@@ -50,87 +59,120 @@ public class StatisticsView {
         } catch (LoginDataRetrievalException e) {
             log.error("Couldn't retrieve the login dates for user {}!", userName, e);
         }
+        modifyStatistic();
     }
 
     public AgentUser getUser() {
         return (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    // TODO: Unify date filtering mechanism
-    public int getPastDayLogin() {
-        LocalDateTime now = LocalDateTime.now();
+    public void calcDailyLogin() {
         int dayLoginSize = 0;
+        log.info("évv: " + calendar.get(Calendar.WEEK_OF_YEAR) + "");
         for (LocalDateTime login : agentLoginDates) {
-            if (login.toLocalDate().equals(now.toLocalDate())) {
+
+            if (login.getYear() == calendar.get(Calendar.YEAR)
+                    && login.getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)
+                    && login.getDayOfMonth() == calendar.get(Calendar.DAY_OF_MONTH)) {
                 dayLoginSize++;
             }
         }
-        return dayLoginSize;
+        statistic.setNumberOfDailyLogins(dayLoginSize);
     }
 
-    public int getPastWeekLogin() {
-        LocalDateTime now = LocalDateTime.now().minusDays(DAYS_IN_WEEK);
+    public void calcWeeklyLogin() {
         int weekLoginSize = 0;
         for (LocalDateTime login : agentLoginDates) {
-            if (login.toLocalDate().isAfter(now.toLocalDate())) {
+            WeekFields weekFields = WeekFields.of(Locale.getDefault());
+            int weekNumber = login.toLocalDate().get(weekFields.weekOfWeekBasedYear());
+            if (weekNumber == calendar.get(Calendar.WEEK_OF_YEAR)) {
                 weekLoginSize++;
             }
         }
-        return weekLoginSize;
+        statistic.setNumberOfWeeklyLogins(weekLoginSize);
 
     }
 
-    public int getPastMonthLogin() {
-        LocalDateTime now = LocalDateTime.now().minusDays(DAYS_IN_MONTH);
+    public void calcMonthlyLogin() {
         int monthLoginSize = 0;
         for (LocalDateTime login : agentLoginDates) {
-            if (login.toLocalDate().isAfter(now.toLocalDate())) {
+            if (login.getYear() == calendar.get(Calendar.YEAR)
+                    && login.getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)) {
                 monthLoginSize++;
             }
         }
-        return monthLoginSize;
+        statistic.setNumberOfMonthlyLogins(monthLoginSize);
     }
 
-    public int getPastDayConvs() {
-        LocalDateTime now = LocalDateTime.now();
+    public void calcDailyConversations() {
         int dayConvsSize = 0;
         for (ConversationVO conversation : agentConversations) {
-            if (conversation.getCreatedAt().toLocalDate().equals(now.toLocalDate())) {
+            if (conversation.getCreatedAt().getYear() == calendar.get(Calendar.YEAR)
+                    && conversation.getCreatedAt().getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)
+                    && conversation.getCreatedAt().getDayOfMonth() == calendar.get(Calendar.DAY_OF_MONTH)) {
                 dayConvsSize++;
             }
         }
-        return dayConvsSize;
+        statistic.setNumberOfDailyConversations(dayConvsSize);
     }
 
-    public int getPastWeekConvs() {
-        LocalDateTime now = LocalDateTime.now().minusDays(DAYS_IN_WEEK);
+    public void calcWeeklyConversations() {
         int weekConvsSize = 0;
         for (ConversationVO conversation : agentConversations) {
-            if (conversation.getCreatedAt().toLocalDate().equals(now.toLocalDate())) {
+            WeekFields weekFields = WeekFields.of(Locale.getDefault());
+            int weekNumber = conversation.getCreatedAt().toLocalDate().get(weekFields.weekOfWeekBasedYear());
+            if (weekNumber == calendar.get(Calendar.WEEK_OF_YEAR)) {
                 weekConvsSize++;
             }
         }
-        return weekConvsSize;
+        statistic.setNumberOfWeeklyConversations(weekConvsSize);
     }
 
-    public int getPastMonthConvs() {
-        LocalDateTime now = LocalDateTime.now().minusDays(DAYS_IN_MONTH);
+    public void calcMonthlyConversations() {
         int monthConvsSize = 0;
         for (ConversationVO conversation : agentConversations) {
-            if (conversation.getCreatedAt().toLocalDate().isAfter(now.toLocalDate())) {
+            if (conversation.getCreatedAt().getYear() == calendar.get(Calendar.YEAR)
+                    && conversation.getCreatedAt().getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)) {
                 monthConvsSize++;
             }
         }
-        return monthConvsSize;
+        statistic.setNumberOfMonthlyConversations(monthConvsSize);
     }
 
-    public List<LocalDateTime> getThisMonthLogins() {
-        LocalDateTime actualDateTime = LocalDateTime.now();
-        LocalDateTime firstDayOfThisMonth = actualDateTime.with(TemporalAdjusters.firstDayOfMonth())
-                .withHour(0).withMinute(0).withSecond(0);
-        return agentLoginDates.stream()
-                .filter(e -> e.isAfter(firstDayOfThisMonth))
-                .collect(Collectors.toList());
+    public void modifyStatistic() {
+        calendar.setTime(date);
+        calcDailyLogin();
+        calcWeeklyLogin();
+        calcMonthlyLogin();
+        calcDailyConversations();
+        calcWeeklyConversations();
+        calcMonthlyConversations();
     }
 
+    public void changeDate(final String type, final String operation) {
+        log.info("Date change " + type + " " + operation);
+        if ("day".equals(type)) {
+            if ("sub".equals(operation)) {
+                calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - 1);
+            } else if ("add".equals(operation)) {
+                calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + 1);
+            }
+        }
+        if ("month".equals(type)) {
+            if ("sub".equals(operation)) {
+                calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
+            } else if ("add".equals(operation)) {
+                calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+            }
+        }
+        if ("week".equals(type)) {
+            if ("sub".equals(operation)) {
+                calendar.set(Calendar.WEEK_OF_YEAR, calendar.get(Calendar.WEEK_OF_YEAR) - 1);
+            } else if ("add".equals(operation)) {
+                calendar.set(Calendar.WEEK_OF_YEAR, calendar.get(Calendar.WEEK_OF_YEAR) + 1);
+            }
+        }
+        date = calendar.getTime();
+        modifyStatistic();
+    }
 }
