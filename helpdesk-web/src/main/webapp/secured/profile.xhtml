@@ -27,13 +27,12 @@
                        value="#{chatPopupView.openConversation.status} #{chatPopupView.openConversation.id}"/>
 
         <div class="container">
-            <h2 style="text-align: center">#{msg.agent}#{msg.profile}</h2>
             <p:importEnum type="hu.schonherz.training.helpdesk.web.security.domain.Gender"
                           var="genderEnum"
                           allSuffix="ALL_ENUM_VALUES"/>
 
             <!-- Agent profile -->
-            <div class="col-md-offset-3 col-md-6 col-md-offset-3">
+            <div class="col-md-offset-3 col-md-6 col-md-offset-3" style="margin-top: 25px">
                 <table class="table responsive">
                     <tr class="text-centered">
                         <td colspan="2">
