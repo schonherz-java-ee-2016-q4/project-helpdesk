@@ -14,6 +14,6 @@ public class MessageVO {
     private String content;
     private LocalDateTime sendDate;
     private String sentBy;
-    private ConversationVO conv;
+    private ConversationVO conversation;
     private String nextMember;
 }
