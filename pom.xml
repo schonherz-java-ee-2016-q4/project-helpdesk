@@ -158,7 +158,7 @@
             <dependency>
                 <groupId>com.github.schonherz-java-ee-2016-q4</groupId>
                 <artifactId>project</artifactId>
-                <version>b811f578473329bf478fe5fd67a948e46b5e2fdc</version>
+                <version>85206ff411d0097a88e464a32a2fb1ffb288242c</version>
             </dependency>
 
             <dependency>

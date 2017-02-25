@@ -1,5 +1,9 @@
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
 
+.my-form-control {
+    z-index: 0;
+}
+
 .panel-parent {
     display: flex;
     flex-direction: column;
