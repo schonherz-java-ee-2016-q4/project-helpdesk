@@ -22,7 +22,6 @@
             <base-name>helpdesk.Messages</base-name>
             <var>msg</var>
         </resource-bundle>
-        <message-bundle>helpdesk.Messages</message-bundle>
 
     </application>
 </faces-config>

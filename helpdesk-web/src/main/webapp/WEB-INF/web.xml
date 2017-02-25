@@ -47,8 +47,6 @@
         <ejb-ref-name>ejb.clientActivityService</ejb-ref-name>
         <remote>hu.schonherz.training.helpdesk.service.api.service.ClientActivityService</remote>
     </ejb-ref>
-
-
     <!-- REST -->
 
     <!-- Auto scan REST service -->
