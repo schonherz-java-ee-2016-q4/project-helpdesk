@@ -27,6 +27,13 @@
             <!-- Navbar -->
             <p:importEnum type="hu.schonherz.training.helpdesk.service.api.vo.ActivityTypeVO" var="activityTypeEnum"
                           allSuffix="ALL_ENUM_VALUES"/>
+
+            <!--<p:inputText type="hidden" id="activityDateFilterFrom" value="#{clientActivityView.dateFrom}"></p:inputText>-->
+            <!--<p:inputText type="hidden" id="activityDateFilterTo" value="#{clientActivityView.dateTo}"></p:inputText>-->
+            <h:inputHidden id="activityDateFilterFrom" value="#{clientActivityView.dateFrom}"></h:inputHidden>
+            <h:inputHidden id="activityDateFilterTo" value="#{clientActivityView.dateTo}"></h:inputHidden>
+            <!--<input type="hidden" id="activityDateFilterFrom" name="filterDateFrom"></input>-->
+            <!--<input type="hidden" id="activityDateFilterTo" name="filterDateTo" ></input>-->
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -92,7 +99,7 @@
                             <li class="dropdown" id="dateDropDown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">
-                                    #{msg.filter_activity_types}<span class="caret"/>
+                                    #{msg.filter_by_date_range}<span class="caret"/>
                                 </a>
                                 <ul class="dropdown-menu">
 
@@ -101,8 +108,8 @@
                                             <div class="container">
                                                 <div class='col-md-2 col-sm-1'>
                                                     <div class="form-group">
-                                                        <div class='input-group date' id='datetimepicker6'
-                                                             aria-readonly="true">
+                                                        <div class='input-group date' id='dateTimePickerFrom'
+                                                        >
                                                             <input type='text' class="form-control"/>
                                                             <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"/>
@@ -112,8 +119,8 @@
                                                 </div>
                                                 <div class='col-md-2 col-sm-1'>
                                                     <div class="form-group">
-                                                        <div class='input-group date' id='datetimepicker7'
-                                                             aria-readonly="true">
+                                                        <div class='input-group date' id='dateTimePickerTo'
+                                                        >
                                                             <input type='text' class="form-control"/>
                                                             <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"/>
@@ -123,7 +130,13 @@
                                                 </div>
                                             </div>
                                         </a>
+                                        <p:commandButton id="submitDateFilters"
+                                                         styleClass="navbar-btn btn-success"
+                                                         action="#{clientActivityView.printDates()}"
+                                                         value="#{msg.submit}"
+                                                         update="activityTableEntries">
 
+                                        </p:commandButton>
                                     </li>
                                 </ul>
                             </li>
@@ -148,7 +161,7 @@
                 <div class="activityDetails">
 
 
-                    <p:poll async="true" delay="2500" update="activityTableEntries"></p:poll>
+                    <!--<p:poll async="true" delay="2500" update="activityTableEntries"></p:poll>-->
                     <table class="table table-responsive">
                         <thead>
                         <tr>
