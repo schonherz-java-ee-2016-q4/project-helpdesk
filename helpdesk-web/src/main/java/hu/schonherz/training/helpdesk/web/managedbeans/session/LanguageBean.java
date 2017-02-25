@@ -32,6 +32,7 @@ public class LanguageBean {
             updateLocaleMessages();
             FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            log.info("language chaner invoked");
             try {
                 externalContext.redirect(((HttpServletRequest) externalContext.getRequest()).getRequestURI());
             } catch (IOException e) {
