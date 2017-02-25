@@ -10,6 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
 @ManagedBean(name = "clientActivityView")
@@ -22,8 +24,8 @@ public class ClientActivityView {
 
     private boolean filtersCleared;
 
-    private String dateFrom = "default";
-    private String dateTo = "default";
+    private String dateFrom;
+    private String dateTo;
 
 
     @PostConstruct
@@ -55,11 +57,12 @@ public class ClientActivityView {
     }
 
     public void printDates() {
-//        Map<String, String> parameterMap = FacesContext.getCurrentInstance().
-//            getExternalContext().getRequestParameterMap();
-//        String dateFrom = parameterMap.get("filterDateFrom");
-//        String dateTo = parameterMap.get("filterDateTo");
-        log.info("dates recieved from the activity page:" + dateFrom + " " + dateTo);
+        log.info("dates recieved from the activity page: {}, {}", dateFrom, dateTo);
+        String formatString = "yyyy-MM-dd HH:mm";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatString);
+        LocalDateTime localFrom = LocalDateTime.parse(dateFrom, formatter);
+        LocalDateTime localTo = LocalDateTime.parse(dateTo, formatter);
+        log.info("LocalDateTime objects converted: {}, {}", localFrom, localTo);
     }
 
 }

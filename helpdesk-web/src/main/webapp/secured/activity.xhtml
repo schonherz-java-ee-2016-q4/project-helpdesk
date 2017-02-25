@@ -13,7 +13,6 @@
 
 
     </ui:define>
-
     <ui:define name="customScripts">
         <h:outputScript library="js" name="moment.min.js"/>
         <h:outputScript library="js" name="bootstrap-datetimepicker.min.js"/>
@@ -22,171 +21,171 @@
 
     <ui:define name="customBody">
 
+            <div class="container" id="activityFilterNavbar">
+                <!-- Navbar -->
+                <p:importEnum type="hu.schonherz.training.helpdesk.service.api.vo.ActivityTypeVO" var="activityTypeEnum"
+                              allSuffix="ALL_ENUM_VALUES"/>
 
-        <div class="container" id="activityFilterNavbar">
-            <!-- Navbar -->
-            <p:importEnum type="hu.schonherz.training.helpdesk.service.api.vo.ActivityTypeVO" var="activityTypeEnum"
-                          allSuffix="ALL_ENUM_VALUES"/>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
 
-            <!--<p:inputText type="hidden" id="activityDateFilterFrom" value="#{clientActivityView.dateFrom}"></p:inputText>-->
-            <!--<p:inputText type="hidden" id="activityDateFilterTo" value="#{clientActivityView.dateTo}"></p:inputText>-->
-            <h:inputHidden id="activityDateFilterFrom" value="#{clientActivityView.dateFrom}"></h:inputHidden>
-            <h:inputHidden id="activityDateFilterTo" value="#{clientActivityView.dateTo}"></h:inputHidden>
-            <!--<input type="hidden" id="activityDateFilterFrom" name="filterDateFrom"></input>-->
-            <!--<input type="hidden" id="activityDateFilterTo" name="filterDateTo" ></input>-->
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+                            <a class="navbar-brand">#{msg.filter}</a>
 
-                        <a class="navbar-brand">#{msg.filter}</a>
-
-                    </div>
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    #{msg.filter_activity_types}<span class="caret"/>
-                                </a>
-                                <ul class="dropdown-menu">
-
-                                    <li>
-                                        <p:commandLink styleClass="buttonClickClass"
-                                                       actionListener='#{clientActivityView.setActivityTypeVOWithString("BUTTON_CLICK")}'
-                                                       update="activityTableEntries">
-                                            BUTTON_CLICK
-                                        </p:commandLink>
-                                    </li>
-                                    <li>
-                                        <p:commandLink styleClass="navigationClass"
-                                                       actionListener='#{clientActivityView.setActivityTypeVOWithString("NAVIGATION")}'
-                                                       update="activityTableEntries">
-                                            NAVIGATION
-                                        </p:commandLink>
-                                    </li>
-                                    <li>
-                                        <p:commandLink styleClass="inputFocuslossClass"
-                                                       actionListener='#{clientActivityView.setActivityTypeVOWithString("INPUT_FOCUSLOSS")}'
-                                                       update="activityTableEntries">
-                                            INPUT_FOCUSLOSS
-                                        </p:commandLink>
-                                    </li>
-
-                                    <li>
-                                        <p:commandLink styleClass="formSubmitClass"
-                                                       actionListener='#{clientActivityView.setActivityTypeVOWithString("FORM_SUBMIT")}'
-                                                       update="activityTableEntries">
-                                            FORM_SUBMIT
-                                        </p:commandLink>
-                                    </li>
-
-
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown" id="dateDropDown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    #{msg.filter_by_date_range}<span class="caret"/>
-                                </a>
-                                <ul class="dropdown-menu">
-
-                                    <li>
-                                        <a>
-                                            <div class="container">
-                                                <div class='col-md-2 col-sm-1'>
-                                                    <div class="form-group">
-                                                        <div class='input-group date' id='dateTimePickerFrom'
-                                                        >
-                                                            <input type='text' class="form-control"/>
-                                                            <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"/>
-                                        </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-2 col-sm-1'>
-                                                    <div class="form-group">
-                                                        <div class='input-group date' id='dateTimePickerTo'
-                                                        >
-                                                            <input type='text' class="form-control"/>
-                                                            <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"/>
-                                        </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <p:commandButton id="submitDateFilters"
-                                                         styleClass="navbar-btn btn-success"
-                                                         action="#{clientActivityView.printDates()}"
-                                                         value="#{msg.submit}"
-                                                         update="activityTableEntries">
-
-                                        </p:commandButton>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-
-
-                        <div class="navbar-right">
-                            <p:commandButton id="deleteFiltersBtn"
-                                             styleClass="navbar-btn btn-danger"
-                                             action="#{clientActivityView.setFiltersCleared(true)}"
-                                             value="#{msg.delete_filters}"
-                                             update="activityTableEntries">
-                            </p:commandButton>
                         </div>
 
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav>
-            <!-- /Navbar -->
-            <!-- User activity details -->
-            <h:form id="activityTableEntries">
-                <div class="activityDetails">
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        #{msg.filter_activity_types}<span class="caret"/>
+                                    </a>
+                                    <ul class="dropdown-menu">
+
+                                        <li>
+                                            <p:commandLink styleClass="buttonClickClass"
+                                                           actionListener='#{clientActivityView.setActivityTypeVOWithString("BUTTON_CLICK")}'
+                                                           update="activityTableEntries">
+                                                BUTTON_CLICK
+                                            </p:commandLink>
+                                        </li>
+                                        <li>
+                                            <p:commandLink styleClass="navigationClass"
+                                                           actionListener='#{clientActivityView.setActivityTypeVOWithString("NAVIGATION")}'
+                                                           update="activityTableEntries">
+                                                NAVIGATION
+                                            </p:commandLink>
+                                        </li>
+                                        <li>
+                                            <p:commandLink styleClass="inputFocuslossClass"
+                                                           actionListener='#{clientActivityView.setActivityTypeVOWithString("INPUT_FOCUSLOSS")}'
+                                                           update="activityTableEntries">
+                                                INPUT_FOCUSLOSS
+                                            </p:commandLink>
+                                        </li>
+
+                                        <li>
+                                            <p:commandLink styleClass="formSubmitClass"
+                                                           actionListener='#{clientActivityView.setActivityTypeVOWithString("FORM_SUBMIT")}'
+                                                           update="activityTableEntries">
+                                                FORM_SUBMIT
+                                            </p:commandLink>
+                                        </li>
 
 
-                    <!--<p:poll async="true" delay="2500" update="activityTableEntries"></p:poll>-->
-                    <table class="table table-responsive">
-                        <thead>
-                        <tr>
-                            <th>#{msg.client_id}</th>
-                            <th>#{msg.timestamp}</th>
-                            <th>#{msg.type}</th>
-                            <th>#{msg.target}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <ui:repeat value='#{clientActivityView.getActivitesByTarget()}' var="clientActivity">
-                            <tr class="#{clientActivity.type.getText()}Class">
-                                <td>#{clientActivity.clientId}</td>
+                                    </ul>
+                                </li>
+                            </ul>
 
-                                <td>#{clientActivity.createdAt}</td>
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown" id="dateDropDown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        #{msg.filter_by_date_range}<span class="caret"/>
+                                    </a>
+                                    <ul class="dropdown-menu">
 
-                                <td>#{clientActivity.type}</td>
+                                        <li>
+                                            <a>
+                                                <div class="container">
+                                                    <div class='col-md-2 col-sm-1'>
+                                                        <div class="form-group">
+                                                            <div class='input-group date' id='dateTimePickerFrom'
+                                                            >
+                                                                <input type='text' class="form-control"/>
+                                                                <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"/>
+                                        </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class='col-md-2 col-sm-1'>
+                                                        <div class="form-group">
+                                                            <div class='input-group date' id='dateTimePickerTo'
+                                                            >
+                                                                <input type='text' class="form-control"/>
+                                                                <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"/>
+                                        </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <h:form id="dateFilter">
 
-                                <td>#{clientActivity.target}</td>
+                                                <p:commandButton id="submitDateFilters"
+                                                                 styleClass="navbar-btn btn-success"
+                                                                 action="#{clientActivityView.printDates()}"
+                                                                 value="#{msg.submit}"
+                                                                 update="activityTableEntries"
+                                                                 type="submit"  >
+                                                    <h:inputHidden id="activityDateFilterFrom"
+                                                                   value="#{clientActivityView.dateFrom}"></h:inputHidden>
+                                                    <h:inputHidden id="activityDateFilterTo"
+                                                                   value="#{clientActivityView.dateTo}"></h:inputHidden>
+                                                </p:commandButton>
+                                            </h:form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+
+                            <div class="navbar-right">
+                                <p:commandButton id="deleteFiltersBtn"
+                                                 styleClass="navbar-btn btn-danger"
+                                                 action="#{clientActivityView.setFiltersCleared(true)}"
+                                                 value="#{msg.delete_filters}"
+                                                 update="activityTableEntries">
+                                </p:commandButton>
+                            </div>
+
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+                <!-- /Navbar -->
+                <!-- User activity details -->
+                <h:form id="activityTableEntries">
+                    <div class="activityDetails">
+
+
+                        <!--<p:poll async="true" delay="2500" update="activityTableEntries"></p:poll>-->
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th>#{msg.client_id}</th>
+                                <th>#{msg.timestamp}</th>
+                                <th>#{msg.type}</th>
+                                <th>#{msg.target}</th>
                             </tr>
-                        </ui:repeat>
-                        </tbody>
-                    </table>
-                </div>
-            </h:form>
-        </div>
+                            </thead>
+                            <tbody>
+                            <ui:repeat value='#{clientActivityView.getActivitesByTarget()}' var="clientActivity">
+                                <tr class="#{clientActivity.type.getText()}Class">
+                                    <td>#{clientActivity.clientId}</td>
+
+                                    <td>#{clientActivity.createdAt}</td>
+
+                                    <td>#{clientActivity.type}</td>
+
+                                    <td>#{clientActivity.target}</td>
+                                </tr>
+                            </ui:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+                </h:form>
+            </div>
     </ui:define>
 </ui:composition>
