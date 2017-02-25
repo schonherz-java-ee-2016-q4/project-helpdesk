@@ -5,19 +5,19 @@
 
     <url-mapping id="activity">
         <pattern value="/client/activity"/>
-        <view-id value="secured/activity.xhtml"/>
+        <view-id value="/secured/activity.xhtml"/>
     </url-mapping>
     <url-mapping id="chat">
         <pattern value="/chat"/>
-        <view-id value="public/chat.xhtml"/>
+        <view-id value="/public/chat.xhtml"/>
     </url-mapping>
     <url-mapping id="profile">
         <pattern value="/agent/profile"/>
-        <view-id value="secured/profile.xhtml"/>
+        <view-id value="/secured/profile.xhtml"/>
     </url-mapping>
     <url-mapping id="statistics">
         <pattern value="/agent/statistics"/>
-        <view-id value="secured/statistics.xhtml"/>
+        <view-id value="/secured/statistics.xhtml"/>
     </url-mapping>
 
 </pretty-config>

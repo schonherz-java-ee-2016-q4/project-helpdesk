@@ -7,13 +7,6 @@
     <application>
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 
-        <managed-bean>
-            <managed-bean-name>languageBean</managed-bean-name>
-            <managed-bean-class>hu.schonherz.training.helpdesk.web.managedbeans.session.LanguageBean
-            </managed-bean-class>
-            <managed-bean-scope>session</managed-bean-scope>
-        </managed-bean>
-
         <locale-config>
             <default-locale>en</default-locale>
             <supported-locale>hu</supported-locale>
