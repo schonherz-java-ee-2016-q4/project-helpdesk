@@ -104,8 +104,9 @@ public class ChatView {
         ticketData.setClientMail(conversationVO.getClientEmail());
         ticketData.setRecUser(user.getUsername());
         ticketData.setBindedUser(null);
-        ticketData.setTicketTypeName(issueType);
+        ticketData.setTicketTypeName("issueType");
         try {
+            log.info("SAving tciket: " + ticketServiceRemote.registerNewTicket(ticketData));
         ticketServiceRemote.registerNewTicket(ticketData);
         } catch (QuotaReachedException e) {
             FacesContext.getCurrentInstance().addMessage(null,
