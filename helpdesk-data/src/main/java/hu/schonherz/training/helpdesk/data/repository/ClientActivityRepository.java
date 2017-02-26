@@ -5,6 +5,7 @@ import hu.schonherz.training.helpdesk.data.enums.ActivityType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -13,4 +14,7 @@ public interface ClientActivityRepository extends JpaRepository<ClientActivityEn
     List<ClientActivityEntity> findByClientIdOrderByCreatedAtDesc(String clientId);
     List<ClientActivityEntity> findByTargetContainingOrderByCreatedAtDesc(String searchString);
     List<ClientActivityEntity> findByTypeOrderByCreatedAtDesc(ActivityType activityType);
+    List<ClientActivityEntity> findAllByOrderByCreatedAtDesc();
+    List<ClientActivityEntity> findByCreatedAtBetweenOrderByCreatedAtDesc(LocalDateTime from, LocalDateTime to);
+
 }

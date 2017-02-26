@@ -13,6 +13,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -54,5 +55,16 @@ public class ClientActivityBean implements ClientActivityService {
         ActivityType dataActivityType = ActivityTypeMapper.toEntity(activityType);
         return ClientActivityMapper.toVO(clientActivityRepository.findByTypeOrderByCreatedAtDesc(dataActivityType));
     }
+
+    @Override
+    public Collection<ClientActivityVO> findAllByOrderByCreatedAtDesc() {
+        return ClientActivityMapper.toVO(clientActivityRepository.findAllByOrderByCreatedAtDesc());
+    }
+
+    @Override
+    public Collection<ClientActivityVO> findByCreatedAtBetweenOrderByCreatedAtDesc(final LocalDateTime from, final LocalDateTime to) {
+        return ClientActivityMapper.toVO(clientActivityRepository.findByCreatedAtBetweenOrderByCreatedAtDesc(from, to));
+    }
+
 
 }

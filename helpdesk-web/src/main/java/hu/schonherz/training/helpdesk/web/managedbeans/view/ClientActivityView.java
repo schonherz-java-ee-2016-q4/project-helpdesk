@@ -28,13 +28,13 @@ public class ClientActivityView {
     private String dateTo;
 
 
+    @EJB
+    private ClientActivityService clientActivityService;
+
     @PostConstruct
     public void create() {
         filtersCleared = true;
     }
-
-    @EJB
-    private ClientActivityService clientActivityService;
 
     public Collection<ClientActivityVO> getActivitiesByUserId(final String clientId) {
         return clientActivityService.findByClientIdOrderByCreatedAtDesc(clientId);
@@ -42,7 +42,7 @@ public class ClientActivityView {
 
     public Collection<ClientActivityVO> getActivitesByTarget() {
         if (filtersCleared || activityTypeVO == null) {
-            return clientActivityService.findAll();
+            return clientActivityService.findAllByOrderByCreatedAtDesc();
         }
         return clientActivityService.findByTypeOrderByCreatedAtDesc(activityTypeVO);
     }
@@ -63,6 +63,10 @@ public class ClientActivityView {
         LocalDateTime localFrom = LocalDateTime.parse(dateFrom, formatter);
         LocalDateTime localTo = LocalDateTime.parse(dateTo, formatter);
         log.info("LocalDateTime objects converted: {}, {}", localFrom, localTo);
+
+        log.info("Search results:");
+        Collection<ClientActivityVO> testResult = clientActivityService.findByCreatedAtBetweenOrderByCreatedAtDesc(localFrom, localTo);
+        testResult.forEach(e -> log.info(e.toString()));
     }
 
 }
