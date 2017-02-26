@@ -111,6 +111,10 @@ public class ChatView {
                 FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Something went wrong"));
             }
+            else {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "SUCCES", "Successful save!"));
+            }
         } catch (QuotaReachedException e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Your comapany cant register more tickets!"));
