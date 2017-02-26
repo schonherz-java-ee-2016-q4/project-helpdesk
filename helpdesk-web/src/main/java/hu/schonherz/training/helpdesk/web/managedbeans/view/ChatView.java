@@ -107,7 +107,10 @@ public class ChatView {
         ticketData.setTicketTypeName("issueType");
         try {
             log.info("SAving tciket: " + ticketServiceRemote.registerNewTicket(ticketData));
-        ticketServiceRemote.registerNewTicket(ticketData);
+            if (ticketServiceRemote.registerNewTicket(ticketData) == false) {
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Something went wrong"));
+            }
         } catch (QuotaReachedException e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Your comapany cant register more tickets!"));
