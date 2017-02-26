@@ -66,5 +66,9 @@ public class ClientActivityBean implements ClientActivityService {
         return ClientActivityMapper.toVO(clientActivityRepository.findByCreatedAtBetweenOrderByCreatedAtDesc(from, to));
     }
 
-
+    @Override
+    public Collection<ClientActivityVO> findByDateRangeAndActivityType(final LocalDateTime from, final LocalDateTime to, final ActivityTypeVO activityType) {
+        ActivityType dataActivityType = ActivityTypeMapper.toEntity(activityType);
+        return ClientActivityMapper.toVO(clientActivityRepository.findByDateRangeAndActivityType(from, to, dataActivityType));
+    }
 }

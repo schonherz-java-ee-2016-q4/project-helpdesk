@@ -5,12 +5,18 @@ $(document).ready(function () {
         var dateAsString = "";
 
         $('#dateTimePickerFrom').datetimepicker({
-            format: "YYYY-MM-DD HH:mm",
+            format: formatString,
+            showClear: true,
+            showClose: true,
+            showTodayButton: true,
             allowInputToggle: true
         });
         $('#dateTimePickerTo').datetimepicker({
             useCurrent: false, //Important! See issue #1075
-            format: "YYYY-MM-DD HH:mm",
+            format: formatString,
+            showClear: true,
+            showClose: true,
+            showTodayButton: true,
             allowInputToggle: true
         });
         $("#dateTimePickerFrom").on("dp.change", function (e) {
@@ -24,9 +30,14 @@ $(document).ready(function () {
             $('#dateFilter\\:activityDateFilterTo').val(dateAsString);
         });
 
-        $('#dateDropDown .dropdown-menu').on({
-            "click":function(e){
-                e.stopPropagation();
+        $('.dropdown-menu').find('form').click(function (e) {
+            e.stopPropagation();
+        });
+
+        $('#dateFilter\\:submitDateFilters').on({
+            "click": function (e) {
+                $('.dropdown.open .dropdown-toggle').dropdown('toggle');
+                $('')
             }
         });
 

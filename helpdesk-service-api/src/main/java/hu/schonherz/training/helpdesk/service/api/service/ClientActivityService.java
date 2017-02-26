@@ -17,4 +17,6 @@ public interface ClientActivityService {
     List<ClientActivityVO> findByTypeOrderByCreatedAtDesc(ActivityTypeVO activityType);
     Collection<ClientActivityVO> findAllByOrderByCreatedAtDesc();
     Collection<ClientActivityVO> findByCreatedAtBetweenOrderByCreatedAtDesc(LocalDateTime from, LocalDateTime to);
+    Collection<ClientActivityVO> findByDateRangeAndActivityType(LocalDateTime from,
+                                                                LocalDateTime to, ActivityTypeVO activityType);
 }

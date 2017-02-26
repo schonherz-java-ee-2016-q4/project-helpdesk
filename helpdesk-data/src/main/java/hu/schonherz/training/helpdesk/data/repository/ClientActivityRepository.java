@@ -16,5 +16,11 @@ public interface ClientActivityRepository extends JpaRepository<ClientActivityEn
     List<ClientActivityEntity> findByTypeOrderByCreatedAtDesc(ActivityType activityType);
     List<ClientActivityEntity> findAllByOrderByCreatedAtDesc();
     List<ClientActivityEntity> findByCreatedAtBetweenOrderByCreatedAtDesc(LocalDateTime from, LocalDateTime to);
+    List<ClientActivityEntity> findByCreatedAtBetweenAndTypeOrderByCreatedAtDesc(LocalDateTime from,
+                                                                                 LocalDateTime to, ActivityType activityType);
 
+    default List<ClientActivityEntity> findByDateRangeAndActivityType(LocalDateTime from,
+                                                                      LocalDateTime to, ActivityType activityType) {
+        return findByCreatedAtBetweenAndTypeOrderByCreatedAtDesc(from, to, activityType);
+    }
 }
