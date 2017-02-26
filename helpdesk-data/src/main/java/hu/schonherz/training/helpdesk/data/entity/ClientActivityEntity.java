@@ -28,4 +28,6 @@ public class ClientActivityEntity extends BaseEntity {
 
     private LocalDateTime createdAt;
 
+    private String sourceURL;
+
 }

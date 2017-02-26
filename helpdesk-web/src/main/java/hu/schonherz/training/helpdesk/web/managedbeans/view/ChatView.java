@@ -3,12 +3,15 @@ package hu.schonherz.training.helpdesk.web.managedbeans.view;
 import hu.schonherz.javatraining.issuetracker.client.api.service.ticket.TicketServiceRemote;
 import hu.schonherz.javatraining.issuetracker.client.api.vo.TicketVo;
 import hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote;
+import hu.schonherz.project.admin.service.api.rpc.RpcLoginServiceRemote;
 import hu.schonherz.project.admin.service.api.rpc.UsernameNotFoundException;
+import hu.schonherz.project.admin.service.api.vo.UserData;
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
 import hu.schonherz.training.helpdesk.service.api.service.MessageService;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationStatusVO;
 import hu.schonherz.training.helpdesk.service.api.vo.ConversationVO;
 import hu.schonherz.training.helpdesk.service.api.vo.MessageVO;
+import hu.schonherz.training.helpdesk.web.BeanConstants;
 import hu.schonherz.training.helpdesk.web.managedbeans.session.LanguageBean;
 import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
@@ -36,9 +39,6 @@ import java.util.List;
 @ManagedBean(name = "chatView")
 @ViewScoped
 public class ChatView {
-    private static final String SENT_BY_AGENT = "agent";
-    private static final String SENT_BY_CLIENT = "client";
-
     @EJB(mappedName = "java:global/issue-tracker-ear-0.0.1-SNAPSHOT/issue-tracker-service-0.0.1-SNAPSHOT/TicketServiceBean!"
             + "hu.schonherz.javatraining.issuetracker.client.api.service.ticket.TicketServiceRemote")
     private TicketServiceRemote ticketServiceRemote;
@@ -46,6 +46,9 @@ public class ChatView {
     @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcAgentAvailabilityServiceBean!"
             + "hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote")
     private RpcAgentAvailabilityServiceRemote rpcAgentAvailabilityServiceRemote;
+
+    @EJB(mappedName = BeanConstants.JNDI_LOGIN_SERVICE)
+    private RpcLoginServiceRemote rpcLoginServiceRemote;
 
     @EJB
     private MessageService messageService;
@@ -55,28 +58,26 @@ public class ChatView {
 
     @ManagedProperty(value = "#{languageBean}")
     private LanguageBean localeManagerBean;
-
     private String content;
     private Boolean isAgent;
     private List<MessageVO> messageList;
-    private Long conversationId;
     private ConversationVO conversationVO;
     private String issueName;
     private String issueDecription;
     private String issueType;
-    private AgentUser user;
+    private UserData user;
+    private AgentUser agent;
 
     @PostConstruct
     public void init() {
-        user = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long conversationId = null;
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         Principal principal = request.getUserPrincipal();
         log.error(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         isAgent = principal != null;
-
         if (isAgent) {
-            user = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            agent = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         }
 
         if (request.getParameterMap().containsKey("id")) {
@@ -85,9 +86,11 @@ public class ChatView {
 
         conversationVO = conversationService.findById(conversationId);
         if (conversationVO != null) {
+            user = rpcLoginServiceRemote.getUserDataById(conversationVO.getAgentId());
             messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(),
                     conversationVO.getClientId());
         }
+
 
     }
 
@@ -122,14 +125,12 @@ public class ChatView {
         message.setClientId(conversationVO.getClientId());
         message.setSendDate(LocalDateTime.now());
         message.setConversation(conversationVO);
-        message.setSentBy(isAgent ? SENT_BY_AGENT : SENT_BY_CLIENT);
+        message.setSentBy(isAgent ? BeanConstants.SENT_BY_AGENT : BeanConstants.SENT_BY_CLIENT);
 
         messageService.save(message);
     }
 
     public Collection<MessageVO> getMessages() {
-        ConversationVO conversationVO = conversationService.findById(conversationId);
-
         if (conversationVO.getStatus().equals(ConversationStatusVO.CLOSED) && !isAgent) {
             clientRedirect();
             return null;
@@ -142,8 +143,8 @@ public class ChatView {
 
         if (messageList == null || messageList.isEmpty()) {
             MessageVO firstMessage = new MessageVO();
-            firstMessage.setNextMember(SENT_BY_AGENT);
-            firstMessage.setSentBy(SENT_BY_AGENT);
+            firstMessage.setNextMember(BeanConstants.SENT_BY_AGENT);
+            firstMessage.setSentBy(BeanConstants.SENT_BY_AGENT);
             firstMessage.setAgentId(conversationVO.getAgentId());
             firstMessage.setClientId(conversationVO.getClientId());
             firstMessage.setContent(localeManagerBean.localize("wait_for_agent"));
@@ -156,10 +157,10 @@ public class ChatView {
 
         MessageVO prev = messageList.get(0);
 
-        if (SENT_BY_CLIENT.equals(prev.getSentBy())) {
-            prev.setNextMember(SENT_BY_CLIENT);
-        } else if (SENT_BY_AGENT.equals(prev.getSentBy())) {
-            prev.setNextMember(SENT_BY_AGENT);
+        if (BeanConstants.SENT_BY_CLIENT.equals(prev.getSentBy())) {
+            prev.setNextMember(BeanConstants.SENT_BY_CLIENT);
+        } else if (BeanConstants.SENT_BY_AGENT.equals(prev.getSentBy())) {
+            prev.setNextMember(BeanConstants.SENT_BY_AGENT);
         }
 
         messageList.set(0, prev);
@@ -194,7 +195,7 @@ public class ChatView {
     }
 
     public boolean isOwnConversation() {
-        return isAgent ? conversationVO.getAgentId().equals(user.getProfileDetails().getId()) : true;
+        return isAgent ? conversationVO.getAgentId().equals(agent.getProfileDetails().getId()) : true;
     }
 
     public void agentRedirect() {
@@ -202,7 +203,7 @@ public class ChatView {
     }
 
     public void clientRedirect() {
-        redirectTo("https://www.google.hu");
+        redirectTo(conversationVO.getSourceURL());
     }
 
     private static void redirectTo(final String url) {
@@ -211,9 +212,5 @@ public class ChatView {
         } catch (IOException e) {
             log.error("Can't redirect to {}!", url, e);
         }
-    }
-
-    public AgentUser getUser() {
-        return null;
     }
 }

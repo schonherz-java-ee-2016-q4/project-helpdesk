@@ -28,5 +28,5 @@ function showGrowl() {
 }
 function redirectToChat() {
     var convID = $('#conversationState').val().split(" ")[1];
-    window.location.href = "/helpdesk/chat?id=" + convID;
+    window.location.href = "/helpdesk/public/chat.xhtml?id=" + convID;
 }

@@ -18,4 +18,5 @@ public class ConversationVO {
     private String clientEmail;
     private ConversationStatusVO status;
     private LocalDateTime createdAt;
+    private String sourceURL;
 }

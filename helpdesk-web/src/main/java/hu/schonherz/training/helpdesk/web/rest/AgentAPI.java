@@ -49,6 +49,7 @@ public class AgentAPI {
                     .clientEmail(clientDetailsRequest.getClientEmail())
                     .status(ConversationStatusVO.NEW)
                     .createdAt(LocalDateTime.now())
+                    .sourceURL(clientDetailsRequest.getSource())
                     .build();
 
             log.info("Current conversationVO: {}", conversationVO);
