@@ -24,7 +24,6 @@
         <h:outputStylesheet library="css" name="bootstrap-theme.min.css"/>
         <h:outputStylesheet library="css" name="helpdek-platform.css"/>
 
-        <h:outputScript library="primefaces" name="jquery/jquery.js"/>
         <ui:insert name="customHead"/>
 
     </h:head>
@@ -55,14 +54,14 @@
                     <div class="navbar-button navbar-login"><ui:insert name="customLogin"></ui:insert></div>
                     <div>
                         <h:form>
-                            <p:commandButton action="#{languageBean.setLanguage('en')}" onchange="submit()" id="lang1"
+                            <h:commandButton action="#{languageBean.setLanguage('en')}" id="lang1"
                                              value=""
                                              styleClass="locale-en" update="@all"/>
                         </h:form>
                     </div>
                     <div>
                         <h:form>
-                            <p:commandButton action="#{languageBean.setLanguage('hu')}" onchange="submit()" value=""
+                            <h:commandButton action="#{languageBean.setLanguage('hu')}" value=""
                                              styleClass="locale-hu" update="@all"/>
                         </h:form>
                     </div>

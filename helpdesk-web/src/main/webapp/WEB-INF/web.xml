@@ -20,6 +20,11 @@
         <param-value>/WEB-INF/spring-context.xml</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -80,5 +85,6 @@
     </servlet-mapping>
 
     <!-- /REST -->
+
 
 </web-app>
