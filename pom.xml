@@ -199,16 +199,16 @@
                 <artifactId>all-themes</artifactId>
                 <version>${primefaces.themes.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.ocpsoft.rewrite</groupId>
-                <artifactId>rewrite-servlet</artifactId>
-                <version>${prettyfaces.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ocpsoft.rewrite</groupId>
-                <artifactId>rewrite-config-prettyfaces</artifactId>
-                <version>${prettyfaces.version}</version>
-            </dependency>
+            <!--<dependency>-->
+            <!--<groupId>org.ocpsoft.rewrite</groupId>-->
+            <!--<artifactId>rewrite-servlet</artifactId>-->
+            <!--<version>${prettyfaces.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+            <!--<groupId>org.ocpsoft.rewrite</groupId>-->
+            <!--<artifactId>rewrite-config-prettyfaces</artifactId>-->
+            <!--<version>${prettyfaces.version}</version>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>javax</groupId>
                 <artifactId>javaee-api</artifactId>
