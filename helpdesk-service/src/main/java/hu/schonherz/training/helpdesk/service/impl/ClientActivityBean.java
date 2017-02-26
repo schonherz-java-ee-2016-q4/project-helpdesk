@@ -15,6 +15,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.interceptor.Interceptors;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -58,4 +59,19 @@ public class ClientActivityBean implements ClientActivityService {
         return ClientActivityMapper.toVO(clientActivityRepository.findByTypeOrderByCreatedAtDesc(dataActivityType));
     }
 
+    @Override
+    public Collection<ClientActivityVO> findAllByOrderByCreatedAtDesc() {
+        return ClientActivityMapper.toVO(clientActivityRepository.findAllByOrderByCreatedAtDesc());
+    }
+
+    @Override
+    public Collection<ClientActivityVO> findByCreatedAtBetweenOrderByCreatedAtDesc(final LocalDateTime from, final LocalDateTime to) {
+        return ClientActivityMapper.toVO(clientActivityRepository.findByCreatedAtBetweenOrderByCreatedAtDesc(from, to));
+    }
+
+    @Override
+    public Collection<ClientActivityVO> findByDateRangeAndActivityType(final LocalDateTime from, final LocalDateTime to, final ActivityTypeVO activityType) {
+        ActivityType dataActivityType = ActivityTypeMapper.toEntity(activityType);
+        return ClientActivityMapper.toVO(clientActivityRepository.findByDateRangeAndActivityType(from, to, dataActivityType));
+    }
 }

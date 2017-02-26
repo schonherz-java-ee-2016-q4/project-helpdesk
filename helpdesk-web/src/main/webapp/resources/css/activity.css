@@ -1,3 +1,5 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
 .activityDetails, #activityFilterNavbar {
     padding-top: 3em;
 }
@@ -7,11 +9,11 @@
 }
 
 .buttonClickClass {
-    background-color: rgba(255,245,157 ,0.8)
+    background-color: rgba(255, 245, 157, 0.8)
 }
 
 .navigationClass {
-    background-color: rgba(128,222,234 ,0.45);
+    background-color: rgba(128, 222, 234, 0.45);
 }
 
 .inputFocuslossClass {
@@ -40,4 +42,21 @@
 .formSubmitClass:hover, .dropdown-menu > li > .formSubmitClass:focus, .dropdown-menu > li > .formSubmitClass:hover {
     background-color: rgba(165, 214, 167, 0.65);
     background-image: none;
+}
+
+.filterInUse {
+    background-color: rgba(129, 199, 132, 0.9) !important;
+    color: rgba(51, 51, 51, 1) !important;
+    background-image: none !important;
+}
+
+.filterInUse:hover, .filterInUse:focus {
+    background-color: rgba(129, 199, 132, 1) !important;
+    color: rgba(51, 51, 51, 1) !important;
+    background-image: none !important;
+}
+
+button {
+    font-family: Helvetica, Arial, sans-serif !important;
+    font-weight: normal !important;
 }
