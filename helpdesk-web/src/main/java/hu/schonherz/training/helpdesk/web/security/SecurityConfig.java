@@ -1,8 +1,8 @@
 package hu.schonherz.training.helpdesk.web.security;
 
 import hu.schonherz.project.admin.service.api.vo.UserRole;
-import hu.schonherz.training.helpdesk.web.security.successhandlers.CustomAuthenticationSuccessHandler;
 import hu.schonherz.training.helpdesk.web.security.service.AgentUserDetailsService;
+import hu.schonherz.training.helpdesk.web.security.successhandlers.CustomAuthenticationSuccessHandler;
 import hu.schonherz.training.helpdesk.web.security.successhandlers.CustomLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,19 +31,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
                 .antMatchers("/agent/**", "/client/**").hasRole(UserRole.AGENT.name())
-            .and()
+                .and()
                 .formLogin()
                 .loginPage("/").failureUrl("/?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login")
                 .successHandler(authenticationSuccessHandler)
-            .and()
+                .and()
                 .logout().logoutSuccessUrl("/?logout")
                 .logoutSuccessHandler(customLogoutSuccessHandler)
-            .and()
+                .and()
                 .csrf().disable();
     }
 
