@@ -57,7 +57,12 @@
                             <h:commandButton action="#{languageBean.setLanguage('en')}" id="lang1"
                                              value=""
                                              styleClass="locale-en" update="@all"/>
-                            <h:commandButton action="#{languageBean.setLanguage('hu')}" value=""
+                        </h:form>
+                    </div>
+                    <div>
+                        <h:form>
+                            <h:commandButton action="#{languageBean.setLanguage('hu')}" id="lang2"
+                                             value=""
                                              styleClass="locale-hu" update="@all"/>
                         </h:form>
                     </div>
