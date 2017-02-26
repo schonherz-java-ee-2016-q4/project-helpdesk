@@ -71,8 +71,6 @@ public class StatisticsView {
         return (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    
-
     public void calcDailyLogin() {
         int dayLoginSize = 0;
         log.info("évv: " + calendar.get(Calendar.WEEK_OF_YEAR) + "");
@@ -148,7 +146,7 @@ public class StatisticsView {
 
     public void calcDailyTickets() {
         Date start, end;
-        Calendar c = calendar;
+        Calendar c = (Calendar) calendar.clone();
         c.set(Calendar.HOUR_OF_DAY, 0);
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
@@ -156,29 +154,35 @@ public class StatisticsView {
         start = c.getTime();
         c.add(Calendar.DAY_OF_MONTH, 1);
         end = c.getTime();
+        log.info("Day: " + calendar.getTime() + " Current Day: " + start + " - " + end);
         statistic.setNumberOfDailyConversations(ticketServiceRemote.getNumberOfCreatedTicketsByUser(getUser().getUsername(), start, end));
     }
 
     public void calcWeeklyTickets() {
-        Calendar c = calendar;
-        int i = c.get(Calendar.DAY_OF_WEEK) - c.getFirstDayOfWeek();
-        c.add(Calendar.DATE, -i - 7);
+        Calendar c = (Calendar) calendar.clone();
+        c.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
+        c.clear(Calendar.MINUTE);
+        c.clear(Calendar.SECOND);
+        c.clear(Calendar.MILLISECOND);
+        c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek());
         Date start = c.getTime();
-        c.add(Calendar.DATE, 6);
+        c.add(Calendar.DAY_OF_MONTH, DAYS_IN_WEEK);
         Date end = c.getTime();
+        log.info("Day: " +  calendar.getTime() + " Currenth Week:" + start + " - " + end);
         statistic.setNumberOfWeeklyConversations(ticketServiceRemote.getNumberOfCreatedTicketsByUser(getUser().getUsername(), start, end));
     }
 
     public void calcMonthlyTickets() {
-        Calendar c = calendar;
+        Calendar c = (Calendar) calendar.clone();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = 1;
         c.set(year, month, day);
         int numOfDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         Date start = c.getTime();
-        c.add(Calendar.DAY_OF_MONTH, numOfDaysInMonth-1);
+        c.add(Calendar.DAY_OF_MONTH, numOfDaysInMonth - 1);
         Date end = c.getTime();
+        log.info("Day: " +  calendar.getTime() + " Currenth Month: " + start + " - " + end);
         statistic.setNumberOfMonthlyTickets(ticketServiceRemote.getNumberOfCreatedTicketsByUser(getUser().getUsername(), start, end));
     }
 
@@ -190,6 +194,9 @@ public class StatisticsView {
         calcDailyConversations();
         calcWeeklyConversations();
         calcMonthlyConversations();
+        calcDailyTickets();
+        calcWeeklyTickets();
+        calcMonthlyTickets();
     }
 
     public void changeDate(final String type, final String operation) {

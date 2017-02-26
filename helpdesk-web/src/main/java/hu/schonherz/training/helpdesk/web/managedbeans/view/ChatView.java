@@ -60,7 +60,6 @@ public class ChatView {
     @ManagedProperty(value = "#{languageBean}")
     private LanguageBean localeManagerBean;
 
-    AgentUser agent = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     private String content;
     private Boolean isAgent;
     private List<MessageVO> messageList;
@@ -94,22 +93,18 @@ public class ChatView {
             messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(),
                     conversationVO.getClientId());
         }
-        issueTypes=ticketServiceRemote.getTypesByCompany(agent.getProfileDetails().getCompany());
+        issueTypes = ticketServiceRemote.getTypesByCompany(user.getProfileDetails().getCompany());
     }
-
-//    public void getTicketTypes(){
-//        issueTypes=ticketServiceRemote.getTypesByCompany(agent.getProfileDetails().getCompany());
-//    }
 
     public void createTicket() {
         TicketData ticketData = new TicketData();
-        ticketData.setCompanyName(agent.getProfileDetails().getCompany());
+        ticketData.setCompanyName(user.getProfileDetails().getCompany());
         ticketData.setTicketName(issueName);
         ticketData.setTicketDescription(issueDecription);
         ticketData.setClientMail(conversationVO.getClientEmail());
-        ticketData.setRecUser(agent.getUsername());
+        ticketData.setRecUser(user.getUsername());
         ticketData.setBindedUser(null);
-        ticketData.setTicketTypeName("sajt");
+        ticketData.setTicketTypeName(issueType);
         try {
         ticketServiceRemote.registerNewTicket(ticketData);
         } catch (QuotaReachedException e) {
