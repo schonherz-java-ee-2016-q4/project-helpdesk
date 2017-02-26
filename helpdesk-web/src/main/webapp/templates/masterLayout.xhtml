@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui"
 >
 
-<f:view locale="#{languageView.locale}">
+<f:view locale="#{languageBean.locale}">
 
     <h:head>
 
@@ -24,6 +24,7 @@
         <h:outputStylesheet library="css" name="bootstrap-theme.min.css"/>
         <h:outputStylesheet library="css" name="helpdek-platform.css"/>
 
+        <h:outputScript library="primefaces" name="jquery/jquery.js"/>
         <ui:insert name="customHead"/>
 
     </h:head>
@@ -54,13 +55,13 @@
                     <div class="navbar-button navbar-login"><ui:insert name="customLogin"></ui:insert></div>
                     <div>
                         <h:form>
-                            <p:commandButton action="#{languageView.setLocale('en')}" id="lang1" value=""
+                            <p:commandButton action="#{languageBean.setLanguage('en')}" id="lang1" value=""
                                              styleClass="locale-en" update="@all"/>
                         </h:form>
                     </div>
                     <div>
                         <h:form>
-                            <p:commandButton action="#{languageView.setLocale('hu')}" value=""
+                            <p:commandButton action="#{languageBean.setLanguage('hu')}" value=""
                                              styleClass="locale-hu" update="@all"/>
                         </h:form>
                     </div>
@@ -78,6 +79,12 @@
                 <ui:insert name="customLink4"></ui:insert>
                 <ui:insert name="customLink5"></ui:insert>
                 <ui:insert name="customLogin"></ui:insert>
+                <div class="local_in_smallnav_parent">
+                    <p:commandButton action="#{languageBean.setLanguage('en')}" id="lang1" value=""
+                                     styleClass="locale-en" update="@all"/>
+                    <p:commandButton action="#{languageBean.setLanguage('hu')}" value=""
+                                     styleClass="locale-hu" update="@all"/>
+                </div>
             </div>
 
             <ui:insert name="customBody" class="custom_body"></ui:insert>
@@ -93,7 +100,7 @@
                 <h:graphicImage library="img" name="schonherzlogo.png" styleClass="schonherz-logo"/>
             </div>
         </div>
-        <h:outputScript library="js" name="jquery.js"/>
+        <!--<h:outputScript library="js" name="jquery.js"/>-->
         <h:outputScript library="js" name="bootstrap.min.js"/>
         <h:outputScript library="js" name="helpdesk-platform.js"/>
         <ui:insert name="customScripts"></ui:insert>

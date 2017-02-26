@@ -1,7 +1,29 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
 body {
     text-align: center;
 }
 
 .profilePicture {
     margin: auto;
+    border-radius: 50%;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.profilePicture:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.left-arrow{
+    float: left;
+}
+.right-arrow{
+    float: right;
+}
+.tabHead{
+    margin-top: 15px;
 }

@@ -16,11 +16,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.EnumSet;
 
-@ManagedBean(name = "clientActivityView")
-@ViewScoped
-@Data
 @Slf4j
+@Data
+@ViewScoped
+@ManagedBean(name = "clientActivityView")
 public class ClientActivityView {
+    private static final String FORMAT_STRING = "yyyy-MM-dd HH:mm";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(FORMAT_STRING);
+
+    @EJB
+    private ClientActivityService clientActivityService;
 
     private ActivityTypeVO activityTypeVO;
 
@@ -30,13 +35,7 @@ public class ClientActivityView {
     private LocalDateTime localFrom;
     private LocalDateTime localTo;
 
-    @EJB
-    private ClientActivityService clientActivityService;
-
     private EnumSet<ClientActivityFilterType> filters;
-
-    private static final String FORMAT_STRING = "yyyy-MM-dd HH:mm";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(FORMAT_STRING);
 
     @PostConstruct
     public void init() {
@@ -71,13 +70,11 @@ public class ClientActivityView {
     }
 
     public void printDates() {
-        log.info("dates recieved from the activity page: {}, {}", dateFrom, dateTo);
-
+        log.info("Dates received from the activity page: {}, {}", dateFrom, dateTo);
         localFrom = LocalDateTime.parse(dateFrom, FORMATTER);
         localTo = LocalDateTime.parse(dateTo, FORMATTER);
         filters.add(ClientActivityFilterType.FILTER_BY_DATE_RANGE);
         log.info("LocalDateTime objects converted: {}, {}", localFrom, localTo);
-
     }
 
 }

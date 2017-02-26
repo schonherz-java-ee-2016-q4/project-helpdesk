@@ -7,57 +7,152 @@
     <ui:define name="customTitle">Statistics</ui:define>
 
     <ui:define name="customHead">
-        <h:outputStylesheet library="css" name="statistics.css"/>
+        <h:outputStylesheet library="css" name="statistics.css"></h:outputStylesheet>
+    </ui:define>
+
+    <ui:define name="customScripts">
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
         <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+        <script src="https://use.fontawesome.com/9f4d39e940.js"></script>
+        <h:outputScript library="js" name="statistics.js"/>
     </ui:define>
 
     <ui:define name="customBody">
-        <div class="container">
+        <div class="container" style="margin-top: 20px">
             <!--Agent statistics-->
-            <h2>#{msg.agent} #{msg.statistics}</h2>
-            <table class="table table-condensed col-sm-6 col-md-6 col-lg-6">
-                <thead>
-                <tr class="text-centered">
-                    <td colspan="2">
-                        <div style="display:flex">
-                            <img src="https://randomuser.me/api/portraits/men/34.jpg"
-                                 class="img-thumbnail profilePicture"/>
+            <div class="col-md-offset-3 col-md-6 col-md-offset-3">
+                <div style="display: flex; margin-bottom: 15px">
+                    <img src="#{statisticsView.user.profileDetails.picture}"
+                         style="margin: auto"
+                         class="img-thumbnail profilePicture">
+                    </img>
+                </div>
+                <h:form id="form">
+                    <p:calendar id="event" styleClass="datePicker" value="#{statisticsView.date}">
+                        <p:ajax event="dateSelect" listener="#{statisticsView.modifyStatistic}" update="form"/>
+                    </p:calendar>
+
+                    <ul class="nav nav-tabs tabHead">
+                        <li id="homeTab" class="active">
+                            <a data-toggle="tab" href="#home">
+                                <i class="fa fa-user-o" aria-hidden="true">
+                                </i>
+                            </a>
+                        </li>
+                        <li id="tab1"><a data-toggle="tab" href="#menu1">#{msg.daily}</a></li>
+                        <li id="tab2"><a data-toggle="tab" href="#menu2">#{msg.weekly}</a></li>
+                        <li id="tab3"><a data-toggle="tab" href="#menu3">#{msg.monthly}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <h3>Jack Murray</h3>
                         </div>
-                    </td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>#{msg.name}</td>
-                    <td>Jack Murray</td>
-                </tr>
-                <tr>
-                    <td>#{msg.num_of_logins}</td>
-                    <td>200</td>
-                </tr>
-                <tr>
-                    <td>#{msg.num_of_conversations}</td>
-                    <td>80</td>
-                </tr>
-                <tr>
-                    <td>#{msg.num_of_issues}</td>
-                    <td>64</td>
-                </tr>
-                </tbody>
-            </table>
+                        <div id="menu1" class="tab-pane fade">
+                            <table class="table responsive" style="text-align: left">
+                                <tr>
+                                    <td>#{msg.num_of_logins}</td>
+                                    <td>#{statisticsView.statistic.numberOfDailyLogins}</td>
+                                </tr>
+                                <tr>
+                                    <td>#{msg.num_of_conversations}</td>
+                                    <td>#{statisticsView.statistic.numberOfDailyConversations}</td>
+                                </tr>
+                                <tr>
+                                    <td>#{msg.num_of_issues}</td>
+                                    <td>64</td>
+                                </tr>
+                            </table>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped active"
+                                     role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                </div>
 
-            <!--/Agent statistics-->
+                            </div>
+                            <p>#{msg.issue_rate}</p>
+                            <p:commandLink actionListener='#{statisticsView.changeDate("day", "sub")}'
+                                           styleClass="btn btn-success left-arrow" update="form"
+                                           oncomplete="addFocusMenu1()"><span
+                                    class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
+
+                            <p:commandLink actionListener='#{statisticsView.changeDate("day", "add")}'
+                                           styleClass="btn btn-success right-arrow" update="form"
+                                           oncomplete="addFocusMenu1()"> <span
+                                    class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <table class="table responsive" style="text-align: left">
+                                <tr>
+                                    <td>#{msg.num_of_logins}</td>
+                                    <td>#{statisticsView.statistic.numberOfWeeklyLogins}</td>
+                                </tr>
+                                <tr>
+                                    <td>#{msg.num_of_conversations}</td>
+                                    <td>#{statisticsView.statistic.numberOfWeeklyConversations}</td>
+                                </tr>
+                                <tr>
+                                    <td>#{msg.num_of_issues}</td>
+                                    <td>64</td>
+                                </tr>
+                            </table>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped active"
+                                     role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                </div>
+                            </div>
+                            <p>#{msg.issue_rate}</p>
+                            <p:commandLink actionListener='#{statisticsView.changeDate("week", "sub")}'
+                                           styleClass="btn btn-success left-arrow" update="form"
+                                           oncomplete="addFocusMenu2()"><span
+                                    class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
+
+                            <p:commandLink actionListener='#{statisticsView.changeDate("week", "add")}'
+                                           styleClass="btn btn-success right-arrow" update="form"
+                                           oncomplete="addFocusMenu2()"> <span
+                                    class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
+                        </div>
+                        <div id="menu3" class="tab-pane fade">
+                            <table class="table responsive" style="text-align: left">
+                                <tr>
+                                    <td>#{msg.num_of_logins}</td>
+                                    <td>#{statisticsView.statistic.numberOfMonthlyLogins} </td>
+                                </tr>
+                                <tr>
+                                    <td>#{msg.num_of_conversations}</td>
+                                    <td>#{statisticsView.statistic.numberOfMonthlyConversations}</td>
+                                </tr>
+                                <tr>
+                                    <td>#{msg.num_of_issues}</td>
+                                    <td>64</td>
+                                </tr>
+                            </table>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped active"
+                                     role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                </div>
+
+                            </div>
+                            <p>#{msg.issue_rate}</p>
+
+                            <p:commandLink actionListener='#{statisticsView.changeDate("month", "sub")}'
+                                           styleClass="btn btn-success left-arrow" update="form"
+                                           oncomplete="addFocusMenu3()"><span
+                                    class="glyphicon glyphicon-chevron-left"></span></p:commandLink>
+
+                            <p:commandLink actionListener='#{statisticsView.changeDate("month", "add")}'
+                                           styleClass="btn btn-success right-arrow" update="form"
+                                           oncomplete="addFocusMenu3()"> <span
+                                    class="glyphicon glyphicon-chevron-right"></span></p:commandLink>
+
+                        </div>
+                    </div>
+                </h:form>
+            </div>
         </div>
-        <div class="knob-container ui-corner-all fa-align-center">
-
-            <!-- If the knobView bean will exist: value="#{knobView.value}"-->
-            <p:knob foregroundColor="#2196F3" backgroundColor="#263238" value="80" disabled="true"/>
-            <p>#{msg.issue_rate}</p>
-        </div>
-    </ui:define>
-    <ui:define name="customScripts">
-
+        <!--/Agent statistics-->
     </ui:define>
 
 </ui:composition>

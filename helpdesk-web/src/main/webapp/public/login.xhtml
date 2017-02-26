@@ -2,14 +2,11 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:p="http://primefaces.org/ui"
-                template="/templates/menuLayout.xhtml">
+                template="/templates/masterLayout.xhtml">
 
     <ui:define name="customHead">
         <h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
     </ui:define>
-
-    <ui:define name="customTitle">Login</ui:define>
 
     <ui:define name="customBody">
         <div class="panel-parent">
@@ -62,7 +59,7 @@
 
                             <button type="submit" class="btn btn-info col-sm-4 col-md-4 col-lg-4 helpdesk-login-button">
                                 <span>#{msg.login}</span>
-                                <i class="glyphicon glyphicon-chevron-right" />
+                                <i class="glyphicon glyphicon-chevron-right"/>
                             </button>
                         </form>
                     </div>

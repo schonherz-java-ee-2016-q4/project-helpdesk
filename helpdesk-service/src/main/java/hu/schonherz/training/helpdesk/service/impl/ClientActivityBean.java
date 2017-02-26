@@ -12,6 +12,8 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.interceptor.Interceptors;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -20,6 +22,7 @@ import java.util.List;
 @Stateless(mappedName = "ClientActivityService")
 @Local(ClientActivityService.class)
 @Interceptors(SpringBeanAutowiringInterceptor.class)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class ClientActivityBean implements ClientActivityService {
 
     @Autowired

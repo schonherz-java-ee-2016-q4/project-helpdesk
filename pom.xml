@@ -4,7 +4,7 @@
 
     <groupId>hu.schonherz.java.training.project</groupId>
     <artifactId>helpdesk</artifactId>
-    <version>0.1.37-SNAPSHOT</version>
+    <version>0.1.46-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Help Desk Platform - Help Desk Parent</name>
@@ -118,6 +118,7 @@
         <version.plugin.pmd>3.6</version.plugin.pmd>
 
         <admin.project.version>0.0.1-SNAPSHOT</admin.project.version>
+        <issue.tracker.version>0.0.1-SNAPSHOT</issue.tracker.version>
     </properties>
 
     <dependencyManagement>
@@ -127,6 +128,13 @@
                 <artifactId>admin-service-api</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
+
+            <dependency>
+                <groupId>hu.schonherz.javatraining</groupId>
+                <artifactId>issue-tracker-client-api</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -149,7 +157,7 @@
             <dependency>
                 <groupId>com.github.schonherz-java-ee-2016-q4</groupId>
                 <artifactId>project</artifactId>
-                <version>66787db6f5e5bdef1f23a389762308121ec62cbb</version>
+                <version>f29b5f7a290ba3ecbe5fbbdf31ceaf8c734c59b6</version>
             </dependency>
 
             <dependency>
