@@ -5,20 +5,20 @@
                 template="/templates/masterLayout.xhtml">
     <ui:define name="customLink1">
         <c:if test="#{p:userPrincipal().name!=null}">
-            <p:link href="/agent/profile">#{msg.profile}</p:link>
+            <p:link href="/secured/profile.xhtml">#{msg.profile}</p:link>
         </c:if>
     </ui:define>
 
     <ui:define name="customLink2">
         <c:if test="#{p:userPrincipal().name!=null}">
-            <p:link href="/chat">#{msg.chat}</p:link>
+            <p:link href="/public/chat.xhtml">#{msg.chat}</p:link>
         </c:if>
     </ui:define>
 
     <ui:define name="customLogin">
         <c:choose>
             <c:when test="#{p:userPrincipal().name==null}">
-                <p:link href="/">#{msg.login}</p:link>
+                <p:link href="/public/login.xhtml">#{msg.login}</p:link>
             </c:when>
             <c:otherwise>
                 <p:link href="/logout">#{msg.logout}</p:link>

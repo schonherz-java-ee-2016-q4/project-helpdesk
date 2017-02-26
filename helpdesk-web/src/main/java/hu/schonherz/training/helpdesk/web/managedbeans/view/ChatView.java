@@ -68,7 +68,7 @@ public class ChatView {
 
     @PostConstruct
     public void init() {
-        user = (AgentUser) (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        user = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         Principal principal = request.getUserPrincipal();
@@ -198,7 +198,7 @@ public class ChatView {
     }
 
     public void agentRedirect() {
-        redirectTo("agent/profile");
+        redirectTo("/secured/profile.xhtml");
     }
 
     public void clientRedirect() {
@@ -214,6 +214,6 @@ public class ChatView {
     }
 
     public AgentUser getUser() {
-        return (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return (AgentUser) ;
     }
 }

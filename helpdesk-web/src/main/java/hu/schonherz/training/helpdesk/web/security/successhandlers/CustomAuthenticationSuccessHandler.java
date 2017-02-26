@@ -19,7 +19,7 @@ import java.io.IOException;
 public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @EJB(mappedName = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcLoginServiceBean!"
-        + "hu.schonherz.project.admin.service.api.rpc.RpcLoginServiceRemote")
+            + "hu.schonherz.project.admin.service.api.rpc.RpcLoginServiceRemote")
     private RpcLoginServiceRemote rpcLoginServiceRemote;
 
     @Override
@@ -32,7 +32,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
             log.error("User {} couldn't login at the admin side.", user.getUsername(), e);
         }
 
-        super.setDefaultTargetUrl("/agent/profile");
+        super.setDefaultTargetUrl("/secured/profile.xhtml");
         super.onAuthenticationSuccess(request, response, authentication);
     }
 

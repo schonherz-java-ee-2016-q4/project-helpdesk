@@ -31,10 +31,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/agent/**", "/client/**").hasRole(UserRole.AGENT.name())
+                .antMatchers("/").permitAll()
+                .antMatchers("/secured/**").hasRole(UserRole.AGENT.name())
                 .and()
                 .formLogin()
-                .loginPage("/").failureUrl("/?error")
+                .loginPage("/public/login.xhtml").failureUrl("/?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login")
