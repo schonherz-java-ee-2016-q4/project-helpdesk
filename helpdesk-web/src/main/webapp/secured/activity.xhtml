@@ -45,7 +45,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown">
+                            <li class="dropdown" id="typeDropDown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">
                                     #{msg.filter_activity_types}<span class="caret"/>
@@ -96,43 +96,32 @@
                                 <ul class="dropdown-menu">
 
                                     <li>
-                                        <div>
-                                            <div>
-                                                <div>
-                                                    <div class="form-group">
-                                                        <div class='input-group date' id='dateTimePickerFrom'
-                                                        >
-                                                            <input type='text' class="form-control"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <div>
-                                                    <div class="form-group">
-                                                        <div class='input-group date' id='dateTimePickerTo'
-                                                        >
-                                                            <input type='text' class="form-control"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div>
+                                            <input type='text' class="form-control" id='dateTimePickerFrom'/>
                                         </div>
+
+                                        <div>
+                                            <input type='text' class="form-control" id='dateTimePickerTo'/>
+                                        </div>
+
                                     </li>
                                     <li>
 
                                         <h:form id="dateFilter">
-
+                                            <h:inputHidden id="activityDateFilterFrom"
+                                                           value="#{clientActivityView.dateFrom}"/>
+                                            <h:inputHidden id="activityDateFilterTo"
+                                                           value="#{clientActivityView.dateTo}"/>
                                             <p:commandButton id="submitDateFilters"
                                                              styleClass="navbar-btn btn-success"
                                                              action="#{clientActivityView.printDates()}"
                                                              value="#{msg.submit}"
                                                              update="activityTableEntries"
                                                              type="submit">
-                                                <h:inputHidden id="activityDateFilterFrom"
-                                                               value="#{clientActivityView.dateFrom}"></h:inputHidden>
-                                                <h:inputHidden id="activityDateFilterTo"
-                                                               value="#{clientActivityView.dateTo}"></h:inputHidden>
+
                                             </p:commandButton>
+
                                         </h:form>
 
                                     </li>

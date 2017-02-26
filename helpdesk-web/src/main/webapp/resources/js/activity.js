@@ -37,9 +37,21 @@ $(document).ready(function () {
         $('#dateFilter\\:submitDateFilters').on({
             "click": function (e) {
                 $('.dropdown.open .dropdown-toggle').dropdown('toggle');
-                $('')
+                $('#dateDropDown .dropdown-toggle').addClass('filterInUse');
             }
         });
 
+        $('#typeDropDown li a').on({
+            "click": function (e) {
+                $('#typeDropDown .dropdown-toggle').addClass('filterInUse');
+            }
+        });
+
+        $('#deleteFiltersBtn').on({
+            "click": function (e) {
+                $('#dateDropDown .dropdown-toggle').removeClass('filterInUse');
+                $('#typeDropDown .dropdown-toggle').removeClass('filterInUse');
+            }
+        })
     });
 });
