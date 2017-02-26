@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.rest.api;
+package hu.schonherz.training.helpdesk.web.rest;
 
 import hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote;
 import hu.schonherz.project.admin.service.api.rpc.UsernameNotFoundException;
@@ -14,7 +14,7 @@ import java.text.MessageFormat;
 public class TestRest {
 
     @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcAgentAvailabilityServiceBean!"
-        + "hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote")
+            + "hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote")
     private RpcAgentAvailabilityServiceRemote rpcAgentAvailabilityServiceRemote;
 
     @GET
@@ -25,8 +25,8 @@ public class TestRest {
             rpcAgentAvailabilityServiceRemote.setAgentAvailabilityToTrue(userName);
         } catch (UsernameNotFoundException e) {
             return Response.status(Response.Status.BAD_REQUEST)
-                .entity(MessageFormat.format("Username {0} not found! Try again!", userName))
-                .build();
+                    .entity(MessageFormat.format("Username {0} not found! Try again!", userName))
+                    .build();
         }
         return Response.status(Response.Status.OK).entity("Success!").build();
 

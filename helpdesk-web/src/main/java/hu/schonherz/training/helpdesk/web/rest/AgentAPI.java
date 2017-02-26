@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.rest.api;
+package hu.schonherz.training.helpdesk.web.rest;
 
 import hu.schonherz.project.admin.service.api.rpc.NoAvailableAgentFoundException;
 import hu.schonherz.project.admin.service.api.rpc.NoSuchDomainException;
@@ -31,7 +31,7 @@ public class AgentAPI {
     private ConversationService conversationService;
 
     @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcAgentAvailabilityServiceBean!"
-        + "hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote")
+            + "hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote")
     private RpcAgentAvailabilityServiceRemote rpcAgentAvailabilityServiceRemote;
 
     @POST
@@ -44,12 +44,12 @@ public class AgentAPI {
             log.info("Got agentid from the admin team: {}", agentId);
 
             ConversationVO conversationVO = ConversationVO.builder()
-                .agentId(agentId)
-                .clientId(clientDetailsRequest.getClientId())
-                .clientEmail(clientDetailsRequest.getClientEmail())
-                .status(ConversationStatusVO.NEW)
-                .createdAt(LocalDateTime.now())
-                .build();
+                    .agentId(agentId)
+                    .clientId(clientDetailsRequest.getClientId())
+                    .clientEmail(clientDetailsRequest.getClientEmail())
+                    .status(ConversationStatusVO.NEW)
+                    .createdAt(LocalDateTime.now())
+                    .build();
 
             log.info("Current conversationVO: {}", conversationVO);
             conversationResponse.setConversationId(conversationService.save(conversationVO));

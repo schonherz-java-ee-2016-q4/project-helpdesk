@@ -1,4 +1,4 @@
-package hu.schonherz.training.helpdesk.web.rest.api;
+package hu.schonherz.training.helpdesk.web.rest;
 
 import hu.schonherz.training.helpdesk.service.api.service.ClientActivityService;
 import hu.schonherz.training.helpdesk.service.api.vo.ClientActivityVO;
@@ -18,8 +18,8 @@ import java.util.Collection;
 
 @Path("/activities")
 @Stateless(mappedName = "activityApi")
-@Consumes({ MediaType.APPLICATION_JSON })
-@Produces({ MediaType.APPLICATION_JSON })
+@Consumes({MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_JSON})
 public class ClientActivityAPI {
 
     @EJB
