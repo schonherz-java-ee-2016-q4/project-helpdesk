@@ -1,5 +1,6 @@
 package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
+import hu.schonherz.javatraining.issuetracker.shared.api.ForHelpdeskServiceRemote;
 import hu.schonherz.project.admin.service.api.rpc.LoginDataRetrievalException;
 import hu.schonherz.project.admin.service.api.rpc.RpcLoginStatisticsService;
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
@@ -38,6 +39,10 @@ public class StatisticsView {
     @EJB
     private ConversationService conversationService;
 
+    @EJB(mappedName = "java:global/issue-tracker-ear-0.0.1-SNAPSHOT/issue-tracker-service-0.0.1-SNAPSHOT/ForHelpdeskServiceBean"
+            + "!hu.schonherz.javatraining.issuetracker.shared.api.ForHelpdeskServiceRemote")
+    private ForHelpdeskServiceRemote ticketServiceRemote;
+
     private List<LocalDateTime> agentLoginDates;
     private List<ConversationVO> agentConversations;
     private Calendar calendar;
@@ -65,6 +70,8 @@ public class StatisticsView {
     public AgentUser getUser() {
         return (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+
+    
 
     public void calcDailyLogin() {
         int dayLoginSize = 0;
@@ -137,6 +144,42 @@ public class StatisticsView {
             }
         }
         statistic.setNumberOfMonthlyConversations(monthConvsSize);
+    }
+
+    public void calcDailyTickets() {
+        Date start, end;
+        Calendar c = calendar;
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        start = c.getTime();
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        end = c.getTime();
+        statistic.setNumberOfDailyConversations(ticketServiceRemote.getNumberOfCreatedTicketsByUser(getUser().getUsername(), start, end));
+    }
+
+    public void calcWeeklyTickets() {
+        Calendar c = calendar;
+        int i = c.get(Calendar.DAY_OF_WEEK) - c.getFirstDayOfWeek();
+        c.add(Calendar.DATE, -i - 7);
+        Date start = c.getTime();
+        c.add(Calendar.DATE, 6);
+        Date end = c.getTime();
+        statistic.setNumberOfWeeklyConversations(ticketServiceRemote.getNumberOfCreatedTicketsByUser(getUser().getUsername(), start, end));
+    }
+
+    public void calcMonthlyTickets() {
+        Calendar c = calendar;
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = 1;
+        c.set(year, month, day);
+        int numOfDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        Date start = c.getTime();
+        c.add(Calendar.DAY_OF_MONTH, numOfDaysInMonth-1);
+        Date end = c.getTime();
+        statistic.setNumberOfMonthlyTickets(ticketServiceRemote.getNumberOfCreatedTicketsByUser(getUser().getUsername(), start, end));
     }
 
     public void modifyStatistic() {

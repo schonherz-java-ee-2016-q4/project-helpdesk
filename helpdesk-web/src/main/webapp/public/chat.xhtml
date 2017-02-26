@@ -1,4 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
@@ -117,11 +118,12 @@
                                              styleClass="cmdButton">
                             </p:commandButton>
                             <ui:fragment rendered='#{chatView.isAgent}'>
-                                <button type="button"
-                                        class="btn btn-info"
-                                        data-toggle="modal"
-                                        data-target="#myModal">#{msg.error_ticket}
-                                </button>
+                                <p:commandButton type="button"
+                                        onclick="$('#myModal').modal('show');"
+                                        actionlistener="#{chatView.getTicketTypes}"
+                                        value="#{msg.error_ticket}"
+                                        styleClass="cmdButton">
+                                </p:commandButton>
                             </ui:fragment>
                         </div>
                     </h:form>
@@ -147,7 +149,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="type">#{msg.issue_type}:</label>
-                                            <h:inputText type="text" value="#{chatView.issueType}" class="form-control" id="type"></h:inputText>
+                                            <h:selectOneMenu value="#{chatView.issueType}">
+                                                <f:selectItems value="#{chatView.issueTypes}"/>
+                                            </h:selectOneMenu>
+
                                         </div>
                                         <p:commandButton id='cmdTicketBtn' value="#{msg.send}"
                                              styleClass="cmdButton" actionListener="#{chatView.createTicket}" update="growl"

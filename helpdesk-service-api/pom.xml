@@ -24,7 +24,7 @@
 
         <dependency>
             <groupId>hu.schonherz.javatraining</groupId>
-            <artifactId>issue-tracker-client-api</artifactId>
+            <artifactId>issue-tracker-shared-api</artifactId>
         </dependency>
 
         <dependency>
