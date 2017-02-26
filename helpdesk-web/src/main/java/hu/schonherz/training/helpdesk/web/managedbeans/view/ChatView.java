@@ -107,11 +107,10 @@ public class ChatView {
         ticketData.setTicketTypeName("issueType");
         try {
             log.info("SAving tciket: " + ticketServiceRemote.registerNewTicket(ticketData));
-            if (ticketServiceRemote.registerNewTicket(ticketData) == false) {
+            if (!ticketServiceRemote.registerNewTicket(ticketData)) {
                 FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Something went wrong"));
-            }
-            else {
+            } else {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "SUCCES", "Successful save!"));
             }
