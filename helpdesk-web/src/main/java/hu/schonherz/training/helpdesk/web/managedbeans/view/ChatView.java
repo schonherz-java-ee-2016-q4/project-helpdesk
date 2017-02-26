@@ -214,6 +214,6 @@ public class ChatView {
     }
 
     public AgentUser getUser() {
-        return (AgentUser) ;
+        return null;
     }
 }
