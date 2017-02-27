@@ -34,6 +34,13 @@ $(document).ready(function () {
             e.stopPropagation();
         });
 
+        $('#dateDropDown .dropdown-menu').on({
+            "click": function (e) {
+                e.stopPropagation();
+            }
+        });
+
+
         $('#dateFilter\\:submitDateFilters').on({
             "click": function (e) {
                 $('.dropdown.open .dropdown-toggle').dropdown('toggle');
@@ -53,5 +60,7 @@ $(document).ready(function () {
                 $('#typeDropDown .dropdown-toggle').removeClass('filterInUse');
             }
         })
+
+
     });
 });

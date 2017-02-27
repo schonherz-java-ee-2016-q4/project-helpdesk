@@ -96,34 +96,32 @@
                                 <ul class="dropdown-menu">
 
                                     <li>
-
-                                        <div>
-                                            <input type='text' class="form-control" id='dateTimePickerFrom'/>
-                                        </div>
-
-                                        <div>
-                                            <input type='text' class="form-control" id='dateTimePickerTo'/>
-                                        </div>
-
-                                    </li>
-                                    <li>
-
                                         <h:form id="dateFilter">
-                                            <h:inputHidden id="activityDateFilterFrom"
-                                                           value="#{clientActivityView.dateFrom}"/>
-                                            <h:inputHidden id="activityDateFilterTo"
-                                                           value="#{clientActivityView.dateTo}"/>
-                                            <p:commandButton id="submitDateFilters"
-                                                             styleClass="navbar-btn btn-success"
-                                                             action="#{clientActivityView.printDates()}"
-                                                             value="#{msg.submit}"
-                                                             update="activityTableEntries"
-                                                             type="submit">
+                                            <div class="form-group">
+                                                <div>
+                                                    <input type='text' class="form-control"
+                                                           id='dateTimePickerFrom'/>
+                                                </div>
 
-                                            </p:commandButton>
+                                                <div>
+                                                    <input type='text' class="form-control" id='dateTimePickerTo'/>
+                                                </div>
 
+
+                                                <h:inputHidden id="activityDateFilterFrom"
+                                                               value="#{clientActivityView.dateFrom}"/>
+                                                <h:inputHidden id="activityDateFilterTo"
+                                                               value="#{clientActivityView.dateTo}"/>
+                                                <p:commandButton id="submitDateFilters"
+                                                                 styleClass="navbar-btn btn-success"
+                                                                 action="#{clientActivityView.printDates()}"
+                                                                 value="#{msg.submit}"
+                                                                 update="activityTableEntries"
+                                                                 type="submit">
+
+                                                </p:commandButton>
+                                            </div>
                                         </h:form>
-
                                     </li>
                                 </ul>
                             </li>
@@ -144,36 +142,40 @@
             </nav>
             <!-- /Navbar -->
             <!-- User activity details -->
-            <h:form id="activityTableEntries">
-                <div class="activityDetails">
+            <div class="table-responsive">
+                <h:form id="activityTableEntries">
+                    <div class="activityDetails">
 
 
-                    <p:poll async="true" delay="2500" update="activityTableEntries"></p:poll>
-                    <table class="table table-responsive">
-                        <thead>
-                        <tr>
-                            <th>#{msg.client_id}</th>
-                            <th>#{msg.timestamp}</th>
-                            <th>#{msg.type}</th>
-                            <th>#{msg.target}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <ui:repeat value='#{clientActivityView.applyFilters()}' var="clientActivity">
-                            <tr class="#{clientActivity.type.getText()}Class">
-                                <td>#{clientActivity.clientId}</td>
+                        <p:poll async="true" delay="2500" update="activityTableEntries"></p:poll>
 
-                                <td>#{clientActivity.createdAt}</td>
-
-                                <td>#{clientActivity.type}</td>
-
-                                <td>#{clientActivity.target}</td>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#{msg.client_id}</th>
+                                <th>#{msg.timestamp}</th>
+                                <th>#{msg.type}</th>
+                                <th>#{msg.target}</th>
                             </tr>
-                        </ui:repeat>
-                        </tbody>
-                    </table>
-                </div>
-            </h:form>
+                            </thead>
+                            <tbody>
+                            <ui:repeat value='#{clientActivityView.applyFilters()}' var="clientActivity">
+                                <tr class="#{clientActivity.type.getText()}Class">
+                                    <td>#{clientActivity.clientId}</td>
+
+                                    <td>#{clientActivity.createdAt}</td>
+
+                                    <td>#{clientActivity.type}</td>
+
+                                    <td>#{clientActivity.target}</td>
+                                </tr>
+                            </ui:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </h:form>
+            </div>
         </div>
     </ui:define>
 </ui:composition>
