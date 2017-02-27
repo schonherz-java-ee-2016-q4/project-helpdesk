@@ -29,6 +29,7 @@ import java.util.Locale;
 @NoArgsConstructor
 @ViewScoped
 @ManagedBean(name = "statisticsView")
+@SuppressWarnings("PMD")
 public class StatisticsView {
     private static final int DAYS_IN_WEEK = 7;
     private static final int DAYS_IN_MONTH = 30;
