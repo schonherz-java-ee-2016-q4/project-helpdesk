@@ -131,8 +131,8 @@
 
             <dependency>
                 <groupId>hu.schonherz.javatraining</groupId>
-                <artifactId>issue-tracker-client-api</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <artifactId>issue-tracker-shared-api</artifactId>
+                <version>${issue.tracker.version}</version>
             </dependency>
 
 

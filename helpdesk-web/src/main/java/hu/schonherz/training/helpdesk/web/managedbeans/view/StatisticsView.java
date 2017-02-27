@@ -1,5 +1,6 @@
 package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
+import hu.schonherz.javatraining.issuetracker.shared.api.ForHelpdeskServiceRemote;
 import hu.schonherz.project.admin.service.api.rpc.LoginDataRetrievalException;
 import hu.schonherz.project.admin.service.api.rpc.RpcLoginStatisticsService;
 import hu.schonherz.training.helpdesk.service.api.service.ConversationService;
@@ -28,6 +29,7 @@ import java.util.Locale;
 @NoArgsConstructor
 @ViewScoped
 @ManagedBean(name = "statisticsView")
+@SuppressWarnings("PMD")
 public class StatisticsView {
     private static final int DAYS_IN_WEEK = 7;
     private static final int DAYS_IN_MONTH = 30;
@@ -37,6 +39,10 @@ public class StatisticsView {
 
     @EJB
     private ConversationService conversationService;
+
+    @EJB(mappedName = "java:global/issue-tracker-ear-0.0.1-SNAPSHOT/issue-tracker-service-0.0.1-SNAPSHOT/ForHelpdeskServiceBean"
+            + "!hu.schonherz.javatraining.issuetracker.shared.api.ForHelpdeskServiceRemote")
+    private ForHelpdeskServiceRemote ticketServiceRemote;
 
     private List<LocalDateTime> agentLoginDates;
     private List<ConversationVO> agentConversations;
@@ -57,7 +63,7 @@ public class StatisticsView {
             agentLoginDates = rpcLoginStatisticsService.getAllLoginsOf(userName);
             agentConversations = conversationService.findByAgentId(agentId);
         } catch (LoginDataRetrievalException e) {
-            log.error("Couldn't retrieve the login dates for user {}!", userName, e);
+            log.error("Couldn't retrieve the login dates for agent {}!", userName, e);
         }
         modifyStatistic();
     }
@@ -139,6 +145,48 @@ public class StatisticsView {
         statistic.setNumberOfMonthlyConversations(monthConvsSize);
     }
 
+    public void calcDailyTickets() {
+        Date start, end;
+        Calendar c = (Calendar) calendar.clone();
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        start = c.getTime();
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        end = c.getTime();
+        log.info("Day: " + calendar.getTime() + " Current Day: " + start + " - " + end);
+        statistic.setNumberOfDailyConversations(ticketServiceRemote.getNumberOfCreatedTicketsByUser(getUser().getUsername(), start, end));
+    }
+
+    public void calcWeeklyTickets() {
+        Calendar c = (Calendar) calendar.clone();
+        c.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
+        c.clear(Calendar.MINUTE);
+        c.clear(Calendar.SECOND);
+        c.clear(Calendar.MILLISECOND);
+        c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek());
+        Date start = c.getTime();
+        c.add(Calendar.DAY_OF_MONTH, DAYS_IN_WEEK);
+        Date end = c.getTime();
+        log.info("Day: " +  calendar.getTime() + " Currenth Week:" + start + " - " + end);
+        statistic.setNumberOfWeeklyConversations(ticketServiceRemote.getNumberOfCreatedTicketsByUser(getUser().getUsername(), start, end));
+    }
+
+    public void calcMonthlyTickets() {
+        Calendar c = (Calendar) calendar.clone();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = 1;
+        c.set(year, month, day);
+        int numOfDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        Date start = c.getTime();
+        c.add(Calendar.DAY_OF_MONTH, numOfDaysInMonth - 1);
+        Date end = c.getTime();
+        log.info("Day: " +  calendar.getTime() + " Currenth Month: " + start + " - " + end);
+        statistic.setNumberOfMonthlyTickets(ticketServiceRemote.getNumberOfCreatedTicketsByUser(getUser().getUsername(), start, end));
+    }
+
     public void modifyStatistic() {
         calendar.setTime(date);
         calcDailyLogin();
@@ -147,6 +195,9 @@ public class StatisticsView {
         calcDailyConversations();
         calcWeeklyConversations();
         calcMonthlyConversations();
+        calcDailyTickets();
+        calcWeeklyTickets();
+        calcMonthlyTickets();
     }
 
     public void changeDate(final String type, final String operation) {

@@ -37,7 +37,7 @@
                     <tr class="text-centered">
                         <td colspan="2">
                             <div style="display: flex">
-                                <img src="#{profileView.user.profileDetails.picture}"
+                                <img src="#{profileView.agent.profileDetails.picture}"
                                      style="margin: auto"
                                      class="img-thumbnail">
                                 </img>
@@ -46,33 +46,33 @@
                     </tr>
                     <tr>
                         <td>#{msg.name}:</td>
-                        <td>#{profileView.user.profileDetails.name}</td>
+                        <td>#{profileView.agent.profileDetails.name}</td>
                     </tr>
                     <tr>
                         <td>#{msg.email}:</td>
-                        <td>#{profileView.user.profileDetails.email}</td>
+                        <td>#{profileView.agent.profileDetails.email}</td>
                     </tr>
                     <tr>
                         <td>#{msg.username}:</td>
-                        <td>#{profileView.user.username}</td>
+                        <td>#{profileView.agent.username}</td>
                     </tr>
                     <tr>
                         <td>#{msg.gender}:</td>
                         <td>
-                            <h:outputText rendered="#{profileView.user.profileDetails.gender == 'MALE'}"
+                            <h:outputText rendered="#{profileView.agent.profileDetails.gender == 'MALE'}"
                                           value="#{msg.male}"/>
-                            <h:outputText rendered="#{profileView.user.profileDetails.gender == 'FEMALE'}"
+                            <h:outputText rendered="#{profileView.agent.profileDetails.gender == 'FEMALE'}"
                                           value="#{msg.female}"/>
                         </td>
 
                     </tr>
                     <tr>
                         <td>#{msg.company}:</td>
-                        <td>#{profileView.user.profileDetails.company}</td>
+                        <td>#{profileView.agent.profileDetails.company}</td>
                     </tr>
                     <tr>
                         <td>#{msg.phone}:</td>
-                        <td>#{profileView.user.profileDetails.phone}</td>
+                        <td>#{profileView.agent.profileDetails.phone}</td>
                     </tr>
                 </table>
 

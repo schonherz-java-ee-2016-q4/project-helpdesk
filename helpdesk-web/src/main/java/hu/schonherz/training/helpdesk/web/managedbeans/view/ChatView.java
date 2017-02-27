@@ -1,7 +1,8 @@
 package hu.schonherz.training.helpdesk.web.managedbeans.view;
 
-import hu.schonherz.javatraining.issuetracker.client.api.service.ticket.TicketServiceRemote;
-import hu.schonherz.javatraining.issuetracker.client.api.vo.TicketVo;
+import hu.schonherz.javatraining.issuetracker.shared.api.ForHelpdeskServiceRemote;
+import hu.schonherz.javatraining.issuetracker.shared.vo.QuotaReachedException;
+import hu.schonherz.javatraining.issuetracker.shared.vo.TicketData;
 import hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote;
 import hu.schonherz.project.admin.service.api.rpc.RpcLoginServiceRemote;
 import hu.schonherz.project.admin.service.api.rpc.UsernameNotFoundException;
@@ -30,18 +31,23 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Slf4j
 @Data
 @NoArgsConstructor
-@ManagedBean(name = "chatView")
 @ViewScoped
+@ManagedBean(name = "chatView")
+@SuppressWarnings("PMD")
 public class ChatView {
-    @EJB(mappedName = "java:global/issue-tracker-ear-0.0.1-SNAPSHOT/issue-tracker-service-0.0.1-SNAPSHOT/TicketServiceBean!"
-            + "hu.schonherz.javatraining.issuetracker.client.api.service.ticket.TicketServiceRemote")
-    private TicketServiceRemote ticketServiceRemote;
+    private static final String SENT_BY_AGENT = "agent";
+    private static final String SENT_BY_CLIENT = "client";
+
+    @EJB(mappedName = "java:global/issue-tracker-ear-0.0.1-SNAPSHOT/issue-tracker-service-0.0.1-SNAPSHOT/ForHelpdeskServiceBean"
+            + "!hu.schonherz.javatraining.issuetracker.shared.api.ForHelpdeskServiceRemote")
+    private ForHelpdeskServiceRemote ticketServiceRemote;
 
     @EJB(lookup = "java:global/admin-ear-0.0.1-SNAPSHOT/admin-service-0.0.1-SNAPSHOT/RpcAgentAvailabilityServiceBean!"
             + "hu.schonherz.project.admin.service.api.rpc.RpcAgentAvailabilityServiceRemote")
@@ -58,26 +64,30 @@ public class ChatView {
 
     @ManagedProperty(value = "#{languageBean}")
     private LanguageBean localeManagerBean;
+
+    private AgentUser agent;
+    private UserData user;
+
+    private Long conversationId;
+    private ConversationVO conversationVO;
     private String content;
     private Boolean isAgent;
     private List<MessageVO> messageList;
-    private ConversationVO conversationVO;
+
     private String issueName;
-    private String issueDecription;
+    private String issueDescription;
     private String issueType;
-    private UserData user;
-    private AgentUser agent;
+
+    private List<String> issueTypes = new ArrayList<>();
 
     @PostConstruct
     public void init() {
-        Long conversationId = null;
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         Principal principal = request.getUserPrincipal();
-        log.error(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         isAgent = principal != null;
         if (isAgent) {
-            agent = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            getAgent();
         }
 
         if (request.getParameterMap().containsKey("id")) {
@@ -91,22 +101,34 @@ public class ChatView {
                     conversationVO.getClientId());
         }
 
-
+        issueTypes = ticketServiceRemote.getTypesByCompany(agent.getProfileDetails().getCompany());
     }
 
     public void createTicket() {
-        AgentUser agent = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        TicketVo ticketVo = new TicketVo();
-        ticketVo.setTitle(issueName);
-        ticketVo.setDescription(issueDecription);
-        //ticketVo.setUid(Long.toString(agent.getProfileDetails().getId()));
-        ticketVo.setClientMail(conversationVO.getClientEmail());
-        if (ticketServiceRemote.save(ticketVo, agent.getUsername()) == null) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Something went wrong..."));
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "The ticket has been saved!"));
+        if (!isAgent) {
+            return;
+        }
+
+        TicketData ticketData = new TicketData();
+        ticketData.setCompanyName(agent.getProfileDetails().getCompany());
+        ticketData.setTicketName(issueName);
+        ticketData.setTicketDescription(issueDescription);
+        ticketData.setClientMail(conversationVO.getClientEmail());
+        ticketData.setRecUser(agent.getUsername());
+        ticketData.setBindedUser(null);
+        ticketData.setTicketTypeName("issueType");
+
+        try {
+            final boolean isCreationSuccessful = ticketServiceRemote.registerNewTicket(ticketData);
+
+            if (!isCreationSuccessful) {
+                errorMessage("Something went wrong!");
+            } else {
+                infoMessage("Successful save!");
+            }
+        } catch (QuotaReachedException e) {
+            log.warn("Could not create ticket because company quota is reached!", e);
+            errorMessage("Your company can't register more tickets!");
         }
     }
 
@@ -136,7 +158,8 @@ public class ChatView {
             return null;
         }
 
-        messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(),
+        messageList = (List<MessageVO>) messageService.findMessages(
+                conversationVO.getAgentId(),
                 conversationVO.getClientId());
 
         log.error(messageList.toString());
@@ -152,7 +175,6 @@ public class ChatView {
             firstMessage.setSendDate(LocalDateTime.now());
             messageService.save(firstMessage);
             messageList.add(firstMessage);
-            log.error(firstMessage.toString());
         }
 
         MessageVO prev = messageList.get(0);
@@ -184,8 +206,9 @@ public class ChatView {
         try {
             rpcAgentAvailabilityServiceRemote.setAgentAvailabilityToTrue(user.getUsername());
         } catch (UsernameNotFoundException e) {
-            log.error("Cann't make the user available", e);
+            log.error("Can't make the agent available", e);
         }
+
         conversationVO.setStatus(ConversationStatusVO.CLOSED);
         conversationService.save(conversationVO);
     }
@@ -213,4 +236,19 @@ public class ChatView {
             log.error("Can't redirect to {}!", url, e);
         }
     }
+
+    public AgentUser getAgent() {
+        return (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    private static void infoMessage(final String message) {
+        FacesContext.getCurrentInstance()
+                .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SUCCESS", message));
+    }
+
+    private static void errorMessage(final String message) {
+        FacesContext.getCurrentInstance()
+                .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", message));
+    }
+
 }

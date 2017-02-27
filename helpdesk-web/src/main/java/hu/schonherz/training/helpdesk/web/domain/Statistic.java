@@ -14,4 +14,7 @@ public class Statistic {
     private int numberOfDailyConversations;
     private int numberOfWeeklyConversations;
     private int numberOfMonthlyConversations;
+    private int numberOfDailyTickets;
+    private int numberOfWeeklyTickets;
+    private int numberOfMonthlyTickets;
 }
