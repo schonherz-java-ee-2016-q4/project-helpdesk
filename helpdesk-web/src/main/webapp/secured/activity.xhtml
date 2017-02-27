@@ -19,6 +19,8 @@
         <h:outputScript library="js" name="activity.js"/>
     </ui:define>
 
+
+
     <ui:define name="customBody">
 
         <div class="container" id="activityFilterNavbar">
@@ -98,6 +100,7 @@
                                     <li>
                                         <h:form id="dateFilter">
                                             <div class="form-group">
+                                                #{msg.choose_dates}
                                                 <div>
                                                     <input type='text' class="form-control"
                                                            id='dateTimePickerFrom'/>
@@ -106,7 +109,6 @@
                                                 <div>
                                                     <input type='text' class="form-control" id='dateTimePickerTo'/>
                                                 </div>
-
 
                                                 <h:inputHidden id="activityDateFilterFrom"
                                                                value="#{clientActivityView.dateFrom}"/>
