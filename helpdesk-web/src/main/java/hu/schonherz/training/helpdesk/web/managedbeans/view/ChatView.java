@@ -18,7 +18,6 @@ import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -238,7 +237,7 @@ public class ChatView {
     }
 
     public AgentUser getAgent() {
-        return (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return this.agent;
     }
 
     private static void infoMessage(final String message) {

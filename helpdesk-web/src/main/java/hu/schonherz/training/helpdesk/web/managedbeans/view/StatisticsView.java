@@ -49,9 +49,11 @@ public class StatisticsView {
     private Calendar calendar;
     private Statistic statistic;
     private Date date;
+    private AgentUser agent;
 
     @PostConstruct
     public void init() {
+        agent = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         statistic = new Statistic();
         date = new Date();
         calendar = Calendar.getInstance();
@@ -69,14 +71,12 @@ public class StatisticsView {
     }
 
     public AgentUser getUser() {
-        return (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return this.agent;
     }
 
     public void calcDailyLogin() {
         int dayLoginSize = 0;
-        log.info("évv: " + calendar.get(Calendar.WEEK_OF_YEAR) + "");
         for (LocalDateTime login : agentLoginDates) {
-
             if (login.getYear() == calendar.get(Calendar.YEAR)
                     && login.getMonth().getValue() == (calendar.get(Calendar.MONTH) + 1)
                     && login.getDayOfMonth() == calendar.get(Calendar.DAY_OF_MONTH)) {
