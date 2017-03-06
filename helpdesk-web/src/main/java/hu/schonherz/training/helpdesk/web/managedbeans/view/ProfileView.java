@@ -15,14 +15,14 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean(name = "profileView")
 public class ProfileView {
 
-    private AgentUser user;
+    private AgentUser agent;
 
     @PostConstruct
     public void init() {
-        user = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        agent = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public AgentUser getUser() {
-        return user;
+    public AgentUser getAgent() {
+        return agent;
     }
 }
