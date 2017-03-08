@@ -18,6 +18,7 @@ import hu.schonherz.training.helpdesk.web.security.domain.AgentUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -41,6 +42,8 @@ import java.util.List;
 @ManagedBean(name = "chatView")
 @SuppressWarnings("PMD")
 public class ChatView {
+    private static final String REQUEST_PARAM_ID = "id";
+
     private static final String SENT_BY_AGENT = "agent";
     private static final String SENT_BY_CLIENT = "client";
 
@@ -86,17 +89,18 @@ public class ChatView {
         Principal principal = request.getUserPrincipal();
         isAgent = principal != null;
         if (isAgent) {
-            getAgent();
+            agent = (AgentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         }
 
-        if (request.getParameterMap().containsKey("id")) {
-            conversationId = Long.parseLong(request.getParameterMap().get("id")[0]);
+        if (request.getParameterMap().containsKey(REQUEST_PARAM_ID)) {
+            conversationId = Long.parseLong(request.getParameterMap().get(REQUEST_PARAM_ID)[0]);
         }
 
         conversationVO = conversationService.findById(conversationId);
         if (conversationVO != null) {
             user = rpcLoginServiceRemote.getUserDataById(conversationVO.getAgentId());
-            messageList = (List<MessageVO>) messageService.findMessages(conversationVO.getAgentId(),
+            messageList = (List<MessageVO>) messageService.findMessages(
+                    conversationVO.getAgentId(),
                     conversationVO.getClientId());
         }
 
